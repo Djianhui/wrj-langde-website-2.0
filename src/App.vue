@@ -35,33 +35,53 @@
                  @mouseenter="keepDropdown(item.id)"
                  @mouseleave="hideDropdown(item.id)">
               <div class="dropdown-content">
-                <!-- 一级分类 -->
-                <div v-for="category in item.children" :key="category.id" class="dropdown-category">
-                  <div class="category-header" 
-                       @click="handleCategoryClick(category)">
-                    <span class="category-title">{{ category.text }}</span>
-                    <i v-if="category.children" class="fas fa-chevron-right category-arrow"></i>
+                <div class="menu-levels">
+                  <!-- 一级分类列表 -->
+                  <div class="level-column level-1-column">
+                    <div class="level-header">产品分类</div>
+                    <div v-for="category in item.children" 
+                         :key="category.id" 
+                         class="menu-item level-1-item"
+                         :class="{'active': hoveredCategory?.id === category.id}"
+                         @mouseenter="setHoveredCategory(category)"
+                         @click="handleCategoryClick(category)">
+                      <div class="item-content">
+                        <span class="item-title">{{ category.text }}</span>
+                        <i v-if="category.children" class="fas fa-chevron-right item-arrow"></i>
+                      </div>
+                    </div>
                   </div>
                   
-                  <!-- 二级分类 -->
-                  <div v-if="category.children" class="subcategory-list">
-                    <div v-for="subcategory in category.children" :key="subcategory.id" class="subcategory-item">
-                      <div class="subcategory-header"
-                           @click="handleCategoryClick(subcategory)">
-                        <span class="subcategory-title">{{ subcategory.text }}</span>
-                        <i v-if="subcategory.children" class="fas fa-chevron-right subcategory-arrow"></i>
+                  <!-- 二级分类列表 -->
+                  <div v-if="hoveredCategory && hoveredCategory.children" 
+                       class="level-column level-2-column">
+                    <div class="level-header">{{ hoveredCategory.text }}</div>
+                    <div v-for="subcategory in hoveredCategory.children" 
+                         :key="subcategory.id" 
+                         class="menu-item level-2-item"
+                         :class="{'active': hoveredSubcategory?.id === subcategory.id}"
+                         @mouseenter="setHoveredSubcategory(subcategory)"
+                         @click="handleCategoryClick(subcategory)">
+                      <div class="item-content">
+                        <span class="item-title">{{ subcategory.text }}</span>
+                        <i v-if="subcategory.children" class="fas fa-chevron-right item-arrow"></i>
                       </div>
-                      
-                      <!-- 三级分类 -->
-                      <div v-if="subcategory.children" class="product-list">
-                        <RouterLink v-for="product in subcategory.children" 
-                                    :key="product.id" 
-                                    :to="product.link" 
-                                    class="product-item"
-                                    @click="handleProductClick(product.id)">
-                          {{ product.text }}
-                        </RouterLink>
-                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- 三级产品列表 -->
+                  <div v-if="hoveredSubcategory && hoveredSubcategory.children" 
+                       class="level-column level-3-column">
+                    <div class="level-header">{{ hoveredSubcategory.text }}</div>
+                    <div v-for="product in hoveredSubcategory.children" 
+                         :key="product.id" 
+                         class="menu-item level-3-item"
+                         @click="handleProductClick(product.id)">
+                      <RouterLink :to="product.link" class="item-link">
+                        <div class="item-content">
+                          <span class="item-title">{{ product.text }}</span>
+                        </div>
+                      </RouterLink>
                     </div>
                   </div>
                 </div>
@@ -153,6 +173,9 @@ const isScrolled = ref(false)
 const isMenuActive = ref(false)
 // 下拉菜单状态
 const activeDropdown = ref(null)
+// 悬停的分类状态
+const hoveredCategory = ref(null)
+const hoveredSubcategory = ref(null)
 let dropdownTimeout = null
 
 // 获取当前语言的导航项
@@ -251,9 +274,17 @@ onMounted(async () => {
     const target = e.target
     const isMenuBtn = target.closest('.mobile-menu-btn')
     const isMenu = target.closest('nav')
+    const isDropdown = target.closest('.dropdown-menu')
+    const isProductCenter = target.closest('.has-dropdown')
     
-    if (!isMenuBtn && !isMenu && isMenuActive.value) {
-      closeMenu()
+    // 如果点击的不是菜单相关区域，关闭所有菜单
+    if (!isMenuBtn && !isMenu && !isDropdown && !isProductCenter) {
+      if (isMenuActive.value) {
+        closeMenu()
+      }
+      if (activeDropdown.value) {
+        hideDropdownImmediately()
+      }
     }
   })
   
@@ -274,8 +305,10 @@ onMounted(async () => {
 
 // 监听路由变化
 watch(() => route.path, () => {
-  // 路由变化时关闭菜单
+  // 路由变化时关闭所有菜单
   closeMenu()
+  hideDropdownImmediately()
+  
   // 路由变化时显示加载状态
   isLoading.value = true
   // 非首页快速恢复
@@ -290,6 +323,11 @@ watch(() => route.path, () => {
 const handleScroll = () => {
   // 设置导航栏滚动状态
   isScrolled.value = window.scrollY > 50
+  
+  // 滚动时隐藏下拉菜单
+  if (activeDropdown.value && window.scrollY > 50) {
+    hideDropdownImmediately()
+  }
 }
 
 // 切换移动菜单
@@ -337,6 +375,9 @@ const showDropdown = (itemId) => {
     clearTimeout(dropdownTimeout)
   }
   activeDropdown.value = itemId
+  // 重置悬停状态
+  hoveredCategory.value = null
+  hoveredSubcategory.value = null
 }
 
 // 隐藏下拉菜单
@@ -344,6 +385,8 @@ const hideDropdown = (itemId = null) => {
   dropdownTimeout = setTimeout(() => {
     if (!itemId || activeDropdown.value === itemId) {
       activeDropdown.value = null
+      hoveredCategory.value = null
+      hoveredSubcategory.value = null
     }
   }, 200)
 }
@@ -356,6 +399,17 @@ const keepDropdown = (itemId) => {
   activeDropdown.value = itemId
 }
 
+// 设置悬停的一级分类
+const setHoveredCategory = (category) => {
+  hoveredCategory.value = category
+  hoveredSubcategory.value = null // 重置二级分类
+}
+
+// 设置悬停的二级分类
+const setHoveredSubcategory = (subcategory) => {
+  hoveredSubcategory.value = subcategory
+}
+
 // 处理分类点击
 const handleCategoryClick = (category) => {
   // 发出分类选择事件
@@ -366,6 +420,9 @@ const handleCategoryClick = (category) => {
     }
   })
   window.dispatchEvent(event)
+  
+  // 立即收起下拉菜单
+  hideDropdownImmediately()
   
   // 跳转到产品中心页面
   if (route.path !== '/technology') {
@@ -382,7 +439,6 @@ const handleCategoryClick = (category) => {
     }, 100)
   }
   
-  hideDropdown()
   closeMenu()
 }
 
@@ -396,12 +452,26 @@ const handleProductClick = (productId) => {
   })
   window.dispatchEvent(event)
   
-  hideDropdown()
+  // 立即收起下拉菜单
+  hideDropdownImmediately()
   closeMenu()
+}
+
+// 立即隐藏下拉菜单（不延迟）
+const hideDropdownImmediately = () => {
+  if (dropdownTimeout) {
+    clearTimeout(dropdownTimeout)
+  }
+  activeDropdown.value = null
+  hoveredCategory.value = null
+  hoveredSubcategory.value = null
 }
 
 // 滚动到产品列表区域
 const scrollToProductList = () => {
+  // 在滚动开始时立即隐藏下拉菜单
+  hideDropdownImmediately()
+  
   // 查找产品列表容器，优先使用最精确的选择器
   const productListElement = document.querySelector('#product-list-container') || 
                            document.querySelector('.category-details') ||
@@ -680,7 +750,7 @@ nav ul li a.active .nav-arrow {
   position: absolute;
   top: 100%;
   left: 0;
-  min-width: 280px;
+  min-width: 720px; /* 增加宽度以容纳多列 */
   background: linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(30, 41, 59, 0.99) 100%);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -689,267 +759,267 @@ nav ul li a.active .nav-arrow {
   border: 1px solid rgba(56, 189, 248, 0.2);
   opacity: 0;
   visibility: hidden;
-  transform: translateY(10px);
-  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transform: translateY(10px) scale(0.95);
+  transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1); /* 加快关闭动画 */
   z-index: 1000;
-  padding: 15px 0;
+  padding: 20px 0;
   margin-top: 10px;
+  pointer-events: none; /* 隐藏时不响应鼠标事件 */
 }
 
 .dropdown-menu.show {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
+  pointer-events: auto; /* 显示时响应鼠标事件 */
 }
 
 .dropdown-content {
   max-height: 500px;
-  overflow-y: auto;
-}
-
-.dropdown-category {
-  margin-bottom: 8px;
-}
-
-/* 一级分类样式优化 */
-.category-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 20px;
-  color: rgba(255, 255, 255, 0.95);
-  font-weight: 700;
-  font-size: 1.1rem;
-  cursor: pointer;
-  border-radius: 10px;
-  margin: 0 8px;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  border: 2px solid transparent;
-  background: linear-gradient(135deg, rgba(79, 172, 254, 0.08) 0%, rgba(0, 242, 254, 0.08) 100%);
-  position: relative;
   overflow: hidden;
 }
 
-.category-header::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 4px;
-  background: linear-gradient(to bottom, #4facfe 0%, #00f2fe 100%);
-  transform: scaleY(0);
-  transition: transform 0.3s ease;
+/* 级联菜单水平布局 */
+.menu-levels {
+  display: flex;
+  min-height: 300px;
 }
 
-.category-header:hover::before {
-  transform: scaleY(1);
+.level-column {
+  border-right: 1px solid rgba(56, 189, 248, 0.15);
+  padding: 0 15px;
+  min-height: 100%;
 }
 
-.category-header:hover {
-  background: linear-gradient(135deg, rgba(79, 172, 254, 0.18) 0%, rgba(0, 242, 254, 0.18) 100%);
-  border-color: rgba(79, 172, 254, 0.4);
-  color: #ffffff;
-  transform: translateX(8px) scale(1.02);
-  box-shadow: 0 8px 25px rgba(79, 172, 254, 0.25);
+.level-column:last-child {
+  border-right: none;
 }
 
-.category-title {
-  font-size: 1.1rem;
+/* 一级分类列 */
+.level-1-column {
+  width: 200px;
+  background: linear-gradient(135deg, rgba(79, 172, 254, 0.05) 0%, rgba(0, 242, 254, 0.05) 100%);
+  border-radius: 8px 0 0 8px;
+}
+
+/* 二级分类列 */
+.level-2-column {
+  width: 220px;
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.04) 0%, rgba(14, 165, 233, 0.04) 100%);
+}
+
+/* 三级产品列 */
+.level-3-column {
+  width: 280px;
+  background: linear-gradient(135deg, rgba(100, 116, 139, 0.03) 0%, rgba(71, 85, 105, 0.03) 100%);
+  border-radius: 0 8px 8px 0;
+}
+
+/* 列标题 */
+.level-header {
+  padding: 15px 20px;
+  color: rgba(255, 255, 255, 0.9);
   font-weight: 700;
+  font-size: 1.1rem;
+  border-bottom: 2px solid rgba(79, 172, 254, 0.2);
+  margin-bottom: 15px;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(79, 172, 254, 0.1) 0%, rgba(0, 242, 254, 0.1) 100%);
+  border-radius: 6px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   letter-spacing: 0.5px;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-.category-arrow {
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.7);
-  transition: all 0.3s ease;
-}
-
-.category-header:hover .category-arrow {
-  color: #4facfe;
-  transform: translateX(4px) scale(1.1);
-}
-
-/* 二级分类样式优化 */
-.subcategory-list {
-  padding-left: 24px;
-  margin-top: 10px;
-  border-left: 2px solid rgba(56, 189, 248, 0.2);
-  position: relative;
-}
-
-.subcategory-list::before {
-  content: '';
-  position: absolute;
-  left: -2px;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: linear-gradient(to bottom, #38bdf8 0%, rgba(56, 189, 248, 0.3) 100%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.subcategory-item:hover ~ .subcategory-list::before,
-.subcategory-list:hover::before {
-  opacity: 1;
-}
-
-.subcategory-item {
+/* 菜单项通用样式 */
+.menu-item {
   margin-bottom: 8px;
-}
-
-.subcategory-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 18px;
-  color: rgba(255, 255, 255, 0.85);
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
   border-radius: 8px;
-  margin: 0 8px;
   transition: all 0.3s ease;
-  border: 1px solid transparent;
-  background: linear-gradient(135deg, rgba(56, 189, 248, 0.06) 0%, rgba(14, 165, 233, 0.06) 100%);
   position: relative;
   overflow: hidden;
 }
 
-.subcategory-header::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: linear-gradient(to bottom, #38bdf8 0%, #0ea5e9 100%);
-  transform: scaleY(0);
-  transition: transform 0.3s ease;
+.item-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
 }
 
-.subcategory-header:hover::before {
-  transform: scaleY(1);
-}
-
-.subcategory-header:hover {
-  background: linear-gradient(135deg, rgba(56, 189, 248, 0.15) 0%, rgba(14, 165, 233, 0.15) 100%);
-  border-color: rgba(56, 189, 248, 0.3);
-  color: #ffffff;
-  transform: translateX(6px);
-  box-shadow: 0 5px 20px rgba(56, 189, 248, 0.2);
-}
-
-.subcategory-title {
-  font-size: 1rem;
+.item-title {
   font-weight: 600;
   letter-spacing: 0.3px;
-}
-
-.subcategory-arrow {
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.6);
   transition: all 0.3s ease;
 }
 
-.subcategory-header:hover .subcategory-arrow {
-  color: #38bdf8;
-  transform: translateX(3px) scale(1.05);
+.item-arrow {
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+  opacity: 0.7;
 }
 
-/* 三级产品样式优化 */
-.product-list {
-  padding-left: 20px;
-  margin-top: 8px;
-  border-left: 1px solid rgba(100, 116, 139, 0.2);
-  position: relative;
+.item-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
 }
 
-.product-list::before {
-  content: '';
-  position: absolute;
-  left: -1px;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background: linear-gradient(to bottom, #64748b 0%, rgba(100, 116, 139, 0.3) 100%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
+.item-link:hover {
+  text-decoration: none;
+  color: inherit;
 }
 
-.product-list:hover::before {
+/* 一级分类样式 */
+.level-1-item {
+  background: linear-gradient(135deg, rgba(79, 172, 254, 0.08) 0%, rgba(0, 242, 254, 0.08) 100%);
+  border: 1px solid rgba(79, 172, 254, 0.15);
+}
+
+.level-1-item .item-content {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.level-1-item .item-title {
+  font-size: 1.05rem;
+  font-weight: 650;
+}
+
+.level-1-item:hover,
+.level-1-item.active {
+  background: linear-gradient(135deg, rgba(79, 172, 254, 0.15) 0%, rgba(0, 242, 254, 0.15) 100%);
+  border-color: rgba(79, 172, 254, 0.3);
+  transform: translateX(5px);
+  box-shadow: 0 5px 20px rgba(79, 172, 254, 0.2);
+}
+
+.level-1-item:hover .item-title,
+.level-1-item.active .item-title {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.level-1-item:hover .item-arrow,
+.level-1-item.active .item-arrow {
+  color: #4facfe;
+  transform: translateX(3px);
   opacity: 1;
 }
 
-.product-item {
-  display: block;
-  padding: 10px 16px;
-  color: rgba(255, 255, 255, 0.75);
-  font-size: 0.9rem;
-  font-weight: 500;
-  text-decoration: none;
-  border-radius: 6px;
-  margin: 3px 8px;
-  transition: all 0.3s ease;
-  border: 1px solid transparent;
-  background: linear-gradient(135deg, rgba(100, 116, 139, 0.04) 0%, rgba(71, 85, 105, 0.04) 100%);
-  position: relative;
-  overflow: hidden;
-  letter-spacing: 0.2px;
+/* 二级分类样式 */
+.level-2-item {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.06) 0%, rgba(14, 165, 233, 0.06) 100%);
+  border: 1px solid rgba(56, 189, 248, 0.12);
 }
 
-.product-item::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: linear-gradient(to bottom, #64748b 0%, #475569 100%);
-  transform: scaleY(0);
-  transition: transform 0.3s ease;
+.level-2-item .item-content {
+  color: rgba(255, 255, 255, 0.85);
 }
 
-.product-item:hover::before {
-  transform: scaleY(1);
-}
-
-.product-item:hover {
-  background: linear-gradient(135deg, rgba(100, 116, 139, 0.1) 0%, rgba(71, 85, 105, 0.1) 100%);
-  border-color: rgba(100, 116, 139, 0.25);
-  color: #e2e8f0;
-  transform: translateX(4px);
-  text-decoration: none;
-  box-shadow: 0 3px 15px rgba(100, 116, 139, 0.15);
+.level-2-item .item-title {
+  font-size: 1rem;
   font-weight: 600;
+}
+
+.level-2-item:hover,
+.level-2-item.active {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.12) 0%, rgba(14, 165, 233, 0.12) 100%);
+  border-color: rgba(56, 189, 248, 0.25);
+  transform: translateX(4px);
+  box-shadow: 0 4px 16px rgba(56, 189, 248, 0.15);
+}
+
+.level-2-item:hover .item-title,
+.level-2-item.active .item-title {
+  color: #ffffff;
+  font-weight: 650;
+}
+
+.level-2-item:hover .item-arrow,
+.level-2-item.active .item-arrow {
+  color: #38bdf8;
+  transform: translateX(2px);
+  opacity: 1;
+}
+
+/* 三级产品样式 */
+.level-3-item {
+  background: linear-gradient(135deg, rgba(100, 116, 139, 0.05) 0%, rgba(71, 85, 105, 0.05) 100%);
+  border: 1px solid rgba(100, 116, 139, 0.1);
+}
+
+.level-3-item .item-content {
+  color: rgba(255, 255, 255, 0.8);
+  padding: 10px 16px;
+}
+
+.level-3-item .item-title {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.level-3-item:hover {
+  background: linear-gradient(135deg, rgba(100, 116, 139, 0.1) 0%, rgba(71, 85, 105, 0.1) 100%);
+  border-color: rgba(100, 116, 139, 0.2);
+  transform: translateX(3px);
+  box-shadow: 0 3px 12px rgba(100, 116, 139, 0.12);
+}
+
+.level-3-item:hover .item-title {
+  color: #e2e8f0;
+  font-weight: 600;
+}
+
+/* 动画效果 */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.level-2-column,
+.level-3-column {
+  animation: slideInRight 0.3s ease;
 }
 
 /* 滚动条样式 */
-.dropdown-content::-webkit-scrollbar {
+.level-column::-webkit-scrollbar {
   width: 4px;
 }
 
-.dropdown-content::-webkit-scrollbar-track {
+.level-column::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 2px;
 }
 
-.dropdown-content::-webkit-scrollbar-thumb {
+.level-column::-webkit-scrollbar-thumb {
   background: rgba(79, 172, 254, 0.5);
   border-radius: 2px;
 }
 
-.dropdown-content::-webkit-scrollbar-thumb:hover {
+.level-column::-webkit-scrollbar-thumb:hover {
   background: rgba(79, 172, 254, 0.7);
 }
 
 /* 响应式处理 */
 @media (max-width: 1024px) {
   .dropdown-menu {
-    min-width: 250px;
+    min-width: 600px;
+  }
+  
+  .level-1-column,
+  .level-2-column,
+  .level-3-column {
+    width: auto;
+    flex: 1;
   }
 }
 

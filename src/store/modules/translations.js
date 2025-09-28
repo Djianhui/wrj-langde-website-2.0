@@ -39,7 +39,6 @@ export const useTranslationsStore = defineStore('translations', () => {
           }
         ]
       },
-      { text: '无人机系统', link: '/drone-system', id: 'drone-system' },
       { text: '应用案例', link: '/cases', id: 'cases' },
       { text: '新闻中心', link: '/news', id: 'news' },
       { text: '关于我们', link: '/about', id: 'about' },
@@ -80,7 +79,6 @@ export const useTranslationsStore = defineStore('translations', () => {
           }
         ]
       },
-      { text: 'Drone Systems', link: '/drone-system', id: 'drone-system' },
       { text: 'Case Studies', link: '/cases', id: 'cases' },
       { text: 'News', link: '/news', id: 'news' },
       { text: 'About Us', link: '/about', id: 'about' },

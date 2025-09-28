@@ -56,11 +56,6 @@ const router = createRouter({
       component: () => import('../views/products/FpvDroneView.vue')
     },
     {
-      path: '/drone-system',
-      name: 'drone-system',
-      component: () => import('../views/DroneSystemView.vue')
-    },
-    {
       path: '/cases',
       name: 'cases',
       component: () => import('../views/CasesView.vue')
