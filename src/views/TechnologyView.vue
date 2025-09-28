@@ -21,134 +21,179 @@
     </div>
     
     <div class="container">
-      <!-- 技术部分 -->
-      <div class="tech-sections">
-        <div class="tech-section" v-for="(tech, index) in currentTechnologies" :key="tech.id" :class="{ 'reverse': index % 2 === 1 }">
-          <div class="tech-content">
-            <div class="tech-index">0{{ index + 1 }}</div>
-            <div class="tech-badge">{{ getTechTag(index) }}</div>
-            <h2>{{ tech.title }}</h2>
-            <div class="tech-desc" v-html="tech.details"></div>
-            
-            <!-- 技术亮点 -->
-            <div class="tech-highlights">
-              <div class="highlight-item">
-                <div class="highlight-icon">
-                  <i class="fas fa-check-circle"></i>
-                </div>
-                <div class="highlight-text">
-                  {{ getTechHighlight(tech.id, 0) }}
-                </div>
-              </div>
-              <div class="highlight-item">
-                <div class="highlight-icon">
-                  <i class="fas fa-check-circle"></i>
-                </div>
-                <div class="highlight-text">
-                  {{ getTechHighlight(tech.id, 1) }}
-                </div>
-              </div>
-            </div>
-            
-            <div class="tech-features">
-              <div class="feature" v-for="(feature, fidx) in tech.features" :key="fidx">
-                <div class="feature-icon">
-                  <i :class="feature.icon"></i>
-                </div>
-                <div class="feature-text">
-                  <h3>{{ feature.title }}</h3>
-                  <p>{{ feature.description }}</p>
-                </div>
-              </div>
-            </div>
-            
-            <!-- 技术指标展示 -->
-            <div class="tech-metrics-mini">
-              <div class="metric-mini-item" v-for="(metric, midx) in getTechMetrics(tech.id)" :key="midx">
-                <div class="metric-mini-value">{{ metric.value }}</div>
-                <div class="metric-mini-label">{{ metric.label }}</div>
-              </div>
-            </div>
-          </div>
-          <div class="tech-image">
-            <div class="image-wrapper">
-              <div class="tech-decoration"></div>
-              <img :src="tech.image" :alt="tech.title" @error="handleImageError">
-              <div class="image-overlay"></div>
-              <div class="tech-tag">{{ getTechTag(index) }}</div>
-              
-              <!-- 技术应用场景 -->
-              <div class="tech-applications">
-                <div class="application-title">{{ techPageTexts.applicableScenarios }}</div>
-                <div class="application-items">
-                  <span v-for="(app, aidx) in getTechApplications(tech.id)" :key="aidx">{{ app }}</span>
-                </div>
-              </div>
-            </div>
-          </div>
+      <!-- 产品分类展示 -->
+      <div class="product-categories">
+        <div class="categories-header">
+          <h2 class="section-title">产品分类</h2>
+          <p class="section-subtitle">朗德智能全系列产品解决方案</p>
         </div>
-      </div>
-      
-      <!-- 技术优势 -->
-      <div class="tech-advantages">
-        <h2 class="section-subtitle">{{ techPageTexts.advantages }}</h2>
-        <p class="section-desc">{{ techPageTexts.advantagesSubtitle }}</p>
         
-        <div class="advantages-grid">
-          <div class="advantage-card" v-for="(advantage, index) in currentAdvantages" :key="index">
-            <div class="advantage-icon">
-              <i :class="advantage.icon"></i>
+        <div class="categories-content">
+          <!-- 左侧产品分类树 -->
+          <div class="category-tree">
+            <div class="tree-container">
+              <div class="tree-item root-item">
+                <div class="tree-node" @click="toggleCategory('root')">
+                  <i class="fas fa-chevron-down tree-icon" :class="{'expanded': expandedCategories.root}"></i>
+                  <span class="node-text">产品中心</span>
+                </div>
+                
+                <div v-show="expandedCategories.root" class="tree-children">
+                  <!-- 立体防控 -->
+                  <div class="tree-item level-1">
+                    <div class="tree-node" @click="toggleCategory('defense'); selectCategory('defense')">
+                      <i class="fas fa-chevron-right tree-icon" :class="{'expanded': expandedCategories.defense}"></i>
+                      <span class="node-text">立体防控</span>
+                    </div>
+                    
+                    <div v-show="expandedCategories.defense" class="tree-children">
+                      <!-- 侦探感知 -->
+                      <div class="tree-item level-2">
+                        <div class="tree-node" @click="toggleCategory('detection'); selectCategory('detection')">
+                          <i class="fas fa-chevron-right tree-icon" :class="{'expanded': expandedCategories.detection}"></i>
+                          <span class="node-text">侦探感知</span>
+                        </div>
+                        
+                        <div v-show="expandedCategories.detection" class="tree-children">
+                          <div class="tree-item level-3" @click="selectCategory('radar')">
+                            <div class="tree-node">
+                              <i class="fas fa-dot-circle tree-icon"></i>
+                              <span class="node-text">雷达探测</span>
+                            </div>
+                          </div>
+                          <div class="tree-item level-3" @click="selectCategory('optical')">
+                            <div class="tree-node">
+                              <i class="fas fa-dot-circle tree-icon"></i>
+                              <span class="node-text">光电识别</span>
+                            </div>
+                          </div>
+                          <div class="tree-item level-3" @click="selectCategory('spectrum')">
+                            <div class="tree-node">
+                              <i class="fas fa-dot-circle tree-icon"></i>
+                              <span class="node-text">频谱侦测</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <!-- 干扰反制 -->
+                      <div class="tree-item level-2" @click="selectCategory('jamming')">
+                        <div class="tree-node">
+                          <i class="fas fa-circle tree-icon"></i>
+                          <span class="node-text">干扰反制</span>
+                        </div>
+                      </div>
+                      
+                      <!-- 一体化防御 -->
+                      <div class="tree-item level-2" @click="selectCategory('integrated')">
+                        <div class="tree-node">
+                          <i class="fas fa-circle tree-icon"></i>
+                          <span class="node-text">一体化防御</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- 低空经济 -->
+                  <div class="tree-item level-1">
+                    <div class="tree-node" @click="toggleCategory('lowAltitude'); selectCategory('lowAltitude')">
+                      <i class="fas fa-chevron-right tree-icon" :class="{'expanded': expandedCategories.lowAltitude}"></i>
+                      <span class="node-text">低空经济</span>
+                    </div>
+                    
+                    <div v-show="expandedCategories.lowAltitude" class="tree-children">
+                      <div class="tree-item level-2" @click="selectCategory('agriculture')">
+                        <div class="tree-node">
+                          <i class="fas fa-circle tree-icon"></i>
+                          <span class="node-text">农业植保</span>
+                        </div>
+                      </div>
+                      <div class="tree-item level-2" @click="selectCategory('patrol')">
+                        <div class="tree-node">
+                          <i class="fas fa-circle tree-icon"></i>
+                          <span class="node-text">巡查防护</span>
+                        </div>
+                      </div>
+                      <div class="tree-item level-2" @click="selectCategory('fpv')">
+                        <div class="tree-node">
+                          <i class="fas fa-circle tree-icon"></i>
+                          <span class="node-text">FPV</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <h3>{{ advantage.title }}</h3>
-            <p>{{ advantage.description }}</p>
           </div>
-        </div>
-      </div>
-      
-      <!-- 技术指标 -->
-      <div class="tech-metrics">
-        <div class="metrics-content">
-          <h2 class="section-subtitle">{{ techPageTexts.metrics }}</h2>
-          <p class="section-desc">{{ techPageTexts.metricsSubtitle }}</p>
           
-          <div class="metrics-list">
-            <div class="metric-item" v-for="(metric, index) in currentMetrics" :key="index">
-              <div class="metric-value">{{ metric.value }}</div>
-              <div class="metric-info">
-                <h3>{{ metric.title }}</h3>
-                <p>{{ metric.description }}</p>
+          <!-- 右侧产品列表展示 -->
+          <div class="category-details">
+            <div v-if="selectedCategory" class="product-list">
+              <div class="product-list-header">
+                <h3 class="list-title">{{ getCategoryProducts(selectedCategory).title }}</h3>
+                <p class="list-subtitle">{{ getCategoryProducts(selectedCategory).subtitle }}</p>
+              </div>
+              
+              <div class="products-grid">
+                <div v-for="product in getCategoryProducts(selectedCategory).products" :key="product.id" 
+                     class="product-card" @click="goToProductDetail(product.link)">
+                  <div class="product-image">
+                    <img :src="product.image" :alt="product.name" @error="handleProductImageError">
+                    <div class="product-overlay">
+                      <i class="fas fa-eye"></i>
+                    </div>
+                  </div>
+                  <div class="product-info">
+                    <h4 class="product-name">{{ product.name }}</h4>
+                    <p class="product-description">{{ product.description }}</p>
+                    <div class="product-features">
+                      <span v-for="feature in product.features" :key="feature" class="feature-tag">
+                        {{ feature }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- 分页 -->
+              <div v-if="getCategoryProducts(selectedCategory).products.length > itemsPerPage" class="pagination">
+                <button @click="prevPage" :disabled="currentPage === 1" class="page-btn">
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+                <span class="page-info">{{ currentPage }} / {{ totalPages }}</span>
+                <button @click="nextPage" :disabled="currentPage === totalPages" class="page-btn">
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+              </div>
+            </div>
+            
+            <!-- 默认展示 -->
+            <div v-else class="default-content">
+              <div class="default-image">
+                <img src="/images/tech/05.png" alt="产品总览" @error="handleDefaultImageError">
+              </div>
+              <div class="default-text">
+                <h3>朗德智能产品中心</h3>
+                <p>选择左侧产品分类，查看详细信息</p>
+                <div class="overview-stats">
+                  <div class="stat-item">
+                    <div class="stat-number">2</div>
+                    <div class="stat-label">主要产品线</div>
+                  </div>
+                  <div class="stat-item">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">产品类别</div>
+                  </div>
+                  <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">技术专利</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="metrics-image">
-          <img src="/images/tech/detection.jpg" alt="技术指标">
-        </div>
-      </div>
-      
-      <!-- 合作伙伴 -->
-      <div class="tech-partners">
-        <h2 class="section-subtitle">{{ techPageTexts.partners }}</h2>
-        <p class="section-desc">{{ techPageTexts.partnersSubtitle }}</p>
-        
-        <div class="partners-grid">
-          <div class="partner-logo" v-for="partner in partners" :key="partner.id">
-            <img :src="partner.logo" :alt="partner.name">
-            <div class="partner-hover">
-              <span>{{ partner.name }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- 技术咨询 -->
-      <div class="tech-cta">
-        <div class="cta-content">
-          <h2>{{ techPageTexts.needConsultation }}</h2>
-          <p>{{ techPageTexts.consultationDesc }}</p>
-          <RouterLink to="/contact" class="btn btn-primary">{{ techPageTexts.contactUs }}</RouterLink>
-        </div>
-        <div class="cta-pattern"></div>
       </div>
     </div>
     
@@ -162,6 +207,7 @@ import { storeToRefs } from 'pinia'
 import { useContentStore } from '@/store/modules/content'
 import { useLanguage } from '@/mixins/language'
 import { useLanguageStore } from '@/store/modules/language'
+import { useRouter } from 'vue-router'
 
 // 获取语言相关功能
 const { isZh, currentLanguage, getTechnologies } = useLanguage()
@@ -169,11 +215,531 @@ const { isZh, currentLanguage, getTechnologies } = useLanguage()
 // 获取语言store以监听语言变化
 const languageStore = useLanguageStore()
 
+// 获取路由对象
+const router = useRouter()
+
 const contentStore = useContentStore()
 const { technologies, partners } = storeToRefs(contentStore)
 
 // 强制刷新标记
 const forceRender = ref(0)
+
+// 产品分类状态管理
+const expandedCategories = ref({
+  root: true, // 默认展开产品中心
+  defense: false,
+  detection: false,
+  lowAltitude: false
+})
+
+const selectedCategory = ref(null)
+
+// 分页状态
+const currentPage = ref(1)
+const itemsPerPage = ref(6) // 按照图片显示，一行三个，两行共六个
+const totalPages = computed(() => {
+  if (!selectedCategory.value) return 0
+  const products = getCategoryProducts(selectedCategory.value).products
+  return Math.ceil(products.length / itemsPerPage.value)
+})
+
+// 产品列表数据
+const productLists = {
+  defense: {
+    title: '立体防控系列产品',
+    subtitle: '先进的空域安全防护解决方案',
+    products: [
+      {
+        id: 'radar-001',
+        name: '雷达探测系统',
+        description: '高精度雷达目标探测与跟踪',
+        image: '/images/products/radar-system.jpg',
+        link: '/products/defense/detection/radar',
+        features: ['高精度', '全天候', '远距离']
+      },
+      {
+        id: 'optical-001',
+        name: '光电识别系统',
+        description: '可见光与红外双光谱识别',
+        image: '/images/products/optical-system.jpg',
+        link: '/products/defense/detection/optical',
+        features: ['智能识别', '夜视能力', '高清成像']
+      },
+      {
+        id: 'spectrum-001',
+        name: '频谱侦测系统',
+        description: '无线电信号侦测与分析',
+        image: '/images/products/spectrum-system.jpg',
+        link: '/products/defense/detection/spectrum',
+        features: ['宽频侦测', '协议分析', '实时监控']
+      },
+      {
+        id: 'jamming-001',
+        name: '干扰反制系统',
+        description: '定向干扰与精准反制',
+        image: '/images/products/jamming-system.jpg',
+        link: '/products/defense/jamming',
+        features: ['定向干扰', '多频段', '智能控制']
+      },
+      {
+        id: 'integrated-001',
+        name: '一体化防御系统',
+        description: '集成化智能防御平台',
+        image: '/images/products/integrated-system.jpg',
+        link: '/products/defense/integrated',
+        features: ['系统集成', '智能决策', '移动部署']
+      }
+    ]
+  },
+  detection: {
+    title: '侦探感知系列产品',
+    subtitle: '先进的无人机目标侦测识别技术',
+    products: [
+      {
+        id: 'radar-fixed',
+        name: '固定式无线电侦测',
+        description: '设备工作稳定、侦测距离远，支持多种部署方式',
+        image: '/images/products/fixed-detector.jpg',
+        link: '/products/defense/detection/radar',
+        features: ['固定部署', '稳定可靠', '远距离侦测']
+      },
+      {
+        id: 'radar-portable',
+        name: '手提式无线电侦测',
+        description: '穿便设计，便携携带，可实现对频范围内的无人机的侦测',
+        image: '/images/products/portable-detector.jpg',
+        link: '/products/defense/detection/radar',
+        features: ['便携式', '快速部署', '灵活机动']
+      },
+      {
+        id: 'optical-tracking',
+        name: '光电识别跟踪',
+        description: '集高清可见光摄像机、制冷红外热成像仪、激光照明等于一体',
+        image: '/images/products/optical-tracking.jpg',
+        link: '/products/defense/detection/optical',
+        features: ['高清成像', '红外热成像', '激光照明']
+      },
+      {
+        id: 'radar-lowalt',
+        name: '低空探测雷达',
+        description: '低空防御系统的重要组成部分',
+        image: '/images/products/lowalt-radar.jpg',
+        link: '/products/defense/detection/radar',
+        features: ['低空专用', '高精度', '快速响应']
+      }
+    ]
+  },
+  radar: {
+    title: '雷达探测系列产品',
+    subtitle: '高精度雷达目标探测与跟踪技术',
+    products: [
+      {
+        id: 'radar-remote',
+        name: '无人机远程识别侦测',
+        description: '支持独立侦测识别无人机的远程识别及频率信号',
+        image: '/images/products/remote-detection.jpg',
+        link: '/products/defense/detection/radar',
+        features: ['远程识别', '频率信号', '独立侦测']
+      },
+      {
+        id: 'radar-fixed-wireless',
+        name: '固定式无线电侦测',
+        description: '设备工作稳定、侦测距离远，支持多种部署方式',
+        image: '/images/products/fixed-wireless.jpg',
+        link: '/products/defense/detection/radar',
+        features: ['稳定运行', '多种部署', '远距离侦测']
+      },
+      {
+        id: 'radar-portable-wireless',
+        name: '手提式无线电侦测',
+        description: '穿便设计，便携携带，可实现对频范围内的无人机的侦测',
+        image: '/images/products/portable-wireless.jpg',
+        link: '/products/defense/detection/radar',
+        features: ['便携设计', '灵活侦测', '快速响应']
+      }
+    ]
+  },
+  optical: {
+    title: '光电识别系列产品',
+    subtitle: '可见光与红外双光谱识别技术',
+    products: [
+      {
+        id: 'optical-tracking-system',
+        name: '光电识别跟踪',
+        description: '集高清可见光摄像机、制冷红外热成像仪、激光照明等于一体',
+        image: '/images/products/optical-tracking-full.jpg',
+        link: '/products/defense/detection/optical',
+        features: ['高清可见光', '红外热成像', '激光照明']
+      }
+    ]
+  },
+  spectrum: {
+    title: '频谱侦测系列产品',
+    subtitle: '无线电信号侦测与分析技术',
+    products: [
+      {
+        id: 'spectrum-detector',
+        name: '物联感知',
+        description: '支持独立侦测识别无人机的远程识别及频率信号',
+        image: '/images/products/iot-sensor.jpg',
+        link: '/products/defense/detection/spectrum',
+        features: ['物联网', '远程识别', '频率分析']
+      }
+    ]
+  },
+  jamming: {
+    title: '干扰反制系列产品',
+    subtitle: '定向干扰与精准反制技术',
+    products: [
+      {
+        id: 'jamming-system',
+        name: '干扰反制系统',
+        description: '采用先进的定向干扰技术，对入侵无人机进行精准反制',
+        image: '/images/products/jamming-full.jpg',
+        link: '/products/defense/jamming',
+        features: ['定向干扰', '精准反制', '智能控制']
+      }
+    ]
+  },
+  integrated: {
+    title: '一体化防御系列产品',
+    subtitle: '集成化智能防御平台',
+    products: [
+      {
+        id: 'integrated-defense',
+        name: '一体化防御系统',
+        description: '集侦测、识别、预警、反制于一体的智能化防御平台',
+        image: '/images/products/integrated-full.jpg',
+        link: '/products/defense/integrated',
+        features: ['系统集成', '智能决策', '移动部署']
+      }
+    ]
+  },
+  lowAltitude: {
+    title: '低空经济系列产品',
+    subtitle: '智能化低空作业解决方案',
+    products: [
+      {
+        id: 'agriculture-drone',
+        name: '农业植保系统',
+        description: '提供高效、精准的农业植保作业服务',
+        image: '/images/products/agriculture-full.jpg',
+        link: '/products/low-altitude/agriculture',
+        features: ['精准喷洒', '智能规划', '高效作业']
+      },
+      {
+        id: 'patrol-drone',
+        name: '巡查防护系统',
+        description: '提供自动化的巡查防护服务，保障区域安全',
+        image: '/images/products/patrol-full.jpg',
+        link: '/products/low-altitude/patrol',
+        features: ['自动巡航', '实时监控', '异常报警']
+      },
+      {
+        id: 'fpv-drone',
+        name: 'FPV系统',
+        description: '提供专业的FPV飞行体验和竞技服务',
+        image: '/images/products/fpv-full.jpg',
+        link: '/products/low-altitude/fpv',
+        features: ['沉浸体验', '竞技比赛', '技能培训']
+      }
+    ]
+  },
+  agriculture: {
+    title: '农业植保系列产品',
+    subtitle: '智能化农业植保作业服务',
+    products: [
+      {
+        id: 'agriculture-system',
+        name: '农业植保系统',
+        description: '提供高效、精准的农业植保作业服务，提高农业生产效率',
+        image: '/images/products/agriculture-system.jpg',
+        link: '/products/low-altitude/agriculture',
+        features: ['精准喷洒', '智能规划', '数据分析']
+      }
+    ]
+  },
+  patrol: {
+    title: '巡查防护系列产品',
+    subtitle: '智能化巡查防护解决方案',
+    products: [
+      {
+        id: 'patrol-system',
+        name: '巡查防护系统',
+        description: '提供自动化的巡查防护服务，保障区域安全',
+        image: '/images/products/patrol-system.jpg',
+        link: '/products/low-altitude/patrol',
+        features: ['自动巡航', '实时监控', '异常报警']
+      }
+    ]
+  },
+  fpv: {
+    title: 'FPV系列产品',
+    subtitle: '第一人称沉浸式飞行体验',
+    products: [
+      {
+        id: 'fpv-system',
+        name: 'FPV系统',
+        description: '提供专业的FPV飞行体验和竞技服务',
+        image: '/images/products/fpv-system.jpg',
+        link: '/products/low-altitude/fpv',
+        features: ['沉浸体验', '竞技比赛', '技能培训']
+      }
+    ]
+  }
+}
+const categoryData = {
+  defense: {
+    title: '立体防控系统',
+    subtitle: '全方位空域安全防护解决方案',
+    description: '集成侦探、识别、预警、干扰反制于一体的智能化防御系统',
+    image: '/images/products/defense-system.jpg',
+    link: '/products/defense',
+    features: [
+      { icon: 'fas fa-radar', title: '多元侦测', description: '雷达、光电、频谱多重侦测手段' },
+      { icon: 'fas fa-shield-alt', title: '智能防御', description: '自动识别、分级预警、精准反制' },
+      { icon: 'fas fa-network-wired', title: '系统集成', description: '统一指挥平台，多设备协同作业' }
+    ],
+    specs: [
+      { name: '侦测距离', value: '≥10km' },
+      { name: '识别精度', value: '≥95%' },
+      { name: '反应时间', value: '<3秒' }
+    ]
+  },
+  detection: {
+    title: '侦探感知系统',
+    subtitle: '先进的无人机目标侦测识别技术',
+    description: '采用多传感器融合技术，实现全天候、全方位目标侦测',
+    image: '/images/products/detection-system.jpg',
+    link: '/products/defense/detection',
+    features: [
+      { icon: 'fas fa-satellite-dish', title: '雷达侦测', description: '高精度雷达系统，可探测微小目标' },
+      { icon: 'fas fa-eye', title: '光电识别', description: '可见光/红外双光谱成像识别' },
+      { icon: 'fas fa-wifi', title: '频谱侦测', description: '无线电信号侦测和分析' }
+    ],
+    specs: [
+      { name: '侦测范围', value: '360°全方位' },
+      { name: '最小目标', value: '0.01m²' },
+      { name: '侦测高度', value: '20m-3000m' }
+    ]
+  },
+  radar: {
+    title: '雷达探测系统',
+    subtitle: '高精度雷达目标探测与跟踪',
+    description: '采用先进的相控阵雷达技术，实现对小型无人机的精准探测',
+    image: '/images/products/radar-detection.jpg',
+    link: '/products/defense/detection/radar',
+    features: [
+      { icon: 'fas fa-crosshairs', title: '精准定位', description: '毫米级定位精度' },
+      { icon: 'fas fa-tachometer-alt', title: '快速响应', description: '毫秒级目标检测' },
+      { icon: 'fas fa-chart-line', title: '轨迹跟踪', description: '实时轨迹预测分析' }
+    ],
+    specs: [
+      { name: '探测距离', value: '5-10km' },
+      { name: '定位精度', value: '±1m' },
+      { name: '工作频段', value: 'Ku段' }
+    ]
+  },
+  optical: {
+    title: '光电识别系统',
+    subtitle: '可见光与红外双光谱识别',
+    description: '采用先进的光电成像技术，实现对无人机的视觉识别和分类',
+    image: '/images/products/optical-detection.jpg',
+    link: '/products/defense/detection/optical',
+    features: [
+      { icon: 'fas fa-camera', title: '高清成像', description: '4K超高清光电成像' },
+      { icon: 'fas fa-thermometer-half', title: '红外探测', description: '热成像夜视探测能力' },
+      { icon: 'fas fa-brain', title: 'AI识别', description: '智能目标识别算法' }
+    ],
+    specs: [
+      { name: '视野范围', value: '360°全景' },
+      { name: '变焦倍数', value: '30倍光学变焦' },
+      { name: '识别精度', value: '≥96%' }
+    ]
+  },
+  spectrum: {
+    title: '频谱侦测系统',
+    subtitle: '无线电信号侦测与分析',
+    description: '对无人机的控制信号进行侦测、识别和分析，判断其类型和威胁等级',
+    image: '/images/products/spectrum-detection.jpg',
+    link: '/products/defense/detection/spectrum',
+    features: [
+      { icon: 'fas fa-signal', title: '信号侦测', description: '宽频无线电信号侦测' },
+      { icon: 'fas fa-search', title: '协议分析', description: '深度协议解析与识别' },
+      { icon: 'fas fa-database', title: '特征库', description: '丰富的信号特征数据库' }
+    ],
+    specs: [
+      { name: '频率范围', value: '400MHz-6GHz' },
+      { name: '侦测灵敏度', value: '-110dBm' },
+      { name: '识别类型', value: '50+种无人机' }
+    ]
+  },
+  jamming: {
+    title: '干扰反制系统',
+    subtitle: '定向干扰与精准反制',
+    description: '采用先进的定向干扰技术，对入侵无人机进行精准反制',
+    image: '/images/products/jamming-system.jpg',
+    link: '/products/defense/jamming',
+    features: [
+      { icon: 'fas fa-wifi', title: '信号干扰', description: '多频段定向干扰' },
+      { icon: 'fas fa-location-arrow', title: 'GPS屏蔽', description: '导航信号干扰屏蔽' },
+      { icon: 'fas fa-bullseye', title: '精准打击', description: '定向能量聚焦打击' }
+    ],
+    specs: [
+      { name: '干扰距离', value: '1-3km' },
+      { name: '功率输出', value: '100W' },
+      { name: '频段覆盖', value: '2.4G/5.8G' }
+    ]
+  },
+  integrated: {
+    title: '一体化防御系统',
+    subtitle: '集成化智能防御平台',
+    description: '集侦测、识别、预警、反制于一体的智能化防御平台',
+    image: '/images/products/integrated-defense.jpg',
+    link: '/products/defense/integrated',
+    features: [
+      { icon: 'fas fa-cogs', title: '系统集成', description: '多子系统一体化集成' },
+      { icon: 'fas fa-brain', title: '智能决策', description: 'AI智能分析决策系统' },
+      { icon: 'fas fa-mobile-alt', title: '移动部署', description: '快速部署机动作业' }
+    ],
+    specs: [
+      { name: '防护半径', value: '0.5-5km' },
+      { name: '部署时间', value: '<30分钟' },
+      { name: '同时目标', value: '32个' }
+    ]
+  },
+  lowAltitude: {
+    title: '低空经济系统',
+    subtitle: '智能化低空作业解决方案',
+    description: '为低空经济发展提供专业的无人机作业解决方案',
+    image: '/images/products/low-altitude-economy.jpg',
+    link: '/products/low-altitude',
+    features: [
+      { icon: 'fas fa-seedling', title: '智慧农业', description: '精准农业作业服务' },
+      { icon: 'fas fa-search-location', title: '巡检监控', description: '智能巡检监控系统' },
+      { icon: 'fas fa-video', title: 'FPV体验', description: '第一人称飞行体验' }
+    ],
+    specs: [
+      { name: '服务领域', value: '3大类别' },
+      { name: '作业效率', value: '提升1000%' },
+      { name: '成本降低', value: '60%' }
+    ]
+  },
+  agriculture: {
+    title: '农业植保系统',
+    subtitle: '智能化农业植保作业服务',
+    description: '提供高效、精准的农业植保作业服务，提高农业生产效率',
+    image: '/images/products/agriculture-drone.jpg',
+    link: '/products/low-altitude/agriculture',
+    features: [
+      { icon: 'fas fa-spray-can', title: '精准喷洒', description: '变量喷洒技术' },
+      { icon: 'fas fa-map', title: '地图规划', description: '智能路径规划' },
+      { icon: 'fas fa-chart-bar', title: '数据分析', description: '作业数据统计' }
+    ],
+    specs: [
+      { name: '喷洒精度', value: '±5cm' },
+      { name: '作业效率', value: '200亩/小时' },
+      { name: '载荷容量', value: '20L' }
+    ]
+  },
+  patrol: {
+    title: '巡查防护系统',
+    subtitle: '智能化巡查防护解决方案',
+    description: '提供自动化的巡查防护服务，保障区域安全',
+    image: '/images/products/patrol-drone.jpg',
+    link: '/products/low-altitude/patrol',
+    features: [
+      { icon: 'fas fa-route', title: '自动巡航', description: '智能路径巡航' },
+      { icon: 'fas fa-video', title: '实时监控', description: '高清视频监控' },
+      { icon: 'fas fa-bell', title: '异常报警', description: '智能异常识别' }
+    ],
+    specs: [
+      { name: '巡航时间', value: '4小时' },
+      { name: '监控范围', value: '5km半径' },
+      { name: '视频质量', value: '4K超高清' }
+    ]
+  },
+  fpv: {
+    title: 'FPV系统',
+    subtitle: '第一人称沉浸式飞行体验',
+    description: '提供专业的FPV飞行体验和竞技服务',
+    image: '/images/products/fpv-drone.jpg',
+    link: '/products/low-altitude/fpv',
+    features: [
+      { icon: 'fas fa-vr-cardboard', title: '沉浸体验', description: '第一人称视角' },
+      { icon: 'fas fa-trophy', title: '竞技比赛', description: '专业竞技平台' },
+      { icon: 'fas fa-graduation-cap', title: '培训教育', description: 'FPV技能培训' }
+    ],
+    specs: [
+      { name: '飞行速度', value: '150km/h' },
+      { name: '图传延迟', value: '<20ms' },
+      { name: '控制距离', value: '2km' }
+    ]
+  }
+}
+
+// 切换分类展开状态
+const toggleCategory = (categoryId) => {
+  expandedCategories.value[categoryId] = !expandedCategories.value[categoryId]
+}
+
+// 获取分类产品列表
+const getCategoryProducts = (categoryId) => {
+  return productLists[categoryId] || { title: '', subtitle: '', products: [] }
+}
+
+// 跳转到产品详情页
+const goToProductDetail = (link) => {
+  if (link) {
+    router.push(link)
+  }
+}
+
+// 分页操作
+const prevPage = () => {
+  if (currentPage.value > 1) {
+    currentPage.value--
+  }
+}
+
+const nextPage = () => {
+  if (currentPage.value < totalPages.value) {
+    currentPage.value++
+  }
+}
+
+// 处理产品图片加载错误
+const handleProductImageError = (event) => {
+  event.target.src = '/images/products/default-product.jpg'
+}
+
+// 选择分类
+const selectCategory = (categoryId) => {
+  selectedCategory.value = categoryId
+  currentPage.value = 1 // 重置到第一页
+}
+
+// 获取分类数据
+const getCategoryData = (categoryId) => {
+  return categoryData[categoryId] || {}
+}
+
+// 下载产品手册
+const downloadBrochure = (categoryId) => {
+  // 这里可以实现下载逻辑
+  console.log('下载产品手册:', categoryId)
+  alert('产品手册下载功能开发中...')
+}
+
+// 处理图片加载错误
+const handleImageError = (event) => {
+  event.target.src = '/images/products/default-product.jpg'
+}
+
+// 处理默认图片加载错误
+const handleDefaultImageError = (event) => {
+  event.target.src = '/images/products/product-overview-default.jpg'
+}
 
 // 当前语言的技术数据
 const currentTechnologies = computed(() => {
@@ -539,24 +1105,6 @@ const getTechImage = (techId) => {
   return techImages[techId] || '/images/tech/detection.jpg'
 }
 
-// 处理图片加载错误
-const handleImageError = (event) => {
-  // 从当前元素的父级元素中找到技术ID
-  const techElement = event.target.closest('.tech-section');
-  if (techElement) {
-    const index = Array.from(techElement.parentNode.children).indexOf(techElement);
-    const tech = technologies.value[index];
-    
-    if (tech) {
-      event.target.src = `/images/tech/${tech.id || 'detection'}.jpg`;
-    } else {
-      event.target.src = '/images/tech/detection.jpg';
-    }
-  } else {
-    // 如果是产品图片，使用默认图片
-    event.target.src = '/images/tech/detection.jpg';
-  }
-}
 </script>
 
 <style scoped>
@@ -1728,4 +2276,696 @@ const handleImageError = (event) => {
   }
 }
 
-</style> 
+/* 产品分类样式 */
+.product-categories {
+  padding: 80px 0;
+}
+
+.categories-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  color: #1e293b;
+  margin-bottom: 20px;
+  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.section-subtitle {
+  font-size: 1.2rem;
+  color: #64748b;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.categories-content {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 40px;
+  min-height: 600px;
+}
+
+/* 左侧产品分类树 */
+.category-tree {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.tree-container {
+  font-family: 'Microsoft YaHei', sans-serif;
+}
+
+.tree-item {
+  margin-bottom: 8px;
+}
+
+.tree-node {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.tree-node:hover {
+  background: rgba(79, 172, 254, 0.1);
+  transform: translateX(5px);
+}
+
+.tree-icon {
+  margin-right: 12px;
+  font-size: 0.9rem;
+  color: #64748b;
+  transition: all 0.3s ease;
+  width: 16px;
+  text-align: center;
+}
+
+.tree-icon.expanded {
+  transform: rotate(90deg);
+  color: #4facfe;
+}
+
+.node-text {
+  font-size: 1rem;
+  color: #1e293b;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.tree-node:hover .node-text {
+  color: #4facfe;
+  font-weight: 600;
+}
+
+.root-item .tree-node {
+  background: linear-gradient(90deg, rgba(79, 172, 254, 0.1) 0%, rgba(0, 242, 254, 0.1) 100%);
+  border: 2px solid rgba(79, 172, 254, 0.2);
+  font-weight: 600;
+}
+
+.root-item .node-text {
+  font-size: 1.1rem;
+  color: #4facfe;
+}
+
+.tree-children {
+  margin-left: 20px;
+  margin-top: 8px;
+  border-left: 2px solid rgba(79, 172, 254, 0.2);
+  padding-left: 20px;
+  animation: slideDown 0.3s ease;
+}
+
+.level-1 .tree-node {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.level-2 .tree-node {
+  background: rgba(248, 250, 252, 0.8);
+  border: 1px solid rgba(226, 232, 240, 0.6);
+}
+
+.level-3 .tree-node {
+  background: rgba(241, 245, 249, 0.8);
+  border: 1px solid rgba(226, 232, 240, 0.4);
+  font-size: 0.9rem;
+}
+
+.level-3 .tree-icon {
+  color: #9ca3af;
+  font-size: 0.7rem;
+}
+
+/* 右侧产品列表 */
+.product-list {
+  padding: 0;
+}
+
+.product-list-header {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.list-title {
+  font-size: 1.8rem;
+  color: #1e293b;
+  margin-bottom: 10px;
+  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.list-subtitle {
+  font-size: 1rem;
+  color: #64748b;
+  margin-bottom: 0;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.product-card {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1px solid #e2e8f0;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  border-color: #4facfe;
+}
+
+.product-image {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image img {
+  transform: scale(1.05);
+}
+
+.product-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(79, 172, 254, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.product-card:hover .product-overlay {
+  opacity: 1;
+}
+
+.product-overlay i {
+  color: white;
+  font-size: 2rem;
+}
+
+.product-info {
+  padding: 20px;
+}
+
+.product-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.product-description {
+  font-size: 0.9rem;
+  color: #64748b;
+  line-height: 1.5;
+  margin-bottom: 15px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.product-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.feature-tag {
+  background: rgba(79, 172, 254, 0.1);
+  color: #4facfe;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* 分页 */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.page-btn {
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  color: #64748b;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.page-btn:hover:not(:disabled) {
+  background: #4facfe;
+  border-color: #4facfe;
+  color: white;
+}
+
+.page-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.page-info {
+  font-size: 0.9rem;
+  color: #64748b;
+  font-weight: 500;
+  min-width: 60px;
+  text-align: center;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .product-info {
+    padding: 15px;
+  }
+  
+  .list-title {
+    font-size: 1.5rem;
+  }
+  
+  .product-image {
+    height: 160px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-image {
+    height: 140px;
+  }
+  
+  .product-name {
+    font-size: 1rem;
+  }
+  
+  .feature-tag {
+    font-size: 0.7rem;
+    padding: 3px 6px;
+  }
+}
+.category-details {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+}
+
+.detail-header {
+  margin-bottom: 30px;
+}
+
+.detail-title {
+  font-size: 2rem;
+  color: #1e293b;
+  margin-bottom: 10px;
+  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.detail-subtitle {
+  font-size: 1.1rem;
+  color: #64748b;
+  margin-bottom: 15px;
+}
+
+.detail-image {
+  position: relative;
+  margin-bottom: 30px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.detail-image img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.detail-image:hover img {
+  transform: scale(1.05);
+}
+
+.image-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  color: white;
+  padding: 20px;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.detail-image:hover .image-overlay {
+  transform: translateY(0);
+}
+
+.overlay-content h4 {
+  margin-bottom: 8px;
+  font-size: 1.2rem;
+}
+
+.overlay-content p {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.detail-features {
+  margin-bottom: 30px;
+}
+
+.detail-features h4 {
+  font-size: 1.3rem;
+  color: #1e293b;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.detail-features h4::before {
+  content: '\f0c9';
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  margin-right: 10px;
+  color: #4facfe;
+}
+
+.features-grid {
+  display: grid;
+  gap: 15px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 20px;
+  background: #f8fafc;
+  border-radius: 8px;
+  border-left: 4px solid #4facfe;
+  transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+  background: rgba(79, 172, 254, 0.05);
+  transform: translateX(5px);
+}
+
+.feature-icon {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.feature-content h5 {
+  font-size: 1rem;
+  color: #1e293b;
+  margin-bottom: 5px;
+}
+
+.feature-content p {
+  font-size: 0.9rem;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+.detail-specs {
+  margin-bottom: 30px;
+}
+
+.detail-specs h4 {
+  font-size: 1.3rem;
+  color: #1e293b;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.detail-specs h4::before {
+  content: '\f0ae';
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  margin-right: 10px;
+  color: #4facfe;
+}
+
+.specs-list {
+  display: grid;
+  gap: 12px;
+}
+
+.spec-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background: #f8fafc;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+
+.spec-name {
+  font-weight: 500;
+  color: #374151;
+}
+
+.spec-value {
+  font-weight: 600;
+  color: #4facfe;
+  background: rgba(79, 172, 254, 0.1);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+.detail-actions {
+  display: flex;
+  gap: 15px;
+}
+
+.btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  color: white;
+  box-shadow: 0 5px 15px rgba(79, 172, 254, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(79, 172, 254, 0.4);
+  color: white;
+  text-decoration: none;
+}
+
+.btn-secondary {
+  background: #f8fafc;
+  color: #4facfe;
+  border: 2px solid #4facfe;
+}
+
+.btn-secondary:hover {
+  background: #4facfe;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* 默认展示 */
+.default-content {
+  text-align: center;
+}
+
+.default-image {
+  margin-bottom: 30px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.default-image img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.default-text h3 {
+  font-size: 1.8rem;
+  color: #1e293b;
+  margin-bottom: 15px;
+}
+
+.default-text p {
+  font-size: 1.1rem;
+  color: #64748b;
+  margin-bottom: 30px;
+}
+
+.overview-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 40px;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* 动画 */
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    max-height: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    max-height: 500px;
+    transform: translateY(0);
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+  .categories-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .category-tree {
+    order: 2;
+  }
+  
+  .category-details {
+    order: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .categories-content {
+    gap: 20px;
+  }
+  
+  .category-tree,
+  .category-details {
+    padding: 20px;
+  }
+  
+  .detail-title {
+    font-size: 1.5rem;
+  }
+  
+  .detail-actions {
+    flex-direction: column;
+  }
+  
+  .overview-stats {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .tree-children {
+    margin-left: 10px;
+    padding-left: 10px;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+}
+</style>
