@@ -20,7 +20,7 @@
       <div class="tech-particles"></div>
     </div>
     
-    <div class="container">
+    <div class="container product-center-container">
       <!-- 产品分类展示 -->
       <div class="product-categories">
         <div class="categories-header">
@@ -33,7 +33,7 @@
           <div class="category-tree">
             <div class="tree-container">
               <div class="tree-item root-item">
-                <div class="tree-node" @click="toggleCategory('root')">
+                <div class="tree-node" @click="toggleCategory('root'); scrollToProductListOnRootClick()">
                   <i class="fas fa-chevron-down tree-icon" :class="{'expanded': expandedCategories.root}"></i>
                   <span class="node-text">产品分类</span>
                 </div>
@@ -148,11 +148,6 @@
                   <div class="product-info">
                     <h4 class="product-name">{{ product.name }}</h4>
                     <p class="product-description">{{ product.description }}</p>
-                    <div class="product-features">
-                      <span v-for="feature in product.features" :key="feature" class="feature-tag">
-                        {{ feature }}
-                      </span>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -178,7 +173,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed, watch, onUnmounted } from 'vue'
+import { ref, onMounted, computed, watch, onUnmounted, nextTick } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useContentStore } from '@/store/modules/content'
 import { useLanguage } from '@/mixins/language'
@@ -251,10 +246,12 @@ const handleGlobalCategorySelect = (event) => {
       expandedCategories.value.lowAltitude = true
     }
     
-    // 延迟滚动，等待产品列表更新完成
-    setTimeout(() => {
-      scrollToProductListInPage()
-    }, 200)
+    // 注释滚动功能，由App.vue统一处理
+    // nextTick(() => {
+    //   setTimeout(() => {
+    //     scrollToProductListInPage()
+    //   }, 300)
+    // })
   }
 }
 
@@ -291,6 +288,13 @@ const handleGlobalProductSelect = (event) => {
       expandedCategories.value.root = true
       expandedCategories.value.lowAltitude = true
     }
+    
+    // 滚动到产品列表
+    nextTick(() => {
+      setTimeout(() => {
+        scrollToProductListInPage()
+      }, 300)
+    })
   }
 }
 
@@ -753,6 +757,18 @@ const toggleCategory = (categoryId) => {
   expandedCategories.value[categoryId] = !expandedCategories.value[categoryId]
 }
 
+// 根节点点击滚动到产品列表
+const scrollToProductListOnRootClick = () => {
+  // 如果根节点被展开，则滚动到产品列表
+  if (expandedCategories.value.root) {
+    nextTick(() => {
+      setTimeout(() => {
+        scrollToProductListInPage()
+      }, 200)
+    })
+  }
+}
+
 // 获取分类产品列表
 const getCategoryProducts = (categoryId) => {
   return productLists[categoryId] || { title: '', subtitle: '', products: [] }
@@ -817,24 +833,35 @@ const selectCategory = (categoryId) => {
 // 选择分类并滚动到产品列表
 const selectCategoryWithScroll = (categoryId) => {
   selectCategory(categoryId)
-  // 延迟滚动，等待产品列表更新
-  setTimeout(() => {
-    scrollToProductListInPage()
-  }, 100)
+  // 延迟滚动，等待产品列表更新和DOM渲染
+  nextTick(() => {
+    setTimeout(() => {
+      scrollToProductListInPage()
+    }, 150)
+  })
 }
 
 // 页面内滚动到产品列表
 const scrollToProductListInPage = () => {
   const productListElement = document.querySelector('#product-list-container')
   if (productListElement) {
-    const navHeight = 90
+    // 获取导航栏高度，确保不被遮挡
+    const navHeight = 100
     const elementTop = productListElement.offsetTop
     const scrollTop = Math.max(0, elementTop - navHeight)
+    
+    console.log('滚动到产品列表:', {
+      elementTop,
+      navHeight,
+      scrollTop
+    })
     
     window.scrollTo({
       top: scrollTop,
       behavior: 'smooth'
     })
+  } else {
+    console.warn('未找到产品列表容器')
   }
 }
 
@@ -2407,14 +2434,36 @@ const getTechImage = (techId) => {
   }
 }
 
+/* 产品中心主容器 */
+.product-center-container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+}
+
 /* 产品分类样式 */
 .product-categories {
   padding: 80px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1600px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, rgba(248, 250, 252, 0.5) 0%, rgba(255, 255, 255, 0.8) 100%);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
 }
 
 .categories-header {
   text-align: center;
   margin-bottom: 60px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  z-index: 2;
 }
 
 .section-title {
@@ -2435,17 +2484,30 @@ const getTechImage = (techId) => {
 
 .categories-content {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 350px 1fr;
   gap: 40px;
   min-height: 600px;
+  align-items: start;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
 }
 
 /* 左侧产品分类树 */
 .category-tree {
-  background: #f8fafc;
-  border-radius: 12px;
-  padding: 30px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
+  position: sticky;
+  top: 20px;
+  height: fit-content;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
 }
 
 .tree-container {
@@ -2459,11 +2521,12 @@ const getTechImage = (techId) => {
 .tree-node {
   display: flex;
   align-items: center;
-  padding: 12px 16px;
+  padding: 10px 14px;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
+  white-space: nowrap;
 }
 
 .tree-node:hover {
@@ -2472,12 +2535,13 @@ const getTechImage = (techId) => {
 }
 
 .tree-icon {
-  margin-right: 12px;
-  font-size: 0.9rem;
+  margin-right: 10px;
+  font-size: 0.85rem;
   color: #64748b;
   transition: all 0.3s ease;
-  width: 16px;
+  width: 14px;
   text-align: center;
+  flex-shrink: 0;
 }
 
 .tree-icon.expanded {
@@ -2486,10 +2550,11 @@ const getTechImage = (techId) => {
 }
 
 .node-text {
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: #1e293b;
   font-weight: 500;
   transition: color 0.3s ease;
+  line-height: 1.4;
 }
 
 .tree-node:hover .node-text {
@@ -2501,12 +2566,13 @@ const getTechImage = (techId) => {
 .root-item .tree-node {
   background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
   border: none;
-  box-shadow: 0 8px 25px rgba(79, 172, 254, 0.3);
+  box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
   font-weight: 700;
-  padding: 16px 20px;
-  border-radius: 12px;
+  padding: 12px 16px;
+  border-radius: 10px;
   position: relative;
   overflow: hidden;
+  margin-bottom: 8px;
 }
 
 .root-item .tree-node::before {
@@ -2521,50 +2587,50 @@ const getTechImage = (techId) => {
 }
 
 .root-item .node-text {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   color: #ffffff;
   font-weight: 700;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  letter-spacing: 0.5px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.3px;
 }
 
 .root-item .tree-icon {
   color: #ffffff;
-  font-size: 1.1rem;
-  margin-right: 15px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  font-size: 1rem;
+  margin-right: 12px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 /* 一级分类样式优化 */
 .level-1 .tree-node {
-  background: linear-gradient(135deg, rgba(30, 41, 59, 0.05) 0%, rgba(71, 85, 105, 0.05) 100%);
-  border: 2px solid rgba(79, 172, 254, 0.15);
-  border-left: 5px solid #4facfe;
-  padding: 14px 18px;
-  border-radius: 10px;
-  margin: 4px 0;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  background: linear-gradient(135deg, rgba(248, 250, 252, 0.8) 0%, rgba(241, 245, 249, 0.8) 100%);
+  border: 1px solid rgba(79, 172, 254, 0.2);
+  border-left: 3px solid #4facfe;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin: 3px 0;
+  transition: all 0.3s ease;
 }
 
 .level-1 .tree-node:hover {
   background: linear-gradient(135deg, rgba(79, 172, 254, 0.08) 0%, rgba(0, 242, 254, 0.08) 100%);
-  border-color: rgba(79, 172, 254, 0.3);
+  border-color: rgba(79, 172, 254, 0.4);
   border-left-color: #00f2fe;
-  transform: translateX(8px) scale(1.02);
-  box-shadow: 0 5px 20px rgba(79, 172, 254, 0.15);
+  transform: translateX(4px);
+  box-shadow: 0 2px 10px rgba(79, 172, 254, 0.15);
 }
 
 .level-1 .node-text {
-  font-size: 1.15rem;
+  font-size: 1rem;
   color: #1e293b;
-  font-weight: 650;
-  letter-spacing: 0.3px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
 }
 
 .level-1 .tree-icon {
   color: #4facfe;
-  font-size: 1rem;
-  margin-right: 14px;
+  font-size: 0.9rem;
+  margin-right: 12px;
   transition: all 0.3s ease;
 }
 
@@ -2580,12 +2646,12 @@ const getTechImage = (techId) => {
 
 /* 二级分类样式优化 */
 .level-2 .tree-node {
-  background: linear-gradient(135deg, rgba(248, 250, 252, 0.9) 0%, rgba(241, 245, 249, 0.9) 100%);
-  border: 1px solid rgba(226, 232, 240, 0.8);
-  border-left: 4px solid #38bdf8;
-  padding: 12px 16px;
-  border-radius: 8px;
-  margin: 3px 0;
+  background: linear-gradient(135deg, rgba(248, 250, 252, 0.6) 0%, rgba(241, 245, 249, 0.6) 100%);
+  border: 1px solid rgba(226, 232, 240, 0.6);
+  border-left: 3px solid #38bdf8;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin: 2px 0;
   transition: all 0.3s ease;
   position: relative;
 }
@@ -2609,21 +2675,21 @@ const getTechImage = (techId) => {
 .level-2 .tree-node:hover {
   background: linear-gradient(135deg, rgba(56, 189, 248, 0.06) 0%, rgba(14, 165, 233, 0.06) 100%);
   border-color: rgba(56, 189, 248, 0.4);
-  transform: translateX(6px);
-  box-shadow: 0 3px 15px rgba(56, 189, 248, 0.12);
+  transform: translateX(3px);
+  box-shadow: 0 1px 8px rgba(56, 189, 248, 0.12);
 }
 
 .level-2 .node-text {
-  font-size: 1.05rem;
+  font-size: 0.9rem;
   color: #334155;
-  font-weight: 600;
-  letter-spacing: 0.2px;
+  font-weight: 550;
+  letter-spacing: 0.1px;
 }
 
 .level-2 .tree-icon {
   color: #38bdf8;
-  font-size: 0.9rem;
-  margin-right: 12px;
+  font-size: 0.8rem;
+  margin-right: 10px;
 }
 
 .level-2 .tree-node:hover .tree-icon {
@@ -2638,13 +2704,13 @@ const getTechImage = (techId) => {
 
 /* 三级分类样式优化 */
 .level-3 .tree-node {
-  background: linear-gradient(135deg, rgba(241, 245, 249, 0.7) 0%, rgba(235, 240, 246, 0.7) 100%);
-  border: 1px solid rgba(203, 213, 225, 0.6);
-  border-left: 3px solid #64748b;
-  padding: 10px 14px;
-  border-radius: 6px;
-  margin: 2px 0;
-  font-size: 0.95rem;
+  background: linear-gradient(135deg, rgba(241, 245, 249, 0.5) 0%, rgba(235, 240, 246, 0.5) 100%);
+  border: 1px solid rgba(203, 213, 225, 0.4);
+  border-left: 2px solid #64748b;
+  padding: 6px 10px;
+  border-radius: 4px;
+  margin: 1px 0;
+  font-size: 0.85rem;
   transition: all 0.3s ease;
   position: relative;
 }
@@ -2668,21 +2734,21 @@ const getTechImage = (techId) => {
 .level-3 .tree-node:hover {
   background: linear-gradient(135deg, rgba(100, 116, 139, 0.05) 0%, rgba(71, 85, 105, 0.05) 100%);
   border-color: rgba(100, 116, 139, 0.4);
-  transform: translateX(4px);
-  box-shadow: 0 2px 10px rgba(100, 116, 139, 0.1);
+  transform: translateX(2px);
+  box-shadow: 0 1px 6px rgba(100, 116, 139, 0.1);
 }
 
 .level-3 .node-text {
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   color: #475569;
-  font-weight: 550;
-  letter-spacing: 0.1px;
+  font-weight: 500;
+  letter-spacing: 0.05px;
 }
 
 .level-3 .tree-icon {
   color: #64748b;
-  font-size: 0.75rem;
-  margin-right: 10px;
+  font-size: 0.7rem;
+  margin-right: 8px;
 }
 
 .level-3 .tree-node:hover .tree-icon {
@@ -2697,23 +2763,23 @@ const getTechImage = (techId) => {
 
 /* 树形连接线样式优化 */
 .tree-children {
-  margin-left: 24px;
-  margin-top: 10px;
-  border-left: 3px solid rgba(79, 172, 254, 0.15);
-  padding-left: 24px;
+  margin-left: 18px;
+  margin-top: 6px;
+  border-left: 2px solid rgba(79, 172, 254, 0.15);
+  padding-left: 18px;
   position: relative;
-  animation: slideDown 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: slideDown 0.3s ease;
 }
 
 .tree-children::before {
   content: '';
   position: absolute;
-  left: -3px;
+  left: -2px;
   top: 0;
   bottom: 0;
-  width: 3px;
+  width: 2px;
   background: linear-gradient(to bottom, #4facfe 0%, rgba(79, 172, 254, 0.3) 50%, transparent 100%);
-  border-radius: 2px;
+  border-radius: 1px;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -2733,8 +2799,8 @@ const getTechImage = (techId) => {
 
 .level-2 .tree-children {
   border-left-color: rgba(100, 116, 139, 0.2);
-  margin-left: 20px;
-  padding-left: 20px;
+  margin-left: 16px;
+  padding-left: 16px;
 }
 
 .level-2 .tree-children::before {
@@ -2790,7 +2856,7 @@ const getTechImage = (techId) => {
 }
 
 .product-list-header {
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   text-align: center;
 }
 
@@ -2812,37 +2878,41 @@ const getTechImage = (techId) => {
 .products-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  margin-bottom: 30px;
+  gap: 40px;
+  margin-bottom: 40px;
 }
 
 .product-card {
   background: #ffffff;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
   cursor: pointer;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #f1f5f9;
+  display: flex;
+  flex-direction: column;
 }
 
 .product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
   border-color: #4facfe;
 }
 
 .product-image {
   position: relative;
   width: 100%;
-  height: 180px;
+  height: 320px;
   overflow: hidden;
+  background: #f8fafc;
 }
 
 .product-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
   transition: transform 0.3s ease;
 }
 
@@ -2856,12 +2926,12 @@ const getTechImage = (techId) => {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(79, 172, 254, 0.8);
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .product-card:hover .product-overlay {
@@ -2875,13 +2945,19 @@ const getTechImage = (techId) => {
 
 .product-info {
   padding: 20px;
+  text-align: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100px;
 }
 
 .product-name {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 600;
   color: #1e293b;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   line-height: 1.3;
 }
 
@@ -2889,26 +2965,11 @@ const getTechImage = (techId) => {
   font-size: 0.9rem;
   color: #64748b;
   line-height: 1.5;
-  margin-bottom: 15px;
+  margin: 0;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-}
-
-.product-features {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.feature-tag {
-  background: rgba(79, 172, 254, 0.1);
-  color: #4facfe;
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 500;
 }
 
 /* 分页 */
@@ -2954,20 +3015,32 @@ const getTechImage = (techId) => {
 }
 
 /* 响应式设计 */
+@media (max-width: 1400px) {
+  .products-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 35px;
+  }
+}
+
 @media (max-width: 1200px) {
   .products-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+  
+  .product-image {
+    height: 280px;
   }
 }
 
 @media (max-width: 768px) {
   .products-grid {
     grid-template-columns: 1fr;
-    gap: 15px;
+    gap: 25px;
   }
   
   .product-info {
-    padding: 15px;
+    padding: 18px;
   }
   
   .list-title {
@@ -2975,22 +3048,26 @@ const getTechImage = (techId) => {
   }
   
   .product-image {
-    height: 160px;
+    height: 250px;
+  }
+  
+  .product-name {
+    font-size: 1.1rem;
   }
 }
 
 @media (max-width: 480px) {
   .product-image {
-    height: 140px;
+    height: 220px;
   }
   
   .product-name {
     font-size: 1rem;
   }
   
-  .feature-tag {
-    font-size: 0.7rem;
-    padding: 3px 6px;
+  .product-info {
+    padding: 15px;
+    min-height: 90px;
   }
 }
 .category-details {
@@ -2999,6 +3076,15 @@ const getTechImage = (techId) => {
   padding: 40px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   border: 1px solid #e2e8f0;
+}
+
+/* 产品列表容器固定尺寸 */
+#product-list-container {
+  width: 1200px;
+  height: 1200px;
+  overflow: auto;
+  position: relative;
+  scroll-margin-top: 100px;
 }
 
 .detail-header {
@@ -3293,9 +3379,15 @@ const getTechImage = (techId) => {
 
 /* 响应式设计 */
 @media (max-width: 1024px) {
+  .product-center-container {
+    max-width: 1200px;
+    padding: 0 15px;
+  }
+  
   .categories-content {
     grid-template-columns: 1fr;
     gap: 30px;
+    max-width: 1000px;
   }
   
   .category-tree {
@@ -3308,17 +3400,33 @@ const getTechImage = (techId) => {
 }
 
 @media (max-width: 768px) {
+  .product-center-container {
+    padding: 0 10px;
+  }
+  
+  .product-categories {
+    padding: 60px 20px;
+    border-radius: 15px;
+  }
+  
   .section-title {
     font-size: 2rem;
   }
   
   .categories-content {
     gap: 20px;
+    max-width: 100%;
   }
   
   .category-tree,
   .category-details {
     padding: 20px;
+  }
+  
+  #product-list-container {
+    width: 100%;
+    height: 800px;
+    max-width: 1200px;
   }
   
   .detail-title {
@@ -3336,6 +3444,23 @@ const getTechImage = (techId) => {
 }
 
 @media (max-width: 576px) {
+  .product-center-container {
+    padding: 0 8px;
+  }
+  
+  .product-categories {
+    padding: 40px 15px;
+    border-radius: 12px;
+  }
+  
+  .section-title {
+    font-size: 1.8rem;
+  }
+  
+  .section-subtitle {
+    font-size: 1rem;
+  }
+  
   .tree-children {
     margin-left: 10px;
     padding-left: 10px;
@@ -3344,6 +3469,12 @@ const getTechImage = (techId) => {
   .btn {
     padding: 10px 20px;
     font-size: 0.9rem;
+  }
+  
+  #product-list-container {
+    width: 100%;
+    height: 600px;
+    max-width: 1200px;
   }
 }
 </style>

@@ -131,11 +131,19 @@ const router = createRouter({
     }
   ],
   scrollBehavior(to, from, savedPosition) {
+    // 如果有保存的位置（如浏览器前进/后退），则恢复到保存的位置
     if (savedPosition) {
       return savedPosition
-    } else {
-      return { top: 0 }
     }
+    
+    // 如果是从导航栏跳转到产品中心页面，不自动滚动到顶部
+    // 让 App.vue 中的滚动逻辑处理
+    if (to.path === '/technology' && from.path !== '/technology') {
+      return false // 不进行自动滚动
+    }
+    
+    // 其他情况滚动到顶部
+    return { top: 0 }
   }
 })
 

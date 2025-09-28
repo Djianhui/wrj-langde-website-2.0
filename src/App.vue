@@ -412,6 +412,8 @@ const setHoveredSubcategory = (subcategory) => {
 
 // 处理分类点击
 const handleCategoryClick = (category) => {
+  console.log('导航栏分类点击:', category)
+  
   // 发出分类选择事件
   const event = new CustomEvent('categorySelected', {
     detail: {
@@ -426,17 +428,20 @@ const handleCategoryClick = (category) => {
   
   // 跳转到产品中心页面
   if (route.path !== '/technology') {
+    console.log('跳转到产品中心页面')
     router.push('/technology').then(() => {
-      // 页面跳转完成后滚动到产品列表
+      // 页面跳转完成后，增加更长的延迟以确保页面完全加载和事件处理完成
       setTimeout(() => {
+        console.log('页面跳转完成，开始滚动')
         scrollToProductList()
-      }, 300)
+      }, 1000) // 增加延迟时间
     })
   } else {
-    // 如果已经在产品中心页面，直接滚动到产品列表
+    console.log('已在产品中心页面，直接滚动')
+    // 如果已经在产品中心页面，延迟滚动以确保事件处理完成
     setTimeout(() => {
       scrollToProductList()
-    }, 100)
+    }, 500) // 增加延迟时间
   }
   
   closeMenu()
@@ -472,37 +477,84 @@ const scrollToProductList = () => {
   // 在滚动开始时立即隐藏下拉菜单
   hideDropdownImmediately()
   
-  // 查找产品列表容器，优先使用最精确的选择器
-  const productListElement = document.querySelector('#product-list-container') || 
-                           document.querySelector('.category-details') ||
-                           document.querySelector('.product-list') ||
-                           document.querySelector('.products-grid')
+  console.log('开始执行滚动到产品列表')
   
-  if (productListElement) {
-    // 计算滚动位置，考虑固定导航栏的高度
-    const navHeight = 90 // 导航栏高度（考虑padding）
-    const elementTop = productListElement.offsetTop
-    const scrollTop = Math.max(0, elementTop - navHeight)
+  // 多次尝试查找产品列表容器
+  const findAndScroll = (attempt = 1) => {
+    const productListElement = document.querySelector('#product-list-container')
     
-    console.log('滚动到产品列表:', {
-      elementTop,
-      navHeight,
-      scrollTop
-    })
-    
-    // 平滑滚动到目标位置
-    window.scrollTo({
-      top: scrollTop,
-      behavior: 'smooth'
-    })
-  } else {
-    console.log('未找到产品列表元素，使用默认滚动')
-    // 如果找不到具体元素，滚动到页面中间位置
-    window.scrollTo({
-      top: window.innerHeight * 0.5,
-      behavior: 'smooth'
-    })
+    if (productListElement) {
+      // 计算滚动位置，考虑固定导航栏的高度
+      const navHeight = 100 // 导航栏高度
+      const elementTop = productListElement.offsetTop
+      const scrollTop = Math.max(0, elementTop - navHeight)
+      
+      console.log(`第${attempt}次尝试成功，找到产品列表容器，开始滚动:`, {
+        elementTop,
+        navHeight,
+        scrollTop,
+        currentScrollTop: window.pageYOffset,
+        elementVisible: productListElement.offsetHeight > 0
+      })
+      
+      // 平滑滚动到目标位置
+      window.scrollTo({
+        top: scrollTop,
+        behavior: 'smooth'
+      })
+      
+      return true
+    } else {
+      console.log(`第${attempt}次尝试未找到产品列表容器`)
+      
+      // 最多尝试10次，每次间隔300ms
+      if (attempt < 10) {
+        setTimeout(() => {
+          findAndScroll(attempt + 1)
+        }, 300)
+      } else {
+        console.log('多次尝试后仍未找到产品列表容器，使用备用滚动方案')
+        // 备用方案：尝试查找其他可能的容器元素
+        const alternativeSelectors = [
+          '.product-categories',
+          '.category-details',
+          '.product-list',
+          '.products-grid'
+        ]
+        
+        let scrolled = false
+        for (const selector of alternativeSelectors) {
+          const element = document.querySelector(selector)
+          if (element) {
+            const navHeight = 100
+            const elementTop = element.offsetTop
+            const scrollTop = Math.max(0, elementTop - navHeight)
+            
+            console.log(`使用备用选择器 ${selector} 进行滚动`)
+            window.scrollTo({
+              top: scrollTop,
+              behavior: 'smooth'
+            })
+            scrolled = true
+            break
+          }
+        }
+        
+        if (!scrolled) {
+          // 最后的备用方案：滚动到页面中下部
+          console.log('使用最终备用方案：滚动到页面中下部')
+          window.scrollTo({
+            top: window.innerHeight * 0.8,
+            behavior: 'smooth'
+          })
+        }
+      }
+      
+      return false
+    }
   }
+  
+  findAndScroll()
 }
 
 // 处理语言切换
