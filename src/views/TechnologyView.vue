@@ -33,7 +33,7 @@
           <div class="category-tree">
             <div class="tree-container">
               <div class="tree-item root-item">
-                <div class="tree-node" @click="toggleCategory('root'); scrollToProductListOnRootClick()">
+                <div class="tree-node" @click="toggleCategory('root')">
                   <i class="fas fa-chevron-down tree-icon" :class="{'expanded': expandedCategories.root}"></i>
                   <span class="node-text">产品分类</span>
                 </div>
@@ -41,7 +41,7 @@
                 <div v-show="expandedCategories.root" class="tree-children">
                   <!-- 立体防控 -->
                   <div class="tree-item level-1">
-                    <div class="tree-node" @click="toggleCategory('defense'); selectCategoryWithScroll('defense')">
+                    <div class="tree-node" @click="toggleCategory('defense'); selectCategory('defense')">
                       <i class="fas fa-chevron-right tree-icon" :class="{'expanded': expandedCategories.defense}"></i>
                       <span class="node-text">立体防控</span>
                     </div>
@@ -49,25 +49,25 @@
                     <div v-show="expandedCategories.defense" class="tree-children">
                       <!-- 侦探感知 -->
                       <div class="tree-item level-2">
-                        <div class="tree-node" @click="toggleCategory('detection'); selectCategoryWithScroll('detection')">
+                        <div class="tree-node" @click="toggleCategory('detection'); selectCategory('detection')">
                           <i class="fas fa-chevron-right tree-icon" :class="{'expanded': expandedCategories.detection}"></i>
                           <span class="node-text">侦探感知</span>
                         </div>
                         
                         <div v-show="expandedCategories.detection" class="tree-children">
-                          <div class="tree-item level-3" @click="selectCategoryWithScroll('radar')">
+                          <div class="tree-item level-3" @click="selectCategory('radar')">
                             <div class="tree-node">
                               <i class="fas fa-dot-circle tree-icon"></i>
                               <span class="node-text">雷达探测</span>
                             </div>
                           </div>
-                          <div class="tree-item level-3" @click="selectCategoryWithScroll('optical')">
+                          <div class="tree-item level-3" @click="selectCategory('optical')">
                             <div class="tree-node">
                               <i class="fas fa-dot-circle tree-icon"></i>
                               <span class="node-text">光电识别</span>
                             </div>
                           </div>
-                          <div class="tree-item level-3" @click="selectCategoryWithScroll('spectrum')">
+                          <div class="tree-item level-3" @click="selectCategory('spectrum')">
                             <div class="tree-node">
                               <i class="fas fa-dot-circle tree-icon"></i>
                               <span class="node-text">频谱侦测</span>
@@ -77,7 +77,7 @@
                       </div>
                       
                       <!-- 干扰反制 -->
-                      <div class="tree-item level-2" @click="selectCategoryWithScroll('jamming')">
+                      <div class="tree-item level-2" @click="selectCategory('jamming')">
                         <div class="tree-node">
                           <i class="fas fa-circle tree-icon"></i>
                           <span class="node-text">干扰反制</span>
@@ -85,7 +85,7 @@
                       </div>
                       
                       <!-- 一体化防御 -->
-                      <div class="tree-item level-2" @click="selectCategoryWithScroll('integrated')">
+                      <div class="tree-item level-2" @click="selectCategory('integrated')">
                         <div class="tree-node">
                           <i class="fas fa-circle tree-icon"></i>
                           <span class="node-text">一体化防御</span>
@@ -96,25 +96,25 @@
                   
                   <!-- 低空经济 -->
                   <div class="tree-item level-1">
-                    <div class="tree-node" @click="toggleCategory('lowAltitude'); selectCategoryWithScroll('lowAltitude')">
+                    <div class="tree-node" @click="toggleCategory('lowAltitude'); selectCategory('lowAltitude')">
                       <i class="fas fa-chevron-right tree-icon" :class="{'expanded': expandedCategories.lowAltitude}"></i>
                       <span class="node-text">低空经济</span>
                     </div>
                     
                     <div v-show="expandedCategories.lowAltitude" class="tree-children">
-                      <div class="tree-item level-2" @click="selectCategoryWithScroll('agriculture')">
+                      <div class="tree-item level-2" @click="selectCategory('agriculture')">
                         <div class="tree-node">
                           <i class="fas fa-circle tree-icon"></i>
                           <span class="node-text">农业植保</span>
                         </div>
                       </div>
-                      <div class="tree-item level-2" @click="selectCategoryWithScroll('patrol')">
+                      <div class="tree-item level-2" @click="selectCategory('patrol')">
                         <div class="tree-node">
                           <i class="fas fa-circle tree-icon"></i>
                           <span class="node-text">巡查防护</span>
                         </div>
                       </div>
-                      <div class="tree-item level-2" @click="selectCategoryWithScroll('fpv')">
+                      <div class="tree-item level-2" @click="selectCategory('fpv')">
                         <div class="tree-node">
                           <i class="fas fa-circle tree-icon"></i>
                           <span class="node-text">FPV</span>
@@ -757,18 +757,6 @@ const toggleCategory = (categoryId) => {
   expandedCategories.value[categoryId] = !expandedCategories.value[categoryId]
 }
 
-// 根节点点击滚动到产品列表
-const scrollToProductListOnRootClick = () => {
-  // 如果根节点被展开，则滚动到产品列表
-  if (expandedCategories.value.root) {
-    nextTick(() => {
-      setTimeout(() => {
-        scrollToProductListInPage()
-      }, 200)
-    })
-  }
-}
-
 // 获取分类产品列表
 const getCategoryProducts = (categoryId) => {
   return productLists[categoryId] || { title: '', subtitle: '', products: [] }
@@ -828,56 +816,6 @@ const handleProductImageError = (event) => {
 const selectCategory = (categoryId) => {
   selectedCategory.value = categoryId
   currentPage.value = 1 // 重置到第一页
-}
-
-// 选择分类并滚动到产品列表
-const selectCategoryWithScroll = (categoryId) => {
-  selectCategory(categoryId)
-  // 延迟滚动，等待产品列表更新和DOM渲染
-  nextTick(() => {
-    setTimeout(() => {
-      scrollToProductListInPage()
-    }, 150)
-  })
-}
-
-// 页面内滚动到产品列表
-const scrollToProductListInPage = () => {
-  const productListElement = document.querySelector('#product-list-container')
-  if (productListElement) {
-    // 等待DOM完全渲染
-    setTimeout(() => {
-      // 获取导航栏高度，确保不被遮挡
-      const navHeight = 100
-      const elementTop = productListElement.offsetTop
-      const scrollTop = Math.max(0, elementTop - navHeight)
-      
-      console.log('页面内滚动到产品列表:', {
-        elementTop,
-        navHeight,
-        scrollTop
-      })
-      
-      window.scrollTo({
-        top: scrollTop,
-        behavior: 'smooth'
-      })
-    }, 100) // 额外的短暂延迟确保DOM完全渲染
-  } else {
-    console.warn('未找到产品列表容器')
-    // 备用方案：尝试其他元素
-    const alternativeElement = document.querySelector('.product-categories')
-    if (alternativeElement) {
-      const navHeight = 100
-      const elementTop = alternativeElement.offsetTop
-      const scrollTop = Math.max(0, elementTop - navHeight)
-      
-      window.scrollTo({
-        top: scrollTop,
-        behavior: 'smooth'
-      })
-    }
-  }
 }
 
 // 获取分类数据
