@@ -845,23 +845,38 @@ const selectCategoryWithScroll = (categoryId) => {
 const scrollToProductListInPage = () => {
   const productListElement = document.querySelector('#product-list-container')
   if (productListElement) {
-    // 获取导航栏高度，确保不被遮挡
-    const navHeight = 100
-    const elementTop = productListElement.offsetTop
-    const scrollTop = Math.max(0, elementTop - navHeight)
-    
-    console.log('滚动到产品列表:', {
-      elementTop,
-      navHeight,
-      scrollTop
-    })
-    
-    window.scrollTo({
-      top: scrollTop,
-      behavior: 'smooth'
-    })
+    // 等待DOM完全渲染
+    setTimeout(() => {
+      // 获取导航栏高度，确保不被遮挡
+      const navHeight = 100
+      const elementTop = productListElement.offsetTop
+      const scrollTop = Math.max(0, elementTop - navHeight)
+      
+      console.log('页面内滚动到产品列表:', {
+        elementTop,
+        navHeight,
+        scrollTop
+      })
+      
+      window.scrollTo({
+        top: scrollTop,
+        behavior: 'smooth'
+      })
+    }, 100) // 额外的短暂延迟确保DOM完全渲染
   } else {
     console.warn('未找到产品列表容器')
+    // 备用方案：尝试其他元素
+    const alternativeElement = document.querySelector('.product-categories')
+    if (alternativeElement) {
+      const navHeight = 100
+      const elementTop = alternativeElement.offsetTop
+      const scrollTop = Math.max(0, elementTop - navHeight)
+      
+      window.scrollTo({
+        top: scrollTop,
+        behavior: 'smooth'
+      })
+    }
   }
 }
 

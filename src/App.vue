@@ -438,10 +438,10 @@ const handleCategoryClick = (category) => {
     })
   } else {
     console.log('已在产品中心页面，直接滚动')
-    // 如果已经在产品中心页面，延迟滚动以确保事件处理完成
+    // 如果已经在产品中心页面，立即滚动
     setTimeout(() => {
       scrollToProductList()
-    }, 500) // 增加延迟时间
+    }, 200) // 短延迟确保事件处理完成
   }
   
   closeMenu()
@@ -478,83 +478,103 @@ const scrollToProductList = () => {
   hideDropdownImmediately()
   
   console.log('开始执行滚动到产品列表')
+  console.log('当前页面路径:', route.path)
+  console.log('当前滚动位置:', window.pageYOffset)
+  console.log('页面高度:', document.documentElement.scrollHeight)
+  console.log('视口高度:', window.innerHeight)
   
-  // 多次尝试查找产品列表容器
-  const findAndScroll = (attempt = 1) => {
-    const productListElement = document.querySelector('#product-list-container')
-    
-    if (productListElement) {
-      // 计算滚动位置，考虑固定导航栏的高度
-      const navHeight = 100 // 导航栏高度
-      const elementTop = productListElement.offsetTop
-      const scrollTop = Math.max(0, elementTop - navHeight)
-      
-      console.log(`第${attempt}次尝试成功，找到产品列表容器，开始滚动:`, {
-        elementTop,
-        navHeight,
-        scrollTop,
-        currentScrollTop: window.pageYOffset,
-        elementVisible: productListElement.offsetHeight > 0
-      })
-      
-      // 平滑滚动到目标位置
-      window.scrollTo({
-        top: scrollTop,
-        behavior: 'smooth'
-      })
-      
-      return true
-    } else {
-      console.log(`第${attempt}次尝试未找到产品列表容器`)
-      
-      // 最多尝试10次，每次间隔300ms
-      if (attempt < 10) {
-        setTimeout(() => {
-          findAndScroll(attempt + 1)
-        }, 300)
-      } else {
-        console.log('多次尝试后仍未找到产品列表容器，使用备用滚动方案')
-        // 备用方案：尝试查找其他可能的容器元素
-        const alternativeSelectors = [
-          '.product-categories',
-          '.category-details',
-          '.product-list',
-          '.products-grid'
-        ]
-        
-        let scrolled = false
-        for (const selector of alternativeSelectors) {
-          const element = document.querySelector(selector)
-          if (element) {
-            const navHeight = 100
-            const elementTop = element.offsetTop
-            const scrollTop = Math.max(0, elementTop - navHeight)
-            
-            console.log(`使用备用选择器 ${selector} 进行滚动`)
-            window.scrollTo({
-              top: scrollTop,
-              behavior: 'smooth'
-            })
-            scrolled = true
-            break
-          }
+  // 强制滚动策略 - 不再依赖元素位置计算
+  const forceScroll = () => {
+    // 使用多种方法确定滚动目标
+    const scrollTargets = [
+      () => window.innerHeight * 0.8, // 视口的80%
+      () => 800, // 固定800px
+      () => {
+        // 尝试找到产品分类元素的真实位置
+        const productElement = document.querySelector('.product-categories')
+        if (productElement) {
+          const rect = productElement.getBoundingClientRect()
+          const scrollTop = window.pageYOffset
+          const elementAbsoluteTop = rect.top + scrollTop
+          console.log('产品分类元素的绝对位置:', elementAbsoluteTop)
+          return Math.max(200, elementAbsoluteTop - 100)
         }
-        
-        if (!scrolled) {
-          // 最后的备用方案：滚动到页面中下部
-          console.log('使用最终备用方案：滚动到页面中下部')
-          window.scrollTo({
-            top: window.innerHeight * 0.8,
-            behavior: 'smooth'
-          })
-        }
+        return 600
       }
+    ]
+    
+    // 尝试每个目标
+    for (let i = 0; i < scrollTargets.length; i++) {
+      const targetPos = scrollTargets[i]()
+      console.log(`尝试滚动目标 ${i + 1}: ${targetPos}px`)
       
-      return false
+      if (targetPos > 50 && targetPos < document.documentElement.scrollHeight) {
+        console.log(`执行滚动到: ${targetPos}px`)
+        
+        // 多种滚动方法同时使用
+        window.scrollTo({
+          top: targetPos,
+          behavior: 'smooth'
+        })
+        
+        // 延迟检查并强制滚加
+        setTimeout(() => {
+          const currentPos = window.pageYOffset
+          console.log(`滚动后当前位置: ${currentPos}px, 目标: ${targetPos}px`)
+          
+          if (Math.abs(currentPos - targetPos) > 100) {
+            console.log('平滑滚动未生效，使用强制滚动')
+            // 强制滚动
+            document.documentElement.scrollTop = targetPos
+            document.body.scrollTop = targetPos
+            window.scrollTo(0, targetPos)
+            
+            // 再次检查
+            setTimeout(() => {
+              const finalPos = window.pageYOffset
+              console.log(`强制滚动后最终位置: ${finalPos}px`)
+              
+              if (finalPos === 0) {
+                console.error('所有滚动方法都失败，可能存在CSS或布局问题')
+                
+                // 最后的尝试 - 修改页面样式
+                const htmlElement = document.documentElement
+                const bodyElement = document.body
+                
+                console.log('HTML overflow:', getComputedStyle(htmlElement).overflow)
+                console.log('Body overflow:', getComputedStyle(bodyElement).overflow)
+                console.log('HTML position:', getComputedStyle(htmlElement).position)
+                console.log('Body position:', getComputedStyle(bodyElement).position)
+                
+                // 尝试删除可能阻止滚动的样式
+                htmlElement.style.overflow = 'auto'
+                bodyElement.style.overflow = 'auto'
+                htmlElement.style.height = 'auto'
+                bodyElement.style.height = 'auto'
+                
+                // 再次尝试滚加
+                setTimeout(() => {
+                  window.scrollTo(0, targetPos)
+                  document.documentElement.scrollTop = targetPos
+                }, 100)
+              }
+            }, 300)
+          }
+        }, 500)
+        
+        return true
+      }
     }
+    
+    return false
   }
   
-  findAndScroll()
+  // 立即执行强制滚动
+  if (forceScroll()) {
+    console.log('强制滚动执行完成')
+  } else {
+    console.error('所有滚动尝试都失败')
+  }
 }
 
 // 处理语言切换
