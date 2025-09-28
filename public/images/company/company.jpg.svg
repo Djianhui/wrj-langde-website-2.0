@@ -1,0 +1,83 @@
+<svg width="800" height="500" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#0a192f" />
+    <stop offset="100%" stop-color="#203a63" />
+  </linearGradient>
+  <rect width="800" height="500" fill="url(#bg-gradient)" rx="16" ry="16" />
+  
+  <!-- 装饰元素 -->
+  <circle cx="100" cy="100" r="80" fill="rgba(79, 172, 254, 0.05)" />
+  <circle cx="700" cy="400" r="120" fill="rgba(0, 242, 254, 0.05)" />
+  <circle cx="400" cy="250" r="200" fill="rgba(79, 172, 254, 0.02)" />
+  
+  <!-- 网格线 -->
+  <g stroke="rgba(79, 172, 254, 0.1)" stroke-width="1">
+    <line x1="0" y1="100" x2="800" y2="100" />
+    <line x1="0" y1="200" x2="800" y2="200" />
+    <line x1="0" y1="300" x2="800" y2="300" />
+    <line x1="0" y1="400" x2="800" y2="400" />
+    <line x1="200" y1="0" x2="200" y2="500" />
+    <line x1="400" y1="0" x2="400" y2="500" />
+    <line x1="600" y1="0" x2="600" y2="500" />
+  </g>
+  
+  <!-- 公司建筑 -->
+  <g transform="translate(300, 200)">
+    <!-- 主楼 -->
+    <rect x="0" y="0" width="200" height="250" fill="rgba(79, 172, 254, 0.2)" stroke="#4facfe" stroke-width="2" />
+    
+    <!-- 窗户 -->
+    <g fill="rgba(0, 242, 254, 0.3)">
+      <rect x="30" y="30" width="30" height="40" />
+      <rect x="85" y="30" width="30" height="40" />
+      <rect x="140" y="30" width="30" height="40" />
+      
+      <rect x="30" y="90" width="30" height="40" />
+      <rect x="85" y="90" width="30" height="40" />
+      <rect x="140" y="90" width="30" height="40" />
+      
+      <rect x="30" y="150" width="30" height="40" />
+      <rect x="85" y="150" width="30" height="40" />
+      <rect x="140" y="150" width="30" height="40" />
+      
+      <rect x="85" y="210" width="30" height="40" />
+    </g>
+    
+    <!-- 屋顶 -->
+    <rect x="-20" y="-20" width="240" height="20" fill="rgba(79, 172, 254, 0.3)" />
+    
+    <!-- 天线 -->
+    <line x1="100" y1="-20" x2="100" y2="-60" stroke="#4facfe" stroke-width="3" />
+    <circle cx="100" cy="-60" r="5" fill="#00f2fe" />
+  </g>
+  
+  <!-- 文字 -->
+  <g font-family="Arial, sans-serif" text-anchor="middle">
+    <text x="400" y="100" font-size="36" fill="#ffffff" font-weight="bold">杭州朗德智能科技有限公司</text>
+    <text x="400" y="140" font-size="20" fill="rgba(255, 255, 255, 0.8)">智能反无人机系统研发中心</text>
+  </g>
+  
+  <!-- 无人机图标 -->
+  <g transform="translate(150, 350)">
+    <rect x="0" y="0" width="60" height="15" fill="#4facfe" rx="3" ry="3" />
+    <circle cx="15" cy="0" r="10" fill="#00f2fe" />
+    <circle cx="45" cy="0" r="10" fill="#00f2fe" />
+    <circle cx="15" cy="15" r="10" fill="#00f2fe" />
+    <circle cx="45" cy="15" r="10" fill="#00f2fe" />
+    <rect x="25" y="-5" width="10" height="25" fill="#4facfe" />
+  </g>
+  
+  <!-- 雷达图标 -->
+  <g transform="translate(600, 350)">
+    <circle cx="0" cy="0" r="30" fill="none" stroke="#4facfe" stroke-width="2" />
+    <circle cx="0" cy="0" r="15" fill="none" stroke="#4facfe" stroke-width="2" />
+    <line x1="0" y1="0" x2="30" y2="0" stroke="#00f2fe" stroke-width="3" />
+    <circle cx="0" cy="0" r="5" fill="#00f2fe" />
+  </g>
+  
+  <!-- 底部信息 -->
+  <text x="400" y="470" font-size="14" fill="rgba(255, 255, 255, 0.6)" text-anchor="middle" font-family="Arial, sans-serif">
+    浙江省杭州市滨江区科技园区创新大厦A座15楼
+  </text>
+</svg> 
