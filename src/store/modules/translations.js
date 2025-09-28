@@ -6,7 +6,39 @@ export const useTranslationsStore = defineStore('translations', () => {
   const navItems = reactive({
     zh: [
       { text: '首页', link: '/', id: 'home' },
-      { text: '反无人机系统', link: '/technology', id: 'technology' },
+      { 
+        text: '产品中心', 
+        link: '/technology',
+        id: 'products',
+        children: [
+          {
+            text: '立体防控',
+            id: 'defense',
+            children: [
+              {
+                text: '侦探感知',
+                id: 'detection',
+                children: [
+                  { text: '雷达探测', link: '/products/defense/detection/radar', id: 'radar' },
+                  { text: '光电识别', link: '/products/defense/detection/optical', id: 'optical' },
+                  { text: '频谱侦测', link: '/products/defense/detection/spectrum', id: 'spectrum' }
+                ]
+              },
+              { text: '干扰反制', link: '/products/defense/jamming', id: 'jamming' },
+              { text: '一体化防御', link: '/products/defense/integrated', id: 'integrated' }
+            ]
+          },
+          {
+            text: '低空经济',
+            id: 'low-altitude',
+            children: [
+              { text: '农业植保', link: '/products/low-altitude/agriculture', id: 'agriculture' },
+              { text: '巡查防护', link: '/products/low-altitude/patrol', id: 'patrol' },
+              { text: 'FPV', link: '/products/low-altitude/fpv', id: 'fpv' }
+            ]
+          }
+        ]
+      },
       { text: '无人机系统', link: '/drone-system', id: 'drone-system' },
       { text: '应用案例', link: '/cases', id: 'cases' },
       { text: '新闻中心', link: '/news', id: 'news' },
@@ -15,7 +47,39 @@ export const useTranslationsStore = defineStore('translations', () => {
     ],
     en: [
       { text: 'Home', link: '/', id: 'home' },
-      { text: 'Anti-UAV System', link: '/technology', id: 'technology' },
+      { 
+        text: 'Product Center', 
+        link: '/technology',
+        id: 'products',
+        children: [
+          {
+            text: 'Defense & Control',
+            id: 'defense',
+            children: [
+              {
+                text: 'Detection & Sensing',
+                id: 'detection',
+                children: [
+                  { text: 'Radar Detection', link: '/products/defense/detection/radar', id: 'radar' },
+                  { text: 'Optical Recognition', link: '/products/defense/detection/optical', id: 'optical' },
+                  { text: 'Spectrum Monitoring', link: '/products/defense/detection/spectrum', id: 'spectrum' }
+                ]
+              },
+              { text: 'Jamming & Counter', link: '/products/defense/jamming', id: 'jamming' },
+              { text: 'Integrated Defense', link: '/products/defense/integrated', id: 'integrated' }
+            ]
+          },
+          {
+            text: 'Low-Altitude Economy',
+            id: 'low-altitude',
+            children: [
+              { text: 'Agricultural Protection', link: '/products/low-altitude/agriculture', id: 'agriculture' },
+              { text: 'Patrol & Protection', link: '/products/low-altitude/patrol', id: 'patrol' },
+              { text: 'FPV Systems', link: '/products/low-altitude/fpv', id: 'fpv' }
+            ]
+          }
+        ]
+      },
       { text: 'Drone Systems', link: '/drone-system', id: 'drone-system' },
       { text: 'Case Studies', link: '/cases', id: 'cases' },
       { text: 'News', link: '/news', id: 'news' },

@@ -24,7 +24,7 @@
       <!-- 产品分类展示 -->
       <div class="product-categories">
         <div class="categories-header">
-          <h2 class="section-title">产品分类</h2>
+          <h2 class="section-title">低空安全系列产品</h2>
           <p class="section-subtitle">朗德智能全系列产品解决方案</p>
         </div>
         
@@ -35,7 +35,7 @@
               <div class="tree-item root-item">
                 <div class="tree-node" @click="toggleCategory('root')">
                   <i class="fas fa-chevron-down tree-icon" :class="{'expanded': expandedCategories.root}"></i>
-                  <span class="node-text">产品中心</span>
+                  <span class="node-text">产品分类</span>
                 </div>
                 
                 <div v-show="expandedCategories.root" class="tree-children">
@@ -129,14 +129,15 @@
           
           <!-- 右侧产品列表展示 -->
           <div class="category-details">
-            <div v-if="selectedCategory" class="product-list">
+            <div class="product-list">
               <div class="product-list-header">
-                <h3 class="list-title">{{ getCategoryProducts(selectedCategory).title }}</h3>
-                <p class="list-subtitle">{{ getCategoryProducts(selectedCategory).subtitle }}</p>
+                <h3 class="list-title">{{ getCurrentCategoryTitle }}</h3>
+                <p class="list-subtitle">{{ getCurrentCategorySubtitle }}</p>
               </div>
               
               <div class="products-grid">
-                <div v-for="product in getCategoryProducts(selectedCategory).products" :key="product.id" 
+                <!-- 显示当前页的产品 -->
+                <div v-for="product in getCurrentPageProducts" :key="product.id" 
                      class="product-card" @click="goToProductDetail(product.link)">
                   <div class="product-image">
                     <img :src="product.image" :alt="product.name" @error="handleProductImageError">
@@ -157,7 +158,7 @@
               </div>
               
               <!-- 分页 -->
-              <div v-if="getCategoryProducts(selectedCategory).products.length > itemsPerPage" class="pagination">
+              <div class="pagination">
                 <button @click="prevPage" :disabled="currentPage === 1" class="page-btn">
                   <i class="fas fa-chevron-left"></i>
                 </button>
@@ -165,31 +166,6 @@
                 <button @click="nextPage" :disabled="currentPage === totalPages" class="page-btn">
                   <i class="fas fa-chevron-right"></i>
                 </button>
-              </div>
-            </div>
-            
-            <!-- 默认展示 -->
-            <div v-else class="default-content">
-              <div class="default-image">
-                <img src="/images/tech/05.png" alt="产品总览" @error="handleDefaultImageError">
-              </div>
-              <div class="default-text">
-                <h3>朗德智能产品中心</h3>
-                <p>选择左侧产品分类，查看详细信息</p>
-                <div class="overview-stats">
-                  <div class="stat-item">
-                    <div class="stat-number">2</div>
-                    <div class="stat-label">主要产品线</div>
-                  </div>
-                  <div class="stat-item">
-                    <div class="stat-number">8</div>
-                    <div class="stat-label">产品类别</div>
-                  </div>
-                  <div class="stat-item">
-                    <div class="stat-number">50+</div>
-                    <div class="stat-label">技术专利</div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -237,10 +213,24 @@ const selectedCategory = ref(null)
 // 分页状态
 const currentPage = ref(1)
 const itemsPerPage = ref(6) // 按照图片显示，一行三个，两行共六个
+
+// 计算当前分类的产品
+const getCurrentCategoryProducts = computed(() => {
+  // 如果没有选择分类，返回所有产品
+  if (!selectedCategory.value) {
+    const products = []
+    for (const category in productLists) {
+      products.push(...productLists[category].products)
+    }
+    return products
+  }
+  // 如果选择了分类，返回该分类的产品
+  const categoryData = getCategoryProducts(selectedCategory.value)
+  return categoryData.products || []
+})
+
 const totalPages = computed(() => {
-  if (!selectedCategory.value) return 0
-  const products = getCategoryProducts(selectedCategory.value).products
-  return Math.ceil(products.length / itemsPerPage.value)
+  return Math.ceil(getCurrentCategoryProducts.value.length / itemsPerPage.value)
 })
 
 // 产品列表数据
@@ -527,7 +517,7 @@ const categoryData = {
     title: '雷达探测系统',
     subtitle: '高精度雷达目标探测与跟踪',
     description: '采用先进的相控阵雷达技术，实现对小型无人机的精准探测',
-    image: '/images/products/radar-detection.jpg',
+    image: '/images/tech/05.png',
     link: '/products/defense/detection/radar',
     features: [
       { icon: 'fas fa-crosshairs', title: '精准定位', description: '毫米级定位精度' },
@@ -561,7 +551,7 @@ const categoryData = {
     title: '频谱侦测系统',
     subtitle: '无线电信号侦测与分析',
     description: '对无人机的控制信号进行侦测、识别和分析，判断其类型和威胁等级',
-    image: '/images/products/spectrum-detection.jpg',
+    image: '/images/tech/05.png',
     link: '/products/defense/detection/spectrum',
     features: [
       { icon: 'fas fa-signal', title: '信号侦测', description: '宽频无线电信号侦测' },
@@ -688,6 +678,24 @@ const getCategoryProducts = (categoryId) => {
   return productLists[categoryId] || { title: '', subtitle: '', products: [] }
 }
 
+// 获取当前分类的标题
+const getCurrentCategoryTitle = computed(() => {
+  if (!selectedCategory.value) {
+    return '全部产品'
+  }
+  const categoryData = getCategoryProducts(selectedCategory.value)
+  return categoryData.title || '产品列表'
+})
+
+// 获取当前分类的副标题
+const getCurrentCategorySubtitle = computed(() => {
+  if (!selectedCategory.value) {
+    return '朗德智能全系列产品解决方案'
+  }
+  const categoryData = getCategoryProducts(selectedCategory.value)
+  return categoryData.subtitle || '专业的产品解决方案'
+})
+
 // 跳转到产品详情页
 const goToProductDetail = (link) => {
   if (link) {
@@ -707,6 +715,13 @@ const nextPage = () => {
     currentPage.value++
   }
 }
+
+// 获取当前页的产品
+const getCurrentPageProducts = computed(() => {
+  const startIndex = (currentPage.value - 1) * itemsPerPage.value
+  const endIndex = startIndex + itemsPerPage.value
+  return getCurrentCategoryProducts.value.slice(startIndex, endIndex)
+})
 
 // 处理产品图片加载错误
 const handleProductImageError = (event) => {

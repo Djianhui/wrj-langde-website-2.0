@@ -14,6 +14,47 @@ const router = createRouter({
       name: 'technology',
       component: () => import('../views/TechnologyView.vue')
     },
+    // 产品中心路由
+    {
+      path: '/products/defense/detection/radar',
+      name: 'radar-detection',
+      component: () => import('../views/products/RadarDetectionView.vue')
+    },
+    {
+      path: '/products/defense/detection/optical',
+      name: 'optical-detection',
+      component: () => import('../views/products/OpticalDetectionView.vue')
+    },
+    {
+      path: '/products/defense/detection/spectrum',
+      name: 'spectrum-detection',
+      component: () => import('../views/products/SpectrumDetectionView.vue')
+    },
+    {
+      path: '/products/defense/jamming',
+      name: 'jamming-system',
+      component: () => import('../views/products/JammingSystemView.vue')
+    },
+    {
+      path: '/products/defense/integrated',
+      name: 'integrated-defense',
+      component: () => import('../views/products/IntegratedDefenseView.vue')
+    },
+    {
+      path: '/products/low-altitude/agriculture',
+      name: 'agriculture-drone',
+      component: () => import('../views/products/AgricultureDroneView.vue')
+    },
+    {
+      path: '/products/low-altitude/patrol',
+      name: 'patrol-drone',
+      component: () => import('../views/products/PatrolDroneView.vue')
+    },
+    {
+      path: '/products/low-altitude/fpv',
+      name: 'fpv-drone',
+      component: () => import('../views/products/FpvDroneView.vue')
+    },
     {
       path: '/drone-system',
       name: 'drone-system',
