@@ -1,16 +1,22 @@
+<docs>
 # 内容管理API
 
 <cite>
 **本文档中引用的文件**
-- [app.js](file://app.js)
-- [src/api/index.js](file://src/api/index.js)
-- [src/store/modules/content.js](file://src/store/modules/content.js)
-- [src/store/modules/auth.js](file://src/store/modules/auth.js)
-- [src/views/admin/AdminView.vue](file://src/views/admin/AdminView.vue)
-- [src/views/admin/ContentView.vue](file://src/views/admin/ContentView.vue)
-- [src/views/admin/AdminLoginView.vue](file://src/views/admin/AdminLoginView.vue)
-- [data/content.json](file://data/content.json)
+- [app.js](file://app.js) - *更新了前端静态数据*
+- [src/api/index.js](file://src/api/index.js) - *定义了内容获取与更新接口*
+- [src/store/modules/content.js](file://src/store/modules/content.js) - *实现了内容状态管理逻辑*
+- [data/content.json](file://data/content.json) - *后端内容数据源*
+- [src/views/admin/ContentView.vue](file://src/views/admin/ContentView.vue) - *管理员内容编辑界面*
 </cite>
+
+## 更新摘要
+**已做更改**
+- 根据最新代码库结构和实现细节，全面更新文档内容
+- 明确GET /content/{type} 和 PUT /admin/content/{type} 接口的具体行为
+- 补充POST /admin/upload 文件上传接口的详细说明
+- 提供基于Axios的实际调用代码示例
+- 修正响应数据结构与 data/content.json 的对应关系描述
 
 ## 目录
 1. [简介](#简介)
@@ -25,9 +31,9 @@
 
 ## 简介
 
-本文档详细描述了一个基于Vue.js和Pinia的状态管理系统的前端内容管理API。该系统提供了完整的前后端交互接口，支持管理员对网站内容进行动态管理，包括获取前端展示内容和更新管理内容两大核心功能。
+本文档详细描述了一个基于Vue.js和Pinia的状态管理系统中的内容管理API。该系统提供了完整的前后端交互接口，支持管理员对网站内容进行动态管理，包括获取前端展示内容和更新管理内容两大核心功能。
 
-系统采用现代化的前端架构，使用Vue 3 Composition API和Pinia进行状态管理，通过Axios实现HTTP请求的统一管理和拦截处理。整个系统围绕内容管理这一核心业务需求，提供了完整的CRUD操作支持。
+系统采用现代化的前端架构，使用Vue 3 Composition API和Pinia进行状态管理，通过Axios实现HTTP请求的统一管理和拦截处理。整个系统围绕内容管理这一核心业务需求，提供了完整的CRUD操作支持，并确保所有敏感操作都需要有效的JWT Bearer Token认证。
 
 ## 项目结构
 
@@ -64,7 +70,6 @@ L --> M
 **图表来源**
 - [src/api/index.js](file://src/api/index.js#L1-L95)
 - [src/store/modules/content.js](file://src/store/modules/content.js#L1-L50)
-- [src/store/modules/auth.js](file://src/store/modules/auth.js#L1-L86)
 
 **章节来源**
 - [app.js](file://app.js#L1-L425)
@@ -189,6 +194,8 @@ const contentTypes = [
 }
 ```
 
+此响应数据直接来源于`data/content.json`文件，其结构与文件中存储的数据完全一致。
+
 #### PUT /admin/content/{type} 接口
 
 用于管理员更新特定类型的内容数据，需要有效的JWT Bearer Token认证：
@@ -208,6 +215,8 @@ const updateContent = async (contentType, data) => {
   }
 }
 ```
+
+在实际实现中，该请求会发送到 `/api/admin/content/${contentType}`，并包含新的数据内容。后端将验证JWT令牌的有效性，并在验证通过后更新`data/content.json`文件中的相应部分。
 
 #### POST /admin/upload 文件上传接口
 
@@ -232,6 +241,37 @@ uploadImage: (formData) => api.post('/admin/upload', formData, {
   "size": 1024000
 }
 ```
+
+上传后的文件路径可用于更新内容数据中的图片引用。
+
+### Axios调用代码片段
+
+在Vue组件中安全地提交内容更新请求的示例：
+
+```javascript
+import { contentApi } from '@/api'
+
+// 示例：更新网站信息
+const updateSiteInfo = async (newData) => {
+  try {
+    const response = await contentApi.updateContent('site-info', newData)
+    console.log('更新成功:', response.data)
+    // 处理成功响应
+  } catch (error) {
+    console.error('更新失败:', error)
+    // 处理错误情况
+    if (error.response?.status === 401) {
+      // 认证失败，跳转到登录页
+      router.push('/admin/login')
+    }
+  }
+}
+```
+
+**章节来源**
+- [src/api/index.js](file://src/api/index.js#L50-L55)
+- [src/store/modules/content.js](file://src/store/modules/content.js#L598-L647)
+- [data/content.json](file://data/content.json)
 
 ### Pinia状态管理
 
@@ -263,7 +303,6 @@ ContentStore --> LanguageStore : 使用
 
 **图表来源**
 - [src/store/modules/content.js](file://src/store/modules/content.js#L1-L100)
-- [src/store/modules/language.js](file://src/store/modules/language.js#L1-L50)
 
 #### 状态管理特性
 
@@ -302,185 +341,4 @@ I --> L[MessagesView]
 // 支持的标签页配置
 const tabs = [
   { id: 'site-info', name: '网站信息' },
-  { id: 'solutions', name: '解决方案' },
-  { id: 'technologies', name: '核心技术' },
-  { id: 'cases', name: '典型案例' },
-  { id: 'news', name: '新闻资讯' },
-  { id: 'about', name: '关于我们' },
-  { id: 'jobs', name: '招聘信息' }
-]
-```
-
-**章节来源**
-- [src/views/admin/AdminView.vue](file://src/views/admin/AdminView.vue#L1-L144)
-- [src/views/admin/ContentView.vue](file://src/views/admin/ContentView.vue#L1-L328)
-
-### 认证系统
-
-#### AuthStore 管理员认证
-
-```mermaid
-stateDiagram-v2
-[*] --> 未认证
-未认证 --> 已认证 : 登录成功
-已认证 --> 未认证 : 登出/令牌过期
-已认证 --> 已认证 : 验证令牌
-未认证 --> [*] : 应用关闭
-```
-
-**图表来源**
-- [src/store/modules/auth.js](file://src/store/modules/auth.js#L1-L86)
-
-#### 登录流程
-
-```javascript
-// 登录方法实现
-const login = async (credentials) => {
-  loading.value = true
-  error.value = null
-  
-  try {
-    const response = await axios.post('/api/auth/login', credentials)
-    
-    if (response.data.token) {
-      token.value = response.data.token
-      user.value = response.data.user
-      isAuthenticated.value = true
-      
-      // 保存到本地存储
-      localStorage.setItem('admin-token', token.value)
-      localStorage.setItem('admin-user', JSON.stringify(user.value))
-      
-      return { success: true }
-    } else {
-      throw new Error('认证失败')
-    }
-  } catch (e) {
-    error.value = e.message || '登录失败，请检查账号和密码'
-    return { success: false, error: error.value }
-  } finally {
-    loading.value = false
-  }
-}
-```
-
-**章节来源**
-- [src/store/modules/auth.js](file://src/store/modules/auth.js#L1-L86)
-- [src/views/admin/AdminLoginView.vue](file://src/views/admin/AdminLoginView.vue#L1-L105)
-
-## 依赖关系分析
-
-```mermaid
-graph LR
-subgraph "外部依赖"
-A[Axios]
-B[Vue 3]
-C[Pinia]
-D[Vue Router]
-end
-subgraph "内部模块"
-E[API模块]
-F[内容Store]
-G[认证Store]
-H[管理视图]
-end
-subgraph "数据源"
-I[content.json]
-J[users.json]
-end
-A --> E
-B --> H
-C --> F
-C --> G
-D --> H
-E --> F
-E --> G
-F --> I
-G --> J
-```
-
-**图表来源**
-- [src/api/index.js](file://src/api/index.js#L1-L10)
-- [src/store/modules/content.js](file://src/store/modules/content.js#L1-L10)
-
-**章节来源**
-- [src/api/index.js](file://src/api/index.js#L1-L95)
-- [src/store/modules/content.js](file://src/store/modules/content.js#L1-L648)
-
-## 性能考虑
-
-### 数据缓存策略
-
-1. **本地存储缓存**：管理员令牌和用户信息存储在localStorage中
-2. **状态持久化**：Pinia store状态在页面刷新后保持不变
-3. **懒加载**：内容按需加载，避免一次性加载过多数据
-
-### 错误处理机制
-
-1. **网络错误处理**：自动重试和错误提示
-2. **认证错误处理**：401错误自动登出并跳转到登录页面
-3. **数据验证**：前端表单验证和后端数据校验
-
-### 用户体验优化
-
-1. **加载状态指示**：所有异步操作都有明确的加载状态
-2. **即时反馈**：操作成功或失败立即给出反馈
-3. **移动端适配**：响应式设计支持各种设备尺寸
-
-## 故障排除指南
-
-### 常见问题及解决方案
-
-#### 1. 认证失败
-
-**症状**：无法访问管理后台或收到401错误
-**原因**：JWT令牌无效或已过期
-**解决方案**：
-- 检查localStorage中的admin-token是否存在
-- 尝试重新登录获取新的令牌
-- 检查服务器时间是否正确
-
-#### 2. 内容更新失败
-
-**症状**：更新内容后没有生效或收到错误提示
-**原因**：API请求失败或数据格式不正确
-**解决方案**：
-- 检查网络连接状态
-- 验证请求数据格式是否符合API规范
-- 查看浏览器开发者工具中的网络请求
-
-#### 3. 文件上传失败
-
-**症状**：图片上传后无法显示或返回错误
-**原因**：文件类型不支持或文件过大
-**解决方案**：
-- 确认上传的是图片文件（jpg, png, gif等）
-- 检查文件大小是否超过限制
-- 确认服务器配置允许文件上传
-
-**章节来源**
-- [src/api/index.js](file://src/api/index.js#L25-L45)
-- [src/store/modules/auth.js](file://src/store/modules/auth.js#L25-L50)
-
-## 结论
-
-本文档详细介绍了基于Vue.js和Pinia的内容管理API系统。该系统提供了完整的前后端交互解决方案，支持管理员对网站内容进行动态管理。
-
-### 主要特性总结
-
-1. **完整的API接口**：支持内容获取和更新的RESTful API
-2. **现代化架构**：使用Vue 3 Composition API和Pinia状态管理
-3. **安全认证**：基于JWT的Bearer Token认证机制
-4. **响应式设计**：支持桌面和移动端的完整用户体验
-5. **国际化支持**：多语言内容管理和切换
-6. **错误处理**：完善的错误处理和用户反馈机制
-
-### 技术优势
-
-- **模块化设计**：清晰的模块划分和职责分离
-- **状态管理**：集中式的状态管理和响应式更新
-- **类型安全**：TypeScript友好的JavaScript代码
-- **可维护性**：良好的代码组织和注释
-- **扩展性**：易于添加新的内容类型和功能
-
-该系统为企业网站内容管理提供了一个可靠、高效的解决方案，能够满足现代Web应用对内容管理的各种需求。
+  { id: 'solutions', name: '

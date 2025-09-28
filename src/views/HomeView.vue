@@ -108,12 +108,12 @@
               <div class="feature-info">
                 <div class="info-item">
                   <i class="fas fa-check"></i>
-                  <span>{{ isZh ? '雷达 + 光电 + 频谱 三位一体的多维度立体探测' : 'Multi-dimensional three-dimensional detection integrating radar, optoelectronics and spectrum' }}</span>
+                  <span>{{ isZh ? '雷达 + 光电 + 频谱' : 'Radar, optoelectronics, spectrum' }}</span>
                 </div>
-                <!-- <div class="info-item">
+                <div class="info-item">
                   <i class="fas fa-check"></i>
-                  <span>{{ isZh ? '无盲区覆盖，立体化防御' : 'No Blind Spots, Three-dimensional Defense' }}</span>
-                </div> -->
+                  <span>{{ isZh ? '三位一体的多维度立体探测' : 'Three-in-one multi-dimensional three-dimensional detection' }}</span>
+                </div>
               </div>
             </div>
             <div class="feature-card">
@@ -125,11 +125,11 @@
               <div class="feature-info">
                 <div class="info-item">
                   <i class="fas fa-check"></i>
-                  <span>{{ isZh ? '平均响应时间<3秒' : 'Average Response Time <3s' }}</span>
+                  <span>{{ isZh ? '360 度无盲区覆盖' : '360-degree blind spot-free coverage' }}</span>
                 </div>
                 <div class="info-item">
                   <i class="fas fa-check"></i>
-                  <span>{{ isZh ? '智能威胁评估系统' : 'Intelligent Threat Assessment System' }}</span>
+                  <span>{{ isZh ? '立体化分层防御' : 'Three-dimensional hierarchical defense' }}</span>
                 </div>
               </div>
             </div>
@@ -265,116 +265,10 @@
         </div>
       </section>
 
-      <!-- 反无人机系统 - 优化展示效果 -->
-      <section id="technology" class="technology section defense-tech">
-        <div class="tech-bg-overlay"></div>
-        <div class="tech-glow"></div>
-        <div class="container">
-          <div class="section-header light">
-            <h2 class="section-title">{{ isZh ? '反无人机系统' : 'Anti-Drone System' }}</h2>
-            <p class="section-desc">{{ isZh ? '朗德智能自主研发的反无人机系统，为机场、能源设施、重要场所提供全方位空域安全防护' : 'Lande Intelligent\'s independently developed anti-drone system provides comprehensive airspace security protection for airports, energy facilities, and important venues' }}</p>
-          </div>
-          
-          <div class="tech-showcase">
-            <div class="tech-item" v-for="(tech, index) in currentTechnologies" :key="index"
-              @mouseenter="handleTechHover" @mouseleave="handleTechLeave">
-              <div class="tech-icon">
-                <i :class="tech.icon"></i>
-              </div>
-              <h3>{{ tech.title }}</h3>
-              <p>{{ tech.description }}</p>
-              <span class="tech-number">0{{index + 1}}</span>
-            </div>
-          </div>
-          
-          <div class="tech-video">
-            <div class="video-container">
-              <div class="video-badge">
-                <span>{{ isZh ? '科技演示' : 'Tech Demo' }}</span>
-                <span class="dot"></span>
-                <span>{{ isZh ? '实时防护' : 'Real-time Protection' }}</span>
-              </div>
-              <!-- 使用动画组件替换占位图片 -->
-              <DroneDefenseAnimation />
-            </div>
-            <div class="video-caption">
-              <div class="video-stats">
-                <div class="v-stat">
-                  <span class="v-number">99.9%</span>
-                  <span class="v-label">{{ isZh ? '成功拦截率' : 'Interception Rate' }}</span>
-                </div>
-                <div class="v-stat">
-                  <span class="v-number">4000+</span>
-                  <span class="v-label">{{ isZh ? '部署场所' : 'Deployment Sites' }}</span>
-                </div>
-                <div class="v-stat">
-                  <span class="v-number">10000+</span>
-                  <span class="v-label">{{ isZh ? '作战小时' : 'Operation Hours' }}</span>
-                </div>
-              </div>
-              <h3>{{ isZh ? '反无人机系统如何实时保护重要设施' : 'How the Anti-Drone System Protects Important Facilities in Real-time' }}</h3>
-              <p>{{ isZh ? '从探测、识别到精准拦截，全流程无缝防护' : 'From detection, identification to precise interception, seamless protection throughout the process' }}</p>
-              <RouterLink to="/technology" class="btn btn-video">
-                {{ isZh ? '了解技术细节' : 'Learn More About the Technology' }}
-                <i class="fas fa-arrow-right"></i>
-              </RouterLink>
-            </div>
-          </div>
-        </div>
-      </section>
+      
 
-      <!-- 应用案例 -->
-      <section id="cases" class="cases section">
-        <div class="container">
-          <div class="section-header">
-            <h2 class="section-title">{{ isZh ? '应用案例' : 'Case Studies' }}</h2>
-            <p class="section-desc">{{ isZh ? '朗德智能专注于无人机技术研发与反无人机系统集成' : 'Lande Intelligent focuses on drone technology R&D and anti-drone system integration' }}</p>
-          </div>
-          <div class="cases-grid">
-            <div class="case-card" v-for="(caseItem, index) in casesWithHighlights" :key="index"
-              @mouseenter="handleCaseHover" @mouseleave="handleCaseLeave">
-              <div class="case-tag">{{ isZh ? (caseItem?.tag || '') : translateCaseTag(caseItem?.tag) }}</div>
-              <img :src="caseItem?.image || '/images/placeholder.jpg'" :alt="caseItem?.title || ''" @error="handleImageError">
-              <div class="case-overlay">
-                <div class="case-content">
-                  <h3>{{ isZh ? (caseItem?.title || '') : translateCaseTitle(caseItem?.title) }}</h3>
-                  <p>{{isZh ? (caseItem?.highlight || '') : translateCaseHighlight(caseItem?.highlight)}}</p>
-                  <RouterLink :to="caseItem?.id ? `/cases/${caseItem.id}` : '/cases'" class="case-link">
-                    {{ isZh ? '查看详情' : 'View Details' }} <i class="fas fa-arrow-right"></i>
-                  </RouterLink>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="center-btn">
-            <RouterLink to="/cases" class="btn btn-primary">{{ isZh ? '浏览更多案例' : 'Browse More Cases' }}</RouterLink>
-          </div>
-        </div>
-      </section>
 
-      <!-- 新闻中心 -->
-      <section id="news" class="news section">
-        <div class="container">
-          <h2 class="section-title">{{ isZh ? '新闻中心' : 'News Center' }}</h2>
-          <div class="news-grid">
-            <div class="news-item" v-for="(newsItem, index) in latestNews" :key="index"
-              @mouseenter="handleNewsHover" @mouseleave="handleNewsLeave">
-              <div class="news-date">
-                <span class="day">{{ newsItem?.day || '' }}</span>
-                <span class="month">{{ newsItem?.month || '' }}</span>
-              </div>
-              <div class="news-content">
-                <h3>{{ newsItem?.title || '' }}</h3>
-                <p>{{ newsItem?.summary || '' }}</p>
-                <RouterLink :to="newsItem?.id ? `/news/detail/${newsItem.id}` : '/news'" class="read-more">{{ isZh ? '阅读更多' : 'Read More' }}</RouterLink>
-              </div>
-            </div>
-          </div>
-          <div class="center">
-            <RouterLink to="/news" class="btn">{{ isZh ? '查看更多新闻' : 'View More News' }}</RouterLink>
-          </div>
-        </div>
-      </section>
+ 
     </main>
     </template>
   </div>
