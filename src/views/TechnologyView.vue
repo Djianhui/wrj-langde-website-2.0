@@ -41,7 +41,7 @@
                 <div v-show="expandedCategories.root" class="tree-children">
                   <!-- 立体防控 -->
                   <div class="tree-item level-1">
-                    <div class="tree-node" @click="toggleCategory('defense'); selectCategory('defense')">
+                    <div class="tree-node" @click="toggleCategory('defense'); selectCategoryWithScroll('defense')">
                       <i class="fas fa-chevron-right tree-icon" :class="{'expanded': expandedCategories.defense}"></i>
                       <span class="node-text">立体防控</span>
                     </div>
@@ -49,25 +49,25 @@
                     <div v-show="expandedCategories.defense" class="tree-children">
                       <!-- 侦探感知 -->
                       <div class="tree-item level-2">
-                        <div class="tree-node" @click="toggleCategory('detection'); selectCategory('detection')">
+                        <div class="tree-node" @click="toggleCategory('detection'); selectCategoryWithScroll('detection')">
                           <i class="fas fa-chevron-right tree-icon" :class="{'expanded': expandedCategories.detection}"></i>
                           <span class="node-text">侦探感知</span>
                         </div>
                         
                         <div v-show="expandedCategories.detection" class="tree-children">
-                          <div class="tree-item level-3" @click="selectCategory('radar')">
+                          <div class="tree-item level-3" @click="selectCategoryWithScroll('radar')">
                             <div class="tree-node">
                               <i class="fas fa-dot-circle tree-icon"></i>
                               <span class="node-text">雷达探测</span>
                             </div>
                           </div>
-                          <div class="tree-item level-3" @click="selectCategory('optical')">
+                          <div class="tree-item level-3" @click="selectCategoryWithScroll('optical')">
                             <div class="tree-node">
                               <i class="fas fa-dot-circle tree-icon"></i>
                               <span class="node-text">光电识别</span>
                             </div>
                           </div>
-                          <div class="tree-item level-3" @click="selectCategory('spectrum')">
+                          <div class="tree-item level-3" @click="selectCategoryWithScroll('spectrum')">
                             <div class="tree-node">
                               <i class="fas fa-dot-circle tree-icon"></i>
                               <span class="node-text">频谱侦测</span>
@@ -77,7 +77,7 @@
                       </div>
                       
                       <!-- 干扰反制 -->
-                      <div class="tree-item level-2" @click="selectCategory('jamming')">
+                      <div class="tree-item level-2" @click="selectCategoryWithScroll('jamming')">
                         <div class="tree-node">
                           <i class="fas fa-circle tree-icon"></i>
                           <span class="node-text">干扰反制</span>
@@ -85,7 +85,7 @@
                       </div>
                       
                       <!-- 一体化防御 -->
-                      <div class="tree-item level-2" @click="selectCategory('integrated')">
+                      <div class="tree-item level-2" @click="selectCategoryWithScroll('integrated')">
                         <div class="tree-node">
                           <i class="fas fa-circle tree-icon"></i>
                           <span class="node-text">一体化防御</span>
@@ -96,25 +96,25 @@
                   
                   <!-- 低空经济 -->
                   <div class="tree-item level-1">
-                    <div class="tree-node" @click="toggleCategory('lowAltitude'); selectCategory('lowAltitude')">
+                    <div class="tree-node" @click="toggleCategory('lowAltitude'); selectCategoryWithScroll('lowAltitude')">
                       <i class="fas fa-chevron-right tree-icon" :class="{'expanded': expandedCategories.lowAltitude}"></i>
                       <span class="node-text">低空经济</span>
                     </div>
                     
                     <div v-show="expandedCategories.lowAltitude" class="tree-children">
-                      <div class="tree-item level-2" @click="selectCategory('agriculture')">
+                      <div class="tree-item level-2" @click="selectCategoryWithScroll('agriculture')">
                         <div class="tree-node">
                           <i class="fas fa-circle tree-icon"></i>
                           <span class="node-text">农业植保</span>
                         </div>
                       </div>
-                      <div class="tree-item level-2" @click="selectCategory('patrol')">
+                      <div class="tree-item level-2" @click="selectCategoryWithScroll('patrol')">
                         <div class="tree-node">
                           <i class="fas fa-circle tree-icon"></i>
                           <span class="node-text">巡查防护</span>
                         </div>
                       </div>
-                      <div class="tree-item level-2" @click="selectCategory('fpv')">
+                      <div class="tree-item level-2" @click="selectCategoryWithScroll('fpv')">
                         <div class="tree-node">
                           <i class="fas fa-circle tree-icon"></i>
                           <span class="node-text">FPV</span>
@@ -128,7 +128,7 @@
           </div>
           
           <!-- 右侧产品列表展示 -->
-          <div class="category-details">
+          <div class="category-details" id="product-list-container">
             <div class="product-list">
               <div class="product-list-header">
                 <h3 class="list-title">{{ getCurrentCategoryTitle }}</h3>
@@ -178,7 +178,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed, watch } from 'vue'
+import { ref, onMounted, computed, watch, onUnmounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useContentStore } from '@/store/modules/content'
 import { useLanguage } from '@/mixins/language'
@@ -213,6 +213,86 @@ const selectedCategory = ref(null)
 // 分页状态
 const currentPage = ref(1)
 const itemsPerPage = ref(6) // 按照图片显示，一行三个，两行共六个
+
+// 监听全局分类选择事件
+const handleGlobalCategorySelect = (event) => {
+  const { categoryId, categoryText } = event.detail
+  console.log('接收到全局分类选择:', categoryId, categoryText)
+  
+  // 根据分类 ID 设置当前选中的分类
+  const categoryMapping = {
+    'defense': 'defense',
+    'detection': 'detection', 
+    'low-altitude': 'lowAltitude',
+    'radar': 'radar',
+    'optical': 'optical',
+    'spectrum': 'spectrum',
+    'jamming': 'jamming',
+    'integrated': 'integrated',
+    'agriculture': 'agriculture',
+    'patrol': 'patrol',
+    'fpv': 'fpv'
+  }
+  
+  const mappedCategory = categoryMapping[categoryId]
+  if (mappedCategory) {
+    selectCategory(mappedCategory)
+    
+    // 如果是父级分类，需要展开相应的分类树
+    if (categoryId === 'defense') {
+      expandedCategories.value.root = true
+      expandedCategories.value.defense = true
+    } else if (categoryId === 'detection') {
+      expandedCategories.value.root = true
+      expandedCategories.value.defense = true
+      expandedCategories.value.detection = true
+    } else if (categoryId === 'low-altitude') {
+      expandedCategories.value.root = true
+      expandedCategories.value.lowAltitude = true
+    }
+    
+    // 延迟滚动，等待产品列表更新完成
+    setTimeout(() => {
+      scrollToProductListInPage()
+    }, 200)
+  }
+}
+
+// 监听全局产品选择事件
+const handleGlobalProductSelect = (event) => {
+  const { productId } = event.detail
+  console.log('接收到全局产品选择:', productId)
+  
+  // 根据产品 ID 设置当前选中的分类
+  const productMapping = {
+    'radar': 'radar',
+    'optical': 'optical', 
+    'spectrum': 'spectrum',
+    'jamming': 'jamming',
+    'integrated': 'integrated',
+    'agriculture': 'agriculture',
+    'patrol': 'patrol',
+    'fpv': 'fpv'
+  }
+  
+  const mappedCategory = productMapping[productId]
+  if (mappedCategory) {
+    selectCategory(mappedCategory)
+    
+    // 展开相应的分类树
+    if (['radar', 'optical', 'spectrum'].includes(productId)) {
+      expandedCategories.value.root = true
+      expandedCategories.value.defense = true
+      expandedCategories.value.detection = true
+    } else if (['jamming', 'integrated'].includes(productId)) {
+      expandedCategories.value.root = true
+      expandedCategories.value.defense = true
+    } else if (['agriculture', 'patrol', 'fpv'].includes(productId)) {
+      expandedCategories.value.root = true
+      expandedCategories.value.lowAltitude = true
+    }
+  }
+}
 
 // 计算当前分类的产品
 const getCurrentCategoryProducts = computed(() => {
@@ -369,7 +449,7 @@ const productLists = {
     products: [
       {
         id: 'spectrum-detector',
-        name: '物联感知',
+        name: '频谱侦测系统',
         description: '支持独立侦测识别无人机的远程识别及频率信号',
         image: '/images/products/iot-sensor.jpg',
         link: '/products/defense/detection/spectrum',
@@ -734,6 +814,30 @@ const selectCategory = (categoryId) => {
   currentPage.value = 1 // 重置到第一页
 }
 
+// 选择分类并滚动到产品列表
+const selectCategoryWithScroll = (categoryId) => {
+  selectCategory(categoryId)
+  // 延迟滚动，等待产品列表更新
+  setTimeout(() => {
+    scrollToProductListInPage()
+  }, 100)
+}
+
+// 页面内滚动到产品列表
+const scrollToProductListInPage = () => {
+  const productListElement = document.querySelector('#product-list-container')
+  if (productListElement) {
+    const navHeight = 90
+    const elementTop = productListElement.offsetTop
+    const scrollTop = Math.max(0, elementTop - navHeight)
+    
+    window.scrollTo({
+      top: scrollTop,
+      behavior: 'smooth'
+    })
+  }
+}
+
 // 获取分类数据
 const getCategoryData = (categoryId) => {
   return categoryData[categoryId] || {}
@@ -1096,11 +1200,23 @@ onMounted(async () => {
     })
   }
   
+  // 监听全局分类选择事件
+  window.addEventListener('categorySelected', handleGlobalCategorySelect)
+  
+  // 监听全局产品选择事件 
+  window.addEventListener('productSelected', handleGlobalProductSelect)
+  
   // 通知父组件页面已加载完成
   emit('page-loaded')
   
   // 刷新视图
   refreshView();
+})
+
+// 组件销毁时清理事件监听器
+onUnmounted(() => {
+  window.removeEventListener('categorySelected', handleGlobalCategorySelect)
+  window.removeEventListener('productSelected', handleGlobalProductSelect)
 })
 
 // 定义emit
@@ -2381,44 +2497,291 @@ const getTechImage = (techId) => {
   font-weight: 600;
 }
 
+/* 产品分类根节点样式优化 */
 .root-item .tree-node {
-  background: linear-gradient(90deg, rgba(79, 172, 254, 0.1) 0%, rgba(0, 242, 254, 0.1) 100%);
-  border: 2px solid rgba(79, 172, 254, 0.2);
-  font-weight: 600;
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  border: none;
+  box-shadow: 0 8px 25px rgba(79, 172, 254, 0.3);
+  font-weight: 700;
+  padding: 16px 20px;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.root-item .tree-node::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
+  pointer-events: none;
 }
 
 .root-item .node-text {
+  font-size: 1.3rem;
+  color: #ffffff;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.5px;
+}
+
+.root-item .tree-icon {
+  color: #ffffff;
   font-size: 1.1rem;
-  color: #4facfe;
+  margin-right: 15px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.tree-children {
-  margin-left: 20px;
-  margin-top: 8px;
-  border-left: 2px solid rgba(79, 172, 254, 0.2);
-  padding-left: 20px;
-  animation: slideDown 0.3s ease;
-}
-
+/* 一级分类样式优化 */
 .level-1 .tree-node {
-  background: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(226, 232, 240, 0.8);
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.05) 0%, rgba(71, 85, 105, 0.05) 100%);
+  border: 2px solid rgba(79, 172, 254, 0.15);
+  border-left: 5px solid #4facfe;
+  padding: 14px 18px;
+  border-radius: 10px;
+  margin: 4px 0;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
+.level-1 .tree-node:hover {
+  background: linear-gradient(135deg, rgba(79, 172, 254, 0.08) 0%, rgba(0, 242, 254, 0.08) 100%);
+  border-color: rgba(79, 172, 254, 0.3);
+  border-left-color: #00f2fe;
+  transform: translateX(8px) scale(1.02);
+  box-shadow: 0 5px 20px rgba(79, 172, 254, 0.15);
+}
+
+.level-1 .node-text {
+  font-size: 1.15rem;
+  color: #1e293b;
+  font-weight: 650;
+  letter-spacing: 0.3px;
+}
+
+.level-1 .tree-icon {
+  color: #4facfe;
+  font-size: 1rem;
+  margin-right: 14px;
+  transition: all 0.3s ease;
+}
+
+.level-1 .tree-node:hover .tree-icon {
+  color: #00f2fe;
+  transform: scale(1.1);
+}
+
+.level-1 .tree-node:hover .node-text {
+  color: #0f172a;
+  font-weight: 700;
+}
+
+/* 二级分类样式优化 */
 .level-2 .tree-node {
-  background: rgba(248, 250, 252, 0.8);
-  border: 1px solid rgba(226, 232, 240, 0.6);
+  background: linear-gradient(135deg, rgba(248, 250, 252, 0.9) 0%, rgba(241, 245, 249, 0.9) 100%);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-left: 4px solid #38bdf8;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin: 3px 0;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
-.level-3 .tree-node {
-  background: rgba(241, 245, 249, 0.8);
-  border: 1px solid rgba(226, 232, 240, 0.4);
+.level-2 .tree-node::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  background: linear-gradient(90deg, #38bdf8 0%, #0ea5e9 100%);
+  transition: width 0.3s ease;
+  border-radius: 8px 0 0 8px;
+}
+
+.level-2 .tree-node:hover::before {
+  width: 4px;
+}
+
+.level-2 .tree-node:hover {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.06) 0%, rgba(14, 165, 233, 0.06) 100%);
+  border-color: rgba(56, 189, 248, 0.4);
+  transform: translateX(6px);
+  box-shadow: 0 3px 15px rgba(56, 189, 248, 0.12);
+}
+
+.level-2 .node-text {
+  font-size: 1.05rem;
+  color: #334155;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.level-2 .tree-icon {
+  color: #38bdf8;
   font-size: 0.9rem;
+  margin-right: 12px;
+}
+
+.level-2 .tree-node:hover .tree-icon {
+  color: #0ea5e9;
+  transform: scale(1.05);
+}
+
+.level-2 .tree-node:hover .node-text {
+  color: #1e293b;
+  font-weight: 650;
+}
+
+/* 三级分类样式优化 */
+.level-3 .tree-node {
+  background: linear-gradient(135deg, rgba(241, 245, 249, 0.7) 0%, rgba(235, 240, 246, 0.7) 100%);
+  border: 1px solid rgba(203, 213, 225, 0.6);
+  border-left: 3px solid #64748b;
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin: 2px 0;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.level-3 .tree-node::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  background: linear-gradient(90deg, #64748b 0%, #475569 100%);
+  transition: width 0.3s ease;
+  border-radius: 6px 0 0 6px;
+}
+
+.level-3 .tree-node:hover::before {
+  width: 3px;
+}
+
+.level-3 .tree-node:hover {
+  background: linear-gradient(135deg, rgba(100, 116, 139, 0.05) 0%, rgba(71, 85, 105, 0.05) 100%);
+  border-color: rgba(100, 116, 139, 0.4);
+  transform: translateX(4px);
+  box-shadow: 0 2px 10px rgba(100, 116, 139, 0.1);
+}
+
+.level-3 .node-text {
+  font-size: 0.95rem;
+  color: #475569;
+  font-weight: 550;
+  letter-spacing: 0.1px;
 }
 
 .level-3 .tree-icon {
-  color: #9ca3af;
-  font-size: 0.7rem;
+  color: #64748b;
+  font-size: 0.75rem;
+  margin-right: 10px;
+}
+
+.level-3 .tree-node:hover .tree-icon {
+  color: #475569;
+  transform: scale(1.1);
+}
+
+.level-3 .tree-node:hover .node-text {
+  color: #334155;
+  font-weight: 600;
+}
+
+/* 树形连接线样式优化 */
+.tree-children {
+  margin-left: 24px;
+  margin-top: 10px;
+  border-left: 3px solid rgba(79, 172, 254, 0.15);
+  padding-left: 24px;
+  position: relative;
+  animation: slideDown 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.tree-children::before {
+  content: '';
+  position: absolute;
+  left: -3px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, #4facfe 0%, rgba(79, 172, 254, 0.3) 50%, transparent 100%);
+  border-radius: 2px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.tree-item:hover .tree-children::before {
+  opacity: 1;
+}
+
+/* 二级和三级的连接线 */
+.level-1 .tree-children {
+  border-left-color: rgba(56, 189, 248, 0.2);
+}
+
+.level-1 .tree-children::before {
+  background: linear-gradient(to bottom, #38bdf8 0%, rgba(56, 189, 248, 0.3) 50%, transparent 100%);
+}
+
+.level-2 .tree-children {
+  border-left-color: rgba(100, 116, 139, 0.2);
+  margin-left: 20px;
+  padding-left: 20px;
+}
+
+.level-2 .tree-children::before {
+  background: linear-gradient(to bottom, #64748b 0%, rgba(100, 116, 139, 0.3) 50%, transparent 100%);
+}
+
+/* 增强的悬停效果 */
+.tree-node {
+  position: relative;
+  overflow: hidden;
+}
+
+.tree-node::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.tree-node:hover::after {
+  left: 100%;
+}
+
+/* 选中状态样式 */
+.tree-node.selected {
+  background: linear-gradient(135deg, rgba(79, 172, 254, 0.15) 0%, rgba(0, 242, 254, 0.15) 100%);
+  border-color: #4facfe;
+  box-shadow: 0 0 0 2px rgba(79, 172, 254, 0.2);
+}
+
+.level-1 .tree-node.selected {
+  border-left-color: #00f2fe;
+  box-shadow: 0 5px 20px rgba(79, 172, 254, 0.25);
+}
+
+.level-2 .tree-node.selected {
+  border-left-color: #0ea5e9;
+  box-shadow: 0 3px 15px rgba(56, 189, 248, 0.2);
+}
+
+.level-3 .tree-node.selected {
+  border-left-color: #475569;
+  box-shadow: 0 2px 10px rgba(100, 116, 139, 0.15);
 }
 
 /* 右侧产品列表 */
