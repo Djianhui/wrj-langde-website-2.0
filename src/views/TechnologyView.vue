@@ -333,11 +333,19 @@ const productLists = {
       },
       {
         id: 'optical-001',
-        name: '光电识别系统',
-        description: '可见光与红外双光谱识别',
+        name: '光电识别跟踪',
+        description: '集高清可见光摄像机、制冷红外热成像仪、激光照明等于一体',
         image: '/images/products/optical.png',
         link: '/products/defense/detection/optical',
         features: ['智能识别', '夜视能力', '高清成像']
+      },
+      {
+        id: 'photoelectric-detection',
+        name: '光电探测设备',
+        description: '内置智能目标检测与跟踪算法',
+        image: '/images/products/photoelectric-detection.png',
+        link: '/products/defense/detection/photoelectric-detection',
+        features: ['高清成像', '红外热成像', '激光照明']
       },
       {
         id: 'spectrum-001',
@@ -373,14 +381,6 @@ const productLists = {
       },
       
       {
-        id: 'integrated-001',
-        name: '一体化防御系统',
-        description: '集成化智能防御平台',
-        image: '/images/products/integrated.png',
-        link: '/products/defense/integrated',
-        features: ['系统集成', '智能决策', '移动部署']
-      },
-      {
         id: 'fixed-detector',
         name: '近海安防雷达',
         description: '监控船只的探测、 警戒和目标指示',
@@ -402,6 +402,22 @@ const productLists = {
         description: '集侦测、识别、预警、反制于一体的智能化防御平台',
         image: '/images/products/integrated.png',
         link: '/products/defense/integrated',
+        features: ['系统集成', '智能决策', '移动部署']
+      },
+       {
+        id: 'vehicle-mounted',
+        name: '车载侦打一体系统',
+        description: '四面相控阵监测雷达、全频段频谱侦测、光电追踪系统以及全频段无人机干 扰设备四部分组成',
+        image: '/images/products/vehicle-mounted.png',
+        link: '/products/defense/vehicle-mounted',
+        features: ['系统集成', '智能决策', '移动部署']
+      },
+       {
+        id: 'four-one',
+        name: '四位一体无人机立体防御系统',
+        description: '系统集成了雷达探测、电磁干扰、导航诱骗以 及外置频谱监测等先进技术',
+        image: '/images/products/four-one.png',
+        link: '/products/defense/four-one',
         features: ['系统集成', '智能决策', '移动部署']
       }
     ]
@@ -481,7 +497,7 @@ const productLists = {
         features: ['远程识别', '频率信号', '独立侦测']
       },
       {
-        id: 'radar-fixed-wireless',
+        id: 'fixed-detector',
         name: '近海安防雷达',
         description: '监控船只的探测、 警戒和目标指示',
         image: '/images/products/fixed-detector.png',
@@ -577,11 +593,19 @@ const productLists = {
     subtitle: '集成化智能防御平台',
     products: [
       {
-        id: 'integrated-defense',
-        name: '一体化防御系统',
-        description: '集侦测、识别、预警、反制于一体的智能化防御平台',
-        image: '/images/products/integrated.png',
-        link: '/products/defense/integrated',
+        id: 'vehicle-mounted',
+        name: '车载侦打一体系统',
+        description: '四面相控阵监测雷达、全频段频谱侦测、光电追踪系统以及全频段无人机干 扰设备四部分组成',
+        image: '/images/products/vehicle-mounted.png',
+        link: '/products/defense/vehicle-mounted',
+        features: ['系统集成', '智能决策', '移动部署']
+      },
+      {
+        id: 'four-one',
+        name: '四位一体无人机立体防御系统',
+        description: '系统集成了雷达探测、电磁干扰、导航诱骗以 及外置频谱监测等先进技术',
+        image: '/images/products/four-one.png',
+        link: '/products/defense/four-one',
         features: ['系统集成', '智能决策', '移动部署']
       }
     ]

@@ -27,7 +27,7 @@ const router = createRouter({
     },
       {
       path: '/products/defense/detection/low-altitude-radar',
-      name: 'fixed-detector',
+      name: 'low-altitude-radar',
       component: () => import('../views/products/LowAltitudeRadarView.vue')
     },
     {
@@ -60,6 +60,16 @@ const router = createRouter({
       path: '/products/defense/strike-gun',
       name: 'strike-gun',
       component: () => import('../views/products/StrikeGunView.vue')
+    },
+     {
+      path: '/products/defense/vehicle-mounted',
+      name: 'vehicle-mounted',
+      component: () => import('../views/products/VehicleMountedView.vue')
+    },
+    {
+      path: '/products/defense/four-one',
+      name: 'four-one',
+      component: () => import('../views/products/FourOneView.vue')
     },
 
 

@@ -10,10 +10,10 @@
           <span>/</span>
           <span>立体防控</span>
           <span>/</span>
-          <span>干扰反制</span>
+          <span>一体化防御</span>
         </div>
         <div class="product-hero-content">
-          <h1 class="product-title">三通道无人机打击枪</h1>
+          <h1 class="product-title">车载侦打一体系统</h1>
           <p class="product-subtitle"></p>
         </div>
       </div>
@@ -23,11 +23,11 @@
       <!-- 产品概述 -->
       <div class="product-overview">
         <div class="product-image">
-          <img src="/images/products/strike-gun.png" alt="三通道无人机打击枪" @error="handleImageError">
+          <img src="/images/products/vehicle-mounted.png" alt="车载侦打一体系统" @error="handleImageError">
         </div>
         <div class="product-info">
           <h2>产品概述</h2>
-          <p>三通道无人机打击枪是一款专为应 对非法无人机入侵而设计的高效安防工具，其工作在 5.8GHz、2.4GHz、1.5GHz三个核心频段，精准干扰无 人机的遥控指令与视频传输链路，实现无人机的安全驱 离或强制返航。设备采用便捷的枪型设计，便于单兵操 作与迅速布防。</p>
+          <p>车载侦打一体系统四面相控阵监测雷达、全频段频谱侦测、光电追踪系统以及全频段无人机干 扰设备四部分组成。该系统车载设计，能够同时实现无人机的侦测追踪和干扰反制功能。它可以让无人机在原地 悬停、迫降或返航，从而有效防范无人机进入防区，保障低空空域的安全。</p>
   </div>
       </div>
       
@@ -45,40 +45,56 @@
             </thead>
             <tbody>
               <tr>
-                <td class="spec-label">工作模式</td>
-                <td class="spec-cell">无线电干扰</td>
+                <td class="spec-label">雷达探测</td>
+                <td class="spec-cell">工作频段：相控阵雷达+收发合一数字，DB功率水平制<br>工作模式：脉冲压缩制<br>探测距离方位：1500m (RCS=0.01m²) 0°~360°<br>份阐借获：40次/s</td>
               </tr>
               <tr>
-                <td class="spec-label">干扰频段及发射功率</td>
-                <td class="spec-cell">1.5GHz - 10W<br>2.4GHz - 30W<br>5.8GHz - 20W</td>
+                <td class="spec-label">频谱侦测</td>
+                <td class="spec-cell">全频段范围：20MHz~6GHz<br>份阐借获方位：半径5~7km, 0°~360°<br>定向照射范围：≥5s<br>份阐借获：50次/s</td>
               </tr>
               <tr>
-                <td class="spec-label">工作距离</td>
-                <td class="spec-cell">开阔地≥1500米</td>
+                <td class="spec-label">无线电干扰</td>
+                <td class="spec-cell">433MHz、915MHz、1.5GHz、2.4GHz、5.8GHz主流频段等<br>干扰范围：全方位≥30000M，定向照射≥1000M<br>巢室对抗性：采用智能对抗全频段干扰调制<br>播放尺寸：640×512</td>
               </tr>
               <tr>
-                <td class="spec-label">天线类型</td>
-                <td class="spec-cell">高增益9dB定向天线</td>
+                <td class="spec-label">可见光在机型</td>
+                <td class="spec-cell">1/2.8英寸 CMOS，200万像素<br>镜头：30倍光学变焦, f=4.3mm~f=高速球129.0mm(相当), f=1.6倍数字用</td>
               </tr>
               <tr>
-                <td class="spec-label">天线夾角</td>
-                <td class="spec-cell">30°</td>
+                <td class="spec-label">红外热成像</td>
+                <td class="spec-cell">可见光范围(水平)：63.7°(广角变焦)3°(长焦)<br>最小焦距：10mm(广角变焦)1200mm(长焦)</td>
               </tr>
               <tr>
-                <td class="spec-label">供电电源</td>
-                <td class="spec-cell">内置式电池：24V/5Ah</td>
+                <td class="spec-label">光电跟踪</td>
+                <td class="spec-cell">图像对比度(50%)：高温目标：0.35 ℃(ICR开启)；0.013 ℃(ICR关闭)<br>正常运作：1.4 ℃(ICR开启)；0.05 ℃(ICR关闭)<br>索照：自动、手动跟踪、巡回、主机、定点跟踪、旅游、扫描重旅游伪目标、<br>扫描、手动</td>
               </tr>
               <tr>
-                <td class="spec-label">工作时间</td>
-                <td class="spec-cell">干扰端工作时间可达40分钟</td>
+                <td class="spec-label">雷达跟踪</td>
+                <td class="spec-cell">扫描速度：自动(视频数据：正常, 低)，一键式自动扫描、手动、无级大、同<br>步巡回模式：有(打开/关闭)<br>对焦与变焦：自动+手动对焦，ICR承交一体化扫描车信号</td>
               </tr>
               <tr>
-                <td class="spec-label">重量</td>
-                <td class="spec-cell">约4KG（含电池）</td>
+                <td class="spec-label">对焦模式</td>
+                <td class="spec-cell">左右巡回动作：有(打开/关闭)<br>对焦级别时间：有(打开/关闭)</td>
               </tr>
               <tr>
-                <td class="spec-label">拓展功能</td>
-                <td class="spec-cell">配有标准导轨，可安装瑟伴弹夾、夜视仪、执法记录仪等</td>
+                <td class="spec-label">跟踪与自动跟踪功能</td>
+                <td class="spec-cell">真实时间跟踪功能：真实时间跟踪功能跟踪时间约响，在天气良好环境下，最大跟<br>踪距离1.2km（“大疑”天气）</td>
+              </tr>
+              <tr>
+                <td class="spec-label">最大跟踪距离</td>
+                <td class="spec-cell">1.5 FOV/s</td>
+              </tr>
+              <tr>
+                <td class="spec-label">跟踪频率精度</td>
+                <td class="spec-cell">±1像素</td>
+              </tr>
+              <tr>
+                <td class="spec-label">跟踪范围</td>
+                <td class="spec-cell">方位：360°；仰角：-10°~45°</td>
+              </tr>
+              <tr>
+                <td class="spec-label">跟踪角速度</td>
+                <td class="spec-cell">≥60°/s</td>
               </tr>
             </tbody>
           </table>
@@ -93,29 +109,29 @@
             <div class="feature-icon">
               <i class="fas fa-crosshairs"></i>
             </div>
-            <h3>20MHz~6GHz全频覆盖</h3>
-            <p> 配备高增益全向天线系统，采用全频段干扰方 式，覆盖20MHz~6GHz，且频段可自由编写， 覆盖95%无人机机型。</p>
+            <h3>车载一体化设计</h3>
+            <p> 系统采用车载式设计， 一套设备即可完成对无 人机的侦测与反制， 适配不同类型车辆， 轻度 改装即可完成架设安装。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
               <i class="fas fa-tachometer-alt"></i>
             </div>
-            <h3>干扰距离远</h3>
-            <p>在平地无遮挡空旷区域干扰半径距离可达3公里， 城市环境干扰半径距离可达1公里。</p>
+            <h3>全向侦测干扰</h3>
+            <p>采用四面相控阵雷达、全频段频谱侦测、光电 追踪系统以及全频段无人机干扰设备，实现全 向360°范围空域的侦测干扰。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
               <i class="fas fa-chart-line"></i>
             </div>
-            <h3>一机多用</h3>
-            <p>可单独做无人机打击设备，亦可做排爆干扰仪、 信号屏蔽器、对讲机屏蔽器使用。</p>
+            <h3>防御距离远</h3>
+            <p>侦测半径>1.5公里，反制距离>1公里。(根据环 境和机型不同会存在一定差异)。</p>
           </div>
          <div class="feature-card">
             <div class="feature-icon">
               <i class="fas fa-chart-line"></i>
             </div>
-            <h3>可扩展性强</h3>
-            <p>设备可根据客户需求定制多模块、定制单通道 功率，可集成无人机探测系统，实现无人机侦测反制一体化，支持设备组网工作。</p>
+            <h3>防范机型多</h3>
+            <p>采用20-6000MHz无线电干扰对多个频段的无 人机进行干扰，可检测防御99%无人机机型。</p>
           </div>  
         </div>
       </div>

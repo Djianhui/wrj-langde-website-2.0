@@ -10,10 +10,10 @@
           <span>/</span>
           <span>立体防控</span>
           <span>/</span>
-          <span>干扰反制</span>
+          <span>一体化防御</span>
         </div>
         <div class="product-hero-content">
-          <h1 class="product-title">三通道无人机打击枪</h1>
+          <h1 class="product-title">四位一体无人机立体防御系统</h1>
           <p class="product-subtitle"></p>
         </div>
       </div>
@@ -23,11 +23,11 @@
       <!-- 产品概述 -->
       <div class="product-overview">
         <div class="product-image">
-          <img src="/images/products/strike-gun.png" alt="三通道无人机打击枪" @error="handleImageError">
+          <img src="/images/products/four-one.png" alt="四位一体无人机立体防御系统" @error="handleImageError">
         </div>
         <div class="product-info">
           <h2>产品概述</h2>
-          <p>三通道无人机打击枪是一款专为应 对非法无人机入侵而设计的高效安防工具，其工作在 5.8GHz、2.4GHz、1.5GHz三个核心频段，精准干扰无 人机的遥控指令与视频传输链路，实现无人机的安全驱 离或强制返航。设备采用便捷的枪型设计，便于单兵操 作与迅速布防。</p>
+          <p>无人机立体防御系统是针对低空安全威胁的综 合解决方案，集成了雷达探测、电磁干扰、导航诱骗以及外置 频谱监测等先进技术，形成强大的四位一体防御体系。系统可自动识别并追踪入侵多旋翼无人机，运用智能分析与雷 达准确定位。针对威胁，系统灵活采取电磁干扰或发射微功率 伪卫星信号策略，迫使无人机偏离航线，飞离防护区外，从而 保护敏感区域和重大活动的低空安全，实现全方位防护。</p>
   </div>
       </div>
       
@@ -35,54 +35,77 @@
       <div class="product-specifications">
         <h2 class="section-title">产品规格</h2>
         <p class="spec-note">* 注意：外观、规格和功能可能有所不同，恕不另行通知。</p>
-        <div class="specification-table">
-          <table class="spec-table">
-            <thead>
-              <tr>
-                <th class="spec-label-header">参数类型</th>
-                <th class="spec-header">技术参数</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="spec-label">工作模式</td>
-                <td class="spec-cell">无线电干扰</td>
-              </tr>
-              <tr>
-                <td class="spec-label">干扰频段及发射功率</td>
-                <td class="spec-cell">1.5GHz - 10W<br>2.4GHz - 30W<br>5.8GHz - 20W</td>
-              </tr>
-              <tr>
-                <td class="spec-label">工作距离</td>
-                <td class="spec-cell">开阔地≥1500米</td>
-              </tr>
-              <tr>
-                <td class="spec-label">天线类型</td>
-                <td class="spec-cell">高增益9dB定向天线</td>
-              </tr>
-              <tr>
-                <td class="spec-label">天线夾角</td>
-                <td class="spec-cell">30°</td>
-              </tr>
-              <tr>
-                <td class="spec-label">供电电源</td>
-                <td class="spec-cell">内置式电池：24V/5Ah</td>
-              </tr>
-              <tr>
-                <td class="spec-label">工作时间</td>
-                <td class="spec-cell">干扰端工作时间可达40分钟</td>
-              </tr>
-              <tr>
-                <td class="spec-label">重量</td>
-                <td class="spec-cell">约4KG（含电池）</td>
-              </tr>
-              <tr>
-                <td class="spec-label">拓展功能</td>
-                <td class="spec-cell">配有标准导轨，可安装瑟伴弹夾、夜视仪、执法记录仪等</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+              <div class="specification-table">
+                <table class="spec-table">
+                  <thead>
+                    <tr>
+                      <th class="spec-label-header">功能模块</th>
+                      <th class="spec-header">技术参数</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- 雷达探测 -->
+                    <tr>
+                      <td rowspan="4" class="spec-category">雷达探测</td>
+                      <td class="spec-cell">工作频段：C 波段</td>
+                    </tr>
+                    <tr>
+                      <td class="spec-cell">雷达频率：5400MHz~5600MHz</td>
+                    </tr>
+                    <tr>
+                      <td class="spec-cell">探测距离：MAX: ≥1.5km, MIN: ≤100m</td>
+                    </tr>
+                    <tr>
+                      <td class="spec-cell">覆盖角度：方位覆盖360°,俯仰覆盖40°</td>
+                    </tr>
+                    
+                    <!-- 频谱侦测(可选) -->
+                    <tr>
+                      <td rowspan="3" class="spec-category">频谱侦测(可选)</td>
+                      <td class="spec-cell">探测频段：70MHz~6GHz</td>
+                    </tr>
+                    <tr>
+                      <td class="spec-cell">探测角度：360°</td>
+                    </tr>
+                    <tr>
+                      <td class="spec-cell">探测距离：≥5km</td>
+                    </tr>
+                    
+                    <!-- 无线电干扰 -->
+                    <tr>
+                      <td rowspan="2" class="spec-category">无线电干扰</td>
+                      <td class="spec-cell">干扰频段：1550~1620MHz / 400~2500MHz / 5150~5850MHz</td>
+                    </tr>
+                    <tr>
+                      <td class="spec-cell">干扰半径：≥1.0km</td>
+                    </tr>
+                    
+                    <!-- 导航诱骗 -->
+                    <tr>
+                      <td rowspan="3" class="spec-category">导航诱骗</td>
+                      <td class="spec-cell">诱骗频段：GPS/GALILEO/GLONASS/北斗</td>
+                    </tr>
+                    <tr>
+                      <td class="spec-cell">诱骗距离：≥1.0km</td>
+                    </tr>
+                    <tr>
+                      <td class="spec-cell">诱骗方式：迫降、驱离</td>
+                    </tr>
+                    
+                    <!-- 参数指标 -->
+                    <tr>
+                      <td rowspan="3" class="spec-category">参数指标</td>
+                      <td class="spec-cell">电源电压：AC180V~250V</td>
+                    </tr>
+                    <tr>
+                      <td class="spec-cell">功　　率：≤100W(探测模式)、≤600W(反制模式)</td>
+                    </tr>
+                    <tr>
+                      <td class="spec-cell">尺　　寸：585mm*585mm*1460mm</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
       </div>
       
        <!-- 产品特点 -->
@@ -93,29 +116,29 @@
             <div class="feature-icon">
               <i class="fas fa-crosshairs"></i>
             </div>
-            <h3>20MHz~6GHz全频覆盖</h3>
-            <p> 配备高增益全向天线系统，采用全频段干扰方 式，覆盖20MHz~6GHz，且频段可自由编写， 覆盖95%无人机机型。</p>
+            <h3>四位一体防御体系</h3>
+            <p> 系统集成了雷达探测、电磁干扰、导航诱骗以 及外置频谱监测等先进技术，形成强大的四位 一体防御体系。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
               <i class="fas fa-tachometer-alt"></i>
             </div>
-            <h3>干扰距离远</h3>
-            <p>在平地无遮挡空旷区域干扰半径距离可达3公里， 城市环境干扰半径距离可达1公里。</p>
+            <h3>干扰信号隔离</h3>
+            <p>自动隔离非安全的GPS  L1和BDS  B1信号，确保 授时设备正常工作。具有静态、动态用户轨迹 生成功能。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
               <i class="fas fa-chart-line"></i>
             </div>
-            <h3>一机多用</h3>
-            <p>可单独做无人机打击设备，亦可做排爆干扰仪、 信号屏蔽器、对讲机屏蔽器使用。</p>
+            <h3>可连续工作</h3>
+            <p>设备能够全天候持续监测打击和记录防区空域 ,即使在浓雾和雷雨等恶劣天气条件下也能保 持稳定运行。</p>
           </div>
          <div class="feature-card">
             <div class="feature-icon">
               <i class="fas fa-chart-line"></i>
             </div>
             <h3>可扩展性强</h3>
-            <p>设备可根据客户需求定制多模块、定制单通道 功率，可集成无人机探测系统，实现无人机侦测反制一体化，支持设备组网工作。</p>
+            <p>设备可根据客户需求定制多模块、定制单通道 功率，可集成无人机探测系统，实现无人机侦 测反制一体化，支持设备组网工作。</p>
           </div>  
         </div>
       </div>
@@ -417,6 +440,17 @@ onMounted(() => {
   font-weight: 500;
   text-align: left;
   padding-left: 20px;
+}
+
+.spec-category {
+  background-color: #f1f5f9 !important;
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 16px;
+  text-align: center;
+  vertical-align: middle;
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
 }
 
 .product-contact {
