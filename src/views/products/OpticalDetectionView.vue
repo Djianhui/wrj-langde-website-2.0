@@ -30,23 +30,49 @@
         <div class="product-info">
           <h2>产品概述</h2>
           <p>采用先进的光电成像技术，实现对无人机的视觉识别和分类。系统集成4K超高清光电成像、热成像夜视探测和智能目标识别算法。</p>
-          
-          <div class="product-specs">
-            <h3>技术规格</h3>
-            <div class="specs-grid">
-              <div class="spec-item">
-                <span class="spec-label">视野范围</span>
-                <span class="spec-value">360°全景</span>
-              </div>
-              <div class="spec-item">
-                <span class="spec-label">变焦倍数</span>
-                <span class="spec-value">30倍光学变焦</span>
-              </div>
-              <div class="spec-item">
-                <span class="spec-label">识别精度</span>
-                <span class="spec-value">≥96%</span>
-              </div>
-            </div>
+        </div>
+      </div>
+      
+      <!-- 产品规格 -->
+      <div class="product-specifications">
+        <h2 class="section-title">产品规格</h2>
+        <p class="spec-note">* 注意：外观、规格和功能可能有所不同，恕不另行通知。</p>
+        <div class="specification-table">
+          <div class="spec-row">
+            <div class="spec-label">视野范围</div>
+            <div class="spec-value">360°全景</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">变焦倍数</div>
+            <div class="spec-value">30倍光学变焦</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">识别精度</div>
+            <div class="spec-value">≥96%</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">探测距离</div>
+            <div class="spec-value">≥3km</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">成像质量</div>
+            <div class="spec-value">4K超高清</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">红外探测</div>
+            <div class="spec-value">热成像夜视</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">响应时间</div>
+            <div class="spec-value">≤ 2s</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">工作温度</div>
+            <div class="spec-value">-30℃ ~ +65℃</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">防护等级</div>
+            <div class="spec-value">IP67</div>
           </div>
         </div>
       </div>
@@ -177,16 +203,27 @@ onMounted(() => {
 
 .product-overview {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1.5fr;
   gap: 60px;
   margin: 80px 0;
   align-items: center;
 }
 
+.product-image {
+  max-width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .product-image img {
-  width: 100%;
+  width: 320px;
+  height: 550px;
   border-radius: 12px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+  object-position: center;
 }
 
 .product-info h2 {
@@ -315,6 +352,76 @@ onMounted(() => {
   color: #1e293b;
 }
 
+.product-specifications {
+  margin-bottom: 80px;
+}
+
+.spec-note {
+  text-align: center;
+  color: #64748b;
+  font-size: 0.9rem;
+  margin-bottom: 30px;
+  font-style: italic;
+}
+
+.specification-table {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+}
+
+.spec-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  border-bottom: 1px solid #e2e8f0;
+  transition: background-color 0.2s ease;
+}
+
+.spec-row:last-child {
+  border-bottom: none;
+}
+
+.spec-row:hover {
+  background-color: #f8fafc;
+}
+
+.spec-header {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  color: white;
+  font-weight: 600;
+}
+
+.spec-header:hover {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.spec-label {
+  padding: 15px 20px;
+  font-weight: 500;
+  color: #374151;
+  background-color: #f8fafc;
+  border-right: 1px solid #e2e8f0;
+}
+
+.spec-header .spec-label {
+  background: transparent;
+  color: white;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.spec-value {
+  padding: 15px 20px;
+  color: #1e293b;
+  font-weight: 400;
+}
+
+.spec-header .spec-value {
+  color: white;
+  font-weight: 600;
+}
+
 .product-contact {
   background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
   border-radius: 20px;
@@ -364,6 +471,11 @@ onMounted(() => {
     gap: 40px;
   }
   
+  .product-image img {
+    width: 280px;
+    height: 240px;
+  }
+  
   .features-grid {
     grid-template-columns: 1fr;
   }
@@ -378,6 +490,30 @@ onMounted(() => {
   
   .product-contact {
     padding: 40px 20px;
+  }
+  
+  .specification-table {
+    margin: 0 -10px;
+  }
+  
+  .spec-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .spec-label {
+    border-right: none;
+    border-bottom: 1px solid #e2e8f0;
+    font-weight: 600;
+    background-color: #f1f5f9;
+  }
+  
+  .spec-header .spec-label {
+    background: rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .spec-value {
+    padding-top: 10px;
   }
 }
 </style>

@@ -41,10 +41,10 @@
         <h2 class="section-title">产品规格</h2>
         <p class="spec-note">* 注意：外观、规格和功能可能有所不同，恕不另行通知。</p>
         <div class="specification-table">
-          <div class="spec-row spec-header">
+          <!-- <div class="spec-row spec-header">
             <div class="spec-label">型号</div>
             <div class="spec-value">TXPD3000</div>
-          </div>
+          </div> -->
           <div class="spec-row">
             <div class="spec-label">雷达类型</div>
             <div class="spec-value">频率调制连续波 (FMCW)</div>
@@ -306,7 +306,7 @@ onMounted(() => {
 
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 30px;
   margin-bottom: 80px;
 }

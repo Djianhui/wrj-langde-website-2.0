@@ -343,7 +343,7 @@ const productLists = {
         id: 'spectrum-001',
         name: '频谱侦测系统',
         description: '无线电信号侦测与分析',
-        image: '/images/products/spectrum-system.jpg',
+        image: '/images/products/spectrum.png',
         link: '/products/defense/detection/spectrum',
         features: ['宽频侦测', '协议分析', '实时监控']
       },
