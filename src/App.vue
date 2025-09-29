@@ -86,12 +86,12 @@
               </div>
             </div>
           </li>
-          <li class="nav-item-lang">
+          <!-- <li class="nav-item-lang">
             <a href="#" class="lang-switch" @click.prevent="handleLanguageSwitch">
               <i class="fas fa-globe"></i>
               <span>{{ languageStore.currentLanguageText() }}</span>
             </a>
-          </li>
+          </li> -->
         </ul>
       </nav>
       <div class="mobile-menu-btn" :class="{'active': isMenuActive}" @click.stop="toggleMenu">
