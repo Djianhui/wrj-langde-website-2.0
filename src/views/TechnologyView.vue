@@ -364,6 +364,15 @@ const productLists = {
         features: ['系统集成', '智能决策', '移动部署']
       },
       {
+        id: 'strike-gun',
+        name: '三通道无人机打击枪',
+        description: '射频干扰技术，可覆盖20MHz~6GHz的全频段',
+        image: '/images/products/strike-gun.png',
+        link: '/products/defense/strike-gun',
+        features: ['系统集成', '智能决策', '移动部署']
+      },
+      
+      {
         id: 'integrated-001',
         name: '一体化防御系统',
         description: '集成化智能防御平台',
@@ -552,7 +561,15 @@ const productLists = {
         image: '/images/products/fixed-countermeasures.png',
         link: '/products/defense/fixed-countermeasures',
         features: ['系统集成', '智能决策', '移动部署']
-      }
+      },
+      {
+        id: 'strike-gun',
+        name: '三通道无人机打击枪',
+        description: '射频干扰技术，可覆盖20MHz~6GHz的全频段',
+        image: '/images/products/strike-gun.png',
+        link: '/products/defense/strike-gun',
+        features: ['系统集成', '智能决策', '移动部署']
+      },
     ]
   },
   integrated: {

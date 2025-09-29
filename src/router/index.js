@@ -56,7 +56,11 @@ const router = createRouter({
       name: 'fixed-countermeasures',
       component: () => import('../views/products/FixedCountermeasuresView.vue')
     },
-
+    {
+      path: '/products/defense/strike-gun',
+      name: 'strike-gun',
+      component: () => import('../views/products/StrikeGunView.vue')
+    },
 
 
 
