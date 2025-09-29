@@ -20,6 +20,16 @@ const router = createRouter({
       name: 'radar-detection',
       component: () => import('../views/products/RadarDetectionView.vue')
     },
+      {
+      path: '/products/defense/detection/fixed',
+      name: 'fixed-detector',
+      component: () => import('../views/products/FixedDetectorView.vue')
+    },
+      {
+      path: '/products/defense/detection/low-altitude-radar',
+      name: 'fixed-detector',
+      component: () => import('../views/products/LowAltitudeRadarView.vue')
+    },
     {
       path: '/products/defense/detection/optical',
       name: 'optical-detection',

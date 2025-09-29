@@ -370,19 +370,19 @@ const productLists = {
     subtitle: '先进的无人机目标侦测识别技术',
     products: [
       {
-        id: 'radar-fixed',
-        name: '固定式无线电侦测',
-        description: '设备工作稳定、侦测距离远，支持多种部署方式',
-        image: '/images/products/fixed-detector.jpg',
-        link: '/products/defense/detection/radar',
+        id: 'fixed-detector',
+        name: '近海安防雷达',
+        description: '监控船只的探测、 警戒和目标指示',
+        image: '/images/products/fixed-detector.png',
+        link: '/products/defense/detection/fixed',
         features: ['固定部署', '稳定可靠', '远距离侦测']
       },
       {
-        id: 'radar-portable',
-        name: '手提式无线电侦测',
-        description: '穿便设计，便携携带，可实现对频范围内的无人机的侦测',
-        image: '/images/products/portable-detector.jpg',
-        link: '/products/defense/detection/radar',
+        id: 'low-altitude-radar',
+        name: '低空安防雷达',
+        description: '适应夜晚、雨雪、雾霾、扬尘等恶劣环境',
+        image: '/images/products/low-altitude-radar.png',
+        link: '/products/defense/detection/low-altitude-radar',
         features: ['便携式', '快速部署', '灵活机动']
       },
         {
@@ -425,18 +425,18 @@ const productLists = {
       },
       {
         id: 'radar-fixed-wireless',
-        name: '固定式无线电侦测',
-        description: '设备工作稳定、侦测距离远，支持多种部署方式',
-        image: '/images/products/fixed-wireless.jpg',
-        link: '/products/defense/detection/radar',
+        name: '近海安防雷达',
+        description: '监控船只的探测、 警戒和目标指示',
+        image: '/images/products/fixed-detector.png',
+        link: '/products/defense/detection/fixed',
         features: ['稳定运行', '多种部署', '远距离侦测']
       },
       {
-        id: 'radar-portable-wireless',
-        name: '手提式无线电侦测',
-        description: '穿便设计，便携携带，可实现对频范围内的无人机的侦测',
-        image: '/images/products/portable-wireless.jpg',
-        link: '/products/defense/detection/radar',
+        id: 'low-altitude-radar',
+        name: '低空安防雷达',
+        description: '适应夜晚、雨雪、雾霾、扬尘等恶劣环境',
+        image: '/images/products/low-altitude-radar.png',
+        link: '/products/defense/detection/low-altitude-radar',
         features: ['便携设计', '灵活侦测', '快速响应']
       }
     ]
