@@ -349,16 +349,48 @@ const productLists = {
       },
       {
         id: 'jamming-001',
-        name: '干扰反制系统',
+        name: '固定式无人机侦测设备',
         description: '定向干扰与精准反制',
-        image: '/images/products/jamming-system.jpg',
+        image: '/images/products/jamming-system.png',
         link: '/products/defense/jamming',
         features: ['定向干扰', '多频段', '智能控制']
+      },
+      {
+        id: 'fixed-countermeasures',
+        name: '固定式无人机侦测设备',
+        description: '射频干扰技术，可覆盖20MHz~6GHz的全频段',
+        image: '/images/products/fixed-countermeasures.png',
+        link: '/products/defense/fixed-countermeasures',
+        features: ['系统集成', '智能决策', '移动部署']
       },
       {
         id: 'integrated-001',
         name: '一体化防御系统',
         description: '集成化智能防御平台',
+        image: '/images/products/integrated.png',
+        link: '/products/defense/integrated',
+        features: ['系统集成', '智能决策', '移动部署']
+      },
+      {
+        id: 'fixed-detector',
+        name: '近海安防雷达',
+        description: '监控船只的探测、 警戒和目标指示',
+        image: '/images/products/fixed-detector.png',
+        link: '/products/defense/detection/fixed',
+        features: ['固定部署', '稳定可靠', '远距离侦测']
+      },
+      {
+        id: 'photoelectric-detection',
+        name: '光电探测设备',
+        description: '内置智能目标检测与跟踪算法',
+        image: '/images/products/photoelectric-detection.png',
+        link: '/products/defense/detection/photoelectric-detection',
+        features: ['高清成像', '红外热成像', '激光照明']
+      },
+        {
+        id: 'spectrum-integrated-defense',
+        name: '固定式无人机侦测设备',
+        description: '集侦测、识别、预警、反制于一体的智能化防御平台',
         image: '/images/products/integrated.png',
         link: '/products/defense/integrated',
         features: ['系统集成', '智能决策', '移动部署']
@@ -416,6 +448,14 @@ const productLists = {
         image: '/images/products/radar.png',
         link: '/products/defense/detection/radar',
         features: ['低空专用', '高精度', '快速响应']
+      },
+        {
+        id: 'spectrum-integrated-defense',
+        name: '固定式无人机侦测设备',
+        description: '集侦测、识别、预警、反制于一体的智能化防御平台',
+        image: '/images/products/integrated.png',
+        link: '/products/defense/integrated',
+        features: ['系统集成', '智能决策', '移动部署']
       }
     ]
   },
@@ -482,6 +522,14 @@ const productLists = {
         image: '/images/products/spectrum.png',
         link: '/products/defense/detection/spectrum',
         features: ['物联网', '远程识别', '频率分析']
+      },
+       {
+        id: 'spectrum-integrated-defense',
+        name: '固定式无人机侦测设备',
+        description: '集侦测、识别、预警、反制于一体的智能化防御平台',
+        image: '/images/products/integrated.png',
+        link: '/products/defense/integrated',
+        features: ['系统集成', '智能决策', '移动部署']
       }
     ]
   },
@@ -491,11 +539,19 @@ const productLists = {
     products: [
       {
         id: 'jamming-system',
-        name: '干扰反制系统',
+        name: '固定式无人机侦测设备',
         description: '采用先进的定向干扰技术，对入侵无人机进行精准反制',
-        image: '/images/products/jamming-full.jpg',
+        image: '/images/products/jamming-system.png',
         link: '/products/defense/jamming',
         features: ['定向干扰', '精准反制', '智能控制']
+      },
+       {
+        id: 'fixed-countermeasures',
+        name: '固定式无人机侦测设备',
+        description: '射频干扰技术，可覆盖20MHz~6GHz的全频段',
+        image: '/images/products/fixed-countermeasures.png',
+        link: '/products/defense/fixed-countermeasures',
+        features: ['系统集成', '智能决策', '移动部署']
       }
     ]
   },
@@ -676,7 +732,7 @@ const categoryData = {
     title: '干扰反制系统',
     subtitle: '定向干扰与精准反制',
     description: '采用先进的定向干扰技术，对入侵无人机进行精准反制',
-    image: '/images/products/jamming-system.jpg',
+    image: '/images/products/jamming-system.png',
     link: '/products/defense/jamming',
     features: [
       { icon: 'fas fa-wifi', title: '信号干扰', description: '多频段定向干扰' },

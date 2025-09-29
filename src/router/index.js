@@ -50,6 +50,16 @@ const router = createRouter({
       name: 'jamming-system',
       component: () => import('../views/products/JammingSystemView.vue')
     },
+
+    {
+      path: '/products/defense/fixed-countermeasures',
+      name: 'fixed-countermeasures',
+      component: () => import('../views/products/FixedCountermeasuresView.vue')
+    },
+
+
+
+
     {
       path: '/products/defense/integrated',
       name: 'integrated-defense',

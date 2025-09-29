@@ -23,12 +23,11 @@
       <!-- 产品概述 -->
       <div class="product-overview">
         <div class="product-image">
-          <img src="/images/products/jamming-system.png" alt="固定式无人机反制设备" @error="handleImageError">
+          <img src="/images/products/fixed-countermeasures.png" alt="固定式无人机反制设备" @error="handleImageError">
         </div>
         <div class="product-info">
           <h2>产品概述</h2>
-          <p>具有多个频段的定向宽带压制干扰能力，可自动对准入侵的“低慢小”无人机的遥控信号和GNSS导航信号进行压制干扰，达到驱离或者迫降的目的 </p>
-          <p>可按频段灵活设置干扰，支持用户定义组合, 支持通过有线网络与探测设备联动使用</p>
+          <p>固定式无人机反制设备采用高增益全向    射频干扰技术，可覆盖20MHz~6GHz的全频段，频段可自 由编写，适用于更多无人机机型。发现可疑目标后，发射 大功率射频干扰信号，瘫痪无人机的卫星导航、无线遥控 及无线图传链路，迫使无人机原地悬停、降落或原路返回</p>
         </div>
       </div>
       
@@ -36,36 +35,44 @@
       <div class="product-specifications">
         <h2 class="section-title">产品规格</h2>
         <p class="spec-note">* 注意：外观、规格和功能可能有所不同，恕不另行通知。</p>
-   <div class="specification-table">
-  <div class="spec-row">
-    <div class="spec-label">工作模式</div>
-    <div class="spec-value">无线电干扰</div>
-  </div>
-  <div class="spec-row">
-    <div class="spec-label">工作频段</div>
-    <div class="spec-value">900MHz、1.5GHz、2.4GHz、5.8GHz</div>
-  </div>
-  <div class="spec-row">
-    <div class="spec-label">干扰半径</div>
-    <div class="spec-value">≥1000m城市环境<br>≥1500m空旷区域<br>(视机型/环境情况而定)</div>
-  </div>
-  <div class="spec-row">
-    <div class="spec-label">天线类型</div>
-    <div class="spec-value">高增益全向天线</div>
-  </div>
-  <div class="spec-row">
-    <div class="spec-label">响应时间</div>
-    <div class="spec-value">≤4s</div>
-  </div>
-  <div class="spec-row">
-    <div class="spec-label">发射功率</div>
-    <div class="spec-value">≥450W</div>
-  </div>
-  <div class="spec-row">
-    <div class="spec-label">拓展功能</div>
-    <div class="spec-value">可根据客户要求添加干扰频段<br>及功率，可集成无人机探测系<br>统且支持组网工作</div>
-  </div>
-</div>
+            <div class="specification-table">
+              <div class="spec-row">
+                <div class="spec-label">工作模式</div>
+                <div class="spec-value">无线电扫频干扰</div>
+              </div>
+              <div class="spec-row">
+                <div class="spec-label">工作频段</div>
+                <div class="spec-value">20MHz ~ 6GHz</div>
+              </div>
+              <div class="spec-row">
+                <div class="spec-label">干扰半径</div>
+                <div class="spec-value">城市环境≥1000m<br>空旷区域≥3000m（无人机反制）</div>
+              </div>
+              <div class="spec-row">
+                <div class="spec-label">天线类型</div>
+                <div class="spec-value">高增益全向 8 通道</div>
+              </div>
+              <div class="spec-row">
+                <div class="spec-label">干扰方向</div>
+                <div class="spec-value">360°</div>
+              </div>
+              <div class="spec-row">
+                <div class="spec-label">干扰模式</div>
+                <div class="spec-value">全数字信号源合成干扰源技术</div>
+              </div>
+              <div class="spec-row">
+                <div class="spec-label">发射功率</div>
+                <div class="spec-value">≥450W</div>
+              </div>
+              <div class="spec-row">
+                <div class="spec-label">电源适应性</div>
+                <div class="spec-value">AC220V市电<br>或增加内置电池DC24-28V</div>
+              </div>
+              <div class="spec-row">
+                <div class="spec-label">拓展功能</div>
+                <div class="spec-value">可增加单通道功率，可集成频谱探测设备且支持组网工作</div>
+              </div>
+            </div>
       </div>
       
        <!-- 产品特点 -->
@@ -76,29 +83,29 @@
             <div class="feature-icon">
               <i class="fas fa-crosshairs"></i>
             </div>
-            <h3>多频段同时压制</h3>
-            <p> 确保压制无人机可能的遥控频段和导航信号</p>
+            <h3>20MHz~6GHz全频覆盖</h3>
+            <p> 配备高增益全向天线系统，采用全频段干扰方 式，覆盖20MHz~6GHz，且频段可自由编写， 覆盖95%无人机机型。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
               <i class="fas fa-tachometer-alt"></i>
             </div>
-            <h3>定向干扰</h3>
-            <p>对周围其它方向的设备基本不受影响，附带杀伤小，可实现黑白名单干扰</p>
+            <h3>干扰距离远</h3>
+            <p>在平地无遮挡空旷区域干扰半径距离可达3公里， 城市环境干扰半径距离可达1公里。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
               <i class="fas fa-chart-line"></i>
             </div>
-            <h3>多频段定制</h3>
-            <p>可配置多个干扰频段，成本经济可行</p>
+            <h3>一机多用</h3>
+            <p>可单独做无人机打击设备，亦可做排爆干扰仪、 信号屏蔽器、对讲机屏蔽器使用。</p>
           </div>
          <div class="feature-card">
             <div class="feature-icon">
               <i class="fas fa-chart-line"></i>
             </div>
-            <h3>全天候全天时</h3>
-            <p>不受雨雪雾霾影响，可实现 7*24小时 360°全方位实时干扰</p>
+            <h3>可扩展性强</h3>
+            <p>设备可根据客户需求定制多模块、定制单通道 功率，可集成无人机探测系统，实现无人机侦 测反制一体化，支持设备组网工作。</p>
           </div>  
         </div>
       </div>

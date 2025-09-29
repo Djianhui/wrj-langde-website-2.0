@@ -10,8 +10,9 @@
           <span>/</span>
           <span>立体防控</span>
           <span>/</span>
-          <span>一体化防御</span>
-       
+          <span>侦探感知</span>
+          <span>/</span>
+          <span>频谱侦测</span>
         </div>
         <div class="product-hero-content">
           <h1 class="product-title">固定式无人机侦测设备</h1>
