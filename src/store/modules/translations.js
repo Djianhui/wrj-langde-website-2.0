@@ -19,22 +19,22 @@ export const useTranslationsStore = defineStore('translations', () => {
                 text: '侦探感知',
                 id: 'detection',
                 children: [
-                  { text: '雷达探测', link: '/products/defense/detection/radar', id: 'radar' },
-                  { text: '光电识别', link: '/products/defense/detection/optical', id: 'optical' },
-                  { text: '频谱侦测', link: '/products/defense/detection/spectrum', id: 'spectrum' }
+                  { text: '雷达探测', id: 'radar' },
+                  { text: '光电识别', id: 'optical' },
+                  { text: '频谱侦测', id: 'spectrum' }
                 ]
               },
-              { text: '干扰反制', link: '/products/defense/jamming', id: 'jamming' },
-              { text: '一体化防御', link: '/products/defense/integrated', id: 'integrated' }
+              { text: '干扰反制', id: 'jamming' },
+              { text: '一体化防御', id: 'integrated' }
             ]
           },
           {
             text: '低空经济',
             id: 'low-altitude',
             children: [
-              { text: '农业植保', link: '/products/low-altitude/agriculture', id: 'agriculture' },
-              { text: '巡查防护', link: '/products/low-altitude/patrol', id: 'patrol' },
-              { text: 'FPV', link: '/products/low-altitude/fpv', id: 'fpv' }
+              { text: '农业植保', id: 'agriculture' },
+              { text: '巡查防护', id: 'patrol' },
+              { text: 'FPV', id: 'fpv' }
             ]
           }
         ]
@@ -59,22 +59,22 @@ export const useTranslationsStore = defineStore('translations', () => {
                 text: 'Detection & Sensing',
                 id: 'detection',
                 children: [
-                  { text: 'Radar Detection', link: '/products/defense/detection/radar', id: 'radar' },
-                  { text: 'Optical Recognition', link: '/products/defense/detection/optical', id: 'optical' },
-                  { text: 'Spectrum Monitoring', link: '/products/defense/detection/spectrum', id: 'spectrum' }
+                  { text: 'Radar Detection', id: 'radar' },
+                  { text: 'Optical Recognition', id: 'optical' },
+                  { text: 'Spectrum Monitoring', id: 'spectrum' }
                 ]
               },
-              { text: 'Jamming & Counter', link: '/products/defense/jamming', id: 'jamming' },
-              { text: 'Integrated Defense', link: '/products/defense/integrated', id: 'integrated' }
+              { text: 'Jamming & Counter', id: 'jamming' },
+              { text: 'Integrated Defense', id: 'integrated' }
             ]
           },
           {
             text: 'Low-Altitude Economy',
             id: 'low-altitude',
             children: [
-              { text: 'Agricultural Protection', link: '/products/low-altitude/agriculture', id: 'agriculture' },
-              { text: 'Patrol & Protection', link: '/products/low-altitude/patrol', id: 'patrol' },
-              { text: 'FPV Systems', link: '/products/low-altitude/fpv', id: 'fpv' }
+              { text: 'Agricultural Protection', id: 'agriculture' },
+              { text: 'Patrol & Protection', id: 'patrol' },
+              { text: 'FPV Systems', id: 'fpv' }
             ]
           }
         ]

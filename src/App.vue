@@ -77,11 +77,9 @@
                          :key="product.id" 
                          class="menu-item level-3-item"
                          @click="handleProductClick(product.id)">
-                      <RouterLink :to="product.link" class="item-link">
-                        <div class="item-content">
-                          <span class="item-title">{{ product.text }}</span>
-                        </div>
-                      </RouterLink>
+                      <div class="item-content">
+                        <span class="item-title">{{ product.text }}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -460,6 +458,21 @@ const handleProductClick = (productId) => {
   // 立即收起下拉菜单
   hideDropdownImmediately()
   closeMenu()
+  
+  // 如果不在产品中心页面，先导航到产品中心
+  if (router.currentRoute.value.path !== '/technology') {
+    router.push('/technology').then(() => {
+      // 导航完成后稍等一下，然后滚动到产品列表
+      setTimeout(() => {
+        scrollToProductList()
+      }, 300)
+    })
+  } else {
+    // 已经在产品中心页面，直接滚动
+    setTimeout(() => {
+      scrollToProductList()
+    }, 100)
+  }
 }
 
 // 立即隐藏下拉菜单（不延迟）
