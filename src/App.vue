@@ -883,7 +883,6 @@ nav ul li a.active .nav-arrow {
 /* 三级产品列 */
 .level-3-column {
   width: 280px;
-  background: linear-gradient(135deg, rgba(100, 116, 139, 0.03) 0%, rgba(71, 85, 105, 0.03) 100%);
   border-radius: 0 8px 8px 0;
 }
 
@@ -1019,8 +1018,7 @@ nav ul li a.active .nav-arrow {
 
 /* 三级产品样式 */
 .level-3-item {
-  background: linear-gradient(135deg, rgba(100, 116, 139, 0.05) 0%, rgba(71, 85, 105, 0.05) 100%);
-  border: 1px solid rgba(100, 116, 139, 0.1);
+  border: 1px solid transparent;
 }
 
 .level-3-item .item-content {
@@ -1034,7 +1032,6 @@ nav ul li a.active .nav-arrow {
 }
 
 .level-3-item:hover {
-  background: linear-gradient(135deg, rgba(100, 116, 139, 0.1) 0%, rgba(71, 85, 105, 0.1) 100%);
   border-color: rgba(100, 116, 139, 0.2);
   transform: translateX(3px);
   box-shadow: 0 3px 12px rgba(100, 116, 139, 0.12);
