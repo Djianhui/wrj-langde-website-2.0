@@ -335,7 +335,7 @@ const productLists = {
         id: 'optical-001',
         name: '光电识别系统',
         description: '可见光与红外双光谱识别',
-        image: '/images/products/optical-system.jpg',
+        image: '/images/products/optical.png',
         link: '/products/defense/detection/optical',
         features: ['智能识别', '夜视能力', '高清成像']
       },
@@ -359,7 +359,7 @@ const productLists = {
         id: 'integrated-001',
         name: '一体化防御系统',
         description: '集成化智能防御平台',
-        image: '/images/products/integrated-system.jpg',
+        image: '/images/products/integrated.png',
         link: '/products/defense/integrated',
         features: ['系统集成', '智能决策', '移动部署']
       }
@@ -385,11 +385,19 @@ const productLists = {
         link: '/products/defense/detection/radar',
         features: ['便携式', '快速部署', '灵活机动']
       },
+        {
+        id: 'spectrum-detector',
+        name: '频谱侦测系统',
+        description: '支持独立侦测识别无人机的远程识别及频率信号',
+        image: '/images/products/spectrum.png',
+        link: '/products/defense/detection/spectrum',
+        features: ['物联网', '远程识别', '频率分析']
+      },
       {
         id: 'optical-tracking',
         name: '光电识别跟踪',
         description: '集高清可见光摄像机、制冷红外热成像仪、激光照明等于一体',
-        image: '/images/products/optical-tracking.jpg',
+        image: '/images/products/optical.png',
         link: '/products/defense/detection/optical',
         features: ['高清成像', '红外热成像', '激光照明']
       },
@@ -397,7 +405,7 @@ const productLists = {
         id: 'radar-lowalt',
         name: '低空探测雷达',
         description: '低空防御系统的重要组成部分',
-        image: '/images/tech/03.png',
+        image: '/images/products/radar.png',
         link: '/products/defense/detection/radar',
         features: ['低空专用', '高精度', '快速响应']
       }
@@ -441,7 +449,7 @@ const productLists = {
         id: 'optical-tracking-system',
         name: '光电识别跟踪',
         description: '集高清可见光摄像机、制冷红外热成像仪、激光照明等于一体',
-        image: '/images/products/optical-tracking-full.jpg',
+        image: '/images/products/optical.png',
         link: '/products/defense/detection/optical',
         features: ['高清可见光', '红外热成像', '激光照明']
       }
@@ -455,7 +463,7 @@ const productLists = {
         id: 'spectrum-detector',
         name: '频谱侦测系统',
         description: '支持独立侦测识别无人机的远程识别及频率信号',
-        image: '/images/products/iot-sensor.jpg',
+        image: '/images/products/spectrum.png',
         link: '/products/defense/detection/spectrum',
         features: ['物联网', '远程识别', '频率分析']
       }
@@ -483,7 +491,7 @@ const productLists = {
         id: 'integrated-defense',
         name: '一体化防御系统',
         description: '集侦测、识别、预警、反制于一体的智能化防御平台',
-        image: '/images/products/integrated-full.jpg',
+        image: '/images/products/integrated.png',
         link: '/products/defense/integrated',
         features: ['系统集成', '智能决策', '移动部署']
       }
@@ -618,7 +626,7 @@ const categoryData = {
     title: '光电识别系统',
     subtitle: '可见光与红外双光谱识别',
     description: '采用先进的光电成像技术，实现对无人机的视觉识别和分类',
-    image: '/images/products/optical-detection.jpg',
+    image: '/images/products/optical.png',
     link: '/products/defense/detection/optical',
     features: [
       { icon: 'fas fa-camera', title: '高清成像', description: '4K超高清光电成像' },
@@ -669,7 +677,7 @@ const categoryData = {
     title: '一体化防御系统',
     subtitle: '集成化智能防御平台',
     description: '集侦测、识别、预警、反制于一体的智能化防御平台',
-    image: '/images/products/integrated-defense.jpg',
+    image: '/images/products/integrated.png',
     link: '/products/defense/integrated',
     features: [
       { icon: 'fas fa-cogs', title: '系统集成', description: '多子系统一体化集成' },

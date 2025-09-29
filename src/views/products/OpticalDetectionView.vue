@@ -25,11 +25,11 @@
       <!-- 产品概述 -->
       <div class="product-overview">
         <div class="product-image">
-          <img src="/images/products/optical-detection.jpg" alt="光电识别系统" @error="handleImageError">
+          <img src="/images/products/optical.png" alt="光电识别系统" @error="handleImageError">
         </div>
         <div class="product-info">
           <h2>产品概述</h2>
-          <p>采用先进的光电成像技术，实现对无人机的视觉识别和分类。系统集成4K超高清光电成像、热成像夜视探测和智能目标识别算法。</p>
+          <p>该光电跟踪装置内置高清可见光透雾网络摄像头加热成像摄像机，内置智能目标检测和跟踪算法，在可见光、低照度、恶劣雾霾天气和夜间实现24小时不间断的目标识别和跟踪。机身采用高强度减震合金压铸外壳，整体三防喷涂、隔热、耐高温耐寒、耐冲击、耐腐蚀，具有良好的抗风减震性能。</p>
         </div>
       </div>
       
@@ -37,44 +37,92 @@
       <div class="product-specifications">
         <h2 class="section-title">产品规格</h2>
         <p class="spec-note">* 注意：外观、规格和功能可能有所不同，恕不另行通知。</p>
-        <div class="specification-table">
-          <div class="spec-row">
-            <div class="spec-label">视野范围</div>
-            <div class="spec-value">360°全景</div>
-          </div>
-          <div class="spec-row">
-            <div class="spec-label">变焦倍数</div>
-            <div class="spec-value">30倍光学变焦</div>
-          </div>
-          <div class="spec-row">
-            <div class="spec-label">识别精度</div>
-            <div class="spec-value">≥96%</div>
-          </div>
-          <div class="spec-row">
-            <div class="spec-label">探测距离</div>
-            <div class="spec-value">≥3km</div>
-          </div>
-          <div class="spec-row">
-            <div class="spec-label">成像质量</div>
-            <div class="spec-value">4K超高清</div>
-          </div>
-          <div class="spec-row">
-            <div class="spec-label">红外探测</div>
-            <div class="spec-value">热成像夜视</div>
-          </div>
-          <div class="spec-row">
-            <div class="spec-label">响应时间</div>
-            <div class="spec-value">≤ 2s</div>
-          </div>
-          <div class="spec-row">
-            <div class="spec-label">工作温度</div>
-            <div class="spec-value">-30℃ ~ +65℃</div>
-          </div>
-          <div class="spec-row">
-            <div class="spec-label">防护等级</div>
-            <div class="spec-value">IP67</div>
-          </div>
-        </div>
+       <div class="specification-table">
+  <div class="spec-row">
+    <div class="spec-label">最大分辨率</div>
+    <div class="spec-value">1080P(1920x1080)</div>
+  </div>
+  <div class="spec-row">
+    <div class="spec-label">焦距</div>
+    <div class="spec-value">6.5～312mm 48倍光学连续变焦</div>
+  </div>
+  <div class="spec-row">
+    <div class="spec-label">最低照度</div>
+    <div class="spec-value">彩色:0.002Lux 黑白:0.0002Lux@(AGC ON)</div>
+  </div>
+  <div class="spec-row">
+    <div class="spec-label">透雾功能</div>
+    <div class="spec-value">光学透雾、电子透雾</div>
+  </div>
+  <div class="spec-row">
+    <div class="spec-label">探测器类型</div>
+    <div class="spec-value">非制冷氧化钒焦平面探测器</div>
+  </div>
+  <div class="spec-row">
+    <div class="spec-label">图像分辨率</div>
+    <div class="spec-value">640x512, 热成像编码:1280x1024</div>
+  </div>
+  <div class="spec-row">
+    <div class="spec-label">热像镜头焦距</div>
+    <div class="spec-value">75mm</div>
+  </div>
+  <div class="spec-row">
+    <div class="spec-label">视频压缩标准</div>
+    <div class="spec-value">H.265 / H.264 / MJPEG</div>
+  </div>
+  <div class="spec-row">
+    <div class="spec-label">帧率</div>
+    <div class="spec-value">25/30fps</div>
+  </div>
+  <div class="spec-row">
+    <div class="spec-label">OSD 字符叠加</div>
+    <div class="spec-value">多区智能OSD，支持多行国标字符，字体大小、颜色、位置可自定义</div>
+  </div>
+  <div class="spec-row">
+    <div class="spec-label">转台旋转范围</div>
+    <div class="spec-value">水平:0°～360°连续无限位旋转；垂直: -90°～+90°</div>
+  </div>
+  <div class="spec-row">
+    <div class="spec-label">预置位</div>
+    <div class="spec-value">256个</div>
+  </div>
+  <div class="spec-row">
+    <div class="spec-label">目标探测性能</div>
+    <div class="spec-value">可见光≥2.5Km 热成像≥1.2Km<br>(无人机35x35cm, 能见度≥20Km，温度≤20℃，湿度≤40%)</div>
+  </div>
+  <div class="spec-row">
+    <div class="spec-label">支持的协议</div>
+    <div class="spec-value">IPv4, TCP/IP, UDP, HTTP, DHCP, RTP/RTCP/RTSP, FTP, UPnP, DDNS, NTP, IGMP, ICMP</div>
+  </div>
+  <div class="spec-row">
+    <div class="spec-label">兼容协议</div>
+    <div class="spec-value">ONVIF, GB/T 28181</div>
+  </div>
+  <div class="spec-row">
+    <div class="spec-label">通讯接口</div>
+    <div class="spec-value">1个RJ45, 10M/100M自适应以太网接口</div>
+  </div>
+  <div class="spec-row">
+    <div class="spec-label">工作温度/湿度</div>
+    <div class="spec-value">-35℃～+60℃ / ＜90%RH</div>
+  </div>
+  <div class="spec-row">
+    <div class="spec-label">云台防护等级</div>
+    <div class="spec-value">IP66</div>
+  </div>
+  <div class="spec-row">
+    <div class="spec-label">电源输入</div>
+    <div class="spec-value">AC220V转DC24V±15%防水电源</div>
+  </div>
+  <div class="spec-row">
+    <div class="spec-label">功率</div>
+    <div class="spec-value">正常工作≤30W</div>
+  </div>
+  <div class="spec-row">
+    <div class="spec-label">重量(净重)</div>
+    <div class="spec-value">＜8KG</div>
+  </div>
+</div>
       </div>
       
       <!-- 产品特点 -->
@@ -85,22 +133,26 @@
             <div class="feature-icon">
               <i class="fas fa-camera"></i>
             </div>
-            <h3>高清成像</h3>
+            <h3>黑白名单功能</h3>
             <p>4K超高清光电成像，提供清晰的目标图像</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
               <i class="fas fa-thermometer-half"></i>
             </div>
-            <h3>红外探测</h3>
-            <p>热成像夜视探测能力，全天候监控</p>
+            <h3>多光谱全天候监测</h3>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
               <i class="fas fa-brain"></i>
             </div>
-            <h3>AI识别</h3>
-            <p>智能目标识别算法，准确分类目标</p>
+            <h3>远程探测和发现目标</h3>
+          </div>
+           <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-brain"></i>
+            </div>
+            <h3>智能区域计算</h3>
           </div>
         </div>
       </div>
@@ -218,8 +270,8 @@ onMounted(() => {
 }
 
 .product-image img {
-  width: 320px;
-  height: 550px;
+  width: 416px;
+  height: 416px;
   border-radius: 12px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   object-fit: cover;
@@ -278,7 +330,7 @@ onMounted(() => {
 
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 30px;
   margin-bottom: 80px;
 }

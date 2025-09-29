@@ -25,7 +25,7 @@
       <!-- 产品概述 -->
       <div class="product-overview">
         <div class="product-image">
-          <img src="/images/tech/03.png" alt="低空探测雷达" @error="handleImageError">
+          <img src="/images/products/radar.png" alt="低空探测雷达" @error="handleImageError">
         </div>
         <div class="product-info">
           <h2>产品概述</h2>
@@ -276,8 +276,8 @@ onMounted(() => {
 }
 
 .product-image img {
-  width: 320px;
-  height: 550px;
+  width: 416px;
+  height: 416px;
   border-radius: 12px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   object-fit: cover;
