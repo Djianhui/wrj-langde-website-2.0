@@ -40,6 +40,11 @@ const router = createRouter({
       name: 'spectrum-detection',
       component: () => import('../views/products/SpectrumDetectionView.vue')
     },
+      {
+      path: '/products/defense/detection/photoelectric-detection',
+      name: 'photoelectric-detection',
+      component: () => import('../views/products/PhotoelectricDetectionView.vue')
+    },
     {
       path: '/products/defense/jamming',
       name: 'jamming-system',

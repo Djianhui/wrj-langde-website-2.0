@@ -402,6 +402,14 @@ const productLists = {
         features: ['高清成像', '红外热成像', '激光照明']
       },
       {
+        id: 'photoelectric-detection',
+        name: '光电探测设备',
+        description: '内置智能目标检测与跟踪算法',
+        image: '/images/products/photoelectric-detection.png',
+        link: '/products/defense/detection/photoelectric-detection',
+        features: ['高清成像', '红外热成像', '激光照明']
+      },
+      {
         id: 'radar-lowalt',
         name: '低空探测雷达',
         description: '低空防御系统的重要组成部分',
@@ -452,6 +460,14 @@ const productLists = {
         image: '/images/products/optical.png',
         link: '/products/defense/detection/optical',
         features: ['高清可见光', '红外热成像', '激光照明']
+      },
+       {
+        id: 'optical-photoelectric-detection',
+        name: '光电探测设备',
+        description: '内置智能目标检测与跟踪算法',
+        image: '/images/products/photoelectric-detection.png',
+        link: '/products/defense/detection/photoelectric-detection',
+        features: ['高清成像', '红外热成像', '激光照明']
       }
     ]
   },

@@ -7,16 +7,16 @@
           <RouterLink to="/">首页</RouterLink>
           <span>/</span>
           <RouterLink to="/technology">产品中心</RouterLink>
-          <span>/</span>
+         <span>/</span>
           <span>立体防控</span>
           <span>/</span>
           <span>侦探感知</span>
           <span>/</span>
-          <span>雷达探测</span>
+          <span>光电识别</span>
         </div>
         <div class="product-hero-content">
-          <h1 class="product-title">低空探测雷达</h1>
-          <p class="product-subtitle">高精度雷达目标探测与跟踪技术</p>
+          <h1 class="product-title">光电探测设备</h1>
+          <p class="product-subtitle"></p>
         </div>
       </div>
     </div>
@@ -25,11 +25,15 @@
       <!-- 产品概述 -->
       <div class="product-overview">
         <div class="product-image">
-          <img src="/images/products/radar.png" alt="低空探测雷达" @error="handleImageError">
+          <img src="/images/products/photoelectric-detection.png" alt="光电探测设备" @error="handleImageError">
         </div>
         <div class="product-info">
           <h2>产品概述</h2>
-          <p>该设备可接收并截获各类雷达信号，通过数字信道化处理，精准测量信号的载频、脉宽、到达时间（TOA）、方向（DOA）、幅度等特征参数，生成脉冲描述字（PDW）数据；同时具备设定脉冲中频波形信号的采集与下传功能。设备支持六/八通道干涉仪、DBF测向等多种工作模式，能实时记录并输出频谱、幅度、脉冲描述字（PDW）及阵列中频原始数据，实现雷达信号的全流程特征提取与数据留存。</p>
+          <p>光电跟踪设备内置高清可见光透雾网络摄像机加热成像摄像机加激光测距仪，内置智能目标检测与跟踪算法，实现白天、夜间、恶劣雾霾天气、夜间等全天候24小时不间断目标识别并跟踪。</p>
+          <p>• 光电跟踪设备内置高清可见光透雾网络摄像机加热成像摄像机，内置智能目标检测与跟踪算法</p>
+          <p>• 能对自动识别的目标（无人机）进行自动锁定和跟踪，也可通过雷达或者频谱来引导跟踪；</p>
+          <p>• 集成先进的同步自动变焦和快速对焦算法，根据目标视场的大小，镜头快速变倍至指定倍数，同时聚焦至指定位置；</p>
+          <p>• 选用高精度步进电机，提供多个高精度预置位和自学习轨迹，采用全数码控制，可任意迅速定位及连续追踪扫描。</p>
         </div>
       </div>
       
@@ -38,148 +42,118 @@
         <h2 class="section-title">产品规格</h2>
         <p class="spec-note">* 注意：外观、规格和功能可能有所不同，恕不另行通知。</p>
         <div class="specification-table">
-          <!-- <div class="spec-row spec-header">
-            <div class="spec-label">型号</div>
-            <div class="spec-value">TXPD3000</div>
-          </div> -->
-          <div class="spec-row">
-            <div class="spec-label">雷达类型</div>
-            <div class="spec-value">频率调制连续波 (FMCW)</div>
-          </div>
-          <div class="spec-row">
-            <div class="spec-label">频率范围</div>
-            <div class="spec-value">K 波段 (24GHz)</div>
-          </div>
-          <div class="spec-row">
-            <div class="spec-label">扫描类型</div>
-            <div class="spec-value">机械扫描</div>
-          </div>
-          <div class="spec-row">
-            <div class="spec-label">刷新率</div>
-            <div class="spec-value">3s / 6s</div>
-          </div>
-          <div class="spec-row">
-            <div class="spec-label">检测范围</div>
-            <div class="spec-value">≥ 3km @ RCS=0.01 m²</div>
-          </div>
-          <div class="spec-row">
-            <div class="spec-label">距离分辨率</div>
-            <div class="spec-value">±3.75m @ RCS=0.01 m²</div>
-          </div>
-          <div class="spec-row">
-            <div class="spec-label">方位角</div>
-            <div class="spec-value">0°~360°</div>
-          </div>
-          <div class="spec-row">
-            <div class="spec-label">方位精度</div>
-            <div class="spec-value">≤ 1°</div>
-          </div>
-          <div class="spec-row">
-            <div class="spec-label">俯仰角</div>
-            <div class="spec-value">0 ~ 30°</div>
-          </div>
-          <div class="spec-row">
-            <div class="spec-label">俯仰精度</div>
-            <div class="spec-value">≤ 2°</div>
-          </div>
-          <div class="spec-row">
-            <div class="spec-label">目标速度检测范围</div>
-            <div class="spec-value">±30 m/s</div>
-          </div>
-          <div class="spec-row">
-            <div class="spec-label">同时跟踪</div>
-            <div class="spec-value">100</div>
-          </div>
-          <div class="spec-row">
-            <div class="spec-label">发射功率</div>
-            <div class="spec-value">≤10W</div>
-          </div>
-          <div class="spec-row">
-            <div class="spec-label">系统功率</div>
-            <div class="spec-value">100-240V AC</div>
-          </div>
-          <div class="spec-row">
-            <div class="spec-label">整机平均功耗</div>
-            <div class="spec-value">≤160W</div>
-          </div>
-          <div class="spec-row">
-            <div class="spec-label">防护等级</div>
-            <div class="spec-value">IP65</div>
-          </div>
-          <div class="spec-row">
-            <div class="spec-label">工作温度</div>
-            <div class="spec-value">-40 ~ 60°C</div>
-          </div>
-          <div class="spec-row">
-            <div class="spec-label">外部尺寸</div>
-            <div class="spec-value">< 740*600*600 mm</div>
-          </div>
-          <div class="spec-row">
-            <div class="spec-label">重量</div>
-            <div class="spec-value">≤30kg</div>
-          </div>
-          <div class="spec-row">
-            <div class="spec-label">通讯接口</div>
-            <div class="spec-value">RJ45</div>
-          </div>
+          <table class="spec-table">
+           
+            <tbody>
+              <tr>
+                <td class="spec-label">侦测距离</td>
+                <td colspan="3" class="spec-category">≥5KM</td>
+              </tr>
+              <tr>
+                <td class="spec-label">侦测频段</td>
+                <td colspan="3" class="spec-category">70MHZ-6000MHZ备注:其他频段可定制</td>
+              </tr>
+              <tr>
+                <td class="spec-label">覆盖范围</td>
+                <td colspan="3" class="spec-category">360°</td>
+              </tr>
+              <tr>
+                <td class="spec-label">雷达探测距离</td>
+                <td colspan="3" class="spec-category">≥50.0km (无人机)</td>
+              </tr>
+              <tr>
+                <td class="spec-label"></td>
+                <td colspan="3" class="spec-category">≥8.0km (行人)</td>
+              </tr>
+              <tr>
+                <td class="spec-label"></td>
+                <td colspan="3" class="spec-category">≥10.0km (车辆)</td>
+              </tr>
+              <tr>
+                <td class="spec-label"></td>
+                <td colspan="3" class="spec-category">≥15.0km (船只)</td>
+              </tr>
+              <tr>
+                <td class="spec-label">探测条件</td>
+                <td colspan="3" class="spec-category">在大气能见度≥20km，湿度≤50%RH，温差>6k的情况下，对0.3m*0.3m无人机目标</td>
+              </tr>
+              <tr>
+                <td class="spec-label">光电探测距离</td>
+                <td class="spec-cell">可见光探测距离 ≥5000m</td>
+                <td class="spec-cell"></td>
+                <td class="spec-cell">热像探测距离 ≥1500m</td>
+              </tr>
+              <tr>
+                <td class="spec-label"></td>
+                <td class="spec-cell">跟踪距离 ≥4000m</td>
+                <td class="spec-cell">红外探测</td>
+                <td class="spec-cell">跟踪距离 ≥1000m</td>
+              </tr>
+              <tr>
+                <td class="spec-label"></td>
+                <td class="spec-cell">识别距离 ≥3000m</td>
+                <td class="spec-cell">识别距离 ≥1000m</td>
+                <td class="spec-cell"></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
       
-       <!-- 产品特点 -->
+      <!-- 产品特点 -->
       <div class="product-features">
         <h2 class="section-title">产品特点</h2>
         <div class="features-grid">
           <div class="feature-card">
             <div class="feature-icon">
-              <i class="fas fa-crosshairs"></i>
+              <i class="fas fa-camera"></i>
             </div>
-            <h3>数字信道化处理</h3>
-            <p>采用自主研发的数字信道化处理方法，适应复杂电磁环境下多个同时到达信号测量</p>
+            <h3>雷达+频谱+光电三级联动</h3>
+            <p>探测系统由频谱侦测、雷达探测和光电跟踪组成，结合主动与被动探测手段有效互补，实现5 公里范围内的高效无人机监测与跟踪。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
-              <i class="fas fa-tachometer-alt"></i>
+              <i class="fas fa-thermometer-half"></i>
             </div>
-            <h3>高精度测向</h3>
-            <p>自主研发的多通道干涉仪测向方法</p>
-            <p>测向精度高，解模糊概率高</p>
+            <h3>可连续工作</h3>
+            <p>设备能够全天候持续监测打击和记录防区空域 ,即使在浓雾和雷雨等恶劣天气条件下也能保 持稳定运行。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
-              <i class="fas fa-chart-line"></i>
+              <i class="fas fa-brain"></i>
             </div>
-            <h3>支持多站协同定位</h3>
-            <p>支持多站测向交叉及多站</p>
-            <p>时差（TDOA）协同定位</p>
+            <h3>多级别管控</h3>
+            <p>雷达探测、无线电侦测和光电跟踪可设置为多 级别联动处置模式，以确保灵活应对各种威胁。</p>
           </div>
-         <div class="feature-card">
+          <div class="feature-card">
             <div class="feature-icon">
-              <i class="fas fa-chart-line"></i>
+              <i class="fas fa-brain"></i>
             </div>
-            <h3>功耗低 </h3>
-            <p>功耗小于40W</p>
-          </div>  
+            <h3>三位一体防御体系</h3>
+            <p>系统集成了雷达探测、电磁频谱、光电监测等先进技术，形成强大的三位 一体防御体系。</p>
+          </div>
         </div>
       </div>
+      
       <!-- 应用场景 -->
       <div class="product-applications">
         <h2 class="section-title">应用场景</h2>
         <div class="applications-grid">
           <div class="application-item">
-            <i class="fas fa-plane"></i>
-            <span>机场安防</span>
+            <i class="fas fa-moon"></i>
+            <span>夜间监控</span>
           </div>
           <div class="application-item">
             <i class="fas fa-building"></i>
-            <span>重要设施</span>
-          </div>
-          <div class="application-item">
-            <i class="fas fa-shield-alt"></i>
-            <span>边境防护</span>
+            <span>城市安防</span>
           </div>
           <div class="application-item">
             <i class="fas fa-eye"></i>
-            <span>区域监控</span>
+            <span>目标跟踪</span>
+          </div>
+          <div class="application-item">
+            <i class="fas fa-video"></i>
+            <span>实时监控</span>
           </div>
         </div>
       </div>
@@ -214,6 +188,7 @@ onMounted(() => {
 </script>
 
 <style scoped>
+/* 复用RadarDetectionView.vue的样式 */
 .product-detail-page {
   padding-top: 0;
 }
@@ -291,7 +266,7 @@ onMounted(() => {
   font-size: 1.1rem;
   line-height: 1.8;
   color: #64748b;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .section-title {
@@ -310,14 +285,15 @@ onMounted(() => {
 
 .feature-card {
   text-align: center;
-  padding: 40px 20px;
+  padding: 40px 30px;
   background: white;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
 .feature-card:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
   transform: translateY(-10px);
 }
 
@@ -397,54 +373,72 @@ onMounted(() => {
   border: 1px solid #e2e8f0;
 }
 
-.spec-row {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  border-bottom: 1px solid #e2e8f0;
-  transition: background-color 0.2s ease;
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
 }
 
-.spec-row:last-child {
-  border-bottom: none;
+.spec-label-header {
+  background: #f8f9fa;
+  color: #374151;
+  padding: 20px 15px;
+  font-weight: 600;
+  font-size: 18px;
+  text-align: center;
+  border: 1px solid #dee2e6;
 }
 
-.spec-row:hover {
-  background-color: #f8fafc;
-}
-
-.spec-header {
+.spec-table thead th {
   background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
   color: white;
+  padding: 20px 15px;
   font-weight: 600;
-}
-
-.spec-header:hover {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  font-size: 18px;
+  text-align: center;
+  border: 1px solid #dee2e6;
 }
 
 .spec-label {
-  padding: 15px 20px;
-  font-weight: 500;
+  background-color: #f8f9fa;
   color: #374151;
-  background-color: #f8fafc;
-  border-right: 1px solid #e2e8f0;
-}
-
-.spec-header .spec-label {
-  background: transparent;
-  color: white;
-  border-right: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.spec-value {
-  padding: 15px 20px;
-  color: #1e293b;
-  font-weight: 400;
-}
-
-.spec-header .spec-value {
-  color: white;
+  padding: 15px;
   font-weight: 600;
+  text-align: center;
+  border: 1px solid #dee2e6;
+  font-size: 15px;
+}
+
+.spec-table tbody td {
+  padding: 15px;
+  text-align: center;
+  border: 1px solid #dee2e6;
+  transition: background-color 0.2s ease;
+}
+
+.spec-table tbody tr:nth-child(even) .spec-cell {
+  background-color: #f8f9fa;
+}
+
+.spec-table tbody tr:hover .spec-cell {
+  background-color: #e3f2fd;
+}
+
+.spec-table tbody tr:hover .spec-label {
+  background-color: #e8f5e8;
+}
+
+.spec-category {
+  background-color: #f1f5f9 !important;
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 16px;
+}
+
+.spec-cell {
+  color: #374151;
+  font-size: 15px;
+  font-weight: 500;
 }
 
 .product-contact {
@@ -519,26 +513,23 @@ onMounted(() => {
   
   .specification-table {
     margin: 0 -10px;
+    overflow-x: auto;
   }
   
-  .spec-row {
-    grid-template-columns: 1fr;
+  .spec-table {
+    min-width: 700px;
   }
   
-  .spec-label {
-    border-right: none;
-    border-bottom: 1px solid #e2e8f0;
-    font-weight: 600;
-    background-color: #f1f5f9;
+  .spec-label-header,
+  .spec-table thead th {
+    padding: 12px 8px;
+    font-size: 14px;
   }
   
-  .spec-header .spec-label {
-    background: rgba(255, 255, 255, 0.1);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  }
-  
-  .spec-value {
-    padding-top: 10px;
+  .spec-label,
+  .spec-table tbody td {
+    padding: 10px 6px;
+    font-size: 13px;
   }
 }
 </style>
