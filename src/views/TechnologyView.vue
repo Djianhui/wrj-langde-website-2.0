@@ -325,9 +325,9 @@ const productLists = {
     products: [
       {
         id: 'radar-001',
-        name: '雷达探测系统',
+        name: '低空探测雷达',
         description: '高精度雷达目标探测与跟踪',
-        image: '/images/products/radar-system.jpg',
+        image: '/images/tech/03.png',
         link: '/products/defense/detection/radar',
         features: ['高精度', '全天候', '远距离']
       },
@@ -397,7 +397,7 @@ const productLists = {
         id: 'radar-lowalt',
         name: '低空探测雷达',
         description: '低空防御系统的重要组成部分',
-        image: '/images/products/lowalt-radar.jpg',
+        image: '/images/tech/03.png',
         link: '/products/defense/detection/radar',
         features: ['低空专用', '高精度', '快速响应']
       }
@@ -409,9 +409,9 @@ const productLists = {
     products: [
       {
         id: 'radar-remote',
-        name: '无人机远程识别侦测',
+        name: '低空探测雷达',
         description: '支持独立侦测识别无人机的远程识别及频率信号',
-        image: '/images/products/remote-detection.jpg',
+        image: '/images/tech/03.png',
         link: '/products/defense/detection/radar',
         features: ['远程识别', '频率信号', '独立侦测']
       },
