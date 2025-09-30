@@ -835,7 +835,7 @@ nav ul li a.active .nav-arrow {
   position: absolute;
   top: 100%;
   left: 0;
-  min-width: 720px; /* 增加宽度以容纳多列 */
+  min-width: 220px; /* 增加宽度以容纳多列 */
   background: linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(30, 41, 59, 0.99) 100%);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -867,7 +867,7 @@ nav ul li a.active .nav-arrow {
 /* 级联菜单水平布局 */
 .menu-levels {
   display: flex;
-  min-height: 300px;
+  min-height: 150px;
 }
 
 .level-column {
@@ -969,7 +969,7 @@ nav ul li a.active .nav-arrow {
 
 .level-1-item .item-title {
   font-size: 1.05rem;
-  font-weight: 650;
+  font-weight: 550;
 }
 
 .level-1-item:hover,
