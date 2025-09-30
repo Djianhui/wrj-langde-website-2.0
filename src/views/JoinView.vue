@@ -39,8 +39,8 @@
       
       <div class="join-contact">
         <h2>{{ t('contact', '联系我们') }}</h2>
-        <p v-if="isZh">如果您对我们的职位感兴趣，请将简历发送至：<a href="mailto:hr@landeintelligent.com">hr@landeintelligent.com</a></p>
-        <p v-else>If you are interested in our positions, please send your resume to: <a href="mailto:hr@landeintelligent.com">hr@landeintelligent.com</a></p>
+        <p v-if="isZh">如果您对我们的职位感兴趣，请将简历发送至：<a href="mailto:hr@landeintelligent.com">1547554068@qq.com</a></p>
+        <p v-else>If you are interested in our positions, please send your resume to: <a href="mailto:hr@landeintelligent.com">1547554068@qq.com</a></p>
       </div>
     </div>
   </div>

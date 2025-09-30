@@ -16,7 +16,7 @@ export const useNewsStore = defineStore('news', {
             category: 'company',
             categoryName: '公司新闻',
             date: '2024-06-10',
-            image: '/images/about/logo-ld.png',
+            image: '/images/products/fpv-5.png',
             summary: '朗德智能宣布其新一代反无人机系统"天盾-X"成功通过最终测试，拦截距离突破10公里大关，成为国内领先的反无人机解决方案。',
             content: `
               <p>杭州，2024年6月10日 — 朗德智能科技有限公司今日宣布，经过三年的研发，其新一代反无人机系统"天盾-X"已成功通过最终测试，正式投入市场。该系统在多项关键指标上取得突破，尤其是拦截距离首次超过10公里，大幅领先业内同类产品。</p>
@@ -38,7 +38,7 @@ export const useNewsStore = defineStore('news', {
             category: 'company',
             categoryName: '公司新闻',
             date: '2024-05-22',
-            image: '/images/about/logo-ld.png',
+            image: '/images/products/fpv-7.png',
             summary: '朗德智能与国家电网签署战略合作协议，将在五省区域部署智能无人机巡检系统，实现电力设施的智能化、自动化巡检。',
             content: `
               <p>北京，2024年5月22日 — 朗德智能科技有限公司今日与国家电网有限公司在北京签署战略合作协议，双方将在华东、华北五省区域内合作部署智能无人机巡检系统，覆盖超过10000公里的高压输电线路和3000座变电站。</p>

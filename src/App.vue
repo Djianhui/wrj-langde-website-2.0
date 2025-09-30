@@ -108,7 +108,7 @@
   <RouterView v-show="!isLoading" @page-loaded="handlePageLoaded" />
   
   <!-- 浮动语言切换按钮 -->
-  <LanguageSwitcher floating v-show="!isLoading && !isMenuActive" />
+  <!-- <LanguageSwitcher floating v-show="!isLoading && !isMenuActive" /> -->
 
   <footer v-show="!isLoading">
     <div class="container">
