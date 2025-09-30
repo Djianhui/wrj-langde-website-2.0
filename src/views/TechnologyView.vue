@@ -31,11 +31,16 @@
         <div class="categories-content">
           <!-- 左侧产品分类树 -->
           <div class="category-tree">
+            <!-- 分类标题头部 -->
+            <div class="category-header">
+              <span class="header-text">产品分类</span>
+            </div>
+            
             <div class="tree-container">
               <div class="tree-item root-item">
                 <div class="tree-node" @click="toggleCategory('root')">
                   <i class="fas fa-chevron-down tree-icon" :class="{'expanded': expandedCategories.root}"></i>
-                  <span class="node-text">产品分类</span>
+                  <span class="node-text">产品中心</span>
                 </div>
                 
                 <div v-show="expandedCategories.root" class="tree-children">
@@ -2636,17 +2641,81 @@ const getTechImage = (techId) => {
   font-weight: 600;
 }
 
-/* 产品分类根节点样式优化 */
-.root-item .tree-node {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-  border: none;
-  box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+/* 产品分类标题头部样式 */
+.category-tree {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
+  position: sticky;
+  top: 20px;
+  height: fit-content;
+  max-height: calc(100vh - 100px);
+  overflow: hidden;
+}
+
+/* 红色标题头部 */
+.category-header {
+  background: linear-gradient(135deg, #3ec7df 0%, #1cb992 100%);
+  color: #ffffff;
+  padding: 16px 20px;
+  margin: 0;
+  border-radius: 12px 12px 0 0;
+  font-size: 1.1rem;
   font-weight: 700;
-  padding: 12px 16px;
-  border-radius: 10px;
+  text-align: center;
   position: relative;
   overflow: hidden;
-  margin-bottom: 8px;
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
+}
+
+.category-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.category-header .header-text {
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.5px;
+}
+
+/* 树形容器内容区域 */
+.tree-container {
+  font-family: 'Microsoft YaHei', sans-serif;
+  padding: 20px;
+  max-height: calc(100vh - 160px);
+  overflow-y: auto;
+}
+
+/* 产品分类根节点样式优化 */
+.root-item .tree-node {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border: 2px solid #e2e8f0;
+  border-left: 4px solid #3ec7df;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  font-weight: 600;
+  padding: 12px 16px;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+}
+
+.root-item .tree-node:hover {
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.05) 0%, rgba(185, 28, 28, 0.05) 100%);
+  border-color: #26dccd;
+  transform: translateX(3px);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.15);
 }
 
 .root-item .tree-node::before {
@@ -2656,76 +2725,108 @@ const getTechImage = (techId) => {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.02) 0%, transparent 100%);
   pointer-events: none;
 }
 
 .root-item .node-text {
-  font-size: 1.1rem;
-  color: #ffffff;
-  font-weight: 700;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  letter-spacing: 0.3px;
-}
-
-.root-item .tree-icon {
-  color: #ffffff;
-  font-size: 1rem;
-  margin-right: 12px;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-}
-
-/* 一级分类样式优化 */
-.level-1 .tree-node {
-  background: linear-gradient(135deg, rgba(248, 250, 252, 0.8) 0%, rgba(241, 245, 249, 0.8) 100%);
-  border: 1px solid rgba(79, 172, 254, 0.2);
-  border-left: 3px solid #4facfe;
-  padding: 10px 14px;
-  border-radius: 8px;
-  margin: 3px 0;
-  transition: all 0.3s ease;
-}
-
-.level-1 .tree-node:hover {
-  background: linear-gradient(135deg, rgba(79, 172, 254, 0.08) 0%, rgba(0, 242, 254, 0.08) 100%);
-  border-color: rgba(79, 172, 254, 0.4);
-  border-left-color: #00f2fe;
-  transform: translateX(4px);
-  box-shadow: 0 2px 10px rgba(79, 172, 254, 0.15);
-}
-
-.level-1 .node-text {
   font-size: 1rem;
   color: #1e293b;
   font-weight: 600;
   letter-spacing: 0.2px;
+  position: relative;
+  z-index: 1;
 }
 
-.level-1 .tree-icon {
-  color: #4facfe;
+.root-item .tree-node:hover .node-text {
+  color: #dc2626;
+  font-weight: 700;
+}
+
+.root-item .tree-icon {
+  color: #dc2626;
   font-size: 0.9rem;
   margin-right: 12px;
   transition: all 0.3s ease;
 }
 
+.root-item .tree-node:hover .tree-icon {
+  color: #b91c1c;
+  transform: scale(1.1);
+}
+
+/* 一级分类样式优化 */
+.level-1 .tree-node {
+  background: linear-gradient(135deg, rgba(248, 250, 252, 0.9) 0%, rgba(241, 245, 249, 0.9) 100%);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-left: 3px solid #dc2626;
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin: 4px 0;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.level-1 .tree-node::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  background: linear-gradient(90deg, #dc2626 0%, #b91c1c 100%);
+  transition: width 0.3s ease;
+  border-radius: 6px 0 0 6px;
+}
+
+.level-1 .tree-node:hover::before {
+  width: 4px;
+}
+
+.level-1 .tree-node:hover {
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.06) 0%, rgba(185, 28, 28, 0.06) 100%);
+  border-color: rgba(220, 38, 38, 0.4);
+  border-left-color: #dc2626;
+  transform: translateX(4px);
+  box-shadow: 0 2px 10px rgba(220, 38, 38, 0.15);
+}
+
+.level-1 .node-text {
+  font-size: 0.95rem;
+  color: #1e293b;
+  font-weight: 600;
+  letter-spacing: 0.1px;
+  position: relative;
+  z-index: 1;
+}
+
+.level-1 .tree-icon {
+  color: #dc2626;
+  font-size: 0.85rem;
+  margin-right: 10px;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
 .level-1 .tree-node:hover .tree-icon {
-  color: #00f2fe;
+  color: #b91c1c;
   transform: scale(1.1);
 }
 
 .level-1 .tree-node:hover .node-text {
-  color: #0f172a;
+  color: #dc2626;
   font-weight: 700;
 }
 
 /* 二级分类样式优化 */
 .level-2 .tree-node {
-  background: linear-gradient(135deg, rgba(248, 250, 252, 0.6) 0%, rgba(241, 245, 249, 0.6) 100%);
+  background: linear-gradient(135deg, rgba(248, 250, 252, 0.7) 0%, rgba(241, 245, 249, 0.7) 100%);
   border: 1px solid rgba(226, 232, 240, 0.6);
-  border-left: 3px solid #38bdf8;
+  border-left: 3px solid #f97316;
   padding: 8px 12px;
-  border-radius: 6px;
-  margin: 2px 0;
+  border-radius: 5px;
+  margin: 3px 0;
   transition: all 0.3s ease;
   position: relative;
 }
@@ -2737,37 +2838,41 @@ const getTechImage = (techId) => {
   top: 0;
   bottom: 0;
   width: 0;
-  background: linear-gradient(90deg, #38bdf8 0%, #0ea5e9 100%);
+  background: linear-gradient(90deg, #f97316 0%, #ea580c 100%);
   transition: width 0.3s ease;
-  border-radius: 8px 0 0 8px;
+  border-radius: 5px 0 0 5px;
 }
 
 .level-2 .tree-node:hover::before {
-  width: 4px;
+  width: 3px;
 }
 
 .level-2 .tree-node:hover {
-  background: linear-gradient(135deg, rgba(56, 189, 248, 0.06) 0%, rgba(14, 165, 233, 0.06) 100%);
-  border-color: rgba(56, 189, 248, 0.4);
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.06) 0%, rgba(234, 88, 12, 0.06) 100%);
+  border-color: rgba(249, 115, 22, 0.4);
   transform: translateX(3px);
-  box-shadow: 0 1px 8px rgba(56, 189, 248, 0.12);
+  box-shadow: 0 1px 8px rgba(249, 115, 22, 0.12);
 }
 
 .level-2 .node-text {
   font-size: 0.9rem;
   color: #334155;
   font-weight: 550;
-  letter-spacing: 0.1px;
+  letter-spacing: 0.05px;
+  position: relative;
+  z-index: 1;
 }
 
 .level-2 .tree-icon {
-  color: #38bdf8;
+  color: #f97316;
   font-size: 0.8rem;
-  margin-right: 10px;
+  margin-right: 8px;
+  position: relative;
+  z-index: 1;
 }
 
 .level-2 .tree-node:hover .tree-icon {
-  color: #0ea5e9;
+  color: #ea580c;
   transform: scale(1.05);
 }
 
@@ -2778,12 +2883,12 @@ const getTechImage = (techId) => {
 
 /* 三级分类样式优化 */
 .level-3 .tree-node {
-  background: linear-gradient(135deg, rgba(241, 245, 249, 0.5) 0%, rgba(235, 240, 246, 0.5) 100%);
+  background: linear-gradient(135deg, rgba(241, 245, 249, 0.6) 0%, rgba(235, 240, 246, 0.6) 100%);
   border: 1px solid rgba(203, 213, 225, 0.4);
-  border-left: 2px solid #64748b;
+  border-left: 2px solid #6b7280;
   padding: 6px 10px;
   border-radius: 4px;
-  margin: 1px 0;
+  margin: 2px 0;
   font-size: 0.85rem;
   transition: all 0.3s ease;
   position: relative;
@@ -2796,20 +2901,20 @@ const getTechImage = (techId) => {
   top: 0;
   bottom: 0;
   width: 0;
-  background: linear-gradient(90deg, #64748b 0%, #475569 100%);
+  background: linear-gradient(90deg, #6b7280 0%, #4b5563 100%);
   transition: width 0.3s ease;
-  border-radius: 6px 0 0 6px;
+  border-radius: 4px 0 0 4px;
 }
 
 .level-3 .tree-node:hover::before {
-  width: 3px;
+  width: 2px;
 }
 
 .level-3 .tree-node:hover {
-  background: linear-gradient(135deg, rgba(100, 116, 139, 0.05) 0%, rgba(71, 85, 105, 0.05) 100%);
-  border-color: rgba(100, 116, 139, 0.4);
+  background: linear-gradient(135deg, rgba(107, 114, 128, 0.05) 0%, rgba(75, 85, 99, 0.05) 100%);
+  border-color: rgba(107, 114, 128, 0.4);
   transform: translateX(2px);
-  box-shadow: 0 1px 6px rgba(100, 116, 139, 0.1);
+  box-shadow: 0 1px 6px rgba(107, 114, 128, 0.1);
 }
 
 .level-3 .node-text {
@@ -2817,16 +2922,20 @@ const getTechImage = (techId) => {
   color: #475569;
   font-weight: 500;
   letter-spacing: 0.05px;
+  position: relative;
+  z-index: 1;
 }
 
 .level-3 .tree-icon {
-  color: #64748b;
+  color: #6b7280;
   font-size: 0.7rem;
-  margin-right: 8px;
+  margin-right: 6px;
+  position: relative;
+  z-index: 1;
 }
 
 .level-3 .tree-node:hover .tree-icon {
-  color: #475569;
+  color: #4b5563;
   transform: scale(1.1);
 }
 
@@ -2837,10 +2946,10 @@ const getTechImage = (techId) => {
 
 /* 树形连接线样式优化 */
 .tree-children {
-  margin-left: 18px;
+  margin-left: 16px;
   margin-top: 6px;
-  border-left: 2px solid rgba(79, 172, 254, 0.15);
-  padding-left: 18px;
+  border-left: 2px solid rgba(220, 38, 38, 0.15);
+  padding-left: 16px;
   position: relative;
   animation: slideDown 0.3s ease;
 }
@@ -2852,7 +2961,7 @@ const getTechImage = (techId) => {
   top: 0;
   bottom: 0;
   width: 2px;
-  background: linear-gradient(to bottom, #4facfe 0%, rgba(79, 172, 254, 0.3) 50%, transparent 100%);
+  background: linear-gradient(to bottom, #2693dc 0%, rgba(220, 38, 38, 0.3) 50%, transparent 100%);
   border-radius: 1px;
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -2864,21 +2973,21 @@ const getTechImage = (techId) => {
 
 /* 二级和三级的连接线 */
 .level-1 .tree-children {
-  border-left-color: rgba(56, 189, 248, 0.2);
+  border-left-color: rgba(249, 115, 22, 0.2);
 }
 
 .level-1 .tree-children::before {
-  background: linear-gradient(to bottom, #38bdf8 0%, rgba(56, 189, 248, 0.3) 50%, transparent 100%);
+  background: linear-gradient(to bottom, #f97316 0%, rgba(249, 115, 22, 0.3) 50%, transparent 100%);
 }
 
 .level-2 .tree-children {
-  border-left-color: rgba(100, 116, 139, 0.2);
-  margin-left: 16px;
-  padding-left: 16px;
+  border-left-color: rgba(107, 114, 128, 0.2);
+  margin-left: 14px;
+  padding-left: 14px;
 }
 
 .level-2 .tree-children::before {
-  background: linear-gradient(to bottom, #64748b 0%, rgba(100, 116, 139, 0.3) 50%, transparent 100%);
+  background: linear-gradient(to bottom, #6b7280 0%, rgba(107, 114, 128, 0.3) 50%, transparent 100%);
 }
 
 /* 增强的悬停效果 */

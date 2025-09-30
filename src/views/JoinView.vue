@@ -167,9 +167,9 @@ const currentPositions = computed(() => {
 // 申请职位方法
 const applyPosition = (id) => {
   if (isZh.value) {
-    alert('感谢您的申请，请将简历发送至hr@landeintelligent.com，并注明职位编号：' + id)
+    alert('感谢您的申请，请将简历发送至1547554068@qq.com，并注明职位编号：' + id)
   } else {
-    alert('Thank you for your application. Please send your resume to hr@landeintelligent.com, and specify position ID: ' + id)
+    alert('Thank you for your application. Please send your resume to 1547554068@qq.com, and specify position ID: ' + id)
   }
 }
 </script>
