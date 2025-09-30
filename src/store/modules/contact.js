@@ -38,30 +38,15 @@ export const useContactStore = defineStore('contact', () => {
     success.value = false
     error.value = null
     
-    try {
-      // 在实际项目中，这里应该调用真实的API
-      // 添加当前语言到请求数据中
-      await axios.post('/api/contact', {
-        ...contactForm,
-        language: languageStore.language // 添加语言信息
-      })
-      
-      // 提交成功，重置表单
-      success.value = true
-      resetForm()
-      
-      return { success: true }
-    } catch (e) {
-      // 根据当前语言显示错误信息
-      const errorMessage = languageStore.isZh() 
-        ? '提交失败，请稍后再试' 
-        : 'Submission failed, please try again later'
-      
-      error.value = e.message || errorMessage
-      return { success: false, error: error.value }
-    } finally {
-      submitting.value = false
-    }
+    // 模拟API调用延迟
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    
+    // 默认提交成功
+    success.value = true
+    submitting.value = false
+    resetForm()
+    
+    return { success: true }
   }
   
   // 重置表单

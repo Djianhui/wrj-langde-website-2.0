@@ -51,8 +51,8 @@ export const useContentStore = defineStore('content', () => {
       description: '领先的反无人机系统及反无人机解决方案提供商',
       contactInfo: {
         address: '浙江省杭州市滨江区科技园区创新大厦A座15楼',
-        phone: '0571-8888 9999',
-        email: 'info@landedrone.com'
+        phone: '15211191964',
+        email: '1547554061@qq.com'
       }
     },
     en: {
@@ -61,8 +61,8 @@ export const useContentStore = defineStore('content', () => {
       description: 'Leading provider of anti-drone systems and solutions',
       contactInfo: {
         address: '15F, Building A, Innovation Tower, Science & Technology Park, Binjiang District, Hangzhou, Zhejiang',
-        phone: '0571-8888 9999',
-        email: 'info@landedrone.com'
+        phone: '15211191964',
+        email: '1547554061@qq.com'
       }
     }
   })

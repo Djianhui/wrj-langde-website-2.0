@@ -83,7 +83,7 @@
                   <h3>{{ isZh ? '电子邮箱' : 'Email' }}</h3>
                 </div>
                 <p>{{ currentSiteInfo.contactInfo.email }}</p>
-                <a :href="`mailto:${currentSiteInfo.contactInfo.email}`" class="info-link">{{ isZh ? '发送邮件' : 'Send Email' }} <i class="fas fa-arrow-right"></i></a>
+                <!-- <a :href="`mailto:${currentSiteInfo.contactInfo.email}`" class="info-link">{{ isZh ? '发送邮件' : 'Send Email' }} <i class="fas fa-arrow-right"></i></a> -->
               </div>
             </div>
             <ContactForm />
@@ -129,15 +129,15 @@ const currentSiteInfo = computed(() => {
     companyName: '杭州朗德智能科技有限公司',
     contactInfo: {
       address: '浙江省杭州市滨江区科技园区创新大厦A座15楼',
-      phone: '0571-8888 9999',
-      email: 'info@landedrone.com'
+      phone: '15211191964',
+      email: '1547554061@qq.com'
     }
   } : {
     companyName: 'Hangzhou Lande Intelligent Technology Co., Ltd.',
     contactInfo: {
       address: '15F, Building A, Innovation Tower, Science & Technology Park, Binjiang District, Hangzhou, Zhejiang',
-      phone: '0571-8888 9999',
-      email: 'info@landedrone.com'
+      phone: '15211191964',
+      email: '1547554061@qq.com'
     }
   }
 })
