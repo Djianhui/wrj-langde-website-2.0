@@ -617,29 +617,61 @@ const productLists = {
     title: '低空经济系列产品',
     subtitle: '智能化低空作业解决方案',
     products: [
-      {
-        id: 'agriculture-drone',
-        name: '农业植保系统',
-        description: '提供高效、精准的农业植保作业服务',
-        image: '/images/products/agriculture-full.jpg',
+        {
+        id: 'agriculture-system',
+        name: 'X-25农业植保无人机',
+        description: '提供高效、精准的农业植保作业服务，提高农业生产效率',
+        image: '/images/products/agriculture-drone.png',
         link: '/products/low-altitude/agriculture',
-        features: ['精准喷洒', '智能规划', '高效作业']
+        features: ['精准喷洒', '智能规划', '数据分析']
+      },
+       {
+        id: 'agriculture-system-lz4',
+        name: 'X50无人机',
+        description: '提供高效、精准的农业植保作业服务，提高农业生产效率',
+        image: '/images/products/agriculture-drone-lz4.png',
+        link: '/products/low-altitude/agriculture-system-lz4',
+        features: ['精准喷洒', '智能规划', '数据分析']
+      },
+        {
+        id: 'agriculture-system-la8',
+        name: 'LA8-100无人机',
+        description: '提供高效、精准的农业植保作业服务，提高农业生产效率',
+        image: '/images/products/agriculture-drone-la8.png',
+        link: '/products/low-altitude/agriculture-system-la8',
+        features: ['精准喷洒', '智能规划', '数据分析']
+      },
+       {
+        id: 'fpv-system',
+        name: '5寸穿越机',
+        description: '提供专业的FPV飞行体验和竞技服务',
+        image: '/images/products/fpv-5.png',
+        link: '/products/low-altitude/fpv',
+        features: ['沉浸体验', '竞技比赛', '技能培训']
+      },
+        {
+        id: 'fpv-system-7',
+        name: '7寸穿越机',
+        description: '为探索更远的风景而生',
+        image: '/images/products/fpv-7.png',
+        link: '/products/low-altitude/fpv-7',
+        features: ['沉浸体验', '竞技比赛', '技能培训']
       },
       {
-        id: 'patrol-drone',
-        name: '巡查防护系统',
-        description: '提供自动化的巡查防护服务，保障区域安全',
-        image: '/images/products/patrol-full.jpg',
+        id: 'patrol-system',
+        name: '巡查矢量多旋翼无人机',
+        description: '专为复杂环境下的高效巡查任务而设计',
+        image: '/images/products/patrol-drone.png',
         link: '/products/low-altitude/patrol',
         features: ['自动巡航', '实时监控', '异常报警']
       },
       {
-        id: 'fpv-drone',
-        name: 'FPV系统',
-        description: '提供专业的FPV飞行体验和竞技服务',
-        image: '/images/products/fpv-full.jpg',
-        link: '/products/low-altitude/fpv',
-        features: ['沉浸体验', '竞技比赛', '技能培训']
+        id: 'fire-fighting',
+        name: '消防多旋翼无人机',
+        description: '充分发挥无人机机动灵活的特点',
+        image: '/images/products/fire-fighting.png',
+        link: '/products/low-altitude/fire-fighting',
+        features: ['自动巡航', '实时监控', '异常报警']
       }
     ]
   },
@@ -649,10 +681,26 @@ const productLists = {
     products: [
       {
         id: 'agriculture-system',
-        name: '农业植保系统',
+        name: 'X-25农业植保无人机',
         description: '提供高效、精准的农业植保作业服务，提高农业生产效率',
-        image: '/images/products/agriculture-system.jpg',
+        image: '/images/products/agriculture-drone.png',
         link: '/products/low-altitude/agriculture',
+        features: ['精准喷洒', '智能规划', '数据分析']
+      },
+       {
+        id: 'agriculture-system-lz4',
+        name: 'X50无人机',
+        description: '提供高效、精准的农业植保作业服务，提高农业生产效率',
+        image: '/images/products/agriculture-drone-lz4.png',
+        link: '/products/low-altitude/agriculture-system-lz4',
+        features: ['精准喷洒', '智能规划', '数据分析']
+      },
+        {
+        id: 'agriculture-system-la8',
+        name: 'LA8-100无人机',
+        description: '提供高效、精准的农业植保作业服务，提高农业生产效率',
+        image: '/images/products/agriculture-drone-la8.png',
+        link: '/products/low-altitude/agriculture-system-la8',
         features: ['精准喷洒', '智能规划', '数据分析']
       }
     ]
@@ -663,10 +711,18 @@ const productLists = {
     products: [
       {
         id: 'patrol-system',
-        name: '巡查防护系统',
-        description: '提供自动化的巡查防护服务，保障区域安全',
-        image: '/images/products/patrol-system.jpg',
+        name: '巡查矢量多旋翼无人机',
+        description: '专为复杂环境下的高效巡查任务而设计',
+        image: '/images/products/patrol-drone.png',
         link: '/products/low-altitude/patrol',
+        features: ['自动巡航', '实时监控', '异常报警']
+      },
+       {
+        id: 'fire-fighting',
+        name: '消防多旋翼无人机',
+        description: '充分发挥无人机机动灵活的特点',
+        image: '/images/products/fire-fighting.png',
+        link: '/products/low-altitude/fire-fighting',
         features: ['自动巡航', '实时监控', '异常报警']
       }
     ]
@@ -677,10 +733,18 @@ const productLists = {
     products: [
       {
         id: 'fpv-system',
-        name: 'FPV系统',
+        name: '5寸穿越机',
         description: '提供专业的FPV飞行体验和竞技服务',
-        image: '/images/products/fpv-system.jpg',
+        image: '/images/products/fpv-5.png',
         link: '/products/low-altitude/fpv',
+        features: ['沉浸体验', '竞技比赛', '技能培训']
+      },
+      {
+        id: 'fpv-system-7',
+        name: '7寸穿越机',
+        description: '为探索更远的风景而生',
+        image: '/images/products/fpv-7.png',
+        link: '/products/low-altitude/fpv-7',
         features: ['沉浸体验', '竞技比赛', '技能培训']
       }
     ]
@@ -825,9 +889,9 @@ const categoryData = {
   },
   agriculture: {
     title: '农业植保系统',
-    subtitle: '智能化农业植保作业服务',
+    subtitle: 'X-25农业植保无人机',
     description: '提供高效、精准的农业植保作业服务，提高农业生产效率',
-    image: '/images/products/agriculture-drone.jpg',
+    image: '/images/products/agriculture-drone.png',
     link: '/products/low-altitude/agriculture',
     features: [
       { icon: 'fas fa-spray-can', title: '精准喷洒', description: '变量喷洒技术' },

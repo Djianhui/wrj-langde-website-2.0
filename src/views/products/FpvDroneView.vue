@@ -1,509 +1,541 @@
 <template>
-  <div class="product-detail">
+  <div class="product-detail-page page-content">
     <!-- 产品头部 -->
-    <section class="product-header">
+    <div class="product-hero">
       <div class="container">
-        <div class="row align-items-center">
-          <div class="col-lg-6">
-            <div class="product-info">
-              <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><router-link to="/">首页</router-link></li>
-                  <li class="breadcrumb-item"><router-link to="/technology">产品中心</router-link></li>
-                  <li class="breadcrumb-item">低空经济</li>
-                  <li class="breadcrumb-item active">FPV</li>
-                </ol>
-              </nav>
-              <h1 class="product-title">FPV竞速无人机</h1>
-              <p class="product-subtitle">极致性能的竞技飞行体验平台</p>
-              <div class="product-features">
-                <span class="feature-tag">极速飞行</span>
-                <span class="feature-tag">灵活操控</span>
-                <span class="feature-tag">高清图传</span>
-                <span class="feature-tag">模块化设计</span>
-              </div>
+        <div class="breadcrumb">
+          <RouterLink to="/">首页</RouterLink>
+          <span>/</span>
+          <RouterLink to="/technology">产品中心</RouterLink>
+          <span>/</span>
+          <span>低空经济</span>
+          <span>/</span>
+          <span>FPV</span>
+        </div>
+        <div class="product-hero-content">
+          <h1 class="product-title">5寸穿越机</h1>
+          <p class="product-subtitle">集高性能硬件与精心调校于一身</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="container">
+      <!-- 产品概述 -->
+      <div class="product-overview">
+        <div class="product-image">
+          <img src="/images/products/fpv-5.png" alt="5寸穿越机" @error="handleImageError">
+        </div>
+        <div class="product-info">
+          <h2>产品概述</h2>
+          <p>为极致速度与操控自由而生！这款5寸穿越机集高性能硬件与精心调校于一身，无论是竞速赛场的激烈角逐，还是自由花飞的创意挥洒，都能为您提供无与伦比的飞行体验。</p>
+        </div>
+      </div>
+      
+      <!-- 产品规格 -->
+      <div class="product-specifications">
+        <h2 class="section-title">零部件组成</h2>
+        <table class="spec-table">
+          <tbody>
+            <tr>
+              <td class="spec-category" rowspan="5">飞控组件</td>
+              <td class="spec-label">旋翼桨叶</td>
+              <td class="spec-value">三叶桨 5.1*3 5*3</td>
+            </tr>
+            <tr>
+              <td class="spec-label">动力电机</td>
+              <td class="spec-value">尺寸规格 2207，kv值 1800</td>
+            </tr>
+            <tr>
+              <td class="spec-label">电调</td>
+              <td class="spec-value">BLITZ E45S 4 合 1，单路电流 45A</td>
+            </tr>
+            <tr>
+              <td class="spec-label">飞控系统</td>
+              <td class="spec-value">F4 或 F7 飞控套装，可选，预设未及预算决定</td>
+            </tr>
+            <tr>
+              <td class="spec-label">图传(机载发射端)</td>
+              <td class="spec-value">通信频率 5.8GHz 发射功率 1.6w，通信频率 1.2GHz 发射功率 1.5w，可选</td>
+            </tr>
+            <tr>
+              <td class="spec-category" rowspan="5">控制设备</td>
+              <td class="spec-label">FPV 眼镜</td>
+              <td class="spec-value">FateCam R1 Mini，射频多列等</td>
+            </tr>
+            <tr>
+              <td class="spec-label">机身控制</td>
+              <td class="spec-value">Nazgul XL5 寸 飞机架，或其他 5 寸机架</td>
+            </tr>
+            <tr>
+              <td class="spec-label">遥控接收机</td>
+              <td class="spec-value">通信协议 ELRS，工作频率 915MHz，也可根据需要选择其他协议及频率的产品</td>
+            </tr>
+            <tr>
+              <td class="spec-label">GPS 定位模块</td>
+              <td class="spec-value">标配不包含该模块，可选配</td>
+            </tr>
+            <tr>
+              <td class="spec-label">动力电池</td>
+              <td class="spec-value">推荐规格 6s 5200mah 65C</td>
+            </tr>
+            <tr>
+              <td class="spec-category" rowspan="3">视频系统</td>
+              <td class="spec-label">高清摄像头</td>
+              <td class="spec-value">ELRS TX12，这套使用者较多，好评度高</td>
+            </tr>
+            <tr>
+              <td class="spec-label">FPV 视频眼镜</td>
+              <td class="spec-value">低成本可选择半透明车模屏等款，有更高显示要求可选 DJ| 眼镜等类似产品</td>
+            </tr>
+            <tr>
+              <td class="spec-label">录制存储</td>
+              <td class="spec-value">支持SD卡存储，可选配高速存储卡</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="spec-note">
+          <p><strong>注意事项：</strong>本配置为竞技级FPV组装方案，具体配件可根据预算和使用需求进行调整。</p>
+        </div>
+      </div>
+      
+       <!-- 产品特点 -->
+      <div class="product-features">
+        <h2 class="section-title">产品特点</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-crosshairs"></i>
             </div>
+            <h3>澎湃动力系统</h3>
+            <p>搭载2207 1800KV大尺寸电机，配合BLITZ E45S 4合1电调（单路45A），构成强大的动力心脏。在6S高压电池的驱动下，爆发力惊人，响应迅如闪电。</p>
           </div>
-          <div class="col-lg-6">
-            <div class="product-image">
-              <img src="/images/products/fpv-drone.jpg" alt="FPV竞速无人机" class="img-fluid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-route"></i>
             </div>
+            <h3>敏捷机身与清晰视野</h3>
+            <p>采用Nazgul XL5等经典5寸机架，兼顾强度与轻量化。搭配RaceCam R1 Mini等低延迟FPV相机，捕捉前方每一个关键细节。</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-shield-virus"></i>
+            </div>
+            <h3>智慧飞行大脑</h3>
+            <p>采用主流F4/F7高性能飞控（可选），确保飞行姿态稳定，算法处理迅速，为您提供精准可靠的操控基础。</p>
+          </div>
+         <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-battery-full"></i>
+            </div>
+            <h3>续航时间</h3>
+            <p>空载状态16min、1.2kg载荷8min。</p>
+          </div>  
+        </div>
+      </div>
+      
+      <!-- 应用场景 -->
+      <div class="product-applications">
+        <h2 class="section-title">应用场景</h2>
+        <div class="applications-grid">
+          <div class="application-item">
+            <i class="fas fa-seedling"></i>
+            <span>大田作物</span>
+          </div>
+          <div class="application-item">
+            <i class="fas fa-apple-alt"></i>
+            <span>果园管理</span>
+          </div>
+          <div class="application-item">
+            <i class="fas fa-carrot"></i>
+            <span>蔬菜种植</span>
+          </div>
+          <div class="application-item">
+            <i class="fas fa-leaf"></i>
+            <span>经济作物</span>
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- 产品概述 -->
-    <section class="product-overview">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 mx-auto">
-            <div class="section-header text-center">
-              <h2>产品概述</h2>
-              <p class="section-subtitle">专业级FPV竞速体验，释放飞行激情</p>
-            </div>
-            <div class="overview-content">
-              <p>FPV竞速无人机是专为竞技飞行和专业应用设计的高性能飞行平台。采用碳纤维轻量化机身设计，配备高功率电机和高效螺旋桨，能够实现极致的飞行性能和灵活的操控体验。</p>
-              <p>产品搭载高清数字图传系统，为飞手提供实时、清晰的第一人称视角飞行体验。模块化设计支持快速维护和个性化定制，广泛应用于FPV竞速、特技表演、航拍创作、专业培训等领域。</p>
-            </div>
-          </div>
+      
+      <!-- 联系咨询 -->
+      <div class="product-contact">
+        <div class="contact-content">
+          <h2>需要了解更多？</h2>
+          <p>我们的专业团队随时为您提供技术支持和解决方案</p>
+          <RouterLink to="/contact" class="btn btn-primary">联系我们</RouterLink>
         </div>
       </div>
-    </section>
-
-    <!-- 核心特点 -->
-    <section class="product-features-section">
-      <div class="container">
-        <div class="section-header text-center">
-          <h2>核心特点</h2>
-          <p class="section-subtitle">极致性能，专业品质的竞速无人机</p>
-        </div>
-        <div class="row">
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="feature-card">
-              <div class="feature-icon">
-                <i class="fas fa-rocket"></i>
-              </div>
-              <h4>极致速度性能</h4>
-              <p>最高飞行速度可达200km/h，强劲动力系统提供澎湃的飞行体验</p>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="feature-card">
-              <div class="feature-icon">
-                <i class="fas fa-feather-alt"></i>
-              </div>
-              <h4>轻量化设计</h4>
-              <p>碳纤维机身，整机重量仅250g，完美的推重比确保灵活操控</p>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="feature-card">
-              <div class="feature-icon">
-                <i class="fas fa-eye"></i>
-              </div>
-              <h4>高清数字图传</h4>
-              <p>720P/1080P实时图传，延迟低至20ms，提供清晰流畅的FPV体验</p>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="feature-card">
-              <div class="feature-icon">
-                <i class="fas fa-gamepad"></i>
-              </div>
-              <h4>精准操控系统</h4>
-              <p>专业级遥控器，支持多种飞行模式，满足不同技能水平飞手需求</p>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="feature-card">
-              <div class="feature-icon">
-                <i class="fas fa-puzzle-piece"></i>
-              </div>
-              <h4>模块化架构</h4>
-              <p>组件可快速拆装，支持个性化改装和快速维护，延长使用寿命</p>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="feature-card">
-              <div class="feature-icon">
-                <i class="fas fa-shield-alt"></i>
-              </div>
-              <h4>碰撞保护</h4>
-              <p>桨叶保护装置和冲击吸收设计，有效保护机身和降低维修成本</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 技术规格 -->
-    <section class="product-specs">
-      <div class="container">
-        <div class="section-header text-center">
-          <h2>技术规格</h2>
-          <p class="section-subtitle">专业级配置参数，满足竞技飞行需求</p>
-        </div>
-        <div class="row">
-          <div class="col-lg-6">
-            <div class="specs-group">
-              <h4>飞行性能</h4>
-              <ul class="specs-list">
-                <li><span class="spec-label">整机重量：</span>250g</li>
-                <li><span class="spec-label">最大速度：</span>200km/h</li>
-                <li><span class="spec-label">续航时间：</span>8-12分钟</li>
-                <li><span class="spec-label">最大升限：</span>500m</li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="specs-group">
-              <h4>动力系统</h4>
-              <ul class="specs-list">
-                <li><span class="spec-label">电机规格：</span>2207 2750KV</li>
-                <li><span class="spec-label">螺旋桨：</span>5英寸三叶桨</li>
-                <li><span class="spec-label">电池：</span>6S 1550mAh LiPo</li>
-                <li><span class="spec-label">推重比：</span>8:1</li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="specs-group">
-              <h4>图传系统</h4>
-              <ul class="specs-list">
-                <li><span class="spec-label">传输距离：</span>≥2km</li>
-                <li><span class="spec-label">图传延迟：</span>≤20ms</li>
-                <li><span class="spec-label">视频分辨率：</span>1080P 60fps</li>
-                <li><span class="spec-label">频段：</span>5.8G数字图传</li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="specs-group">
-              <h4>控制系统</h4>
-              <ul class="specs-list">
-                <li><span class="spec-label">控制距离：</span>≥3km</li>
-                <li><span class="spec-label">控制延迟：</span>≤5ms</li>
-                <li><span class="spec-label">飞控系统：</span>F7飞控芯片</li>
-                <li><span class="spec-label">陀螺仪：</span>6轴陀螺仪</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 应用场景 -->
-    <section class="product-applications">
-      <div class="container">
-        <div class="section-header text-center">
-          <h2>应用场景</h2>
-          <p class="section-subtitle">多元化应用，满足不同飞行需求</p>
-        </div>
-        <div class="row">
-          <div class="col-lg-3 col-md-6 mb-4">
-            <div class="application-card">
-              <div class="app-icon">
-                <i class="fas fa-trophy"></i>
-              </div>
-              <h5>竞速比赛</h5>
-              <p>专业FPV竞速赛事，挑战极限速度和飞行技巧</p>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 mb-4">
-            <div class="application-card">
-              <div class="app-icon">
-                <i class="fas fa-star"></i>
-              </div>
-              <h5>特技表演</h5>
-              <p>空中特技表演，展示精湛飞行技艺和创意动作</p>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 mb-4">
-            <div class="application-card">
-              <div class="app-icon">
-                <i class="fas fa-video"></i>
-              </div>
-              <h5>影视航拍</h5>
-              <p>影视制作中的高速航拍镜头，创造震撼视觉效果</p>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 mb-4">
-            <div class="application-card">
-              <div class="app-icon">
-                <i class="fas fa-graduation-cap"></i>
-              </div>
-              <h5>飞行培训</h5>
-              <p>专业飞手培训和技能提升的理想训练平台</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 联系咨询 -->
-    <section class="product-contact">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-lg-8">
-            <h3>了解更多FPV竞速无人机信息</h3>
-            <p>我们的飞行专家将为您提供专业的竞速无人机解决方案和技术支持</p>
-          </div>
-          <div class="col-lg-4 text-lg-end">
-            <router-link to="/contact" class="btn btn-primary btn-lg">
-              <i class="fas fa-phone me-2"></i>联系我们
-            </router-link>
-          </div>
-        </div>
-      </div>
-    </section>
+    </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'FpvDroneView',
-  mounted() {
-    // 设置页面标题
-    document.title = 'FPV竞速无人机 - 朗德智能科技'
-  }
+<script setup>
+import { onMounted } from 'vue'
+
+// 定义emit
+const emit = defineEmits(['page-loaded'])
+
+// 处理图片加载错误
+const handleImageError = (event) => {
+  event.target.src = '/images/products/default-product.jpg'
 }
+
+// 页面加载完成
+onMounted(() => {
+  emit('page-loaded')
+})
 </script>
 
 <style scoped>
-.product-detail {
-  padding-top: 100px;
+.product-detail-page {
+  padding-top: 0;
 }
 
-.product-header {
-  padding: 80px 0;
-  background: linear-gradient(135deg, #9C27B0 0%, #E91E63 100%);
+.product-hero {
+  background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
+  padding: 150px 0 80px;
   color: white;
 }
 
 .breadcrumb {
-  background: none;
-  padding: 0;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  font-size: 0.9rem;
 }
 
-.breadcrumb-item a {
-  color: rgba(255, 255, 255, 0.8);
+.breadcrumb a {
+  color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
 }
 
-.breadcrumb-item.active {
+.breadcrumb a:hover {
   color: white;
 }
 
+.breadcrumb span {
+  margin: 0 10px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
 .product-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 15px;
+  font-size: 3rem;
+  margin-bottom: 20px;
+  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .product-subtitle {
   font-size: 1.2rem;
-  margin-bottom: 25px;
   opacity: 0.9;
 }
 
-.product-features {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+.product-overview {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 60px;
+  margin: 80px 0;
+  align-items: center;
 }
 
-.feature-tag {
-  background: rgba(255, 255, 255, 0.2);
-  padding: 6px 15px;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  backdrop-filter: blur(10px);
+.product-image {
+  max-width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .product-image img {
-  border-radius: 10px;
+  width: 420px;
+  height: auto;
+  border-radius: 12px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+  object-position: center;
 }
 
-.product-overview {
-  padding: 80px 0;
-  background: #f8f9fa;
+.product-info h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #1e293b;
 }
 
-.section-header {
-  margin-bottom: 50px;
-}
-
-.section-header h2 {
-  font-size: 2.2rem;
-  font-weight: 700;
-  margin-bottom: 15px;
-  color: #2c3e50;
-}
-
-.section-subtitle {
-  font-size: 1.1rem;
-  color: #6c757d;
-}
-
-.overview-content p {
+.product-info p {
   font-size: 1.1rem;
   line-height: 1.8;
-  margin-bottom: 20px;
-  color: #495057;
+  color: #64748b;
+  margin-bottom: 30px;
 }
 
-.product-features-section {
-  padding: 80px 0;
+.section-title {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 50px;
+  color: #1e293b;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  margin-bottom: 80px;
 }
 
 .feature-card {
   text-align: center;
   padding: 40px 20px;
   background: white;
-  border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease;
-  height: 100%;
 }
 
 .feature-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-10px);
 }
 
 .feature-icon {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 20px;
-  background: linear-gradient(135deg, #9C27B0 0%, #E91E63 100%);
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2rem;
+  margin: 0 auto 20px;
+  font-size: 1.8rem;
   color: white;
 }
 
-.feature-card h4 {
+.feature-card h3 {
   font-size: 1.3rem;
-  font-weight: 600;
   margin-bottom: 15px;
-  color: #2c3e50;
+  color: #1e293b;
 }
 
 .feature-card p {
-  color: #6c757d;
+  color: #64748b;
   line-height: 1.6;
 }
 
-.product-specs {
-  padding: 80px 0;
-  background: #f8f9fa;
+.applications-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  margin-bottom: 80px;
 }
 
-.specs-group {
-  margin-bottom: 40px;
-}
-
-.specs-group h4 {
-  font-size: 1.4rem;
-  font-weight: 600;
-  margin-bottom: 20px;
-  color: #2c3e50;
-  border-bottom: 2px solid #9C27B0;
-  padding-bottom: 10px;
-}
-
-.specs-list {
-  list-style: none;
-  padding: 0;
-}
-
-.specs-list li {
-  padding: 10px 0;
-  border-bottom: 1px solid #e9ecef;
-  display: flex;
-  align-items: center;
-}
-
-.spec-label {
-  font-weight: 600;
-  min-width: 120px;
-  color: #495057;
-}
-
-.product-applications {
-  padding: 80px 0;
-}
-
-.application-card {
+.application-item {
   text-align: center;
   padding: 30px 20px;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-  height: 100%;
-}
-
-.application-card:hover {
-  transform: translateY(-3px);
-}
-
-.app-icon {
-  width: 60px;
-  height: 60px;
-  margin: 0 auto 20px;
-  background: linear-gradient(135deg, #9C27B0 0%, #E91E63 100%);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  color: white;
-}
-
-.application-card h5 {
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 15px;
-  color: #2c3e50;
-}
-
-.application-card p {
-  color: #6c757d;
-  line-height: 1.6;
-}
-
-.product-contact {
-  padding: 60px 0;
-  background: linear-gradient(135deg, #9C27B0 0%, #E91E63 100%);
-  color: white;
-}
-
-.product-contact h3 {
-  font-size: 1.8rem;
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-
-.product-contact p {
-  font-size: 1.1rem;
-  opacity: 0.9;
-  margin: 0;
-}
-
-.btn-primary {
-  background: white;
-  border-color: white;
-  color: #9C27B0;
-  font-weight: 600;
-  padding: 12px 30px;
-  border-radius: 25px;
+  background: #f8fafc;
+  border-radius: 12px;
   transition: all 0.3s ease;
 }
 
+.application-item:hover {
+  background: white;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.application-item i {
+  font-size: 2.5rem;
+  color: #4facfe;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.application-item span {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.product-specifications {
+  margin-bottom: 80px;
+}
+
+/* 产品参数表格样式 */
+.spec-table {
+  width: 100%;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  border-collapse: collapse;
+}
+
+.spec-table th,
+.spec-table td {
+  padding: 15px 20px;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.spec-table thead th {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  color: white;
+  font-weight: 600;
+  text-align: center;
+}
+
+.spec-category-header {
+  width: 15%;
+}
+
+.spec-label-header {
+  width: 35%;
+}
+
+.spec-header {
+  width: 50%;
+}
+
+.spec-category {
+  background-color: #f8fafc;
+  font-weight: 600;
+  color: #374151;
+  text-align: center;
+  vertical-align: middle;
+  border-right: 1px solid #e2e8f0;
+}
+
+.spec-label {
+  font-weight: 500;
+  color: #374151;
+  background-color: #f1f5f9;
+  border-right: 1px solid #e2e8f0;
+}
+
+.spec-value {
+  color: #1e293b;
+  font-weight: 400;
+}
+
+.spec-table tbody tr:hover {
+  background-color: rgba(79, 172, 254, 0.05);
+}
+
+.spec-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.spec-note {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f8fafc;
+  border-radius: 8px;
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.spec-note p {
+  margin: 0;
+  text-align: center;
+}
+
+.product-contact {
+  background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
+  border-radius: 20px;
+  padding: 60px;
+  text-align: center;
+  color: white;
+  margin: 80px 0;
+}
+
+.contact-content h2 {
+  font-size: 2.2rem;
+  margin-bottom: 15px;
+}
+
+.contact-content p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  margin-bottom: 30px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 14px 30px;
+  border-radius: 30px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  color: white;
+  box-shadow: 0 10px 20px rgba(79, 172, 254, 0.3);
+}
+
 .btn-primary:hover {
-  background: rgba(255, 255, 255, 0.9);
-  border-color: rgba(255, 255, 255, 0.9);
-  color: #9C27B0;
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  box-shadow: 0 15px 25px rgba(79, 172, 254, 0.4);
+  color: white;
+  text-decoration: none;
 }
 
 @media (max-width: 768px) {
+  .product-overview {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .product-image img {
+    width: 280px;
+    height: 240px;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .applications-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
   .product-title {
     font-size: 2rem;
   }
   
-  .product-features {
-    justify-content: center;
+  .product-contact {
+    padding: 40px 20px;
   }
   
-  .feature-card,
-  .application-card {
-    margin-bottom: 20px;
+  /* 表格移动端适配 */
+  .spec-table {
+    font-size: 0.9rem;
+  }
+  
+  .spec-table th,
+  .spec-table td {
+    padding: 12px 15px;
+  }
+  
+  .spec-category-header,
+  .spec-label-header,
+  .spec-header {
+    width: auto;
+  }
+  
+  .spec-category {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .spec-table {
+    font-size: 0.8rem;
+  }
+  
+  .spec-table th,
+  .spec-table td {
+    padding: 10px 12px;
+  }
+  
+  .section-title {
+    font-size: 1.8rem;
   }
 }
 </style>

@@ -10,11 +10,11 @@
           <span>/</span>
           <span>低空经济</span>
           <span>/</span>
-          <span>农业植保</span>
+          <span>巡查防护</span>
         </div>
         <div class="product-hero-content">
-          <h1 class="product-title">X-25农业植保无人机</h1>
-          <p class="product-subtitle">智慧农业精准作业解决方案</p>
+          <h1 class="product-title">消防多旋翼无人机</h1>
+          <p class="product-subtitle">充分发挥无人机机动灵活的特点，可与消防车辆高效配合，快速抵达并展开作业，构成“车机配合”的高效灭火体系。</p>
         </div>
       </div>
     </div>
@@ -23,11 +23,11 @@
       <!-- 产品概述 -->
       <div class="product-overview">
         <div class="product-image">
-          <img src="/images/products/agriculture-drone.png" alt="X-25农业植保无人机" @error="handleImageError">
+          <img src="/images/products/fire-fighting.png" alt="消防多旋翼无人机" @error="handleImageError">
         </div>
         <div class="product-info">
           <h2>产品概述</h2>
-          <p>在现代农业迈向智能化、精准化的今天，X-25农业植保无人机应运而生。它不仅仅是一台飞行器，更是您田间管理的智能助手，致力于以科技力量革新传统植保作业，为农作物保驾护航，为种植者降本增效。</p>
+          <p>它是一款专为现代消防救援任务设计的重型多旋翼无人机。它创新性地实现了与地面灭火剂供应系统的联动，可挂载最大50mm口径的专用水带，直击高层建筑火灾痛点，将灭火能力有效延伸至百米高空。</p>
         </div>
       </div>
       
@@ -37,90 +37,53 @@
         <table class="spec-table">
           <tbody>
             <tr>
-              <td class="spec-category" rowspan="6">植保参数</td>
-              <td class="spec-label">药箱容量</td>
-              <td class="spec-value">10L</td>
+              <td class="spec-label">标准载荷</td>
+              <td class="spec-value">50KG</td>
             </tr>
             <tr>
-              <td class="spec-label">作业喷幅宽度</td>
-              <td class="spec-value">8-20m</td>
+              <td class="spec-label">最大载荷</td>
+              <td class="spec-value">100KG</td>
             </tr>
             <tr>
-              <td class="spec-label">作业效率时间</td>
-              <td class="spec-value">8m40s（飞距）</td>
+              <td class="spec-label">作业/遥控半径</td>
+              <td class="spec-value">5km</td>
             </tr>
             <tr>
-              <td class="spec-label">喷洒流量</td>
-              <td class="spec-value">12-24L/min</td>
+              <td class="spec-label">最大飞行时间</td>
+              <td class="spec-value">30min</td>
             </tr>
             <tr>
-              <td class="spec-label">喷洒系统</td>
-              <td class="spec-value">离心喷头 x2</td>
+              <td class="spec-label">最大起飞重量</td>
+              <td class="spec-value">150kg</td>
             </tr>
             <tr>
-              <td class="spec-label">飞机自重</td>
-              <td class="spec-value">34kg</td>
+              <td class="spec-label">电池配置</td>
+              <td class="spec-value">28000mAh * 4</td>
             </tr>
             <tr>
-              <td class="spec-category" rowspan="4">整机参数</td>
-              <td class="spec-label">电池容量</td>
-              <td class="spec-value">18530000mah</td>
+              <td class="spec-label">整机重量</td>
+              <td class="spec-value">65kg</td>
             </tr>
             <tr>
-              <td class="spec-label">电池重量</td>
-              <td class="spec-value">14.6kg</td>
+              <td class="spec-label">展开尺寸</td>
+              <td class="spec-value">2324mm / 4324mm（不同状态）</td>
             </tr>
             <tr>
-              <td class="spec-label">整机展开尺寸</td>
-              <td class="spec-value">2989x3115x872mm</td>
+              <td class="spec-label">破窗能力</td>
+              <td class="spec-value">12-10A-12mm中型钢化玻璃</td>
             </tr>
             <tr>
-              <td class="spec-label">整机折叠尺寸</td>
-              <td class="spec-value">1240x840x872mm</td>
+              <td class="spec-label">伦置设备</td>
+              <td class="spec-value">10倘三轴万向云台系统</td>
             </tr>
             <tr>
-              <td class="spec-category" rowspan="5">飞行参数</td>
-              <td class="spec-label">飞行高度</td>
-              <td class="spec-value">≤20m</td>
-            </tr>
-            <tr>
-              <td class="spec-label">飞行时间</td>
-              <td class="spec-value">22m45s</td>
-            </tr>
-            <tr>
-              <td class="spec-label">飞行速度</td>
-              <td class="spec-value">1~12m/s</td>
-            </tr>
-            <tr>
-              <td class="spec-label">空中悬停</td>
-              <td class="spec-value">可悬停力位悬停</td>
-            </tr>
-            <tr>
-              <td class="spec-label">突发控制风速</td>
-              <td class="spec-value">≤6级</td>
-            </tr>
-            <tr>
-              <td class="spec-category" rowspan="2">发射器</td>
-              <td class="spec-label">频率</td>
-              <td class="spec-value">2.4HZ</td>
-            </tr>
-            <tr>
-              <td class="spec-label">电源</td>
-              <td class="spec-value">锂电池</td>
-            </tr>
-            <tr>
-              <td class="spec-category" rowspan="2">接收机</td>
-              <td class="spec-label">频率</td>
-              <td class="spec-value">2.4HZ</td>
-            </tr>
-            <tr>
-              <td class="spec-label">通道</td>
-              <td class="spec-value">12</td>
+              <td class="spec-label">腘准系统</td>
+              <td class="spec-value">1000mW高功率激光瞄准器</td>
             </tr>
           </tbody>
         </table>
         <div class="spec-note">
-          <p><strong>配置包含：</strong>无人机*1，电池*1，遥控器*1，充电器*1。</p>
+          <p><strong>注意事项：</strong>本产品为专业级消防无人机，适用于高层建筑火灾救援、突发火情处置等任务场景。</p>
         </div>
       </div>
       
@@ -132,29 +95,29 @@
             <div class="feature-icon">
               <i class="fas fa-crosshairs"></i>
             </div>
-            <h3>智能喷酒</h3>
-            <p>标准载荷10kg,每小时作业可达50-70亩，药泵与飞节约药剂的同时行速度联动更好的实现了精准喷洒，也防止了药害的发生。</p>
+            <h3>极速爬升，高效灭火</h3>
+            <p>具备强大的动力性能，可在8秒内爬升100米，迅速抵达着火窗口等关键位置，实现对高层/超高层火灾的快速压制，弥补了传统举高消防装备的不足。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
               <i class="fas fa-route"></i>
             </div>
-            <h3>简单、智能、易操作</h3>
-            <p>多元化的作业模式为植保工作带来更多的便利。</p>
+            <h3>车机联动，持续作战</h3>
+            <p>通过专用水带连接地面消防车或固定灭火剂供应源，突破了无人机自带载荷的限制，可实现长时间、大流量的持续灭火作业，标准载荷50KG，最大载荷可达100KG。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
               <i class="fas fa-shield-virus"></i>
             </div>
-            <h3>智能避障系统</h3>
-            <p>配备多传感器避障系统，自动识别障碍物并规避，确保飞行安全</p>
+            <h3>实战验证，安全可靠</h3>
+            <p>经过多种火场环境的实战考验，水带作业端配备脱钩保险装置，确保紧急情况下能快速脱离，保障飞行器安全。专用控制系统针对火场复杂环境优化，使作业更安全、更简单。</p>
           </div>
          <div class="feature-card">
             <div class="feature-icon">
               <i class="fas fa-battery-full"></i>
             </div>
-            <h3>高效作业</h3>
-            <p>高性能锂电池组，单次飞行时间可达45分钟，满足大面积连续作业需求</p>
+            <h3>机动灵活，部署快捷</h3>
+            <p>充分发挥无人机机动灵活的特点，整机重量65kg，可与消防车辆高效配合，快速抵达并展开作业，构成“车机配合”的高效灭火体系。</p>
           </div>  
         </div>
       </div>

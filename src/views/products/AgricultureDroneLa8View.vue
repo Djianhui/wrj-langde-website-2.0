@@ -13,7 +13,7 @@
           <span>农业植保</span>
         </div>
         <div class="product-hero-content">
-          <h1 class="product-title">X-25农业植保无人机</h1>
+          <h1 class="product-title">LA8-100无人机</h1>
           <p class="product-subtitle">智慧农业精准作业解决方案</p>
         </div>
       </div>
@@ -23,11 +23,11 @@
       <!-- 产品概述 -->
       <div class="product-overview">
         <div class="product-image">
-          <img src="/images/products/agriculture-drone.png" alt="X-25农业植保无人机" @error="handleImageError">
+          <img src="/images/products/agriculture-drone-la8.png" alt="LA8-100无人机" @error="handleImageError">
         </div>
         <div class="product-info">
           <h2>产品概述</h2>
-          <p>在现代农业迈向智能化、精准化的今天，X-25农业植保无人机应运而生。它不仅仅是一台飞行器，更是您田间管理的智能助手，致力于以科技力量革新传统植保作业，为农作物保驾护航，为种植者降本增效。</p>
+          <p>在现代农业迈向智能化、精准化的今天，LA8-100无人机应运而生。它不仅仅是一台飞行器，更是您田间管理的智能助手，致力于以科技力量革新传统植保作业，为农作物保驾护航，为种植者降本增效。</p>
         </div>
       </div>
       
@@ -39,7 +39,7 @@
             <tr>
               <td class="spec-category" rowspan="6">植保参数</td>
               <td class="spec-label">药箱容量</td>
-              <td class="spec-value">10L</td>
+              <td class="spec-value">100L</td>
             </tr>
             <tr>
               <td class="spec-label">作业喷幅宽度</td>
@@ -132,29 +132,29 @@
             <div class="feature-icon">
               <i class="fas fa-crosshairs"></i>
             </div>
-            <h3>智能喷酒</h3>
-            <p>标准载荷10kg,每小时作业可达50-70亩，药泵与飞节约药剂的同时行速度联动更好的实现了精准喷洒，也防止了药害的发生。</p>
+            <h3>全自主作业</h3>
+            <p>免遥控器,手机即可实现路径规划、一键作业、断点续喷:自动返航等操作。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
               <i class="fas fa-route"></i>
             </div>
-            <h3>简单、智能、易操作</h3>
-            <p>多元化的作业模式为植保工作带来更多的便利。</p>
+            <h3>简单易学</h3>
+            <p>2小时学习即可快速上手,3天即可独立作业。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
               <i class="fas fa-shield-virus"></i>
             </div>
-            <h3>智能避障系统</h3>
-            <p>配备多传感器避障系统，自动识别障碍物并规避，确保飞行安全</p>
+            <h3>多场景作业</h3>
+            <p>配有雷达仿地系统,可适应多种地形,对不同作物进行精准喷酒。</p>
           </div>
          <div class="feature-card">
             <div class="feature-icon">
               <i class="fas fa-battery-full"></i>
             </div>
-            <h3>高效作业</h3>
-            <p>高性能锂电池组，单次飞行时间可达45分钟，满足大面积连续作业需求</p>
+            <h3>易转运</h3>
+            <p>尾梁采用快速折叠结构,折叠后整机长度缩小30%,运输、携带便捷;飞机自带机轮,方便田间转场。</p>
           </div>  
         </div>
       </div>

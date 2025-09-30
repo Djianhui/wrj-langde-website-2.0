@@ -10,11 +10,11 @@
           <span>/</span>
           <span>低空经济</span>
           <span>/</span>
-          <span>农业植保</span>
+          <span>FPV</span>
         </div>
         <div class="product-hero-content">
-          <h1 class="product-title">X-25农业植保无人机</h1>
-          <p class="product-subtitle">智慧农业精准作业解决方案</p>
+          <h1 class="product-title">7寸穿越机</h1>
+          <p class="product-subtitle">为探索更远的风景而生</p>
         </div>
       </div>
     </div>
@@ -23,104 +23,78 @@
       <!-- 产品概述 -->
       <div class="product-overview">
         <div class="product-image">
-          <img src="/images/products/agriculture-drone.png" alt="X-25农业植保无人机" @error="handleImageError">
+          <img src="/images/products/fpv-7.png" alt="7寸穿越机" @error="handleImageError">
         </div>
         <div class="product-info">
           <h2>产品概述</h2>
-          <p>在现代农业迈向智能化、精准化的今天，X-25农业植保无人机应运而生。它不仅仅是一台飞行器，更是您田间管理的智能助手，致力于以科技力量革新传统植保作业，为农作物保驾护航，为种植者降本增效。</p>
+          <p>这款7寸穿越机专为长航时巡航、远距离勘探与平稳航拍优化设计，在澎湃动力与高效续航之间取得完美平衡，是您穿越山海、拓展视野的可靠伙伴。</p>
         </div>
       </div>
       
       <!-- 产品规格 -->
       <div class="product-specifications">
-        <h2 class="section-title">产品参数</h2>
+        <h2 class="section-title">零部件组成</h2>
         <table class="spec-table">
           <tbody>
             <tr>
-              <td class="spec-category" rowspan="6">植保参数</td>
-              <td class="spec-label">药箱容量</td>
-              <td class="spec-value">10L</td>
+              <td class="spec-category" rowspan="5">飞控组件</td>
+              <td class="spec-label">旋翼桨叶</td>
+              <td class="spec-value">三叶桨 7.5*3.7*3</td>
             </tr>
             <tr>
-              <td class="spec-label">作业喷幅宽度</td>
-              <td class="spec-value">8-20m</td>
+              <td class="spec-label">动力电机</td>
+              <td class="spec-value">尺寸规格 2809，kv值 1250</td>
             </tr>
             <tr>
-              <td class="spec-label">作业效率时间</td>
-              <td class="spec-value">8m40s（飞距）</td>
+              <td class="spec-label">电调</td>
+              <td class="spec-value">BLITZ E55S 4 合 1，单路电流 55A</td>
             </tr>
             <tr>
-              <td class="spec-label">喷洒流量</td>
-              <td class="spec-value">12-24L/min</td>
+              <td class="spec-label">飞控系统</td>
+              <td class="spec-value">F4 或 F7 飞控套装，可选，预设未及预算决定</td>
             </tr>
             <tr>
-              <td class="spec-label">喷洒系统</td>
-              <td class="spec-value">离心喷头 x2</td>
+              <td class="spec-label">图传(机载发射端)</td>
+              <td class="spec-value">通信频率 5.8GHz 发射功率 1.6w，通信频率 1.2GHz 发射功率 1.5w，可选</td>
             </tr>
             <tr>
-              <td class="spec-label">飞机自重</td>
-              <td class="spec-value">34kg</td>
+              <td class="spec-category" rowspan="5">控制设备</td>
+              <td class="spec-label">FPV 眼镜</td>
+              <td class="spec-value">FateCam R1 Mini，射频多列等</td>
             </tr>
             <tr>
-              <td class="spec-category" rowspan="4">整机参数</td>
-              <td class="spec-label">电池容量</td>
-              <td class="spec-value">18530000mah</td>
+              <td class="spec-label">机身控制</td>
+              <td class="spec-value">Chimera7 7 寸机架，或其他 7 寸机架</td>
             </tr>
             <tr>
-              <td class="spec-label">电池重量</td>
-              <td class="spec-value">14.6kg</td>
+              <td class="spec-label">遥控接收机</td>
+              <td class="spec-value">通信协议 ELRS，工作频率 915MHz，也可根据需要选择其他协议及频率的产品</td>
             </tr>
             <tr>
-              <td class="spec-label">整机展开尺寸</td>
-              <td class="spec-value">2989x3115x872mm</td>
+              <td class="spec-label">GPS 定位模块</td>
+              <td class="spec-value">标配不包含该模块，可选配</td>
             </tr>
             <tr>
-              <td class="spec-label">整机折叠尺寸</td>
-              <td class="spec-value">1240x840x872mm</td>
+              <td class="spec-label">动力电池</td>
+              <td class="spec-value">推荐规格 6s 5600mah 95C</td>
             </tr>
             <tr>
-              <td class="spec-category" rowspan="5">飞行参数</td>
-              <td class="spec-label">飞行高度</td>
-              <td class="spec-value">≤20m</td>
+              <td class="spec-category" rowspan="3">视频系统</td>
+              <td class="spec-label">高清摄像头</td>
+              <td class="spec-value">ELRS TX12，这套使用者较多，好评度高</td>
             </tr>
             <tr>
-              <td class="spec-label">飞行时间</td>
-              <td class="spec-value">22m45s</td>
+              <td class="spec-label">FPV 视频眼镜</td>
+              <td class="spec-value">低成本可选择半透明车模屏等款，有更高显示要求可选 DJ| 眼镜等类似产品</td>
             </tr>
             <tr>
-              <td class="spec-label">飞行速度</td>
-              <td class="spec-value">1~12m/s</td>
-            </tr>
-            <tr>
-              <td class="spec-label">空中悬停</td>
-              <td class="spec-value">可悬停力位悬停</td>
-            </tr>
-            <tr>
-              <td class="spec-label">突发控制风速</td>
-              <td class="spec-value">≤6级</td>
-            </tr>
-            <tr>
-              <td class="spec-category" rowspan="2">发射器</td>
-              <td class="spec-label">频率</td>
-              <td class="spec-value">2.4HZ</td>
-            </tr>
-            <tr>
-              <td class="spec-label">电源</td>
-              <td class="spec-value">锂电池</td>
-            </tr>
-            <tr>
-              <td class="spec-category" rowspan="2">接收机</td>
-              <td class="spec-label">频率</td>
-              <td class="spec-value">2.4HZ</td>
-            </tr>
-            <tr>
-              <td class="spec-label">通道</td>
-              <td class="spec-value">12</td>
+              <td class="spec-label">录制存储</td>
+              <td class="spec-value">支持SD卡存储，可选配高速存储卡</td>
             </tr>
           </tbody>
         </table>
         <div class="spec-note">
-          <p><strong>配置包含：</strong>无人机*1，电池*1，遥控器*1，充电器*1。</p>
+          <p><strong>注意事项：</strong>本配置为竞技级FPV组装方案，适用于 7 寸机架规格，具体配件可根据预算和使用需求进行调整。</p>
         </div>
       </div>
       
@@ -132,29 +106,29 @@
             <div class="feature-icon">
               <i class="fas fa-crosshairs"></i>
             </div>
-            <h3>智能喷酒</h3>
-            <p>标准载荷10kg,每小时作业可达50-70亩，药泵与飞节约药剂的同时行速度联动更好的实现了精准喷洒，也防止了药害的发生。</p>
+            <h3>专业飞行大脑</h3>
+            <p>可选用F4或F7高性能飞控，作为系统的智慧中枢，确保飞行姿态稳定，响应精准，为远征飞行提供可靠保障。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
               <i class="fas fa-route"></i>
             </div>
-            <h3>简单、智能、易操作</h3>
-            <p>多元化的作业模式为植保工作带来更多的便利。</p>
+            <h3>专属巡航机身</h3>
+            <p>基于Chimera7等经典7寸机架，优化气动布局，为搭载大容量电池提供充足空间，天生为长途飞行打造。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
               <i class="fas fa-shield-virus"></i>
             </div>
-            <h3>智能避障系统</h3>
-            <p>配备多传感器避障系统，自动识别障碍物并规避，确保飞行安全</p>
+            <h3>卓越续航能力</h3>
+            <p>续航表现远超同级。空载状态下续航可达约18分钟，即使在1.5kg的载荷下，仍能提供约10分钟的有效飞行时间，让创作与探索从容不迫。</p>
           </div>
          <div class="feature-card">
             <div class="feature-icon">
               <i class="fas fa-battery-full"></i>
             </div>
-            <h3>高效作业</h3>
-            <p>高性能锂电池组，单次飞行时间可达45分钟，满足大面积连续作业需求</p>
+            <h3>高效巡航速度</h3>
+            <p>可与广受好评的ELRS TX12遥控器及从入门到专业的各类FPV眼镜无缝协作，为您提供从操控到观看到的完整第一视角飞行体验。</p>
           </div>  
         </div>
       </div>

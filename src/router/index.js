@@ -72,8 +72,6 @@ const router = createRouter({
       component: () => import('../views/products/FourOneView.vue')
     },
 
-
-
     {
       path: '/products/defense/integrated',
       name: 'integrated-defense',
@@ -84,16 +82,40 @@ const router = createRouter({
       name: 'agriculture-drone',
       component: () => import('../views/products/AgricultureDroneView.vue')
     },
+     {
+      path: '/products/low-altitude/agriculture-system-lz4',
+      name: 'agriculture-system-lz4',
+      component: () => import('../views/products/AgricultureDroneLz4View.vue')
+    },
+     {
+      path: '/products/low-altitude/agriculture-system-la8',
+      name: 'agriculture-system-la8',
+      component: () => import('../views/products/AgricultureDroneLa8View.vue')
+    },
+
     {
       path: '/products/low-altitude/patrol',
       name: 'patrol-drone',
       component: () => import('../views/products/PatrolDroneView.vue')
+    },
+
+      {
+      path: '/products/low-altitude/fire-fighting',
+      name: 'fire-fighting',
+      component: () => import('../views/products/PatrolDroneFireFightingView.vue')
     },
     {
       path: '/products/low-altitude/fpv',
       name: 'fpv-drone',
       component: () => import('../views/products/FpvDroneView.vue')
     },
+    {
+      path: '/products/low-altitude/fpv-7',
+      name: 'fpv-system-7',
+      component: () => import('../views/products/FpvDrone7View.vue')
+    },
+   
+
     {
       path: '/cases',
       name: 'cases',
