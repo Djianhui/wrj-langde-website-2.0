@@ -114,7 +114,7 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-logo">
-          <img src="/images/about/logo-ld.png" :alt="isZh ? '朗德智能' : 'Lande Intelligent'" class="footer-logo-img">
+          <img src="/images/about/logo.png" :alt="isZh ? '朗德智能' : 'Lande Intelligent'" class="footer-logo-img">
           <p>{{ currentFooterData.slogan }}</p>
         </div>
         <div class="footer-links">

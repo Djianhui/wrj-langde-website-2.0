@@ -24,8 +24,6 @@
       <!-- 产品分类展示 -->
       <div class="product-categories">
         <div class="categories-header">
-          <h2 class="section-title">低空安全系列产品</h2>
-          <p class="section-subtitle">朗德智能全系列产品解决方案</p>
         </div>
         
         <div class="categories-content">
@@ -2537,7 +2535,7 @@ const getTechImage = (techId) => {
 
 .categories-header {
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 20px;
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
