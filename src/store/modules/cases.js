@@ -61,7 +61,7 @@ export const useCasesStore = defineStore('cases', {
           },
           
           {
-            id: 3,
+            id: 2,
             title: '电力设施无人机巡检系统',
             tag: '工业应用',
             date: '2024-01-10',
