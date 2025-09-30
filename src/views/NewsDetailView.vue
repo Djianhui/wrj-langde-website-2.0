@@ -49,13 +49,13 @@
       
       <div class="article-nav">
         <div class="nav-item prev" v-if="prevNews">
-          <RouterLink :to="`/news/${prevNews.id}`">
+          <RouterLink :to="`/news/detail/${prevNews.id}`">
             <span class="nav-label"><i class="fas fa-arrow-left"></i> {{ newsPage.prevArticle }}</span>
             <h4>{{ prevNews.title }}</h4>
           </RouterLink>
         </div>
         <div class="nav-item next" v-if="nextNews">
-          <RouterLink :to="`/news/${nextNews.id}`">
+          <RouterLink :to="`/news/detail/${nextNews.id}`">
             <span class="nav-label">{{ newsPage.nextArticle }} <i class="fas fa-arrow-right"></i></span>
             <h4>{{ nextNews.title }}</h4>
           </RouterLink>
@@ -66,7 +66,7 @@
         <h2>{{ newsPage.relatedNews }}</h2>
         <div class="related-grid">
           <div v-for="item in relatedNews" :key="item.id" class="related-item">
-            <RouterLink :to="`/news/${item.id}`">
+            <RouterLink :to="`/news/detail/${item.id}`">
               <div class="related-img">
                 <img :src="item.image || '/images/news/default.jpg'" :alt="item.title">
               </div>

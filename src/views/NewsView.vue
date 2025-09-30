@@ -25,7 +25,7 @@
       <div class="news-list">
         <div v-for="item in filteredNews" :key="item.id" class="news-item">
           <div class="news-image">
-            <RouterLink :to="`/news/${item.id}`">
+            <RouterLink :to="`/news/detail/${item.id}`">
               <img :src="item.image || '/images/news/default.jpg'" :alt="item.title">
             </RouterLink>
           </div>
@@ -35,10 +35,10 @@
               <span class="news-date">{{ item.date }}</span>
             </div>
             <h3 class="news-title">
-              <RouterLink :to="`/news/${item.id}`">{{ item.title }}</RouterLink>
+              <RouterLink :to="`/news/detail/${item.id}`">{{ item.title }}</RouterLink>
             </h3>
             <p class="news-summary">{{ item.summary }}</p>
-            <RouterLink :to="`/news/${item.id}`" class="news-link">{{ newsPage.readMore }} <i class="fas fa-arrow-right"></i></RouterLink>
+            <RouterLink :to="`/news/detail/${item.id}`" class="news-link">{{ newsPage.readMore }} <i class="fas fa-arrow-right"></i></RouterLink>
           </div>
         </div>
       </div>
