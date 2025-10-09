@@ -307,7 +307,7 @@ onMounted(() => {
 .hero-section {
   background: linear-gradient(135deg, 
     rgba(59, 130, 246, 0.9) 0%, 
-    rgba(139, 92, 246, 0.8) 50%,
+    rgba(139, 92, 246, 0.8) 80%,
     rgba(59, 130, 246, 0.9) 100%), 
     url('/images/news-hero.jpg');
   background-size: cover;
