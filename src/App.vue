@@ -1,16 +1,5 @@
 <template>
-  <!-- 全局加载蒙层 -->
-  <div class="app-loading" v-if="isLoading">
-    <div class="loading-content">
-      <div class="loading-logo">朗德智能</div>
-      <div class="loading-spinner">
-        <div class="spinner"></div>
-      </div>
-      <div class="loading-text">{{ isZh ? '加载中...' : 'Loading...' }}</div>
-    </div>
-  </div>
-
-  <header :class="{'scrolled': isScrolled}" v-show="!isLoading">
+  <header :class="{'scrolled': isScrolled}">
     <div class="container">
       <!-- <div class="logo">
         <img src="/images/about/logo-ld.png" :alt="isZh ? '朗德智能' : 'Lande Intelligent'" class="logo-img">
@@ -105,12 +94,12 @@
   <!-- 移动菜单蒙层 -->
   <div class="mobile-menu-overlay" :class="{'active': isMenuActive}" @click="closeMenu"></div>
 
-  <RouterView v-show="!isLoading" @page-loaded="handlePageLoaded" />
+  <RouterView />
   
   <!-- 浮动语言切换按钮 -->
-  <!-- <LanguageSwitcher floating v-show="!isLoading && !isMenuActive" /> -->
+  <!-- <LanguageSwitcher floating v-show="!isMenuActive" /> -->
 
-  <footer v-show="!isLoading">
+  <footer>
     <div class="container">
       <div class="footer-content">
         <div class="footer-logo">
@@ -159,11 +148,6 @@ const translationsStore = useTranslationsStore()
 provide('currentLanguage', currentLanguage)
 provide('isZh', isZh)
 provide('isEn', isEn)
-
-// 全局加载状态
-const isLoading = ref(true)
-// 提供全局加载状态给子组件
-provide('isLoading', isLoading)
 
 // 页面滚动状态
 const isScrolled = ref(false)
@@ -222,25 +206,6 @@ const currentRoute = computed(() => {
   return path.split('/')[1]
 })
 
-// 处理页面加载完成事件
-const handlePageLoaded = () => {
-  // 页面内容加载完成后立即隐藏加载界面，不添加延迟
-  isLoading.value = false
-  
-  // 添加安全机制：即使没有收到页面加载完成事件，也确保在合理时间后显示内容
-  const safetyTimer = setTimeout(() => {
-    if (isLoading.value) {
-      console.log('安全机制触发：强制显示页面内容')
-      isLoading.value = false
-    }
-  }, 2000) // 缩短最大等待时间
-  
-  // 组件卸载时清除计时器
-  onUnmounted(() => {
-    clearTimeout(safetyTimer)
-  })
-}
-
 // 预加载基础数据
 const preloadBaseData = async () => {
   try {
@@ -286,12 +251,6 @@ onMounted(async () => {
     }
   })
   
-  // 无论如何，确保页面最终显示出来
-  // 如果是首页，默认加载一些时间，给初始加载界面展示机会
-  setTimeout(() => {
-    isLoading.value = false
-  }, route.path === '/' ? 800 : 300)
-  
   // 监听语言变化事件
   document.addEventListener('languageChanged', (e) => {
     // 语言变化后可以在这里执行一些操作
@@ -299,22 +258,6 @@ onMounted(async () => {
   })
 
   await contentStore.initializeContent()
-})
-
-// 监听路由变化
-watch(() => route.path, () => {
-  // 路由变化时关闭所有菜单
-  closeMenu()
-  hideDropdownImmediately()
-  
-  // 路由变化时显示加载状态
-  isLoading.value = true
-  // 非首页快速恢复
-  if (route.path !== '/') {
-    setTimeout(() => {
-      isLoading.value = false
-    }, 300)
-  }
 })
 
 // 处理滚动事件
@@ -611,15 +554,9 @@ const handleLanguageSwitch = () => {
   }, 100);
 }
 
-// 定义强制刷新标记
-const refreshKey = ref(0)
-
 // 监听语言变化
 watch(() => languageStore.language, async (newLang) => {
   console.log('语言已变更，开始强制刷新视图:', newLang);
-  
-  // 临时显示加载界面
-  isLoading.value = true;
   
   // 等待下一个DOM更新周期
   await nextTick();
@@ -639,11 +576,8 @@ watch(() => languageStore.language, async (newLang) => {
     }
   });
   
-  // 短暂延迟后隐藏加载界面
+  // 短暂延迟后刷新当前路由
   setTimeout(() => {
-    isLoading.value = false;
-    
-    // 刷新当前路由
     const currentPath = router.currentRoute.value.fullPath;
     const refreshPath = currentPath.includes('?') 
       ? `${currentPath}&_t=${Date.now()}` 
@@ -657,77 +591,6 @@ watch(() => languageStore.language, async (newLang) => {
 <style>
 /* 导入主样式 */
 @import './assets/base.css';
-
-/* 全局加载样式 */
-.app-loading {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.loading-content {
-  text-align: center;
-}
-
-.loading-logo {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 30px;
-  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% { opacity: 0.8; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.05); }
-  100% { opacity: 0.8; transform: scale(1); }
-}
-
-.loading-spinner {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.spinner {
-  width: 50px;
-  height: 50px;
-  border: 4px solid rgba(79, 172, 254, 0.2);
-  border-top: 4px solid #4facfe;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.loading-text {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 1rem;
-}
-
-/* 添加平滑淡入效果 */
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
 
 /* 隐藏未加载数据的内容 */
 [v-cloak] {
