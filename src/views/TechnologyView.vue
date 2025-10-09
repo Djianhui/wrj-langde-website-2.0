@@ -36,43 +36,43 @@
             
             <div class="tree-container">
               <div class="tree-item root-item">
-                <div class="tree-node" @click="toggleCategory('root')">
-                  <i class="fas fa-chevron-down tree-icon" :class="{'expanded': expandedCategories.root}"></i>
+                <div class="tree-node" @click="toggleCategory('root')" data-category="root">
+                  <i class="fas fa-microchip tree-icon" :class="{'expanded': expandedCategories.root}"></i>
                   <span class="node-text">产品中心</span>
                 </div>
                 
                 <div v-show="expandedCategories.root" class="tree-children">
                   <!-- 立体防控 -->
                   <div class="tree-item level-1">
-                    <div class="tree-node" @click="toggleCategory('defense'); selectCategory('defense')">
-                      <i class="fas fa-chevron-right tree-icon" :class="{'expanded': expandedCategories.defense}"></i>
+                    <div class="tree-node" @click="toggleCategory('defense'); selectCategory('defense')" data-category="defense">
+                      <i class="fas fa-shield-alt tree-icon" :class="{'expanded': expandedCategories.defense}"></i>
                       <span class="node-text">立体防控</span>
                     </div>
                     
                     <div v-show="expandedCategories.defense" class="tree-children">
                       <!-- 侦探感知 -->
                       <div class="tree-item level-2">
-                        <div class="tree-node" @click="toggleCategory('detection'); selectCategory('detection')">
-                          <i class="fas fa-chevron-right tree-icon" :class="{'expanded': expandedCategories.detection}"></i>
+                        <div class="tree-node" @click="toggleCategory('detection'); selectCategory('detection')" data-category="detection">
+                          <i class="fas fa-radar tree-icon" :class="{'expanded': expandedCategories.detection}"></i>
                           <span class="node-text">侦探感知</span>
                         </div>
                         
                         <div v-show="expandedCategories.detection" class="tree-children">
                           <div class="tree-item level-3" @click="selectCategory('radar')">
-                            <div class="tree-node">
-                              <i class="fas fa-dot-circle tree-icon"></i>
+                            <div class="tree-node" data-category="radar">
+                              <i class="fas fa-satellite-dish tree-icon"></i>
                               <span class="node-text">雷达探测</span>
                             </div>
                           </div>
                           <div class="tree-item level-3" @click="selectCategory('optical')">
-                            <div class="tree-node">
-                              <i class="fas fa-dot-circle tree-icon"></i>
+                            <div class="tree-node" data-category="optical">
+                              <i class="fas fa-eye tree-icon"></i>
                               <span class="node-text">光电识别</span>
                             </div>
                           </div>
                           <div class="tree-item level-3" @click="selectCategory('spectrum')">
-                            <div class="tree-node">
-                              <i class="fas fa-dot-circle tree-icon"></i>
+                            <div class="tree-node" data-category="spectrum">
+                              <i class="fas fa-wave-square tree-icon"></i>
                               <span class="node-text">频谱侦测</span>
                             </div>
                           </div>
@@ -81,16 +81,16 @@
                       
                       <!-- 干扰反制 -->
                       <div class="tree-item level-2" @click="selectCategory('jamming')">
-                        <div class="tree-node">
-                          <i class="fas fa-circle tree-icon"></i>
+                        <div class="tree-node" data-category="jamming">
+                          <i class="fas fa-wifi tree-icon"></i>
                           <span class="node-text">干扰反制</span>
                         </div>
                       </div>
                       
                       <!-- 一体化防御 -->
                       <div class="tree-item level-2" @click="selectCategory('integrated')">
-                        <div class="tree-node">
-                          <i class="fas fa-circle tree-icon"></i>
+                        <div class="tree-node" data-category="integrated">
+                          <i class="fas fa-cogs tree-icon"></i>
                           <span class="node-text">一体化防御</span>
                         </div>
                       </div>
@@ -99,27 +99,27 @@
                   
                   <!-- 低空经济 -->
                   <div class="tree-item level-1">
-                    <div class="tree-node" @click="toggleCategory('lowAltitude'); selectCategory('lowAltitude')">
-                      <i class="fas fa-chevron-right tree-icon" :class="{'expanded': expandedCategories.lowAltitude}"></i>
+                    <div class="tree-node" @click="toggleCategory('lowAltitude'); selectCategory('lowAltitude')" data-category="lowAltitude">
+                      <i class="fas fa-helicopter tree-icon" :class="{'expanded': expandedCategories.lowAltitude}"></i>
                       <span class="node-text">低空经济</span>
                     </div>
                     
                     <div v-show="expandedCategories.lowAltitude" class="tree-children">
                       <div class="tree-item level-2" @click="selectCategory('agriculture')">
-                        <div class="tree-node">
-                          <i class="fas fa-circle tree-icon"></i>
+                        <div class="tree-node" data-category="agriculture">
+                          <i class="fas fa-seedling tree-icon"></i>
                           <span class="node-text">农业植保</span>
                         </div>
                       </div>
                       <div class="tree-item level-2" @click="selectCategory('patrol')">
-                        <div class="tree-node">
-                          <i class="fas fa-circle tree-icon"></i>
+                        <div class="tree-node" data-category="patrol">
+                          <i class="fas fa-search-location tree-icon"></i>
                           <span class="node-text">巡查防护</span>
                         </div>
                       </div>
                       <div class="tree-item level-2" @click="selectCategory('fpv')">
-                        <div class="tree-node">
-                          <i class="fas fa-circle tree-icon"></i>
+                        <div class="tree-node" data-category="fpv">
+                          <i class="fas fa-gamepad tree-icon"></i>
                           <span class="node-text">FPV</span>
                         </div>
                       </div>
@@ -141,7 +141,8 @@
               <div class="products-grid">
                 <!-- 显示当前页的产品 -->
                 <div v-for="product in getCurrentPageProducts" :key="product.id" 
-                     class="product-card" @click="goToProductDetail(product.link)">
+                     class="product-card" @click="goToProductDetail(product.link)"
+                     :data-product-id="product.id" :data-product-link="product.link">
                   <div class="product-image">
                     <img :src="product.image" :alt="product.name" @error="handleProductImageError">
                     <div class="product-overlay">
@@ -201,9 +202,9 @@ const forceRender = ref(0)
 // 产品分类状态管理
 const expandedCategories = ref({
   root: true, // 默认展开产品中心
-  defense: false,
-  detection: false,
-  lowAltitude: false
+  defense: true, // 默认展开立体防控
+  detection: true, // 默认展开侦探感知
+  lowAltitude: true // 默认展开低空经济
 })
 
 const selectedCategory = ref(null)
@@ -256,6 +257,19 @@ const handleGlobalCategorySelect = (event) => {
     //   }, 300)
     // })
   }
+}
+
+// 初始化时选择FPV分类以显示7寸穿越机
+const initializeFpvCategory = () => {
+  console.log('初始化FPV分类')
+  selectCategory('fpv')
+  expandedCategories.value.root = true
+  expandedCategories.value.lowAltitude = true
+  
+  // 调试信息：检查FPV分类下的产品
+  console.log('FPV分类下的产品:', productLists.fpv.products)
+  const fpv7Product = productLists.fpv.products.find(p => p.id === 'fpv-system-7')
+  console.log('7寸穿越机产品数据:', fpv7Product)
 }
 
 // 监听全局产品选择事件
@@ -970,8 +984,16 @@ const getCurrentCategorySubtitle = computed(() => {
 
 // 跳转到产品详情页
 const goToProductDetail = (link) => {
+  console.log('点击产品卡片，跳转链接:', link)
   if (link) {
-    router.push(link)
+    try {
+      router.push(link)
+      console.log('路由跳转成功:', link)
+    } catch (error) {
+      console.error('路由跳转失败:', error, link)
+    }
+  } else {
+    console.warn('产品链接为空')
   }
 }
 
@@ -1004,6 +1026,19 @@ const handleProductImageError = (event) => {
 const selectCategory = (categoryId) => {
   selectedCategory.value = categoryId
   currentPage.value = 1 // 重置到第一页
+  
+  // 移除所有节点的选中状态
+  document.querySelectorAll('.tree-node').forEach(node => {
+    node.classList.remove('selected')
+  })
+  
+  // 为当前选中的分类添加选中状态
+  nextTick(() => {
+    const targetNode = document.querySelector(`[data-category="${categoryId}"]`)
+    if (targetNode) {
+      targetNode.classList.add('selected')
+    }
+  })
 }
 
 // 获取分类数据
@@ -1374,6 +1409,9 @@ onMounted(async () => {
   // 监听全局产品选择事件 
   window.addEventListener('productSelected', handleGlobalProductSelect)
   
+  // 初始化FPV分类以显示7寸穿越机
+  initializeFpvCategory()
+  
   // 通知父组件页面已加载完成
   emit('page-loaded')
   
@@ -1412,15 +1450,19 @@ const getTechImage = (techId) => {
   padding-top: 0;
   padding-bottom: 80px;
   overflow-x: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  min-height: 100vh;
 }
 
 /* 技术页面头部 */
 .tech-hero {
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
   padding: 150px 0 100px;
   position: relative;
   overflow: hidden;
   margin-bottom: 80px;
+  box-shadow: 0 10px 40px rgba(59, 130, 246, 0.2);
 }
 
 .tech-particles {
@@ -1429,7 +1471,7 @@ const getTechImage = (techId) => {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg"><circle cx="2" cy="2" r="1" fill="%234facfe22"/></svg>');
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg"><circle cx="2" cy="2" r="1" fill="%238b5cf633"/></svg>');
   background-size: 30px 30px;
   opacity: 0.3;
   animation: particleMove 60s linear infinite;
@@ -1547,24 +1589,24 @@ const getTechImage = (techId) => {
 
 .tech-badge {
   display: inline-block;
-  background: rgba(79, 172, 254, 0.2);
+  background: rgba(59, 130, 246, 0.1);
   backdrop-filter: blur(10px);
   padding: 8px 16px;
   border-radius: 30px;
   font-size: 0.9rem;
   font-weight: 600;
-  color: #4facfe;
+  color: #3b82f6;
   margin-bottom: 20px;
-  border: 1px solid rgba(79, 172, 254, 0.3);
-  box-shadow: 0 5px 15px rgba(79, 172, 254, 0.2);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  box-shadow: 0 5px 15px rgba(59, 130, 246, 0.2);
 }
 
 .tech-headline {
-  font-size: 3.5rem;
+  font-size: 3.2rem;
   margin-bottom: 1.5rem;
-  font-weight: 700;
-  line-height: 1.2;
-  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  font-weight: 800;
+  line-height: 1.1;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #e2e8f0 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   position: relative;
@@ -1573,26 +1615,35 @@ const getTechImage = (techId) => {
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%;
+  letter-spacing: -0.03em;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .tech-headline::after {
   content: '';
   position: absolute;
-  bottom: -10px;
+  bottom: -12px;
   left: 50%;
   transform: translateX(-50%);
-  width: 80px;
-  height: 4px;
-  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 100%);
   border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
 }
 
 .tech-subheading {
-  font-size: 2.2rem;
-  opacity: 0.9;
+  font-size: 1.5rem;
+  opacity: 0.95;
   max-width: 700px;
   margin: 0 auto;
-  line-height: 1.7;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 400;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: -0.01em;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 /* 技术部分 */
@@ -1621,7 +1672,7 @@ const getTechImage = (techId) => {
   left: 0;
   width: 100%;
   height: 5px;
-  background: linear-gradient(90deg, #4facfe, #00f2fe, #4facfe);
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #3b82f6);
   background-size: 200% 100%;
   animation: gradientMove 5s ease infinite;
 }
@@ -1659,15 +1710,15 @@ const getTechImage = (techId) => {
 
 .tech-badge {
   display: inline-block;
-  background: rgba(79, 172, 254, 0.1);
-  color: #4facfe;
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
   padding: 6px 14px;
   border-radius: 20px;
   font-size: 0.85rem;
   font-weight: 600;
   margin-bottom: 15px;
-  border: 1px solid rgba(79, 172, 254, 0.2);
-  box-shadow: 0 5px 15px rgba(79, 172, 254, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  box-shadow: 0 5px 15px rgba(59, 130, 246, 0.1);
 }
 
 .tech-content h2 {
@@ -1687,7 +1738,7 @@ const getTechImage = (techId) => {
   left: 0;
   width: 60px;
   height: 3px;
-  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
   border-radius: 2px;
 }
 
@@ -1718,7 +1769,7 @@ const getTechImage = (techId) => {
 }
 
 .highlight-icon {
-  color: #4facfe;
+  color: #3b82f6;
   margin-right: 12px;
   font-size: 1.1rem;
   margin-top: 2px;
@@ -1759,7 +1810,7 @@ const getTechImage = (techId) => {
   left: 0;
   width: 5px;
   height: 100%;
-  background: linear-gradient(to bottom, #4facfe, #00f2fe);
+  background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
   opacity: 0;
   transition: all 0.3s ease;
 }
@@ -1777,7 +1828,7 @@ const getTechImage = (techId) => {
 .feature-icon {
   font-size: 1.2rem;
   color: #fff;
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
   width: 50px;
   height: 50px;
   border-radius: 12px;
@@ -1785,7 +1836,7 @@ const getTechImage = (techId) => {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 5px 15px rgba(79, 172, 254, 0.2);
+  box-shadow: 0 5px 15px rgba(59, 130, 246, 0.2);
   transition: all 0.3s ease;
 }
 
@@ -1814,24 +1865,24 @@ const getTechImage = (techId) => {
 }
 
 .metric-mini-item {
-  background: linear-gradient(135deg, rgba(79, 172, 254, 0.1) 0%, rgba(0, 242, 254, 0.1) 100%);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
   border-radius: 16px;
   padding: 15px;
   text-align: center;
   flex: 1;
   transition: all 0.3s ease;
-  border: 1px solid rgba(79, 172, 254, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.15);
 }
 
 .metric-mini-item:hover {
-  background: linear-gradient(135deg, rgba(79, 172, 254, 0.15) 0%, rgba(0, 242, 254, 0.15) 100%);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%);
   transform: translateY(-5px);
 }
 
 .metric-mini-value {
   font-size: 1.6rem;
   font-weight: 700;
-  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 5px;
@@ -1866,7 +1917,7 @@ const getTechImage = (techId) => {
   right: -50px;
   width: 200px;
   height: 200px;
-  background: linear-gradient(135deg, rgba(79, 172, 254, 0.3), rgba(0, 242, 254, 0.3));
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(139, 92, 246, 0.3));
   border-radius: 50%;
   filter: blur(60px);
   z-index: 1;
@@ -1949,7 +2000,7 @@ const getTechImage = (techId) => {
   transform: translateY(-50%);
   width: 12px;
   height: 12px;
-  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
   border-radius: 50%;
 }
 
@@ -1995,7 +2046,7 @@ const getTechImage = (techId) => {
   transform: translateX(-50%);
   width: 60px;
   height: 3px;
-  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
   border-radius: 2px;
 }
 
@@ -2030,20 +2081,20 @@ const getTechImage = (techId) => {
   width: 70px;
   height: 70px;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(79, 172, 254, 0.1) 0%, rgba(0, 242, 254, 0.1) 100%);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 20px;
   font-size: 1.8rem;
-  color: #4facfe;
+  color: #3b82f6;
   transition: all 0.3s ease;
 }
 
 .advantage-card:hover .advantage-icon {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
   color: #fff;
-  box-shadow: 0 10px 20px rgba(79, 172, 254, 0.3);
+  box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
 }
 
 .advantage-card h3 {
@@ -2079,7 +2130,7 @@ const getTechImage = (techId) => {
   right: -20%;
   width: 80%;
   height: 200%;
-  background: linear-gradient(135deg, rgba(79, 172, 254, 0.03) 0%, rgba(0, 242, 254, 0.03) 100%);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.03) 0%, rgba(139, 92, 246, 0.03) 100%);
   border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
   z-index: 0;
 }
@@ -2124,7 +2175,7 @@ const getTechImage = (techId) => {
 .metric-value {
   font-size: 2.5rem;
   font-weight: 700;
-  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   flex-shrink: 0;
@@ -2228,7 +2279,7 @@ const getTechImage = (techId) => {
   right: 0;
   width: 300px;
   height: 300px;
-  background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><path d="M0 0 L100 0 L100 100 L0 100 Z" fill="none" stroke="%234facfe22" stroke-width="1"/></svg>');
+  background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><path d="M0 0 L100 0 L100 100 L0 100 Z" fill="none" stroke="%233b82f622" stroke-width="1"/></svg>');
   background-size: 20px 20px;
   opacity: 0.2;
 }
@@ -2253,19 +2304,19 @@ const getTechImage = (techId) => {
 .btn-primary {
   display: inline-flex;
   align-items: center;
-  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
   color: #fff;
   padding: 14px 30px;
   border-radius: 30px;
   font-weight: 600;
   transition: all 0.3s ease;
-  box-shadow: 0 10px 20px rgba(79, 172, 254, 0.3);
+  box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
   border: none;
   font-size: 1rem;
 }
 
 .btn-primary:hover {
-  box-shadow: 0 15px 25px rgba(79, 172, 254, 0.4);
+  box-shadow: 0 15px 25px rgba(59, 130, 246, 0.4);
   transform: translateY(-3px);
 }
 
@@ -2591,10 +2642,13 @@ const getTechImage = (techId) => {
   align-items: center;
   max-width: 1600px;
   margin: 0 auto;
-  background: linear-gradient(135deg, rgba(248, 250, 252, 0.5) 0%, rgba(255, 255, 255, 0.8) 100%);
-  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(248, 250, 252, 0.9) 0%, rgba(241, 245, 249, 0.8) 100%);
+  border-radius: 24px;
   position: relative;
   overflow: hidden;
+  border: 1px solid rgba(226, 232, 240, 0.6);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(10px);
 }
 
 .categories-header {
@@ -2611,7 +2665,7 @@ const getTechImage = (techId) => {
   font-size: 2.5rem;
   color: #1e293b;
   margin-bottom: 20px;
-  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -2641,14 +2695,14 @@ const getTechImage = (techId) => {
 .category-tree {
   background: #ffffff;
   border-radius: 16px;
-  padding: 25px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  border: 1px solid #e2e8f0;
+  padding: 0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(226, 232, 240, 0.6);
   position: sticky;
   top: 20px;
   height: fit-content;
   max-height: calc(100vh - 100px);
-  overflow-y: auto;
+  overflow: hidden;
 }
 
 .tree-container {
@@ -2662,44 +2716,50 @@ const getTechImage = (techId) => {
 .tree-node {
   display: flex;
   align-items: center;
-  padding: 10px 14px;
+  padding: 15px 16px;
+  height: 50px;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
   white-space: nowrap;
+  border: 1px solid transparent;
+  box-sizing: border-box;
 }
 
 .tree-node:hover {
-  background: rgba(79, 172, 254, 0.1);
-  transform: translateX(5px);
+  background: rgba(248, 250, 252, 0.8);
+  transform: translateX(0);
+  border-color: rgba(226, 232, 240, 0.6);
 }
 
 .tree-icon {
-  margin-right: 10px;
-  font-size: 0.85rem;
-  color: #64748b;
+  margin-right: 12px;
+  font-size: 14px;
+  color: #94a3b8;
   transition: all 0.3s ease;
-  width: 14px;
+  width: 16px;
   text-align: center;
   flex-shrink: 0;
 }
 
 .tree-icon.expanded {
   transform: rotate(90deg);
-  color: #4facfe;
+  color: #3b82f6;
 }
 
 .node-text {
-  font-size: 0.95rem;
-  color: #1e293b;
+  font-size: 14px;
+  color: #64748b;
   font-weight: 500;
   transition: color 0.3s ease;
   line-height: 1.4;
+  letter-spacing: -0.01em;
+  font-family: 'Inter', sans-serif;
 }
 
 .tree-node:hover .node-text {
-  color: #4facfe;
+  color: #3b82f6;
   font-weight: 600;
 }
 
@@ -2717,19 +2777,20 @@ const getTechImage = (techId) => {
   overflow: hidden;
 }
 
-/* 红色标题头部 */
+/* 科技感标题头部 */
 .category-header {
-  background: linear-gradient(135deg, #3ec7df 0%, #1cb992 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
   color: #ffffff;
   padding: 16px 20px;
   margin: 0;
-  border-radius: 12px 12px 0 0;
-  font-size: 1.1rem;
+  border-radius: 16px 16px 0 0;
+  font-size: 18px;
   font-weight: 700;
   text-align: center;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+  font-family: 'Inter', sans-serif;
 }
 
 .category-header::before {
@@ -2752,32 +2813,31 @@ const getTechImage = (techId) => {
 
 /* 树形容器内容区域 */
 .tree-container {
-  font-family: 'Microsoft YaHei', sans-serif;
+  font-family: 'Inter', sans-serif;
   padding: 20px;
   max-height: calc(100vh - 160px);
   overflow-y: auto;
 }
 
-/* 产品分类根节点样式优化 */
+/* 移除过度的装饰样式 */
 .root-item .tree-node {
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-  border: 2px solid #e2e8f0;
-  border-left: 4px solid #3ec7df;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  background: rgba(248, 250, 252, 0.5);
+  border: 1px solid rgba(226, 232, 240, 0.5);
+  border-left: 4px solid #3b82f6;
   font-weight: 600;
-  padding: 12px 16px;
+  padding: 15px 16px;
   border-radius: 8px;
   position: relative;
-  overflow: hidden;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   transition: all 0.3s ease;
+  height: 50px;
+  box-sizing: border-box;
 }
 
 .root-item .tree-node:hover {
-  background: linear-gradient(135deg, rgba(220, 38, 38, 0.05) 0%, rgba(185, 28, 28, 0.05) 100%);
-  border-color: #26dccd;
-  transform: translateX(3px);
-  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.15);
+  background: rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.3);
+  transform: translateX(0);
 }
 
 .root-item .tree-node::before {
@@ -2792,265 +2852,85 @@ const getTechImage = (techId) => {
 }
 
 .root-item .node-text {
-  font-size: 1rem;
+  font-size: 16px;
   color: #1e293b;
   font-weight: 600;
-  letter-spacing: 0.2px;
+  letter-spacing: -0.01em;
   position: relative;
   z-index: 1;
+  font-family: 'Inter', sans-serif;
 }
 
 .root-item .tree-node:hover .node-text {
-  color: #dc2626;
+  color: #3b82f6;
   font-weight: 700;
 }
 
 .root-item .tree-icon {
-  color: #dc2626;
-  font-size: 0.9rem;
+  color: #3b82f6;
+  font-size: 16px;
   margin-right: 12px;
   transition: all 0.3s ease;
 }
 
 .root-item .tree-node:hover .tree-icon {
-  color: #b91c1c;
-  transform: scale(1.1);
-}
-
-/* 一级分类样式优化 */
-.level-1 .tree-node {
-  background: linear-gradient(135deg, rgba(248, 250, 252, 0.9) 0%, rgba(241, 245, 249, 0.9) 100%);
-  border: 1px solid rgba(226, 232, 240, 0.8);
-  border-left: 3px solid #dc2626;
-  padding: 10px 14px;
-  border-radius: 6px;
-  margin: 4px 0;
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-.level-1 .tree-node::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 0;
-  background: linear-gradient(90deg, #dc2626 0%, #b91c1c 100%);
-  transition: width 0.3s ease;
-  border-radius: 6px 0 0 6px;
-}
-
-.level-1 .tree-node:hover::before {
-  width: 4px;
-}
-
-.level-1 .tree-node:hover {
-  background: linear-gradient(135deg, rgba(220, 38, 38, 0.06) 0%, rgba(185, 28, 28, 0.06) 100%);
-  border-color: rgba(220, 38, 38, 0.4);
-  border-left-color: #dc2626;
-  transform: translateX(4px);
-  box-shadow: 0 2px 10px rgba(220, 38, 38, 0.15);
-}
-
-.level-1 .node-text {
-  font-size: 0.95rem;
-  color: #1e293b;
-  font-weight: 600;
-  letter-spacing: 0.1px;
-  position: relative;
-  z-index: 1;
-}
-
-.level-1 .tree-icon {
-  color: #dc2626;
-  font-size: 0.85rem;
-  margin-right: 10px;
-  transition: all 0.3s ease;
-  position: relative;
-  z-index: 1;
-}
-
-.level-1 .tree-node:hover .tree-icon {
-  color: #b91c1c;
-  transform: scale(1.1);
-}
-
-.level-1 .tree-node:hover .node-text {
-  color: #dc2626;
-  font-weight: 700;
-}
-
-/* 二级分类样式优化 */
-.level-2 .tree-node {
-  background: linear-gradient(135deg, rgba(248, 250, 252, 0.7) 0%, rgba(241, 245, 249, 0.7) 100%);
-  border: 1px solid rgba(226, 232, 240, 0.6);
-  border-left: 3px solid #f97316;
-  padding: 8px 12px;
-  border-radius: 5px;
-  margin: 3px 0;
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-.level-2 .tree-node::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 0;
-  background: linear-gradient(90deg, #f97316 0%, #ea580c 100%);
-  transition: width 0.3s ease;
-  border-radius: 5px 0 0 5px;
-}
-
-.level-2 .tree-node:hover::before {
-  width: 3px;
-}
-
-.level-2 .tree-node:hover {
-  background: linear-gradient(135deg, rgba(249, 115, 22, 0.06) 0%, rgba(234, 88, 12, 0.06) 100%);
-  border-color: rgba(249, 115, 22, 0.4);
-  transform: translateX(3px);
-  box-shadow: 0 1px 8px rgba(249, 115, 22, 0.12);
-}
-
-.level-2 .node-text {
-  font-size: 0.9rem;
-  color: #334155;
-  font-weight: 550;
-  letter-spacing: 0.05px;
-  position: relative;
-  z-index: 1;
-}
-
-.level-2 .tree-icon {
-  color: #f97316;
-  font-size: 0.8rem;
-  margin-right: 8px;
-  position: relative;
-  z-index: 1;
-}
-
-.level-2 .tree-node:hover .tree-icon {
-  color: #ea580c;
+  color: #3b82f6;
   transform: scale(1.05);
 }
 
-.level-2 .tree-node:hover .node-text {
-  color: #1e293b;
-  font-weight: 650;
-}
-
-/* 三级分类样式优化 */
-.level-3 .tree-node {
-  background: linear-gradient(135deg, rgba(241, 245, 249, 0.6) 0%, rgba(235, 240, 246, 0.6) 100%);
-  border: 1px solid rgba(203, 213, 225, 0.4);
-  border-left: 2px solid #6b7280;
-  padding: 6px 10px;
-  border-radius: 4px;
+/* 简化级别样式 */
+.level-1 .tree-node {
+  background: transparent;
+  border: none;
+  padding: 15px 16px;
+  border-radius: 8px;
   margin: 2px 0;
-  font-size: 0.85rem;
   transition: all 0.3s ease;
   position: relative;
+  height: 50px;
+  box-sizing: border-box;
 }
 
-.level-3 .tree-node::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 0;
-  background: linear-gradient(90deg, #6b7280 0%, #4b5563 100%);
-  transition: width 0.3s ease;
-  border-radius: 4px 0 0 4px;
-}
 
-.level-3 .tree-node:hover::before {
-  width: 2px;
-}
 
-.level-3 .tree-node:hover {
-  background: linear-gradient(135deg, rgba(107, 114, 128, 0.05) 0%, rgba(75, 85, 99, 0.05) 100%);
-  border-color: rgba(107, 114, 128, 0.4);
-  transform: translateX(2px);
-  box-shadow: 0 1px 6px rgba(107, 114, 128, 0.1);
-}
-
-.level-3 .node-text {
-  font-size: 0.85rem;
-  color: #475569;
-  font-weight: 500;
-  letter-spacing: 0.05px;
+.level-2 .tree-node {
+  background: transparent;
+  border: none;
+  padding: 15px 16px;
+  border-radius: 8px;
+  margin: 2px 0;
+  transition: all 0.3s ease;
   position: relative;
-  z-index: 1;
+  height: 50px;
+  box-sizing: border-box;
 }
 
-.level-3 .tree-icon {
-  color: #6b7280;
-  font-size: 0.7rem;
-  margin-right: 6px;
+
+
+.level-3 .tree-node {
+  background: transparent;
+  border: none;
+  padding: 15px 16px;
+  border-radius: 8px;
+  margin: 2px 0;
+  transition: all 0.3s ease;
   position: relative;
-  z-index: 1;
+  height: 50px;
+  box-sizing: border-box;
 }
 
-.level-3 .tree-node:hover .tree-icon {
-  color: #4b5563;
-  transform: scale(1.1);
-}
 
-.level-3 .tree-node:hover .node-text {
-  color: #334155;
-  font-weight: 600;
-}
 
-/* 树形连接线样式优化 */
+/* 移除过度的树形连接线样式 */
 .tree-children {
-  margin-left: 16px;
-  margin-top: 6px;
-  border-left: 2px solid rgba(220, 38, 38, 0.15);
+  margin-left: 20px;
+  margin-top: 4px;
   padding-left: 16px;
   position: relative;
   animation: slideDown 0.3s ease;
 }
 
-.tree-children::before {
-  content: '';
-  position: absolute;
-  left: -2px;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: linear-gradient(to bottom, #2693dc 0%, rgba(220, 38, 38, 0.3) 50%, transparent 100%);
-  border-radius: 1px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
 
-.tree-item:hover .tree-children::before {
-  opacity: 1;
-}
-
-/* 二级和三级的连接线 */
-.level-1 .tree-children {
-  border-left-color: rgba(249, 115, 22, 0.2);
-}
-
-.level-1 .tree-children::before {
-  background: linear-gradient(to bottom, #f97316 0%, rgba(249, 115, 22, 0.3) 50%, transparent 100%);
-}
-
-.level-2 .tree-children {
-  border-left-color: rgba(107, 114, 128, 0.2);
-  margin-left: 14px;
-  padding-left: 14px;
-}
-
-.level-2 .tree-children::before {
-  background: linear-gradient(to bottom, #6b7280 0%, rgba(107, 114, 128, 0.3) 50%, transparent 100%);
-}
 
 /* 增强的悬停效果 */
 .tree-node {
@@ -3073,21 +2953,32 @@ const getTechImage = (techId) => {
   left: 100%;
 }
 
-/* 选中状态样式 */
+/* 选中状态样式 - 蓝紫色 + 左侧竖线 */
 .tree-node.selected {
-  background: linear-gradient(135deg, rgba(79, 172, 254, 0.15) 0%, rgba(0, 242, 254, 0.15) 100%);
-  border-color: #4facfe;
-  box-shadow: 0 0 0 2px rgba(79, 172, 254, 0.2);
+  background: rgba(59, 130, 246, 0.1);
+  border-color: transparent;
+  border-left: 4px solid #3b82f6;
+  padding-left: 12px;
+  transform: translateX(0);
+}
+
+.tree-node.selected .node-text {
+  color: #3b82f6;
+  font-weight: 600;
+}
+
+.tree-node.selected .tree-icon {
+  color: #3b82f6;
 }
 
 .level-1 .tree-node.selected {
-  border-left-color: #00f2fe;
-  box-shadow: 0 5px 20px rgba(79, 172, 254, 0.25);
+  border-left-color: #8b5cf6;
+  box-shadow: 0 5px 20px rgba(59, 130, 246, 0.25);
 }
 
 .level-2 .tree-node.selected {
-  border-left-color: #0ea5e9;
-  box-shadow: 0 3px 15px rgba(56, 189, 248, 0.2);
+  border-left-color: #3b82f6;
+  box-shadow: 0 3px 15px rgba(59, 130, 246, 0.2);
 }
 
 .level-3 .tree-node.selected {
@@ -3106,49 +2997,72 @@ const getTechImage = (techId) => {
 }
 
 .list-title {
-  font-size: 1.8rem;
+  font-size: 18px;
   color: #1e293b;
   margin-bottom: 10px;
-  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  font-family: 'Inter', sans-serif;
 }
 
 .list-subtitle {
-  font-size: 1rem;
+  font-size: 14px;
   color: #64748b;
   margin-bottom: 0;
+  opacity: 0.8;
+  font-family: 'Inter', sans-serif;
 }
 
 .products-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
+  gap: 30px;
   margin-bottom: 40px;
+  padding: 20px;
 }
 
 .product-card {
   background: #ffffff;
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
-  border: 1px solid #f1f5f9;
+  border: 1px solid rgba(226, 232, 240, 0.6);
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .product-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-  border-color: #4facfe;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15), 0 4px 16px rgba(59, 130, 246, 0.1);
+  border-color: #e2e8f0;
+}
+
+.product-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.product-card:hover::before {
+  opacity: 0;
 }
 
 .product-image {
   position: relative;
   width: 100%;
-  height: 320px;
+  height: 75%;
   overflow: hidden;
   background: #f8fafc;
 }
@@ -3162,7 +3076,7 @@ const getTechImage = (techId) => {
 }
 
 .product-card:hover .product-image img {
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
 .product-overlay {
@@ -3177,6 +3091,7 @@ const getTechImage = (techId) => {
   justify-content: center;
   opacity: 0;
   transition: all 0.3s ease;
+  pointer-events: none; /* 确保覆盖层不阻止点击事件 */
 }
 
 .product-card:hover .product-overlay {
@@ -3199,15 +3114,17 @@ const getTechImage = (techId) => {
 }
 
 .product-name {
-  font-size: 1.2rem;
+  font-size: 18px;
   font-weight: 600;
   color: #1e293b;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   line-height: 1.3;
+  letter-spacing: -0.01em;
+  font-family: 'Inter', sans-serif;
 }
 
 .product-description {
-  font-size: 0.9rem;
+  font-size: 14px;
   color: #64748b;
   line-height: 1.5;
   margin: 0;
@@ -3215,6 +3132,7 @@ const getTechImage = (techId) => {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  font-family: 'Inter', sans-serif;
 }
 
 /* 分页 */
@@ -3227,7 +3145,7 @@ const getTechImage = (techId) => {
 }
 
 .page-btn {
-  background: #f8fafc;
+  background: #ffffff;
   border: 2px solid #e2e8f0;
   color: #64748b;
   width: 40px;
@@ -3238,12 +3156,15 @@ const getTechImage = (techId) => {
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
 }
 
 .page-btn:hover:not(:disabled) {
-  background: #4facfe;
-  border-color: #4facfe;
+  background: #3b82f6;
+  border-color: #3b82f6;
   color: white;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  transform: translateY(-1px);
 }
 
 .page-btn:disabled {
@@ -3252,11 +3173,12 @@ const getTechImage = (techId) => {
 }
 
 .page-info {
-  font-size: 0.9rem;
+  font-size: 14px;
   color: #64748b;
   font-weight: 500;
   min-width: 60px;
   text-align: center;
+  font-family: 'Inter', sans-serif;
 }
 
 /* 响应式设计 */
@@ -3317,10 +3239,10 @@ const getTechImage = (techId) => {
 }
 .category-details {
   background: #ffffff;
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 40px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(226, 232, 240, 0.6);
 }
 
 /* 产品列表容器固定尺寸 */
@@ -3340,7 +3262,7 @@ const getTechImage = (techId) => {
   font-size: 2rem;
   color: #1e293b;
   margin-bottom: 10px;
-  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -3413,7 +3335,7 @@ const getTechImage = (techId) => {
   font-family: 'Font Awesome 5 Free';
   font-weight: 900;
   margin-right: 10px;
-  color: #4facfe;
+  color: #3b82f6;
 }
 
 .features-grid {
@@ -3428,17 +3350,17 @@ const getTechImage = (techId) => {
   padding: 20px;
   background: #f8fafc;
   border-radius: 8px;
-  border-left: 4px solid #4facfe;
+  border-left: 4px solid #3b82f6;
   transition: all 0.3s ease;
 }
 
 .feature-item:hover {
-  background: rgba(79, 172, 254, 0.05);
+  background: rgba(59, 130, 246, 0.05);
   transform: translateX(5px);
 }
 
 .feature-icon {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
   color: white;
   width: 40px;
   height: 40px;
@@ -3478,7 +3400,7 @@ const getTechImage = (techId) => {
   font-family: 'Font Awesome 5 Free';
   font-weight: 900;
   margin-right: 10px;
-  color: #4facfe;
+  color: #3b82f6;
 }
 
 .specs-list {
@@ -3503,8 +3425,8 @@ const getTechImage = (techId) => {
 
 .spec-value {
   font-weight: 600;
-  color: #4facfe;
-  background: rgba(79, 172, 254, 0.1);
+  color: #3b82f6;
+  background: rgba(59, 130, 246, 0.1);
   padding: 4px 12px;
   border-radius: 20px;
   font-size: 0.9rem;
@@ -3530,26 +3452,26 @@ const getTechImage = (techId) => {
 }
 
 .btn-primary {
-  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
   color: white;
-  box-shadow: 0 5px 15px rgba(79, 172, 254, 0.3);
+  box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(79, 172, 254, 0.4);
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
   color: white;
   text-decoration: none;
 }
 
 .btn-secondary {
   background: #f8fafc;
-  color: #4facfe;
-  border: 2px solid #4facfe;
+  color: #3b82f6;
+  border: 2px solid #3b82f6;
 }
 
 .btn-secondary:hover {
-  background: #4facfe;
+  background: #3b82f6;
   color: white;
   transform: translateY(-2px);
 }
@@ -3596,7 +3518,7 @@ const getTechImage = (techId) => {
 .stat-number {
   font-size: 2.5rem;
   font-weight: 700;
-  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 8px;

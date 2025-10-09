@@ -1,5 +1,10 @@
 <template>
   <div class="home-view">
+    <!-- 在页面头部添加字体引用 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
     <div class="home-loading" v-if="isPageLoading">
       <div class="loading-spinner-container">
         <div class="loading-spinner"></div>
@@ -99,75 +104,188 @@
             <p class="section-desc">{{ isZh ? '专业的反无人机系统，提供全方位的安全防护能力' : 'Professional anti-drone system providing comprehensive security protection' }}</p>
           </div>
           <div class="features-grid">
-            <div class="feature-card">
-              <div class="feature-icon">
-                <i class="fas fa-shield-alt"></i>
+            <div class="feature-card modern-card">
+              <div class="feature-header">
+                <div class="feature-icon-wrapper">
+                  <div class="feature-icon modern-icon">
+                    <svg viewBox="0 0 24 24" fill="none" class="icon-svg">
+                      <path d="M12 2L2 7v6c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1"/>
+                      <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
+                  <div class="feature-badge">{{ isZh ? '防护' : 'SHIELD' }}</div>
+                </div>
+                <h3>{{ isZh ? '全方位防护' : 'Comprehensive Protection' }}</h3>
               </div>
-              <h3>{{ isZh ? '全方位防护' : 'Comprehensive Protection' }}</h3>
               <p>{{ isZh ? '多传感器融合探测系统，实现360°无死角覆盖，有效防御各类无人机威胁' : 'Multi-sensor fusion detection system, achieving 360° coverage with no blind spots, effectively defending against various drone threats' }}</p>
-              <div class="feature-info">
-                <div class="info-item">
-                  <i class="fas fa-check"></i>
-                  <span>{{ isZh ? '雷达 + 光电 + 频谱' : 'Radar, optoelectronics, spectrum' }}</span>
+              <div class="feature-metrics">
+                <div class="metric-item">
+                  <div class="metric-icon">
+                    <svg viewBox="0 0 16 16" fill="currentColor">
+                      <circle cx="8" cy="8" r="3" fill="currentColor"/>
+                    </svg>
+                  </div>
+                  <span>{{ isZh ? '雷达 + 光电 + 频谱' : 'Radar + Optics + Spectrum' }}</span>
                 </div>
-                <div class="info-item">
-                  <i class="fas fa-check"></i>
-                  <span>{{ isZh ? '三位一体的多维度立体探测' : 'Three-in-one multi-dimensional three-dimensional detection' }}</span>
+                <div class="metric-item">
+                  <div class="metric-icon">
+                    <svg viewBox="0 0 16 16" fill="currentColor">
+                      <circle cx="8" cy="8" r="3" fill="currentColor"/>
+                    </svg>
+                  </div>
+                  <span>{{ isZh ? '三维立体探测系统' : '3D Detection System' }}</span>
+                </div>
+              </div>
+              <div class="feature-chart">
+                <div class="chart-progress">
+                  <div class="progress-bar" data-progress="95" style="--progress: 95%"></div>
+                  <span class="progress-label">{{ isZh ? '覆盖率 95%' : 'Coverage 95%' }}</span>
                 </div>
               </div>
             </div>
-            <div class="feature-card">
-              <div class="feature-icon">
-                <i class="fas fa-bolt"></i>
+            
+            <div class="feature-card modern-card">
+              <div class="feature-header">
+                <div class="feature-icon-wrapper">
+                  <div class="feature-icon modern-icon">
+                    <svg viewBox="0 0 24 24" fill="none" class="icon-svg">
+                      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1"/>
+                    </svg>
+                  </div>
+                  <div class="feature-badge">{{ isZh ? '响应' : 'SPEED' }}</div>
+                </div>
+                <h3>{{ isZh ? '快速响应' : 'Rapid Response' }}</h3>
               </div>
-              <h3>{{ isZh ? '快速响应' : 'Rapid Response' }}</h3>
               <p>{{ isZh ? '自动识别威胁等级，毫秒级决策，秒级拦截，确保关键区域安全' : 'Automatic threat level identification, millisecond-level decision making, second-level interception, ensuring key area security' }}</p>
-              <div class="feature-info">
-                <div class="info-item">
-                  <i class="fas fa-check"></i>
-                  <span>{{ isZh ? '360 度无盲区覆盖' : '360-degree blind spot-free coverage' }}</span>
+              <div class="feature-metrics">
+                <div class="metric-item">
+                  <div class="metric-icon">
+                    <svg viewBox="0 0 16 16" fill="currentColor">
+                      <circle cx="8" cy="8" r="3" fill="currentColor"/>
+                    </svg>
+                  </div>
+                  <span>{{ isZh ? '360°无盲区覆盖' : '360° Coverage' }}</span>
                 </div>
-                <div class="info-item">
-                  <i class="fas fa-check"></i>
-                  <span>{{ isZh ? '立体化分层防御' : 'Three-dimensional hierarchical defense' }}</span>
+                <div class="metric-item">
+                  <div class="metric-icon">
+                    <svg viewBox="0 0 16 16" fill="currentColor">
+                      <circle cx="8" cy="8" r="3" fill="currentColor"/>
+                    </svg>
+                  </div>
+                  <span>{{ isZh ? '立体化分层防御' : 'Layered Defense' }}</span>
+                </div>
+              </div>
+              <div class="feature-chart">
+                <div class="response-time-chart">
+                  <div class="time-indicator">
+                    <span class="time-value">< 100ms</span>
+                    <span class="time-label">{{ isZh ? '响应时间' : 'Response Time' }}</span>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="feature-card">
-              <div class="feature-icon">
-                <i class="fas fa-brain"></i>
+            
+            <div class="feature-card modern-card">
+              <div class="feature-header">
+                <div class="feature-icon-wrapper">
+                  <div class="feature-icon modern-icon">
+                    <svg viewBox="0 0 24 24" fill="none" class="icon-svg">
+                      <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1"/>
+                    </svg>
+                  </div>
+                  <div class="feature-badge">{{ isZh ? '智能' : 'AI' }}</div>
+                </div>
+                <h3>{{ isZh ? '智能分析' : 'Intelligent Analysis' }}</h3>
               </div>
-              <h3>{{ isZh ? '智能分析' : 'Intelligent Analysis' }}</h3>
               <p>{{ isZh ? 'AI深度学习算法，准确识别无人机型号与意图，误报率低于0.1%' : 'AI deep learning algorithms, accurately identifying drone models and intentions, with a false alarm rate below 0.1%' }}</p>
-              <div class="feature-info">
-                <div class="info-item">
-                  <i class="fas fa-check"></i>
-                  <span>{{ isZh ? '精确识别2000+型号无人机' : 'Precisely Identify 2000+ Drone Models' }}</span>
+              <div class="feature-metrics">
+                <div class="metric-item">
+                  <div class="metric-icon">
+                    <svg viewBox="0 0 16 16" fill="currentColor">
+                      <circle cx="8" cy="8" r="3" fill="currentColor"/>
+                    </svg>
+                  </div>
+                  <span>{{ isZh ? '识别2000+型号' : 'Identify 2000+ Models' }}</span>
                 </div>
-                <div class="info-item">
-                  <i class="fas fa-check"></i>
-                  <span>{{ isZh ? '行为意图智能分析' : 'Behavioral Intent Intelligent Analysis' }}</span>
+                <div class="metric-item">
+                  <div class="metric-icon">
+                    <svg viewBox="0 0 16 16" fill="currentColor">
+                      <circle cx="8" cy="8" r="3" fill="currentColor"/>
+                    </svg>
+                  </div>
+                  <span>{{ isZh ? '行为意图分析' : 'Intent Analysis' }}</span>
+                </div>
+              </div>
+              <div class="feature-chart">
+                <div class="accuracy-chart">
+                  <div class="accuracy-circle">
+                    <svg viewBox="0 0 42 42" class="donut">
+                      <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="#e2e8f0" stroke-width="3"></circle>
+                      <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="url(#accuracyGradient)" stroke-width="3" stroke-dasharray="98 2" stroke-dashoffset="0" class="accuracy-progress"></circle>
+                    </svg>
+                    <div class="accuracy-text">
+                      <span class="accuracy-value">99.9%</span>
+                      <span class="accuracy-label">{{ isZh ? '准确率' : 'Accuracy' }}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="feature-card">
-              <div class="feature-icon">
-                <i class="fas fa-cogs"></i>
-              </div>
-              <h3>{{ isZh ? '系统集成' : 'System Integration' }}</h3>
-              <p>{{ isZh ? '模块化设计，可灵活适配各类场景需求，与现有安防系统无缝对接' : 'Modular design, flexibly adapting to various scenario requirements, seamlessly connecting with existing security systems' }}</p>
-              <div class="feature-info">
-                <div class="info-item">
-                  <i class="fas fa-check"></i>
-                  <span>{{ isZh ? '支持多协议数据接口' : 'Support for Multi-protocol Data Interfaces' }}</span>
+            
+            <div class="feature-card modern-card">
+              <div class="feature-header">
+                <div class="feature-icon-wrapper">
+                  <div class="feature-icon modern-icon">
+                    <svg viewBox="0 0 24 24" fill="none" class="icon-svg">
+                      <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1"/>
+                    </svg>
+                  </div>
+                  <div class="feature-badge">{{ isZh ? '集成' : 'SYSTEM' }}</div>
                 </div>
-                <div class="info-item">
-                  <i class="fas fa-check"></i>
-                  <span>{{ isZh ? '定制化方案开发' : 'Customized Solution Development' }}</span>
+                <h3>{{ isZh ? '系统集成' : 'System Integration' }}</h3>
+              </div>
+              <p>{{ isZh ? '模块化设计，可灵活适配各类场景需求，与现有安防系统无缝对接' : 'Modular design, flexibly adapting to various scenario requirements, seamlessly connecting with existing security systems' }}</p>
+              <div class="feature-metrics">
+                <div class="metric-item">
+                  <div class="metric-icon">
+                    <svg viewBox="0 0 16 16" fill="currentColor">
+                      <circle cx="8" cy="8" r="3" fill="currentColor"/>
+                    </svg>
+                  </div>
+                  <span>{{ isZh ? '多协议接口支持' : 'Multi-protocol Support' }}</span>
+                </div>
+                <div class="metric-item">
+                  <div class="metric-icon">
+                    <svg viewBox="0 0 16 16" fill="currentColor">
+                      <circle cx="8" cy="8" r="3" fill="currentColor"/>
+                    </svg>
+                  </div>
+                  <span>{{ isZh ? '定制化方案开发' : 'Custom Development' }}</span>
+                </div>
+              </div>
+              <div class="feature-chart">
+                <div class="integration-chart">
+                  <div class="integration-nodes">
+                    <div class="node active"></div>
+                    <div class="node active"></div>
+                    <div class="node active"></div>
+                    <div class="connection-line"></div>
+                  </div>
+                  <span class="integration-label">{{ isZh ? '无缝集成' : 'Seamless Integration' }}</span>
                 </div>
               </div>
             </div>
           </div>
+          
+          <!-- 添加SVG渐变定义 -->
+          <svg width="0" height="0" style="position: absolute;">
+            <defs>
+              <linearGradient id="accuracyGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#3b82f6" />
+                <stop offset="100%" stop-color="#8b5cf6" />
+              </linearGradient>
+            </defs>
+          </svg>
         </div>
       </section>
       
@@ -192,8 +310,8 @@
                 </div>
               </div>
               <div class="about-actions">
-                <RouterLink to="/about" class="btn btn-primary">{{ isZh ? '了解更多' : 'Learn More' }}</RouterLink>
-                <RouterLink to="/join" class="btn btn-outline">{{ isZh ? '加入我们' : 'Join Us' }}</RouterLink>
+                <!-- <RouterLink to="/about" class="btn btn-primary">{{ isZh ? '了解更多' : 'Learn More' }}</RouterLink>
+                <RouterLink to="/join" class="btn btn-outline">{{ isZh ? '加入我们' : 'Join Us' }}</RouterLink> -->
               </div>
             </div>
             <div class="about-img">
@@ -210,9 +328,9 @@
         </div>
       </section>
 
-      <!-- 联系我们 -->
-      <section id="contact" class="contact section">
-        <div class="contact-bg"></div>
+      <!-- 联系我们 - 现代化重新设计 -->
+      <section id="contact" class="contact section modern-contact">
+        <div class="contact-bg-pattern"></div>
         <div class="container">
           <div class="section-header">
             <h2 class="section-title">{{ isZh ? '联系我们' : 'Contact Us' }}</h2>
@@ -220,44 +338,108 @@
           </div>
           <div class="contact-content">
             <div class="contact-info">
-              <div class="info-card">
+              <!-- 公司地址卡片 -->
+              <div class="info-card modern-info-card featured-card">
                 <div class="info-header">
-                  <div class="info-icon">
-                    <i class="fas fa-map-marker-alt"></i>
+                  <div class="info-icon-wrapper">
+                    <div class="info-icon modern-info-icon">
+                      <svg viewBox="0 0 24 24" fill="none" class="contact-icon-svg">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1"/>
+                        <circle cx="12" cy="9" r="2.5" stroke="currentColor" stroke-width="2" fill="none"/>
+                      </svg>
+                    </div>
+                    <div class="info-badge">{{ isZh ? '地址' : 'LOCATION' }}</div>
                   </div>
                   <h3>{{ isZh ? '公司地址' : 'Company Address' }}</h3>
                 </div>
-                <p>{{ currentSiteInfo.contactInfo.address }}</p>
-                <div class="address-image">
-                  <img src="/images/company/company-location.jpg.svg" alt="公司地址" @error="handleAddressImageError">
-                  <div class="address-overlay">
-                    <div class="address-marker">
-                      <i class="fas fa-map-marker-alt"></i>
-                      <span>{{ isZh ? '朗德智能' : 'Lande' }}</span>
+                <div class="info-content">
+                  <p class="address-text">{{ currentSiteInfo.contactInfo.address }}</p>
+                  <div class="address-image modern-address-image">
+                    <img src="/images/company/company-location.jpg.svg" alt="公司地址" @error="handleAddressImageError">
+                    <div class="address-overlay modern-overlay">
+                      <div class="address-marker modern-marker">
+                        <div class="marker-icon">
+                          <svg viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M8 2C6.34 2 5 3.34 5 5c0 2.63 3 6.5 3 6.5s3-3.87 3-6.5c0-1.66-1.34-3-3-3z"/>
+                            <circle cx="8" cy="5" r="1" fill="white"/>
+                          </svg>
+                        </div>
+                        <span>{{ isZh ? '朗德智能' : 'Lande Intelligence' }}</span>
+                      </div>
                     </div>
                   </div>
+                  <div class="contact-actions">
+                    <a href="https://ditu.amap.com/search?query=浙江省杭州市滨江区科技园区创新大厦" target="_blank" class="contact-link primary-link">
+                      <svg viewBox="0 0 16 16" fill="currentColor" class="link-icon">
+                        <path d="M8 2C6.34 2 5 3.34 5 5c0 2.63 3 6.5 3 6.5s3-3.87 3-6.5c0-1.66-1.34-3-3-3z"/>
+                      </svg>
+                      {{ isZh ? '获取导航' : 'Get Directions' }}
+                      <svg viewBox="0 0 16 16" fill="currentColor" class="arrow-icon">
+                        <path d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                      </svg>
+                    </a>
+                  </div>
                 </div>
-                <a href="https://ditu.amap.com/search?query=浙江省杭州市滨江区科技园区创新大厦" target="_blank" class="info-link">{{ isZh ? '获取导航' : 'Get Directions' }} <i class="fas fa-arrow-right"></i></a>
               </div>
-              <div class="info-card">
+              
+              <!-- 联系电话卡片 -->
+              <div class="info-card modern-info-card">
                 <div class="info-header">
-                  <div class="info-icon">
-                    <i class="fas fa-phone"></i>
+                  <div class="info-icon-wrapper">
+                    <div class="info-icon modern-info-icon">
+                      <svg viewBox="0 0 24 24" fill="none" class="contact-icon-svg">
+                        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.76 19.76 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.76 19.76 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1"/>
+                      </svg>
+                    </div>
+                    <div class="info-badge">{{ isZh ? '热线' : 'PHONE' }}</div>
                   </div>
                   <h3>{{ isZh ? '联系电话' : 'Phone' }}</h3>
                 </div>
-                <p>{{ currentSiteInfo.contactInfo.phone }}</p>
-                <a :href="`tel:${currentSiteInfo.contactInfo.phone}`" class="info-link">{{ isZh ? '拨打电话' : 'Call Us' }} <i class="fas fa-arrow-right"></i></a>
+                <div class="info-content">
+                  <p class="contact-value">{{ currentSiteInfo.contactInfo.phone }}</p>
+                  <div class="contact-actions">
+                    <a :href="`tel:${currentSiteInfo.contactInfo.phone}`" class="contact-link primary-link">
+                      <svg viewBox="0 0 16 16" fill="currentColor" class="link-icon">
+                        <path d="M15.854.146a.5.5 0 0 1 0 .708L11.707 5l1.147 1.146a.5.5 0 0 1-.708.708L11 5.707 6.854 9.854a.5.5 0 0 1-.708-.708L10.293 5 9.146 3.854a.5.5 0 0 1 .708-.708L11 4.293 15.146.146a.5.5 0 0 1 .708 0z"/>
+                        <path d="M3.5 0a.5.5 0 0 1 .5.5v1.293l4.146-4.147a.5.5 0 0 1 .708.708L4.707 2.5H6a.5.5 0 0 1 0 1H3.5a.5.5 0 0 1-.5-.5v-3a.5.5 0 0 1 .5-.5z"/>
+                      </svg>
+                      {{ isZh ? '拨打电话' : 'Call Us' }}
+                      <svg viewBox="0 0 16 16" fill="currentColor" class="arrow-icon">
+                        <path d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
               </div>
-              <div class="info-card">
+              
+              <!-- 电子邮箱卡片 -->
+              <div class="info-card modern-info-card">
                 <div class="info-header">
-                  <div class="info-icon">
-                    <i class="fas fa-envelope"></i>
+                  <div class="info-icon-wrapper">
+                    <div class="info-icon modern-info-icon">
+                      <svg viewBox="0 0 24 24" fill="none" class="contact-icon-svg">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1"/>
+                        <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2" fill="none"/>
+                      </svg>
+                    </div>
+                    <div class="info-badge">{{ isZh ? '邮箱' : 'EMAIL' }}</div>
                   </div>
                   <h3>{{ isZh ? '电子邮箱' : 'Email' }}</h3>
                 </div>
-                <p>{{ currentSiteInfo.contactInfo.email }}</p>
-                <a :href="`mailto:${currentSiteInfo.contactInfo.email}`" class="info-link">{{ isZh ? '发送邮件' : 'Send Email' }} <i class="fas fa-arrow-right"></i></a>
+                <div class="info-content">
+                  <p class="contact-value">{{ currentSiteInfo.contactInfo.email }}</p>
+                  <div class="contact-actions">
+                    <a :href="`mailto:${currentSiteInfo.contactInfo.email}`" class="contact-link primary-link">
+                      <svg viewBox="0 0 16 16" fill="currentColor" class="link-icon">
+                        <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z"/>
+                      </svg>
+                      {{ isZh ? '发送邮件' : 'Send Email' }}
+                      <svg viewBox="0 0 16 16" fill="currentColor" class="arrow-icon">
+                        <path d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
             <ContactForm />
@@ -707,60 +889,111 @@ onMounted(() => {
     isPageLoading.value = false
     // 发送页面加载完成事件
     emit('page-loaded')
+    
+    // 初始化进度条动画
+    initProgressBars()
   }, 500)
 })
+
+// 初始化进度条动画
+const initProgressBars = () => {
+  // 使用 Intersection Observer 来监听元素进入视口
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const progressBar = entry.target.querySelector('.progress-bar')
+        if (progressBar) {
+          // 设置 CSS 变量来控制进度条宽度
+          const progress = progressBar.getAttribute('data-progress') || '95'
+          progressBar.style.setProperty('--progress', progress + '%')
+        }
+      }
+    })
+  }, { threshold: 0.3 })
+  
+  // 观察所有特性卡片
+  setTimeout(() => {
+    const featureCards = document.querySelectorAll('.feature-card.modern-card')
+    featureCards.forEach(card => observer.observe(card))
+  }, 100)
+}
 
 // 定义emit
 const emit = defineEmits(['page-loaded'])
 </script>
 
 <style scoped>
-/* 主横幅增强，适配3D背景 */
+/* 全局样式优化 */
+* {
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.home-view {
+  font-feature-settings: 'cv01', 'cv02', 'cv03', 'cv04';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* 主横幅增强，适配3D背景 - 现代优化版本 */
 .hero {
   position: relative;
   min-height: 100vh;
   display: flex;
   align-items: center;
   overflow: hidden;
-  background: transparent; /* 移除背景，使3D场景可见 */
+  background: linear-gradient(135deg, 
+    rgba(248, 250, 252, 0.95) 0%, 
+    rgba(241, 245, 249, 0.98) 25%,
+    rgba(236, 254, 255, 0.95) 50%,
+    rgba(219, 234, 254, 0.98) 100%
+  );
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
 .hero-content-wrapper {
   position: relative;
   width: 100%;
-  z-index: 2; /* 确保内容在3D场景上方 */
-  background: linear-gradient(to right, rgba(15, 23, 42, 0.8) 0%, rgba(15, 23, 42, 0.5) 100%);
-  padding: 80px 0;
-  backdrop-filter: blur(5px);
+  z-index: 2;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.7) 0%, 
+    rgba(248, 250, 252, 0.8) 100%
+  );
+  padding: 100px 0;
+  backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(147, 197, 253, 0.2);
 }
 
 .hero-content {
   position: relative;
-  max-width: 800px;
-  color: #fff;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  max-width: 900px;
+  color: #0f172a;
+  text-shadow: none;
   animation: fadeInUp 1s ease-out;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .tech-badge {
   display: inline-block;
-  background: rgba(79, 172, 254, 0.2);
-  backdrop-filter: blur(10px);
-  padding: 8px 16px;
-  border-radius: 30px;
-  font-size: 0.9rem;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(147, 197, 253, 0.15) 100%);
+  backdrop-filter: blur(12px);
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 0.85rem;
   font-weight: 600;
-  color: #4facfe;
-  margin-bottom: 20px;
-  border: 1px solid rgba(79, 172, 254, 0.3);
-  box-shadow: 0 5px 15px rgba(79, 172, 254, 0.2);
+  color: #1e40af;
+  margin-bottom: 25px;
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.15);
   animation: fadeInDown 0.8s ease-out 0.3s both;
+  letter-spacing: 0.5px;
 }
 
-/* LANDER Logo样式 */
+/* LANDER Logo样式 - 现代优化版本 */
 .hero-logo {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 35px;
   animation: fadeInDown 0.8s ease-out 0.2s both;
   display: flex;
   align-items: center;
@@ -768,29 +1001,31 @@ const emit = defineEmits(['page-loaded'])
 }
 
 .brand-logo-img {
-  height: 120px;
-  max-width: 480px;
+  height: 130px;
+  max-width: 520px;
   object-fit: contain;
-  transition: all 0.3s ease;
-  filter: brightness(1.1) contrast(1.05) drop-shadow(0 0 20px rgba(79, 172, 254, 0.3));
-  border-radius: 8px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: brightness(0.95) contrast(1.1) drop-shadow(0 8px 25px rgba(59, 130, 246, 0.25));
+  border-radius: 12px;
 }
 
 .brand-logo-img:hover {
-  transform: scale(1.05);
-  filter: brightness(1.2) contrast(1.1) drop-shadow(0 0 30px rgba(79, 172, 254, 0.5));
+  transform: translateY(-3px) scale(1.03);
+  filter: brightness(1) contrast(1.15) drop-shadow(0 12px 35px rgba(59, 130, 246, 0.35));
 }
 
 .tech-headline {
-  font-size: 3.5rem;
-  margin-bottom: 1.5rem;
-  font-weight: 700;
-  line-height: 1.2;
-  background: linear-gradient(90deg, #4facfe 0%, #0a1af0 100%);
+  font-size: 3.2rem;
+  margin-bottom: 2rem;
+  font-weight: 800;
+  line-height: 1.15;
+  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: none;
   position: relative;
+  letter-spacing: -0.02em;
+  font-family: 'Inter', sans-serif;
 }
 
 /* .tech-headline::after {
@@ -818,30 +1053,37 @@ const emit = defineEmits(['page-loaded'])
 } */
 
 .hero-content p {
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
-  opacity: 0.9;
-  max-width: 600px;
+  font-size: 1.15rem;
+  margin-bottom: 2.5rem;
+  color: #64748b;
+  max-width: 650px;
   line-height: 1.7;
+  font-weight: 400;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: 'Inter', sans-serif;
 }
 
 .hero-buttons {
   display: flex;
-  gap: 20px;
-  margin-top: 30px;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 40px;
   animation: fadeInUp 0.8s ease-out 0.6s both;
 }
 
 .btn {
   display: inline-flex;
   align-items: center;
-  padding: 14px 28px;
-  border-radius: 30px;
+  padding: 16px 32px;
+  border-radius: 50px;
   font-size: 1rem;
   font-weight: 600;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.25px;
 }
 
 .btn::before {
@@ -860,29 +1102,33 @@ const emit = defineEmits(['page-loaded'])
 }
 
 .btn-primary {
-  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: #ffffff;
   border: none;
   font-weight: 600;
-  box-shadow: 0 10px 20px rgba(79, 172, 254, 0.3);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4), 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .btn-primary:hover {
-  box-shadow: 0 15px 25px rgba(79, 172, 254, 0.4);
-  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5), 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
 }
 
 .btn-outline {
-  background: transparent;
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  color: #fff;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.8);
+  border: 2px solid rgba(59, 130, 246, 0.3);
+  color: #1e40af;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 .btn-outline:hover {
-  border-color: #fff;
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
-  transform: translateY(-3px);
+  border-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.08);
+  color: #1d4ed8;
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15);
+  transform: translateY(-2px);
 }
 
 .btn-arrow {
@@ -1017,11 +1263,11 @@ const emit = defineEmits(['page-loaded'])
   }
 }
 
-/* 安全防御特性 */
+/* 安全防御特性 - 现代优化版本 */
 .defense-features {
-  padding: 100px 0;
+  padding: 120px 0;
   position: relative;
-  background: #f8fafc;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
   overflow: hidden;
 }
 
@@ -1031,165 +1277,477 @@ const emit = defineEmits(['page-loaded'])
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('/images/particles.png') repeat;
-  opacity: 0.05;
-  animation: particleMove 60s linear infinite;
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(147, 197, 253, 0.05) 0%, transparent 50%);
+  animation: particleFloat 30s ease-in-out infinite alternate;
 }
 
-@keyframes particleMove {
+@keyframes particleFloat {
   0% {
-    background-position: 0 0;
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
   }
   100% {
-    background-position: 1000px 1000px;
+    transform: translateY(-20px) rotate(2deg);
+    opacity: 0.8;
   }
 }
 
 .section-header {
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 80px;
 }
 
 .section-title {
-  font-size: 2.5rem;
-  margin-bottom: 15px;
+  font-size: 2.8rem;
+  margin-bottom: 20px;
   position: relative;
   display: inline-block;
+  font-weight: 800;
+  color: #0f172a;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: -0.025em;
 }
 
 .section-title::after {
   content: '';
   position: absolute;
-  bottom: -10px;
+  bottom: -12px;
   left: 50%;
   transform: translateX(-50%);
-  width: 60px;
+  width: 80px;
   height: 4px;
-  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
   border-radius: 2px;
 }
 
 .section-desc {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: #64748b;
-  max-width: 600px;
+  max-width: 650px;
   margin: 0 auto;
+  line-height: 1.6;
+  font-family: 'Inter', sans-serif;
 }
 
 .features-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
+  gap: 35px;
 }
 
-.feature-card {
-  background: #fff;
-  border-radius: 16px;
-  padding: 40px 30px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
-  transition: all 0.5s ease;
+/* 现代化特性卡片设计 */
+.feature-card.modern-card {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.95) 0%, 
+    rgba(255, 255, 255, 0.9) 100%);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-radius: 24px;
+  padding: 0;
+  box-shadow: 
+    0 8px 32px rgba(59, 130, 246, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
-  z-index: 1;
-  height: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  height: auto;
   display: flex;
   flex-direction: column;
 }
 
-.feature-card::before {
+.feature-card.modern-card::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 5px;
-  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(59, 130, 246, 0.4) 50%, 
+    transparent 100%);
   opacity: 0;
-  transition: all 0.3s ease;
+  transition: opacity 0.4s ease;
 }
 
-.feature-card:hover {
-  transform: translateY(-15px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+.feature-card.modern-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 
+    0 20px 40px rgba(59, 130, 246, 0.15),
+    0 8px 24px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
-.feature-card:hover::before {
+.feature-card.modern-card:hover::before {
   opacity: 1;
 }
 
-.feature-icon {
-  width: 80px;
-  height: 80px;
-  border-radius: 20px;
-  background: linear-gradient(135deg, rgba(79, 172, 254, 0.1) 0%, rgba(0, 242, 254, 0.1) 100%);
+/* 特性头部区域 */
+.feature-header {
+  padding: 32px 32px 24px;
+  position: relative;
+}
+
+.feature-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.feature-icon.modern-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, 
+    rgba(59, 130, 246, 0.1) 0%, 
+    rgba(147, 197, 253, 0.15) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 25px;
-  font-size: 32px;
-  color: #4facfe;
-  transition: all 0.3s ease;
+  border: 2px solid rgba(59, 130, 246, 0.15);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.feature-card:hover .feature-icon {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-  color: #fff;
+.feature-icon.modern-icon::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transform: rotate(-45deg) translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.feature-card.modern-card:hover .feature-icon.modern-icon {
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+}
+
+.feature-card.modern-card:hover .feature-icon.modern-icon::before {
+  transform: rotate(-45deg) translateX(100%);
+}
+
+.icon-svg {
+  width: 32px;
+  height: 32px;
+  color: #3b82f6;
+  transition: all 0.4s ease;
+}
+
+.feature-card.modern-card:hover .icon-svg {
+  color: #ffffff;
   transform: scale(1.1);
 }
 
-.feature-card h3 {
+.feature-badge {
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 12px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+  font-family: 'Inter', sans-serif;
+}
+
+.feature-header h3 {
   font-size: 1.4rem;
-  margin-bottom: 15px;
+  font-weight: 700;
   color: #0f172a;
+  margin: 0;
+  line-height: 1.3;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: -0.01em;
 }
 
-.feature-card p {
+.feature-card.modern-card p {
   color: #64748b;
-  margin-bottom: 25px;
   line-height: 1.6;
+  margin: 0 32px 24px;
   font-size: 0.95rem;
+  font-family: 'Inter', sans-serif;
 }
 
-.feature-info {
-  margin-top: auto;
-  border-top: 1px solid rgba(203, 213, 225, 0.5);
-  padding-top: 20px;
+/* 特性指标区域 */
+.feature-metrics {
+  padding: 0 32px;
+  margin-bottom: 24px;
 }
 
-.info-item {
+.metric-item {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
-  font-size: 0.9rem;
-  color: #334155;
+  margin-bottom: 12px;
+  font-size: 0.88rem;
+  color: #475569;
+  font-family: 'Inter', sans-serif;
 }
 
-.info-item i {
-  color: #4facfe;
-  margin-right: 10px;
+.metric-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 12px;
+  color: #3b82f6;
+  opacity: 0.7;
 }
 
-/* 响应式调整 */
+/* 图表区域样式 */
+.feature-chart {
+  padding: 24px 32px 32px;
+  background: linear-gradient(135deg, 
+    rgba(248, 250, 252, 0.8) 0%, 
+    rgba(241, 245, 249, 0.9) 100%);
+  margin-top: auto;
+  border-radius: 0 0 24px 24px;
+  border-top: 1px solid rgba(226, 232, 240, 0.6);
+}
+
+/* 进度条图表 */
+.chart-progress {
+  position: relative;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: var(--progress, 95%);
+  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+  border-radius: 4px;
+  animation: progressFill 2s ease-out 0.5s both;
+}
+
+@keyframes progressFill {
+  from { width: 0; }
+  to { width: var(--progress, 95%); }
+}
+
+.progress-label {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.8rem;
+  color: #64748b;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+}
+
+/* 响应时间图表 */
+.response-time-chart {
+  text-align: center;
+}
+
+.time-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.time-value {
+  font-size: 1.8rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 4px;
+  font-family: 'Inter', sans-serif;
+}
+
+.time-label {
+  font-size: 0.8rem;
+  color: #64748b;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+}
+
+/* 准确率环形图表 */
+.accuracy-chart {
+  display: flex;
+  justify-content: center;
+}
+
+.accuracy-circle {
+  position: relative;
+  width: 84px;
+  height: 84px;
+}
+
+.donut {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.accuracy-progress {
+  stroke-linecap: round;
+  animation: drawCircle 2s ease-out 0.5s both;
+}
+
+@keyframes drawCircle {
+  from { stroke-dasharray: 0 100; }
+  to { stroke-dasharray: 98 2; }
+}
+
+.accuracy-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.accuracy-value {
+  display: block;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #3b82f6;
+  line-height: 1;
+  font-family: 'Inter', sans-serif;
+}
+
+.accuracy-label {
+  font-size: 0.7rem;
+  color: #64748b;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+}
+
+/* 集成图表 */
+.integration-chart {
+  text-align: center;
+}
+
+.integration-nodes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.node {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  transition: all 0.4s ease;
+  position: relative;
+}
+
+.node.active {
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.4);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.2); opacity: 0.8; }
+}
+
+.connection-line {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  right: 20px;
+  height: 2px;
+  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+  border-radius: 1px;
+  z-index: -1;
+  animation: lineGrow 1.5s ease-out 1s both;
+}
+
+@keyframes lineGrow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.integration-label {
+  font-size: 0.8rem;
+  color: #64748b;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+}
+
+/* 响应式调整 - 现代优化版本 */
 @media (max-width: 1200px) {
   .features-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+  
+  .section-title {
+    font-size: 2.4rem;
+  }
+  
+  .feature-card.modern-card {
+    margin-bottom: 20px;
+  }
+  
+  .contact-content {
+    grid-template-columns: 1fr 1.2fr;
+    gap: 35px;
   }
 }
 
 @media (max-width: 991px) {
   .tech-headline {
-    font-size: 2.8rem;
+    font-size: 2.6rem;
   }
   
   .hero-stats {
     gap: 20px;
+  }
+  
+  .hero-content-wrapper {
+    padding: 80px 0;
+  }
+  
+  .about-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .contact-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .contact-info {
+    grid-template-columns: 1fr;
+  }
+  
+  .info-card.featured-card {
+    grid-row: auto;
   }
 }
 
 @media (max-width: 767px) {
   .hero-buttons {
     flex-direction: column;
-    gap: 15px;
+    gap: 18px;
   }
   
   .hero-stats {
@@ -1200,16 +1758,67 @@ const emit = defineEmits(['page-loaded'])
   
   .features-grid {
     grid-template-columns: 1fr;
+    gap: 25px;
   }
   
   .section-title {
-    font-size: 2rem;
+    font-size: 2.2rem;
+  }
+  
+  .section-desc {
+    font-size: 1.1rem;
+    padding: 0 15px;
+  }
+  
+  .feature-header {
+    padding: 24px 24px 18px;
+  }
+  
+  .feature-card.modern-card p {
+    margin: 0 24px 20px;
+  }
+  
+  .feature-metrics {
+    padding: 0 24px;
+  }
+  
+  .feature-chart {
+    padding: 20px 24px 24px;
+  }
+  
+  .defense-features,
+  .about,
+  .contact.modern-contact {
+    padding: 80px 0;
+  }
+  
+  /* 联系我们响应式 */
+  .info-header {
+    padding: 24px 24px 18px;
+  }
+  
+  .info-content {
+    padding: 0 24px 24px;
+  }
+  
+  .address-image.modern-address-image {
+    height: 200px;
+  }
+  
+  .info-icon.modern-info-icon {
+    width: 56px;
+    height: 56px;
+  }
+  
+  .contact-icon-svg {
+    width: 28px;
+    height: 28px;
   }
 }
 
 @media (max-width: 576px) {
   .tech-headline {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
   
   .hero-content p {
@@ -1227,6 +1836,88 @@ const emit = defineEmits(['page-loaded'])
   
   .stat-label {
     font-size: 0.9rem;
+  }
+  
+  .section-title {
+    font-size: 1.8rem;
+  }
+  
+  .feature-header {
+    padding: 20px 20px 16px;
+  }
+  
+  .feature-card.modern-card p {
+    margin: 0 20px 16px;
+    font-size: 0.9rem;
+  }
+  
+  .feature-metrics {
+    padding: 0 20px;
+  }
+  
+  .feature-chart {
+    padding: 16px 20px 20px;
+  }
+  
+  .btn {
+    padding: 14px 28px;
+    font-size: 0.95rem;
+  }
+  
+  .feature-icon.modern-icon {
+    width: 56px;
+    height: 56px;
+  }
+  
+  .icon-svg {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .feature-header h3 {
+    font-size: 1.2rem;
+  }
+  
+  /* 联系我们移动端优化 */
+  .info-header {
+    padding: 20px 20px 16px;
+  }
+  
+  .info-content {
+    padding: 0 20px 20px;
+  }
+  
+  .info-header h3 {
+    font-size: 1.2rem;
+  }
+  
+  .address-text,
+  .contact-value {
+    font-size: 0.9rem;
+  }
+  
+  .address-image.modern-address-image {
+    height: 180px;
+  }
+  
+  .info-icon.modern-info-icon {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .contact-icon-svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .contact-link.primary-link {
+    padding: 10px 16px;
+    font-size: 0.85rem;
+  }
+  
+  .info-badge {
+    font-size: 0.65rem;
+    padding: 3px 8px;
   }
 }
 
@@ -1743,35 +2434,38 @@ const emit = defineEmits(['page-loaded'])
     }
   }
   
-  /* 关于我们部分 */
+  /* 关于我们部分 - 现代优化版本 */
   .about {
-    padding: 100px 0;
+    padding: 120px 0;
     position: relative;
-    background: #fff;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
     overflow: hidden;
   }
   
   .about-shape {
     position: absolute;
-    top: -50%;
-    right: -20%;
-    width: 80%;
-    height: 200%;
-    background: linear-gradient(135deg, rgba(79, 172, 254, 0.03) 0%, rgba(0, 242, 254, 0.03) 100%);
-    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    top: -30%;
+    right: -15%;
+    width: 70%;
+    height: 160%;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.04) 0%, rgba(147, 197, 253, 0.06) 100%);
+    border-radius: 35% 65% 65% 35% / 35% 35% 65% 65%;
     z-index: 1;
-    animation: morphShape 20s linear infinite alternate;
+    animation: morphShape 25s ease-in-out infinite alternate;
   }
   
   @keyframes morphShape {
     0% {
-      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+      border-radius: 35% 65% 65% 35% / 35% 35% 65% 65%;
+      transform: rotate(0deg);
     }
     50% {
       border-radius: 60% 40% 40% 60% / 60% 60% 40% 40%;
+      transform: rotate(1deg);
     }
     100% {
-      border-radius: 40% 60% 30% 70% / 40% 30% 70% 60%;
+      border-radius: 45% 55% 35% 65% / 45% 35% 65% 55%;
+      transform: rotate(-1deg);
     }
   }
   
@@ -1790,26 +2484,34 @@ const emit = defineEmits(['page-loaded'])
   
   .about-badge {
     display: inline-block;
-    background: linear-gradient(135deg, rgba(79, 172, 254, 0.1) 0%, rgba(0, 242, 254, 0.1) 100%);
-    color: #4facfe;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(147, 197, 253, 0.12) 100%);
+    color: #1e40af;
     font-weight: 600;
-    padding: 8px 16px;
-    border-radius: 30px;
-    margin-bottom: 20px;
-    border: 1px solid rgba(79, 172, 254, 0.3);
+    padding: 10px 20px;
+    border-radius: 25px;
+    margin-bottom: 25px;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    font-family: 'Inter', sans-serif;
   }
   
   .about-text h3 {
-    font-size: 1.8rem;
-    font-weight: 700;
+    font-size: 2rem;
+    font-weight: 800;
     color: #0f172a;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    line-height: 1.3;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -0.02em;
   }
   
   .about-text p {
     color: #64748b;
     line-height: 1.7;
-    margin-bottom: 15px;
+    margin-bottom: 18px;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
   }
   
   .about-stats {
@@ -1821,12 +2523,19 @@ const emit = defineEmits(['page-loaded'])
   
   .stat-item {
     position: relative;
-    padding: 15px;
-    border-radius: 16px;
+    padding: 20px;
+    border-radius: 18px;
     text-align: center;
-    background: rgba(255, 255, 255, 0.5);
-    border: 1px solid rgba(226, 232, 240, 0.8);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(248, 250, 252, 0.9) 100%);
+    border: 1px solid rgba(226, 232, 240, 0.6);
     overflow: hidden;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+  }
+  
+  .stat-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.1);
   }
   
   .stat-bg {
@@ -1834,23 +2543,26 @@ const emit = defineEmits(['page-loaded'])
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 5px;
-    background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+    height: 4px;
+    background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
   }
   
   .stat-num {
-    font-size: 1.8rem;
-    font-weight: 700;
-    background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+    font-size: 2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
+    font-family: 'Inter', sans-serif;
   }
   
   .stat-desc {
     font-size: 0.9rem;
     color: #64748b;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
   }
   
   .about-actions {
@@ -1900,35 +2612,42 @@ const emit = defineEmits(['page-loaded'])
     margin: 0 10px;
   }
   
-  /* 联系我们部分 */
-  .contact {
-    padding: 100px 0;
+  /* 联系我们部分 - 现代化重新设计 */
+  .contact.modern-contact {
+    padding: 120px 0;
     position: relative;
-    background: #f8fafc;
+    background: linear-gradient(135deg, 
+      #f8fafc 0%, 
+      #f1f5f9 25%,
+      #e2e8f0 50%,
+      #f8fafc 100%);
     overflow: hidden;
   }
   
-  .contact-bg {
+  .contact-bg-pattern {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('data:image/svg+xml;utf8,<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg"><circle cx="2" cy="2" r="1" fill="%234facfe22"/></svg>');
-    background-size: 20px 20px;
-    opacity: 0.5;
+    background-image: 
+      radial-gradient(circle at 15% 25%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 85% 75%, rgba(147, 197, 253, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 45% 85%, rgba(59, 130, 246, 0.03) 0%, transparent 40%);
+    opacity: 0.8;
   }
   
-  .contact .container {
+  .contact.modern-contact .container {
     position: relative;
     z-index: 2;
   }
   
+  /* 联系我们内容布局 */
   .contact-content {
     display: grid;
     grid-template-columns: 1fr 1.5fr;
-    gap: 40px;
-    margin-top: 50px;
+    gap: 50px;
+    margin-top: 60px;
   }
   
   .contact-info {
@@ -1937,73 +2656,297 @@ const emit = defineEmits(['page-loaded'])
     gap: 30px;
   }
   
-  .info-card {
-    background: #fff;
-    border-radius: 16px;
-    padding: 30px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(226, 232, 240, 0.8);
-    transition: all 0.3s ease;
+  /* 现代化信息卡片 */
+  .info-card.modern-info-card {
+    background: linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.95) 0%, 
+      rgba(255, 255, 255, 0.9) 100%);
+    border-radius: 24px;
+    padding: 0;
+    box-shadow: 
+      0 8px 32px rgba(59, 130, 246, 0.08),
+      0 2px 16px rgba(0, 0, 0, 0.04),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(20px) saturate(180%);
+    overflow: hidden;
+    position: relative;
   }
   
-  .info-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  .info-card.modern-info-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(59, 130, 246, 0.4) 50%, 
+      transparent 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
   }
   
+  .info-card.modern-info-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 
+      0 20px 40px rgba(59, 130, 246, 0.15),
+      0 8px 24px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+  
+  .info-card.modern-info-card:hover::before {
+    opacity: 1;
+  }
+  
+  /* 特色卡片样式 */
+  .info-card.featured-card {
+    grid-row: span 2;
+    background: linear-gradient(135deg, 
+      rgba(59, 130, 246, 0.02) 0%, 
+      rgba(255, 255, 255, 0.95) 25%,
+      rgba(255, 255, 255, 0.9) 100%);
+  }
+  
+  .info-card.featured-card::before {
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(59, 130, 246, 0.6) 50%, 
+      transparent 100%);
+  }
+  
+  /* 信息头部区域 */
   .info-header {
+    padding: 32px 32px 24px;
+    position: relative;
+  }
+  
+  .info-icon-wrapper {
     display: flex;
     align-items: center;
-    margin-bottom: 15px;
+    justify-content: space-between;
+    margin-bottom: 20px;
   }
   
-  .info-icon {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, rgba(79, 172, 254, 0.1) 0%, rgba(0, 242, 254, 0.1) 100%);
+  .info-icon.modern-info-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, 
+      rgba(59, 130, 246, 0.1) 0%, 
+      rgba(147, 197, 253, 0.15) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #4facfe;
-    font-size: 18px;
-    margin-right: 15px;
-    flex-shrink: 0;
+    border: 2px solid rgba(59, 130, 246, 0.15);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .info-icon.modern-info-icon::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: rotate(-45deg) translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+  
+  .info-card.modern-info-card:hover .info-icon.modern-info-icon {
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1) rotate(8deg);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+  }
+  
+  .info-card.modern-info-card:hover .info-icon.modern-info-icon::before {
+    transform: rotate(-45deg) translateX(100%);
+  }
+  
+  .contact-icon-svg {
+    width: 32px;
+    height: 32px;
+    color: #3b82f6;
+    transition: all 0.4s ease;
+  }
+  
+  .info-card.modern-info-card:hover .contact-icon-svg {
+    color: #ffffff;
+    transform: scale(1.1);
+  }
+  
+  .info-badge {
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+    color: #ffffff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 12px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+    font-family: 'Inter', sans-serif;
   }
   
   .info-header h3 {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
+    font-weight: 700;
     color: #0f172a;
     margin: 0;
+    line-height: 1.3;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -0.01em;
   }
   
-  .info-card p {
+  /* 信息内容区域 */
+  .info-content {
+    padding: 0 32px 32px;
+  }
+  
+  .address-text,
+  .contact-value {
     color: #64748b;
-    margin-bottom: 20px;
     line-height: 1.6;
+    margin-bottom: 24px;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
   }
   
-  .info-link {
+  /* 现代化地址图片 */
+  .address-image.modern-address-image {
+    position: relative;
+    width: 100%;
+    height: 240px;
+    border-radius: 18px;
+    overflow: hidden;
+    margin: 20px 0 24px;
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+  }
+  
+  .address-image.modern-address-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .address-image.modern-address-image:hover img {
+    transform: scale(1.08);
+  }
+  
+  .address-overlay.modern-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, 
+      rgba(59, 130, 246, 0.1) 0%, 
+      rgba(0, 0, 0, 0.2) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .address-marker.modern-marker {
+    background: linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.95) 0%, 
+      rgba(248, 250, 252, 0.9) 100%);
+    border-radius: 50px;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.25);
+    backdrop-filter: blur(12px);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    transform: translateY(0);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .address-image.modern-address-image:hover .address-marker.modern-marker {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 35px rgba(59, 130, 246, 0.35);
+  }
+  
+  .marker-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    color: #3b82f6;
+  }
+  
+  .address-marker.modern-marker span {
+    font-weight: 700;
+    color: #0f172a;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+  }
+  
+  /* 联系操作区域 */
+  .contact-actions {
+    margin-top: 20px;
+  }
+  
+  .contact-link.primary-link {
     display: inline-flex;
     align-items: center;
-    color: #4facfe;
+    gap: 8px;
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+    color: #ffffff;
+    padding: 12px 20px;
+    border-radius: 50px;
+    text-decoration: none;
     font-weight: 600;
-    font-size: 0.95rem;
-    transition: all 0.3s ease;
-    margin-top: 15px;
+    font-size: 0.9rem;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+    position: relative;
+    overflow: hidden;
   }
   
-  .info-link i {
-    margin-left: 8px;
+  .contact-link.primary-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: all 0.4s ease;
+  }
+  
+  .contact-link.primary-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+    background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+  }
+  
+  .contact-link.primary-link:hover::before {
+    left: 100%;
+  }
+  
+  .link-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+  
+  .arrow-icon {
+    width: 14px;
+    height: 14px;
     transition: transform 0.3s ease;
+    flex-shrink: 0;
   }
   
-  .info-link:hover {
-    color: #0f172a;
-  }
-  
-  .info-link:hover i {
-    transform: translateX(5px);
+  .contact-link.primary-link:hover .arrow-icon {
+    transform: translateX(4px);
   }
   
   /* 地图卡片样式 */
@@ -2063,26 +3006,27 @@ const emit = defineEmits(['page-loaded'])
     }
   }
 
-  /* 地址图片样式 */
+  /* 地址图片样式 - 现代优化版本 */
   .address-image {
     position: relative;
     width: 100%;
-    height: 200px;
-    border-radius: 12px;
+    height: 220px;
+    border-radius: 16px;
     overflow: hidden;
-    margin: 15px 0;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.8);
   }
 
   .address-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .address-image:hover img {
-    transform: scale(1.05);
+    transform: scale(1.08);
   }
 
   .address-overlay {
@@ -2091,45 +3035,50 @@ const emit = defineEmits(['page-loaded'])
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.5));
+    background: linear-gradient(135deg, rgba(0,0,0,0.1) 0%, rgba(59, 130, 246, 0.3) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
   .address-marker {
-    background: rgba(255, 255, 255, 0.9);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.9) 100%);
     border-radius: 30px;
-    padding: 8px 16px;
+    padding: 12px 20px;
     display: flex;
     align-items: center;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.25);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.6);
     transform: translateY(0);
-    transition: transform 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .address-image:hover .address-marker {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 35px rgba(59, 130, 246, 0.35);
   }
 
   .address-marker i {
-    color: #4facfe;
-    font-size: 18px;
-    margin-right: 8px;
+    color: #3b82f6;
+    font-size: 20px;
+    margin-right: 10px;
   }
 
   .address-marker span {
-    font-weight: 600;
+    font-weight: 700;
     color: #0f172a;
+    font-family: 'Inter', sans-serif;
   }
 
-  /* 页面加载样式 */
+  /* 页面加载样式 - 现代优化版本 */
   .home-loading {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
+    font-family: 'Inter', sans-serif;
   }
 
   .loading-spinner-container {
@@ -2139,18 +3088,20 @@ const emit = defineEmits(['page-loaded'])
   }
 
   .loading-spinner {
-    width: 50px;
-    height: 50px;
-    border: 4px solid rgba(79, 172, 254, 0.2);
-    border-top: 4px solid #4facfe;
+    width: 60px;
+    height: 60px;
+    border: 4px solid rgba(59, 130, 246, 0.2);
+    border-top: 4px solid #3b82f6;
     border-radius: 50%;
     animation: spin 1s linear infinite;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
   }
 
   .loading-spinner-container span {
     color: #64748b;
-    font-size: 0.9rem;
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
   }
 
   @keyframes spin {

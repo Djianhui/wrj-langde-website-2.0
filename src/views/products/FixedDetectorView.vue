@@ -5,15 +5,14 @@
       <div class="container">
         <div class="breadcrumb">
           <RouterLink to="/">首页</RouterLink>
-          <span>/</span>
+          <CustomIcons name="chevron-right" :size="16" class="breadcrumb-separator" />
           <RouterLink to="/technology">产品中心</RouterLink>
-         <span>/</span>
+          <CustomIcons name="chevron-right" :size="16" class="breadcrumb-separator" />
           <span>立体防控</span>
-          <span>/</span>
+          <CustomIcons name="chevron-right" :size="16" class="breadcrumb-separator" />
           <span>侦探感知</span>
-          <span>/</span>
+          <CustomIcons name="chevron-right" :size="16" class="breadcrumb-separator" />
           <span>雷达探测</span>
-       
         </div>
         <div class="product-hero-content">
           <h1 class="product-title">近海安防雷达监测设备</h1>
@@ -96,31 +95,31 @@
         <div class="features-grid">
           <div class="feature-card">
             <div class="feature-icon">
-              <i class="fas fa-camera"></i>
+              <CustomIcons name="long-distance-monitoring" :size="32" />
             </div>
             <h3>监测距离远</h3>
-            <p>对于船只有效探测距离可达100m~5.0km，距 离远， 是一种原理先进的传感器， 在近海领域 都有非常广泛的应用。</p>
+            <p>对于船只有效探测距离可达100m~5.0km，距离远， 是一种原理先进的传感器， 在近海领域都有非常广泛的应用。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
-              <i class="fas fa-thermometer-half"></i>
+              <CustomIcons name="video-evidence" :size="32" />
             </div>
             <h3>录像取证</h3>
-            <p>架设方便、重量轻、操作简单，执法过程录像 取证系统记录入侵目标的视频和入侵轨迹。</p>
+            <p>架设方便、重量轻、操作简单，执法过程录像取证系统记录入侵目标的视频和入侵轨迹。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
-              <i class="fas fa-brain"></i>
+              <CustomIcons name="environmental-adaptation" :size="32" />
             </div>
             <h3>环境适应性强</h3>
-            <p>可在恶劣天气下工作， 全天候运行， 可按照预 案设置智能工作。</p>
+            <p>可在恶劣天气下工作， 全天候运行， 可按照预案设置智能工作。</p>
           </div>
            <div class="feature-card">
             <div class="feature-icon">
-              <i class="fas fa-brain"></i>
+              <CustomIcons name="high-convenience" :size="32" />
             </div>
             <h3>便捷性更高</h3>
-            <p>便携、重量轻、体积小;  对架设环境要求较低可 在灯杆或原有基建上进行安装，节约资源。</p>
+            <p>便携、重量轻、体积小;  对架设环境要求较低可在灯杆或原有基建上进行安装，节约资源。</p>
           </div>
         </div>
       </div>
@@ -130,19 +129,19 @@
         <h2 class="section-title">应用场景</h2>
         <div class="applications-grid">
           <div class="application-item">
-            <i class="fas fa-moon"></i>
+            <CustomIcons name="night-vision" :size="40" />
             <span>夜间监控</span>
           </div>
           <div class="application-item">
-            <i class="fas fa-building"></i>
+            <CustomIcons name="urban-security" :size="40" />
             <span>城市安防</span>
           </div>
           <div class="application-item">
-            <i class="fas fa-eye"></i>
+            <CustomIcons name="target-tracking" :size="40" />
             <span>目标跟踪</span>
           </div>
           <div class="application-item">
-            <i class="fas fa-video"></i>
+            <CustomIcons name="real-time-monitoring" :size="40" />
             <span>实时监控</span>
           </div>
         </div>
@@ -162,6 +161,7 @@
 
 <script setup>
 import { onMounted } from 'vue'
+import CustomIcons from '@/components/icons/CustomIcons.vue'
 
 // 定义emit
 const emit = defineEmits(['page-loaded'])
@@ -178,29 +178,58 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* 复用RadarDetectionView.vue的样式 */
+/* 现代化产品详情页基础样式 */
 .product-detail-page {
   padding-top: 0;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  min-height: 100vh;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
+/* 现代化产品头部 */
 .product-hero {
-  background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
   padding: 150px 0 80px;
   color: white;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(59, 130, 246, 0.2);
+}
+
+.product-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg"><circle cx="2" cy="2" r="1" fill="%23ffffff15"/></svg>');
+  background-size: 30px 30px;
+  opacity: 0.3;
+  animation: particleMove 60s linear infinite;
+}
+
+@keyframes particleMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 1000px 1000px; }
 }
 
 .breadcrumb {
   margin-bottom: 30px;
   font-size: 0.9rem;
+  position: relative;
+  z-index: 2;
 }
 
 .breadcrumb a {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.8);
   text-decoration: none;
+  transition: all 0.3s ease;
 }
 
 .breadcrumb a:hover {
   color: white;
+  text-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
 }
 
 .breadcrumb span {
@@ -209,24 +238,40 @@ onMounted(() => {
 }
 
 .product-title {
-  font-size: 3rem;
+  font-size: 3.5rem;
   margin-bottom: 20px;
-  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0.9) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  text-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
+  position: relative;
+  z-index: 2;
 }
 
 .product-subtitle {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   opacity: 0.9;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  position: relative;
+  z-index: 2;
 }
 
+/* 现代化产品概述区域 */
 .product-overview {
   display: grid;
   grid-template-columns: 1fr 1.5fr;
-  gap: 60px;
-  margin: 80px 0;
+  gap: 80px;
+  margin: 100px 0;
   align-items: center;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 60px;
+  box-shadow: 0 20px 60px rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.7);
 }
 
 .product-image {
@@ -235,292 +280,443 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+}
+
+.product-image::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+  border-radius: 24px;
+  z-index: -1;
 }
 
 .product-image img {
   width: 416px;
   height: 416px;
-  border-radius: 12px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 25px 50px rgba(59, 130, 246, 0.15);
   object-fit: cover;
   object-position: center;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-image:hover img {
+  transform: scale(1.05);
+  box-shadow: 0 35px 70px rgba(59, 130, 246, 0.2);
 }
 
 .product-info h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
+  font-size: 2.5rem;
+  margin-bottom: 24px;
   color: #1e293b;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .product-info p {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   line-height: 1.8;
   color: #64748b;
   margin-bottom: 30px;
+  font-weight: 400;
 }
 
-.product-specs h3 {
-  font-size: 1.3rem;
-  margin-bottom: 20px;
-  color: #1e293b;
-}
-
-.specs-grid {
-  display: grid;
-  gap: 15px;
-}
-
-.spec-item {
-  display: flex;
-  justify-content: space-between;
-  padding: 15px;
-  background: #f8fafc;
-  border-radius: 8px;
-  border: 1px solid #e2e8f0;
-}
-
-.spec-label {
-  font-weight: 500;
-  color: #374151;
-}
-
-.spec-value {
-  font-weight: 600;
-  color: #4facfe;
-}
-
+/* 现代化章节标题 */
 .section-title {
   text-align: center;
-  font-size: 2.2rem;
-  margin-bottom: 50px;
+  font-size: 2.8rem;
+  margin-bottom: 60px;
   color: #1e293b;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  position: relative;
 }
 
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+  border-radius: 2px;
+}
+
+/* 现代化特点和应用场景区域 */
 .features-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 30px;
-  margin-bottom: 80px;
+  gap: 40px;
+  margin-bottom: 100px;
 }
 
 .feature-card {
   text-align: center;
-  padding: 40px 20px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease;
+  padding: 50px 30px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .feature-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-12px);
+  box-shadow: 0 30px 80px rgba(59, 130, 246, 0.15);
+  border-color: rgba(59, 130, 246, 0.2);
+}
+
+.feature-card:hover::before {
+  opacity: 1;
 }
 
 .feature-icon {
-  width: 70px;
-  height: 70px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 20px;
-  font-size: 1.8rem;
+  margin: 0 auto 24px;
+  font-size: 2rem;
   color: white;
+  box-shadow: 0 12px 30px rgba(59, 130, 246, 0.3);
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover .feature-icon {
+  transform: scale(1.1);
+  box-shadow: 0 16px 40px rgba(59, 130, 246, 0.4);
 }
 
 .feature-card h3 {
-  font-size: 1.3rem;
-  margin-bottom: 15px;
+  font-size: 1.5rem;
+  margin-bottom: 16px;
   color: #1e293b;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 .feature-card p {
   color: #64748b;
-  line-height: 1.6;
+  line-height: 1.7;
+  font-size: 1.1rem;
+  font-weight: 400;
 }
 
 .applications-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
-  margin-bottom: 80px;
+  gap: 40px;
+  margin-bottom: 100px;
 }
 
 .application-item {
   text-align: center;
-  padding: 30px 20px;
-  background: #f8fafc;
-  border-radius: 12px;
-  transition: all 0.3s ease;
+  padding: 40px 24px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .application-item:hover {
-  background: white;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 25px 50px rgba(59, 130, 246, 0.12);
+  transform: translateY(-8px);
 }
 
 .application-item i {
-  font-size: 2.5rem;
-  color: #4facfe;
-  margin-bottom: 15px;
+  font-size: 3rem;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 20px;
   display: block;
 }
 
 .application-item span {
   font-weight: 600;
   color: #1e293b;
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
 }
 
+/* 现代化产品规格和联系区域 */
 .product-specifications {
-  margin-bottom: 80px;
+  margin-bottom: 100px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  padding: 50px;
+  border-radius: 24px;
+  box-shadow: 0 25px 60px rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .spec-note {
   text-align: center;
   color: #64748b;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   margin-bottom: 30px;
   font-style: italic;
+  font-weight: 500;
 }
 
 .specification-table {
-  background: white;
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  border: 1px solid #e2e8f0;
+  box-shadow: 0 15px 40px rgba(59, 130, 246, 0.06);
+  border: 1px solid rgba(226, 232, 240, 0.8);
 }
 
 .spec-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 16px;
+  font-family: 'Inter', sans-serif;
 }
 
 .spec-label-header {
-  background: #f8f9fa;
-  color: #374151;
+  background: linear-gradient(135deg, #e0e7ff 0%, #ddd6fe 100%);
+  color: #3730a3;
   padding: 20px 15px;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 18px;
   text-align: center;
-  border: 1px solid #dee2e6;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  letter-spacing: -0.01em;
 }
 
 .spec-table thead th {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
   color: white;
   padding: 20px 15px;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 18px;
   text-align: center;
-  border: 1px solid #dee2e6;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  letter-spacing: -0.01em;
 }
 
 .spec-label {
-  background-color: #f8f9fa;
-  color: #374151;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  color: #1e293b;
   padding: 15px;
   font-weight: 600;
   text-align: center;
-  border: 1px solid #dee2e6;
+  border: 1px solid rgba(226, 232, 240, 0.8);
   font-size: 15px;
 }
 
 .spec-table tbody td {
   padding: 15px;
   text-align: center;
-  border: 1px solid #dee2e6;
-  transition: background-color 0.2s ease;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.spec-table tbody tr:nth-child(even) .spec-cell {
-  background-color: #f8f9fa;
-}
-
-.spec-table tbody tr:hover .spec-cell {
-  background-color: #e3f2fd;
+.spec-table tbody tr:hover {
+  background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%);
+  transform: scale(1.01);
 }
 
 .spec-table tbody tr:hover .spec-label {
-  background-color: #e8f5e8;
+  background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%);
+  color: #1e40af;
 }
 
 .spec-cell {
   color: #374151;
   font-size: 15px;
   font-weight: 500;
+  background: rgba(248, 250, 252, 0.5);
+}
+
+.spec-table tbody tr:nth-child(even) .spec-cell {
+  background: rgba(241, 245, 249, 0.5);
+}
+
+.spec-table tbody tr:hover .spec-cell {
+  background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%);
+  color: #1e40af;
 }
 
 .product-contact {
-  background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
-  border-radius: 20px;
-  padding: 60px;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  border-radius: 24px;
+  padding: 80px 60px;
   text-align: center;
   color: white;
-  margin: 80px 0;
+  margin: 100px 0;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 25px 50px rgba(59, 130, 246, 0.2);
+}
+
+.product-contact::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg"><circle cx="2" cy="2" r="1" fill="%23ffffff15"/></svg>');
+  background-size: 30px 30px;
+  opacity: 0.3;
+}
+
+.contact-content {
+  position: relative;
+  z-index: 2;
 }
 
 .contact-content h2 {
-  font-size: 2.2rem;
-  margin-bottom: 15px;
+  font-size: 2.8rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 .contact-content p {
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   opacity: 0.9;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
+  font-weight: 400;
 }
 
 .btn {
   display: inline-flex;
   align-items: center;
-  padding: 14px 30px;
-  border-radius: 30px;
+  padding: 16px 40px;
+  border-radius: 50px;
   font-weight: 600;
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
 }
 
 .btn-primary {
-  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
-  color: white;
-  box-shadow: 0 10px 20px rgba(79, 172, 254, 0.3);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  color: #3b82f6;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 15px 30px rgba(255, 255, 255, 0.2);
 }
 
 .btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 15px 25px rgba(79, 172, 254, 0.4);
-  color: white;
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 20px 40px rgba(255, 255, 255, 0.3);
+  color: #3b82f6;
   text-decoration: none;
+  background: rgba(255, 255, 255, 1);
+}
+
+/* 自定义图标样式 */
+.feature-icon .custom-icon {
+  color: white;
+}
+
+.feature-icon .custom-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.feature-icon .custom-icon svg * {
+  stroke: white !important;
+}
+
+.feature-icon .custom-icon svg *[fill="currentColor"] {
+  fill: white !important;
+}
+
+.application-item .custom-icon {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.application-item:hover .custom-icon svg * {
+  stroke: white !important;
+  fill: currentColor !important;
+}
+
+.application-item:hover .custom-icon svg *[fill="none"] {
+  fill: none !important;
+}
+
+.application-item:hover .custom-icon svg *[fill="currentColor"] {
+  fill: white !important;
+}
+
+/* 现代化响应式设计 */
+@media (max-width: 1200px) {
+  .product-overview {
+    gap: 60px;
+    padding: 50px;
+  }
 }
 
 @media (max-width: 768px) {
+  .product-hero {
+    padding: 120px 0 60px;
+  }
+  
+  .product-title {
+    font-size: 2.5rem;
+  }
+  
   .product-overview {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 50px;
+    padding: 40px 30px;
+    margin: 60px 0;
   }
   
   .product-image img {
-    width: 280px;
-    height: 240px;
+    width: 300px;
+    height: 300px;
+  }
+  
+  .section-title {
+    font-size: 2.2rem;
+    margin-bottom: 40px;
   }
   
   .features-grid {
     grid-template-columns: 1fr;
+    gap: 30px;
   }
   
   .applications-grid {
     grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .product-title {
-    font-size: 2rem;
-  }
-  
-  .product-contact {
-    padding: 40px 20px;
+    gap: 25px;
   }
   
   .specification-table {
@@ -542,6 +738,20 @@ onMounted(() => {
   .spec-table tbody td {
     padding: 10px 6px;
     font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-title {
+    font-size: 2rem;
+  }
+  
+  .section-title {
+    font-size: 1.8rem;
+  }
+  
+  .product-contact {
+    padding: 40px 20px;
   }
 }
 </style>

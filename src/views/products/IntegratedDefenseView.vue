@@ -2,21 +2,22 @@
   <div class="product-detail-page page-content">
     <!-- 产品头部 -->
     <div class="product-hero">
+      <div class="hero-background"></div>
       <div class="container">
         <div class="breadcrumb">
           <RouterLink to="/">首页</RouterLink>
-          <span>/</span>
+          <CustomIcons name="chevron-right" :size="16" class="breadcrumb-separator" />
           <RouterLink to="/technology">产品中心</RouterLink>
-          <span>/</span>
+          <CustomIcons name="chevron-right" :size="16" class="breadcrumb-separator" />
           <span>立体防控</span>
-          <span>/</span>
+          <CustomIcons name="chevron-right" :size="16" class="breadcrumb-separator" />
           <span>侦探感知</span>
-          <span>/</span>
+          <CustomIcons name="chevron-right" :size="16" class="breadcrumb-separator" />
           <span>频谱侦测</span>
         </div>
         <div class="product-hero-content">
           <h1 class="product-title">固定式无人机侦测设备</h1>
-          <p class="product-subtitle"></p>
+          <p class="product-subtitle">先进无线电与AI技术融合的全域监测解决方案</p>
         </div>
       </div>
     </div>
@@ -37,40 +38,40 @@
       <div class="product-specifications">
         <h2 class="section-title">产品规格</h2>
         <p class="spec-note">* 注意：外观、规格和功能可能有所不同，恕不另行通知。</p>
-            <div class="specification-table">
-        <div class="spec-row">
-          <div class="spec-label">工作模式</div>
-          <div class="spec-value">无线电接收</div>
+        <div class="specification-table">
+          <div class="spec-row">
+            <div class="spec-label">工作模式</div>
+            <div class="spec-value">无线电接收</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">工作频段</div>
+            <div class="spec-value">70MHz~6GHz</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">探测半径</div>
+            <div class="spec-value">≥5000m</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">识别半径距离</div>
+            <div class="spec-value">≥5000米，能识别无人机品牌和型号</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">探测角度</div>
+            <div class="spec-value">360°</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">探测角度精度误差（均方根）</div>
+            <div class="spec-value">距离5km或以上 ≤ 1°</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">无人机无线电拦截响应时间</div>
+            <div class="spec-value">≤2s</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">最低探测高度</div>
+            <div class="spec-value">≤0m</div>
+          </div>
         </div>
-        <div class="spec-row">
-          <div class="spec-label">工作频段</div>
-          <div class="spec-value">70MHz~6GHz</div>
-        </div>
-        <div class="spec-row">
-          <div class="spec-label">探测半径</div>
-          <div class="spec-value">≥5000m</div>
-        </div>
-        <div class="spec-row">
-          <div class="spec-label">识别半径距离</div>
-          <div class="spec-value">≥5000米，能识别无人机品牌和型号</div>
-        </div>
-        <div class="spec-row">
-          <div class="spec-label">探测角度</div>
-          <div class="spec-value">360°</div>
-        </div>
-        <div class="spec-row">
-          <div class="spec-label">探测角度精度误差（均方根）</div>
-          <div class="spec-value">距离5km或以上 ≤ 1°</div>
-        </div>
-        <div class="spec-row">
-          <div class="spec-label">无人机无线电拦截响应时间</div>
-          <div class="spec-value">≤2s</div>
-        </div>
-        <div class="spec-row">
-          <div class="spec-label">最低探测高度</div>
-          <div class="spec-value">≤0m</div>
-        </div>
-      </div>
       </div>
       
       <!-- 产品特点 -->
@@ -79,28 +80,28 @@
         <div class="features-grid">
           <div class="feature-card">
             <div class="feature-icon">
-              <i class="fas fa-camera"></i>
+              <CustomIcons name="long-range-detection" :size="32" />
             </div>
             <h3>侦测距离远、精度高</h3>
             <p>设备采用全向360°无死角探测，侦测半径距离 可达5km，探测范围超广搭配自主研发低噪放和腔体滤波器，有效降低 信号接收中的噪声干扰，确保信号的纯净度与 强度，从而提升整体系统的灵敏度和准确性。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
-              <i class="fas fa-thermometer-half"></i>
+              <CustomIcons name="adaptive-learning" :size="32" />
             </div>
             <h3>自学习特征数据库</h3>
             <p>系统可自动分析目标信号参数，使用样本库自 动识别无人机品牌和型号，并建立电子指纹档 案库，供后续报警使用。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
-              <i class="fas fa-brain"></i>
+              <CustomIcons name="multi-target-tracking" :size="32" />
             </div>
             <h3>多目标定位侧向</h3>
             <p>可实现对多台无人机同时进行测向，并将多目 标的无人机角度在地图上同时显示</p>
           </div>
            <div class="feature-card">
             <div class="feature-icon">
-              <i class="fas fa-brain"></i>
+              <CustomIcons name="ads-b-monitoring" :size="32" />
             </div>
             <h3>ADS-B监视技术</h3>
             <p>设备够接收并解码附近无人机通过ADS-B系统 广播的实时信息。信息包含无人机的身份识别 、位置、高度、速度、航向和垂直速度等数据</p>
@@ -113,19 +114,27 @@
         <h2 class="section-title">应用场景</h2>
         <div class="applications-grid">
           <div class="application-item">
-            <i class="fas fa-moon"></i>
+            <div class="app-icon">
+              <CustomIcons name="night-vision" :size="32" />
+            </div>
             <span>夜间监控</span>
           </div>
           <div class="application-item">
-            <i class="fas fa-building"></i>
+            <div class="app-icon">
+              <CustomIcons name="urban-security" :size="32" />
+            </div>
             <span>城市安防</span>
           </div>
           <div class="application-item">
-            <i class="fas fa-eye"></i>
+            <div class="app-icon">
+              <CustomIcons name="target-tracking" :size="32" />
+            </div>
             <span>目标跟踪</span>
           </div>
           <div class="application-item">
-            <i class="fas fa-video"></i>
+            <div class="app-icon">
+              <CustomIcons name="real-time-monitoring" :size="32" />
+            </div>
             <span>实时监控</span>
           </div>
         </div>
@@ -145,6 +154,7 @@
 
 <script setup>
 import { onMounted } from 'vue'
+import CustomIcons from '@/components/icons/CustomIcons.vue'
 
 // 定义emit
 const emit = defineEmits(['page-loaded'])
@@ -161,25 +171,44 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* 复用RadarDetectionView.vue的样式 */
+/* 现代化设计系统 */
 .product-detail-page {
   padding-top: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 .product-hero {
-  background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
   padding: 150px 0 80px;
   color: white;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(59, 130, 246, 0.2);
+}
+
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.03"><circle cx="30" cy="30" r="30"/></g></svg>') repeat;
+  opacity: 0.3;
 }
 
 .breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   margin-bottom: 30px;
   font-size: 0.9rem;
+  font-weight: 500;
 }
 
 .breadcrumb a {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.8);
   text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 .breadcrumb a:hover {
@@ -187,28 +216,36 @@ onMounted(() => {
 }
 
 .breadcrumb span {
-  margin: 0 10px;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.breadcrumb-separator {
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .product-title {
-  font-size: 3rem;
+  font-size: 3.5rem;
+  font-weight: 800;
   margin-bottom: 20px;
-  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
 }
 
 .product-subtitle {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
+  font-weight: 400;
   opacity: 0.9;
+  letter-spacing: 0.01em;
 }
 
 .product-overview {
   display: grid;
   grid-template-columns: 1fr 1.5fr;
-  gap: 60px;
-  margin: 80px 0;
+  gap: 80px;
+  margin: 100px 0;
   align-items: center;
 }
 
@@ -223,163 +260,60 @@ onMounted(() => {
 .product-image img {
   width: 416px;
   height: 416px;
-  border-radius: 12px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border-radius: 24px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
   object-fit: cover;
   object-position: center;
-}
-
-.product-info h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: #1e293b;
-}
-
-.product-info p {
-  font-size: 1.1rem;
-  line-height: 1.8;
-  color: #64748b;
-  margin-bottom: 30px;
-}
-
-.product-specs h3 {
-  font-size: 1.3rem;
-  margin-bottom: 20px;
-  color: #1e293b;
-}
-
-.specs-grid {
-  display: grid;
-  gap: 15px;
-}
-
-.spec-item {
-  display: flex;
-  justify-content: space-between;
-  padding: 15px;
-  background: #f8fafc;
-  border-radius: 8px;
-  border: 1px solid #e2e8f0;
-}
-
-.spec-label {
-  font-weight: 500;
-  color: #374151;
-}
-
-.spec-value {
-  font-weight: 600;
-  color: #4facfe;
-}
-
-.section-title {
-  text-align: center;
-  font-size: 2.2rem;
-  margin-bottom: 50px;
-  color: #1e293b;
-}
-
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 30px;
-  margin-bottom: 80px;
-}
-
-.feature-card {
-  text-align: center;
-  padding: 40px 20px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease;
 }
 
-.feature-card:hover {
-  transform: translateY(-10px);
+.product-image img:hover {
+  transform: scale(1.02);
 }
 
-.feature-icon {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 20px;
-  font-size: 1.8rem;
-  color: white;
-}
-
-.feature-card h3 {
-  font-size: 1.3rem;
-  margin-bottom: 15px;
-  color: #1e293b;
-}
-
-.feature-card p {
-  color: #64748b;
-  line-height: 1.6;
-}
-
-.applications-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
-  margin-bottom: 80px;
-}
-
-.application-item {
-  text-align: center;
-  padding: 30px 20px;
-  background: #f8fafc;
-  border-radius: 12px;
-  transition: all 0.3s ease;
-}
-
-.application-item:hover {
-  background: white;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.application-item i {
+.product-info h2 {
   font-size: 2.5rem;
-  color: #4facfe;
-  margin-bottom: 15px;
-  display: block;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: #1e293b;
+  letter-spacing: -0.01em;
 }
 
-.application-item span {
-  font-weight: 600;
-  color: #1e293b;
+.product-info p {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: #64748b;
+  margin-bottom: 32px;
+  font-weight: 400;
 }
 
 .product-specifications {
-  margin-bottom: 80px;
+  margin-bottom: 100px;
 }
 
 .spec-note {
   text-align: center;
   color: #64748b;
-  font-size: 0.9rem;
-  margin-bottom: 30px;
+  font-size: 0.95rem;
+  margin-bottom: 40px;
   font-style: italic;
+  font-weight: 400;
 }
 
 .specification-table {
-  background: white;
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  border: 1px solid #e2e8f0;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .spec-row {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  border-bottom: 1px solid #e2e8f0;
-  transition: background-color 0.2s ease;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .spec-row:last-child {
@@ -387,91 +321,224 @@ onMounted(() => {
 }
 
 .spec-row:hover {
-  background-color: #f8fafc;
-}
-
-.spec-header {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-  color: white;
-  font-weight: 600;
-}
-
-.spec-header:hover {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  background: rgba(59, 130, 246, 0.05);
+  transform: translateX(4px);
 }
 
 .spec-label {
-  padding: 15px 20px;
-  font-weight: 500;
+  padding: 20px 24px;
+  font-weight: 600;
   color: #374151;
-  background-color: #f8fafc;
-  border-right: 1px solid #e2e8f0;
-}
-
-.spec-header .spec-label {
-  background: transparent;
-  color: white;
-  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(248, 250, 252, 0.8);
+  border-right: 1px solid rgba(226, 232, 240, 0.3);
+  font-size: 0.95rem;
 }
 
 .spec-value {
-  padding: 15px 20px;
+  padding: 20px 24px;
   color: #1e293b;
-  font-weight: 400;
+  font-weight: 500;
+  font-size: 0.95rem;
 }
 
-.spec-header .spec-value {
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 60px;
+  color: #1e293b;
+  letter-spacing: -0.01em;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  margin-bottom: 100px;
+}
+
+.feature-card {
+  text-align: center;
+  padding: 48px 32px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.feature-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 30px 60px rgba(59, 130, 246, 0.2);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.feature-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
   color: white;
+  box-shadow: 0 15px 30px rgba(59, 130, 246, 0.3);
+}
+
+.feature-card h3 {
+  font-size: 1.4rem;
   font-weight: 600;
+  margin-bottom: 16px;
+  color: #1e293b;
+  letter-spacing: -0.01em;
+}
+
+.feature-card p {
+  color: #64748b;
+  line-height: 1.6;
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.applications-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  margin-bottom: 100px;
+}
+
+.application-item {
+  text-align: center;
+  padding: 32px 24px;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.application-item:hover {
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
+}
+
+.app-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  color: white;
+  box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+}
+
+.application-item span {
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 1rem;
 }
 
 .product-contact {
-  background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
-  border-radius: 20px;
-  padding: 60px;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  border-radius: 32px;
+  padding: 80px 60px;
   text-align: center;
   color: white;
-  margin: 80px 0;
+  margin: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.product-contact::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.05"><circle cx="30" cy="30" r="30"/></g></svg>') repeat;
+  opacity: 0.3;
+}
+
+.contact-content {
+  position: relative;
+  z-index: 1;
 }
 
 .contact-content h2 {
-  font-size: 2.2rem;
-  margin-bottom: 15px;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
 }
 
 .contact-content p {
-  font-size: 1.1rem;
+  font-size: 1.125rem;
+  font-weight: 400;
   opacity: 0.9;
-  margin-bottom: 30px;
+  margin-bottom: 32px;
 }
 
 .btn {
   display: inline-flex;
   align-items: center;
-  padding: 14px 30px;
-  border-radius: 30px;
+  padding: 16px 32px;
+  border-radius: 50px;
   font-weight: 600;
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 1.1rem;
 }
 
 .btn-primary {
-  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
   color: white;
-  box-shadow: 0 10px 20px rgba(79, 172, 254, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .btn-primary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 15px 25px rgba(79, 172, 254, 0.4);
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   color: white;
   text-decoration: none;
 }
 
+@media (max-width: 1200px) {
+  .product-overview {
+    gap: 60px;
+  }
+  
+  .features-grid {
+    gap: 30px;
+  }
+  
+  .applications-grid {
+    gap: 24px;
+  }
+}
+
 @media (max-width: 768px) {
+  .product-hero {
+    padding: 120px 0 60px;
+  }
+  
+  .product-title {
+    font-size: 2.5rem;
+  }
+  
   .product-overview {
     grid-template-columns: 1fr;
     gap: 40px;
+    margin: 60px 0;
   }
   
   .product-image img {
@@ -481,22 +548,34 @@ onMounted(() => {
   
   .features-grid {
     grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .feature-card {
+    padding: 32px 24px;
   }
   
   .applications-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
   
-  .product-title {
-    font-size: 2rem;
+  .application-item {
+    padding: 24px 16px;
   }
   
   .product-contact {
-    padding: 40px 20px;
+    padding: 60px 32px;
+    border-radius: 24px;
+  }
+  
+  .contact-content h2 {
+    font-size: 2rem;
   }
   
   .specification-table {
-    margin: 0 -10px;
+    margin: 0 -16px;
+    border-radius: 16px;
   }
   
   .spec-row {
@@ -505,18 +584,45 @@ onMounted(() => {
   
   .spec-label {
     border-right: none;
-    border-bottom: 1px solid #e2e8f0;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.3);
+    background: rgba(59, 130, 246, 0.1);
     font-weight: 600;
-    background-color: #f1f5f9;
-  }
-  
-  .spec-header .spec-label {
-    background: rgba(255, 255, 255, 0.1);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   }
   
   .spec-value {
-    padding-top: 10px;
+    padding-top: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-title {
+    font-size: 2rem;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .breadcrumb {
+    font-size: 0.8rem;
+  }
+  
+  .feature-icon {
+    width: 64px;
+    height: 64px;
+  }
+  
+  .app-icon {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .feature-card h3 {
+    font-size: 1.2rem;
+  }
+  
+  .applications-grid {
+    grid-template-columns: 1fr;
   }
 }
 </style>

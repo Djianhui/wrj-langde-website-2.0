@@ -2,14 +2,15 @@
   <div class="product-detail-page page-content">
     <!-- 产品头部 -->
     <div class="product-hero">
+      <div class="hero-background"></div>
       <div class="container">
         <div class="breadcrumb">
           <RouterLink to="/">首页</RouterLink>
-          <span>/</span>
+          <CustomIcons name="chevron-right" :size="16" class="breadcrumb-separator" />
           <RouterLink to="/technology">产品中心</RouterLink>
-          <span>/</span>
+          <CustomIcons name="chevron-right" :size="16" class="breadcrumb-separator" />
           <span>低空经济</span>
-          <span>/</span>
+          <CustomIcons name="chevron-right" :size="16" class="breadcrumb-separator" />
           <span>巡查防护</span>
         </div>
         <div class="product-hero-content">
@@ -93,28 +94,28 @@
         <div class="features-grid">
           <div class="feature-card">
             <div class="feature-icon">
-              <i class="fas fa-crosshairs"></i>
+              <CustomIcons name="rapid-ascent" :size="32" />
             </div>
             <h3>极速爬升，高效灭火</h3>
             <p>具备强大的动力性能，可在8秒内爬升100米，迅速抵达着火窗口等关键位置，实现对高层/超高层火灾的快速压制，弥补了传统举高消防装备的不足。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
-              <i class="fas fa-route"></i>
+              <CustomIcons name="vehicle-linkage" :size="32" />
             </div>
             <h3>车机联动，持续作战</h3>
             <p>通过专用水带连接地面消防车或固定灭火剂供应源，突破了无人机自带载荷的限制，可实现长时间、大流量的持续灭火作业，标准载荷50KG，最大载荷可达100KG。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
-              <i class="fas fa-shield-virus"></i>
+              <CustomIcons name="combat-tested" :size="32" />
             </div>
             <h3>实战验证，安全可靠</h3>
             <p>经过多种火场环境的实战考验，水带作业端配备脱钩保险装置，确保紧急情况下能快速脱离，保障飞行器安全。专用控制系统针对火场复杂环境优化，使作业更安全、更简单。</p>
           </div>
          <div class="feature-card">
             <div class="feature-icon">
-              <i class="fas fa-battery-full"></i>
+              <CustomIcons name="mobile-flexible" :size="32" />
             </div>
             <h3>机动灵活，部署快捷</h3>
             <p>充分发挥无人机机动灵活的特点，整机重量65kg，可与消防车辆高效配合，快速抵达并展开作业，构成“车机配合”的高效灭火体系。</p>
@@ -127,20 +128,28 @@
         <h2 class="section-title">应用场景</h2>
         <div class="applications-grid">
           <div class="application-item">
-            <i class="fas fa-seedling"></i>
-            <span>大田作物</span>
+            <div class="app-icon">
+              <CustomIcons name="fire-fighting" :size="32" />
+            </div>
+            <span>灭火救援</span>
           </div>
           <div class="application-item">
-            <i class="fas fa-apple-alt"></i>
-            <span>果园管理</span>
+            <div class="app-icon">
+              <CustomIcons name="high-rise-emergency" :size="32" />
+            </div>
+            <span>高层建筑救援</span>
           </div>
           <div class="application-item">
-            <i class="fas fa-carrot"></i>
-            <span>蔬菜种植</span>
+            <div class="app-icon">
+              <CustomIcons name="emergency-response" :size="32" />
+            </div>
+            <span>突发火情处置</span>
           </div>
           <div class="application-item">
-            <i class="fas fa-leaf"></i>
-            <span>经济作物</span>
+            <div class="app-icon">
+              <CustomIcons name="rapid-response" :size="32" />
+            </div>
+            <span>快速响应</span>
           </div>
         </div>
       </div>
@@ -159,6 +168,7 @@
 
 <script setup>
 import { onMounted } from 'vue'
+import CustomIcons from '@/components/icons/CustomIcons.vue'
 
 // 定义emit
 const emit = defineEmits(['page-loaded'])
@@ -175,24 +185,44 @@ onMounted(() => {
 </script>
 
 <style scoped>
+/* 现代化设计系统 */
 .product-detail-page {
   padding-top: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 .product-hero {
-  background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
   padding: 150px 0 80px;
   color: white;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(59, 130, 246, 0.2);
+}
+
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.03"><circle cx="30" cy="30" r="30"/></g></svg>') repeat;
+  opacity: 0.3;
 }
 
 .breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   margin-bottom: 30px;
   font-size: 0.9rem;
+  font-weight: 500;
 }
 
 .breadcrumb a {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.8);
   text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 .breadcrumb a:hover {
@@ -200,28 +230,36 @@ onMounted(() => {
 }
 
 .breadcrumb span {
-  margin: 0 10px;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.breadcrumb-separator {
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .product-title {
-  font-size: 3rem;
+  font-size: 3.5rem;
+  font-weight: 800;
   margin-bottom: 20px;
-  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
 }
 
 .product-subtitle {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
+  font-weight: 400;
   opacity: 0.9;
+  letter-spacing: 0.01em;
 }
 
 .product-overview {
   display: grid;
   grid-template-columns: 1fr 1.5fr;
-  gap: 60px;
-  margin: 80px 0;
+  gap: 80px;
+  margin: 100px 0;
   align-items: center;
 }
 
@@ -236,172 +274,185 @@ onMounted(() => {
 .product-image img {
   width: 420px;
   height: auto;
-  border-radius: 12px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border-radius: 24px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
   object-fit: cover;
   object-position: center;
+  transition: transform 0.3s ease;
+}
+
+.product-image img:hover {
+  transform: scale(1.02);
 }
 
 .product-info h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 24px;
   color: #1e293b;
+  letter-spacing: -0.01em;
 }
 
 .product-info p {
-  font-size: 1.1rem;
+  font-size: 1.125rem;
   line-height: 1.8;
   color: #64748b;
-  margin-bottom: 30px;
+  margin-bottom: 32px;
+  font-weight: 400;
 }
 
 .section-title {
   text-align: center;
-  font-size: 2.2rem;
-  margin-bottom: 50px;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 60px;
   color: #1e293b;
+  letter-spacing: -0.01em;
 }
 
 .features-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 30px;
-  margin-bottom: 80px;
+  gap: 40px;
+  margin-bottom: 100px;
 }
 
 .feature-card {
   text-align: center;
-  padding: 40px 20px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease;
+  padding: 48px 32px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .feature-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-12px);
+  box-shadow: 0 30px 60px rgba(59, 130, 246, 0.2);
+  background: rgba(255, 255, 255, 0.95);
 }
 
 .feature-icon {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  width: 80px;
+  height: 80px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 20px;
-  font-size: 1.8rem;
+  margin: 0 auto 24px;
   color: white;
+  box-shadow: 0 15px 30px rgba(59, 130, 246, 0.3);
 }
 
 .feature-card h3 {
-  font-size: 1.3rem;
-  margin-bottom: 15px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 16px;
   color: #1e293b;
+  letter-spacing: -0.01em;
 }
 
 .feature-card p {
   color: #64748b;
   line-height: 1.6;
+  font-weight: 400;
+  font-size: 1rem;
 }
 
 .applications-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
-  margin-bottom: 80px;
+  gap: 32px;
+  margin-bottom: 100px;
 }
 
 .application-item {
   text-align: center;
-  padding: 30px 20px;
-  background: #f8fafc;
-  border-radius: 12px;
-  transition: all 0.3s ease;
+  padding: 32px 24px;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .application-item:hover {
-  background: white;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
 }
 
-.application-item i {
-  font-size: 2.5rem;
-  color: #4facfe;
-  margin-bottom: 15px;
-  display: block;
+.app-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  color: white;
+  box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
 }
 
 .application-item span {
   font-weight: 600;
   color: #1e293b;
+  font-size: 1rem;
 }
 
 .product-specifications {
-  margin-bottom: 80px;
+  margin-bottom: 100px;
 }
 
 /* 产品参数表格样式 */
 .spec-table {
   width: 100%;
-  background: white;
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  border: 1px solid #e2e8f0;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-collapse: collapse;
 }
 
 .spec-table th,
 .spec-table td {
-  padding: 15px 20px;
+  padding: 20px 24px;
   text-align: left;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .spec-table thead th {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
   color: white;
   font-weight: 600;
   text-align: center;
-}
-
-.spec-category-header {
-  width: 15%;
-}
-
-.spec-label-header {
-  width: 35%;
-}
-
-.spec-header {
-  width: 50%;
-}
-
-.spec-category {
-  background-color: #f8fafc;
-  font-weight: 600;
-  color: #374151;
-  text-align: center;
-  vertical-align: middle;
-  border-right: 1px solid #e2e8f0;
+  font-size: 1rem;
 }
 
 .spec-label {
-  font-weight: 500;
+  font-weight: 600;
   color: #374151;
-  background-color: #f1f5f9;
-  border-right: 1px solid #e2e8f0;
+  background: rgba(248, 250, 252, 0.8);
+  border-right: 1px solid rgba(226, 232, 240, 0.3);
+  font-size: 0.95rem;
 }
 
 .spec-value {
   color: #1e293b;
-  font-weight: 400;
+  font-weight: 500;
+  font-size: 0.95rem;
 }
 
 .spec-table tbody tr:hover {
-  background-color: rgba(79, 172, 254, 0.05);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+  transform: translateX(4px);
 }
 
 .spec-table tbody tr:last-child td {
@@ -409,66 +460,117 @@ onMounted(() => {
 }
 
 .spec-note {
-  margin-top: 20px;
-  padding: 15px;
-  background-color: #f8fafc;
-  border-radius: 8px;
+  margin-top: 32px;
+  padding: 20px 24px;
+  background: rgba(248, 250, 252, 0.8);
+  backdrop-filter: blur(20px);
+  border-radius: 16px;
+  border: 1px solid rgba(226, 232, 240, 0.3);
   color: #64748b;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
 }
 
 .spec-note p {
   margin: 0;
   text-align: center;
+  font-weight: 500;
 }
 
 .product-contact {
-  background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
-  border-radius: 20px;
-  padding: 60px;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  border-radius: 32px;
+  padding: 80px 60px;
   text-align: center;
   color: white;
-  margin: 80px 0;
+  margin: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.product-contact::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.05"><circle cx="30" cy="30" r="30"/></g></svg>') repeat;
+  opacity: 0.3;
+}
+
+.contact-content {
+  position: relative;
+  z-index: 1;
 }
 
 .contact-content h2 {
-  font-size: 2.2rem;
-  margin-bottom: 15px;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
 }
 
 .contact-content p {
-  font-size: 1.1rem;
+  font-size: 1.125rem;
+  font-weight: 400;
   opacity: 0.9;
-  margin-bottom: 30px;
+  margin-bottom: 32px;
 }
 
 .btn {
   display: inline-flex;
   align-items: center;
-  padding: 14px 30px;
-  border-radius: 30px;
+  padding: 16px 32px;
+  border-radius: 50px;
   font-weight: 600;
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 1.1rem;
 }
 
 .btn-primary {
-  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
   color: white;
-  box-shadow: 0 10px 20px rgba(79, 172, 254, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .btn-primary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 15px 25px rgba(79, 172, 254, 0.4);
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   color: white;
   text-decoration: none;
 }
 
+@media (max-width: 1200px) {
+  .product-overview {
+    gap: 60px;
+  }
+  
+  .features-grid {
+    gap: 30px;
+  }
+  
+  .applications-grid {
+    gap: 24px;
+  }
+}
+
 @media (max-width: 768px) {
+  .product-hero {
+    padding: 120px 0 60px;
+  }
+  
+  .product-title {
+    font-size: 2.5rem;
+  }
+  
   .product-overview {
     grid-template-columns: 1fr;
     gap: 40px;
+    margin: 60px 0;
   }
   
   .product-image img {
@@ -478,42 +580,75 @@ onMounted(() => {
   
   .features-grid {
     grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .feature-card {
+    padding: 32px 24px;
   }
   
   .applications-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
   
-  .product-title {
-    font-size: 2rem;
+  .application-item {
+    padding: 24px 16px;
   }
   
   .product-contact {
-    padding: 40px 20px;
+    padding: 60px 32px;
+    border-radius: 24px;
+  }
+  
+  .contact-content h2 {
+    font-size: 2rem;
   }
   
   /* 表格移动端适配 */
   .spec-table {
     font-size: 0.9rem;
+    margin: 0 -16px;
+    border-radius: 16px;
   }
   
   .spec-table th,
   .spec-table td {
     padding: 12px 15px;
   }
-  
-  .spec-category-header,
-  .spec-label-header,
-  .spec-header {
-    width: auto;
-  }
-  
-  .spec-category {
-    font-size: 0.85rem;
-  }
 }
 
 @media (max-width: 480px) {
+  .product-title {
+    font-size: 2rem;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .breadcrumb {
+    font-size: 0.8rem;
+  }
+  
+  .feature-icon {
+    width: 64px;
+    height: 64px;
+  }
+  
+  .app-icon {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .feature-card h3 {
+    font-size: 1.2rem;
+  }
+  
+  .applications-grid {
+    grid-template-columns: 1fr;
+  }
+  
   .spec-table {
     font-size: 0.8rem;
   }
@@ -521,10 +656,6 @@ onMounted(() => {
   .spec-table th,
   .spec-table td {
     padding: 10px 12px;
-  }
-  
-  .section-title {
-    font-size: 1.8rem;
   }
 }
 </style>

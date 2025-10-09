@@ -130,28 +130,28 @@
         <div class="features-grid">
           <div class="feature-card">
             <div class="feature-icon">
-              <i class="fas fa-crosshairs"></i>
+              <CustomIcons name="smart-spraying" :size="32" />
             </div>
             <h3>全自主作业</h3>
             <p>免遥控器,手机即可实现路径规划、一键作业、断点续喷:自动返航等操作。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
-              <i class="fas fa-route"></i>
+              <CustomIcons name="easy-operation" :size="32" />
             </div>
             <h3>简单易学</h3>
             <p>2小时学习即可快速上手,3天即可独立作业。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
-              <i class="fas fa-shield-virus"></i>
+              <CustomIcons name="multi-terrain" :size="32" />
             </div>
             <h3>多场景作业</h3>
-            <p>配有雷达仿地系统,可适应多种地形,对不同作物进行精准喷酒。</p>
+            <p>配有雷达仿地系统,可适应多种地形,对不同作物进行精准喷洒。</p>
           </div>
          <div class="feature-card">
             <div class="feature-icon">
-              <i class="fas fa-battery-full"></i>
+              <CustomIcons name="portable-transport" :size="32" />
             </div>
             <h3>易转运</h3>
             <p>尾梁采用快速折叠结构,折叠后整机长度缩小30%,运输、携带便捷;飞机自带机轮,方便田间转场。</p>
@@ -164,19 +164,19 @@
         <h2 class="section-title">应用场景</h2>
         <div class="applications-grid">
           <div class="application-item">
-            <i class="fas fa-seedling"></i>
+            <CustomIcons name="field-crops" :size="40" />
             <span>大田作物</span>
           </div>
           <div class="application-item">
-            <i class="fas fa-apple-alt"></i>
+            <CustomIcons name="orchard-management" :size="40" />
             <span>果园管理</span>
           </div>
           <div class="application-item">
-            <i class="fas fa-carrot"></i>
+            <CustomIcons name="vegetable-planting" :size="40" />
             <span>蔬菜种植</span>
           </div>
           <div class="application-item">
-            <i class="fas fa-leaf"></i>
+            <CustomIcons name="economic-crops" :size="40" />
             <span>经济作物</span>
           </div>
         </div>
@@ -196,6 +196,7 @@
 
 <script setup>
 import { onMounted } from 'vue'
+import CustomIcons from '@/components/icons/CustomIcons.vue'
 
 // 定义emit
 const emit = defineEmits(['page-loaded'])
@@ -212,28 +213,58 @@ onMounted(() => {
 </script>
 
 <style scoped>
+/* 现代化产品详情页基础样式 */
 .product-detail-page {
   padding-top: 0;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  min-height: 100vh;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
+/* 现代化产品头部 */
 .product-hero {
-  background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
   padding: 150px 0 80px;
   color: white;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(59, 130, 246, 0.2);
+}
+
+.product-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg"><circle cx="2" cy="2" r="1" fill="%23ffffff15"/></svg>');
+  background-size: 30px 30px;
+  opacity: 0.3;
+  animation: particleMove 60s linear infinite;
+}
+
+@keyframes particleMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 1000px 1000px; }
 }
 
 .breadcrumb {
   margin-bottom: 30px;
   font-size: 0.9rem;
+  position: relative;
+  z-index: 2;
 }
 
 .breadcrumb a {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.8);
   text-decoration: none;
+  transition: all 0.3s ease;
 }
 
 .breadcrumb a:hover {
   color: white;
+  text-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
 }
 
 .breadcrumb span {
@@ -242,24 +273,40 @@ onMounted(() => {
 }
 
 .product-title {
-  font-size: 3rem;
+  font-size: 3.5rem;
   margin-bottom: 20px;
-  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0.9) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  text-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
+  position: relative;
+  z-index: 2;
 }
 
 .product-subtitle {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   opacity: 0.9;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  position: relative;
+  z-index: 2;
 }
 
+/* 现代化产品概述区域 */
 .product-overview {
   display: grid;
   grid-template-columns: 1fr 1.5fr;
-  gap: 60px;
-  margin: 80px 0;
+  gap: 80px;
+  margin: 100px 0;
   align-items: center;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 60px;
+  box-shadow: 0 20px 60px rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.7);
 }
 
 .product-image {
@@ -268,177 +315,266 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+}
+
+.product-image::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+  border-radius: 24px;
+  z-index: -1;
 }
 
 .product-image img {
   width: 420px;
   height: auto;
-  border-radius: 12px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 25px 50px rgba(59, 130, 246, 0.15);
   object-fit: cover;
   object-position: center;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-image:hover img {
+  transform: scale(1.05);
+  box-shadow: 0 35px 70px rgba(59, 130, 246, 0.2);
 }
 
 .product-info h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
+  font-size: 2.5rem;
+  margin-bottom: 24px;
   color: #1e293b;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .product-info p {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   line-height: 1.8;
   color: #64748b;
   margin-bottom: 30px;
+  font-weight: 400;
 }
 
+/* 现代化章节标题 */
 .section-title {
   text-align: center;
-  font-size: 2.2rem;
-  margin-bottom: 50px;
+  font-size: 2.8rem;
+  margin-bottom: 60px;
   color: #1e293b;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  position: relative;
 }
 
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+  border-radius: 2px;
+}
+
+/* 现代化特点网格 */
 .features-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 30px;
-  margin-bottom: 80px;
+  gap: 40px;
+  margin-bottom: 100px;
 }
 
 .feature-card {
   text-align: center;
-  padding: 40px 20px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease;
+  padding: 50px 30px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .feature-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-12px);
+  box-shadow: 0 30px 80px rgba(59, 130, 246, 0.15);
+  border-color: rgba(59, 130, 246, 0.2);
+}
+
+.feature-card:hover::before {
+  opacity: 1;
 }
 
 .feature-icon {
-  width: 70px;
-  height: 70px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 20px;
-  font-size: 1.8rem;
+  margin: 0 auto 24px;
+  font-size: 2rem;
   color: white;
+  box-shadow: 0 12px 30px rgba(59, 130, 246, 0.3);
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover .feature-icon {
+  transform: scale(1.1);
+  box-shadow: 0 16px 40px rgba(59, 130, 246, 0.4);
 }
 
 .feature-card h3 {
-  font-size: 1.3rem;
-  margin-bottom: 15px;
+  font-size: 1.5rem;
+  margin-bottom: 16px;
   color: #1e293b;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 .feature-card p {
   color: #64748b;
-  line-height: 1.6;
+  line-height: 1.7;
+  font-size: 1.1rem;
+  font-weight: 400;
 }
 
+/* 现代化应用场景和表格样式 */
 .applications-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
-  margin-bottom: 80px;
+  gap: 40px;
+  margin-bottom: 100px;
 }
 
 .application-item {
   text-align: center;
-  padding: 30px 20px;
-  background: #f8fafc;
-  border-radius: 12px;
-  transition: all 0.3s ease;
+  padding: 40px 24px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .application-item:hover {
-  background: white;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 25px 50px rgba(59, 130, 246, 0.12);
+  transform: translateY(-8px);
 }
 
 .application-item i {
-  font-size: 2.5rem;
-  color: #4facfe;
-  margin-bottom: 15px;
+  font-size: 3rem;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 20px;
   display: block;
 }
 
-.application-item span {
-  font-weight: 600;
-  color: #1e293b;
-}
-
+/* 现代化产品参数表格样式 */
 .product-specifications {
-  margin-bottom: 80px;
+  margin-bottom: 100px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  padding: 50px;
+  border-radius: 24px;
+  box-shadow: 0 25px 60px rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* 产品参数表格样式 */
 .spec-table {
   width: 100%;
-  background: white;
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  border: 1px solid #e2e8f0;
+  box-shadow: 0 15px 40px rgba(59, 130, 246, 0.06);
+  border: 1px solid rgba(226, 232, 240, 0.8);
   border-collapse: collapse;
 }
 
 .spec-table th,
 .spec-table td {
-  padding: 15px 20px;
+  padding: 20px 25px;
   text-align: left;
   border-bottom: 1px solid #e2e8f0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .spec-table thead th {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
   color: white;
-  font-weight: 600;
+  font-weight: 700;
   text-align: center;
-}
-
-.spec-category-header {
-  width: 15%;
-}
-
-.spec-label-header {
-  width: 35%;
-}
-
-.spec-header {
-  width: 50%;
+  font-size: 18px;
+  letter-spacing: -0.01em;
 }
 
 .spec-category {
-  background-color: #f8fafc;
-  font-weight: 600;
-  color: #374151;
+  background: linear-gradient(135deg, #e0e7ff 0%, #ddd6fe 100%);
+  font-weight: 700;
+  color: #3730a3;
   text-align: center;
   vertical-align: middle;
   border-right: 1px solid #e2e8f0;
+  letter-spacing: 0.05em;
+  font-size: 16px;
 }
 
 .spec-label {
-  font-weight: 500;
-  color: #374151;
-  background-color: #f1f5f9;
+  font-weight: 600;
+  color: #1e293b;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
   border-right: 1px solid #e2e8f0;
+  font-size: 15px;
 }
 
 .spec-value {
-  color: #1e293b;
-  font-weight: 400;
+  color: #374151;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 1.6;
 }
 
 .spec-table tbody tr:hover {
-  background-color: rgba(79, 172, 254, 0.05);
+  background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%);
+  transform: scale(1.01);
+}
+
+.spec-table tbody tr:hover .spec-category {
+  background: linear-gradient(135deg, #c7d2fe 0%, #ddd6fe 100%);
+  color: #1e40af;
+}
+
+.spec-table tbody tr:hover .spec-label {
+  background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%);
+  color: #1e40af;
 }
 
 .spec-table tbody tr:last-child td {
@@ -446,90 +582,119 @@ onMounted(() => {
 }
 
 .spec-note {
-  margin-top: 20px;
-  padding: 15px;
-  background-color: #f8fafc;
-  border-radius: 8px;
-  color: #64748b;
-  font-size: 0.9rem;
+  margin-top: 30px;
+  padding: 20px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 16px;
+  color: #475569;
+  font-size: 0.95rem;
+  border: 1px solid rgba(226, 232, 240, 0.8);
 }
 
 .spec-note p {
   margin: 0;
   text-align: center;
+  font-weight: 500;
 }
 
 .product-contact {
-  background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
-  border-radius: 20px;
-  padding: 60px;
-  text-align: center;
-  color: white;
-  margin: 80px 0;
-}
-
-.contact-content h2 {
-  font-size: 2.2rem;
-  margin-bottom: 15px;
-}
-
-.contact-content p {
-  font-size: 1.1rem;
-  opacity: 0.9;
-  margin-bottom: 30px;
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  padding: 14px 30px;
-  border-radius: 30px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  border-radius: 24px;
+  padding: 80px 60px;
+  box-shadow: 0 25px 50px rgba(59, 130, 246, 0.2);
 }
 
 .btn-primary {
-  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
-  color: white;
-  box-shadow: 0 10px 20px rgba(79, 172, 254, 0.3);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  color: #3b82f6;
+  border: 1px solid rgba(255, 255, 255, 0.7);
 }
 
 .btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 15px 25px rgba(79, 172, 254, 0.4);
+  transform: translateY(-4px) scale(1.05);
+  background: rgba(255, 255, 255, 1);
+  color: #3b82f6;
+}
+
+/* 自定义图标样式 */
+.feature-icon .custom-icon {
   color: white;
-  text-decoration: none;
+}
+
+.feature-icon .custom-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.feature-icon .custom-icon svg * {
+  stroke: white !important;
+}
+
+.feature-icon .custom-icon svg *[fill="currentColor"] {
+  fill: white !important;
+}
+
+.application-item .custom-icon {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.application-item:hover .custom-icon svg * {
+  stroke: white !important;
+  fill: currentColor !important;
+}
+
+.application-item:hover .custom-icon svg *[fill="none"] {
+  fill: none !important;
+}
+
+.application-item:hover .custom-icon svg *[fill="currentColor"] {
+  fill: white !important;
+}
+
+/* 现代化响应式设计 */
+@media (max-width: 1200px) {
+  .product-overview {
+    gap: 60px;
+    padding: 50px;
+  }
 }
 
 @media (max-width: 768px) {
+  .product-hero {
+    padding: 120px 0 60px;
+  }
+  
+  .product-title {
+    font-size: 2.5rem;
+  }
+  
   .product-overview {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 50px;
+    padding: 40px 30px;
+    margin: 60px 0;
   }
   
   .product-image img {
-    width: 280px;
-    height: 240px;
+    width: 300px;
+  }
+  
+  .section-title {
+    font-size: 2.2rem;
+    margin-bottom: 40px;
   }
   
   .features-grid {
     grid-template-columns: 1fr;
+    gap: 30px;
   }
   
   .applications-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
   }
   
-  .product-title {
-    font-size: 2rem;
-  }
-  
-  .product-contact {
-    padding: 40px 20px;
-  }
-  
-  /* 表格移动端适配 */
   .spec-table {
     font-size: 0.9rem;
   }
@@ -538,30 +703,19 @@ onMounted(() => {
   .spec-table td {
     padding: 12px 15px;
   }
-  
-  .spec-category-header,
-  .spec-label-header,
-  .spec-header {
-    width: auto;
-  }
-  
-  .spec-category {
-    font-size: 0.85rem;
-  }
 }
 
 @media (max-width: 480px) {
-  .spec-table {
-    font-size: 0.8rem;
-  }
-  
-  .spec-table th,
-  .spec-table td {
-    padding: 10px 12px;
+  .product-title {
+    font-size: 2rem;
   }
   
   .section-title {
     font-size: 1.8rem;
+  }
+  
+  .product-contact {
+    padding: 40px 20px;
   }
 }
 </style>

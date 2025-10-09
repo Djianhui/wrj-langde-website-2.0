@@ -142,11 +142,15 @@
   /* 优化导航栏在移动端的显示 */
   header {
     padding: 10px 0;
-    background: linear-gradient(135deg, rgba(7, 14, 28, 0.95) 0%, rgba(15, 23, 42, 0.92) 50%, rgba(30, 41, 59, 0.90) 100%) !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.95) 100%) !important;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
   }
   
   .logo h1 {
     font-size: 1.5rem;
+    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
   
   .logo-img {
@@ -161,16 +165,16 @@
     width: 85%;
     max-width: 350px;
     height: 100vh;
-    background: linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(30, 41, 59, 0.99) 100%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.95) 100%);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3);
+    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.15);
     z-index: 1001;
     transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
     padding: 90px 25px 40px;
     overflow-y: auto;
     display: block !important;
-    border-left: 1px solid rgba(56, 189, 248, 0.15);
+    border-left: 1px solid rgba(226, 232, 240, 0.6);
   }
   
   nav.active {
@@ -197,25 +201,24 @@
     justify-content: space-between;
     padding: 16px 20px !important;
     border-radius: 12px;
-    font-size: 1.25rem;
-    background: rgba(255, 255, 255, 0.08);
+    font-size: 15px;
+    background: rgba(248, 250, 252, 0.8);
     transition: all 0.3s ease;
     width: 100%;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-    color: rgba(255, 255, 255, 0.95) !important;
-    font-weight: 600 !important;
-    letter-spacing: 0.5px;
+    border: 1px solid rgba(226, 232, 240, 0.6);
+    color: #1e293b !important;
+    font-weight: 500 !important;
+    letter-spacing: -0.01em;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   }
   
   nav ul li a:hover,
   nav ul li a.active {
-    background: rgba(79, 172, 254, 0.2);
-    color: #ffffff !important;
-    border-color: rgba(79, 172, 254, 0.3);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    background: rgba(59, 130, 246, 0.12);
+    color: #1e40af !important;
+    border-color: rgba(59, 130, 246, 0.3);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
   }
   
   nav ul li a::before {
@@ -240,51 +243,54 @@
     transform: translateY(-50%);
     width: 8px;
     height: 8px;
-    background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+    background: #3b82f6;
     border-radius: 50%;
-    box-shadow: 0 0 15px rgba(79, 172, 254, 0.8);
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.6);
   }
   
   .lang-switch {
     margin-top: 20px;
     display: block;
     text-align: center;
-    background: rgba(56, 189, 248, 0.25);
+    background: rgba(59, 130, 246, 0.12);
     width: 100%;
-    color: #fff !important;
-    font-weight: 600 !important;
+    color: #1e40af !important;
+    font-weight: 500 !important;
     padding: 12px !important;
     border-radius: 10px;
-    border: 1px solid rgba(56, 189, 248, 0.4);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   }
   
   .mobile-menu-btn {
     display: flex !important;
     z-index: 1002;
-    width: 35px;
-    height: 25px;
+    width: 32px;
+    height: 28px;
+    padding: 6px;
+    background: rgba(248, 250, 252, 0.9);
+    border: 1px solid rgba(226, 232, 240, 0.6);
+    border-radius: 6px;
   }
   
   .mobile-menu-btn span {
-    height: 3px;
-    background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
-    border-radius: 3px;
-    box-shadow: 0 0 5px rgba(79, 172, 254, 0.3);
+    height: 2px;
+    background: #64748b;
+    border-radius: 2px;
   }
   
-  /* 添加菜单标题 */
+  /* 移除菜单标题 */
   nav::before {
     content: '菜单导航';
     position: absolute;
     top: 35px;
     left: 25px;
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: white;
-    opacity: 0.95;
-    letter-spacing: 1px;
-    text-shadow: 0 0 10px rgba(79, 172, 254, 0.5);
+    font-size: 16px;
+    font-weight: 600;
+    color: #1e293b;
+    opacity: 0.8;
+    letter-spacing: -0.01em;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   }
   
   /* 移动菜单动画效果 */

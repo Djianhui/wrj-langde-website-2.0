@@ -835,28 +835,29 @@ nav ul li a.active .nav-arrow {
   position: absolute;
   top: 100%;
   left: 0;
-  min-width: 220px; /* 增加宽度以容纳多列 */
-  background: linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(30, 41, 59, 0.99) 100%);
+  min-width: 200px;
+  background: linear-gradient(135deg, rgba(219, 234, 254, 0.95) 0%, rgba(255, 255, 255, 0.98) 100%);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-radius: 12px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15), 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(147, 197, 253, 0.4);
   opacity: 0;
   visibility: hidden;
-  transform: translateY(10px) scale(0.95);
-  transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1); /* 加快关闭动画 */
+  transform: translateY(15px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 1000;
   padding: 20px 0;
   margin-top: 10px;
-  pointer-events: none; /* 隐藏时不响应鼠标事件 */
+  pointer-events: none;
 }
 
 .dropdown-menu.show {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0) scale(1);
-  pointer-events: auto; /* 显示时响应鼠标事件 */
+  transform: translateY(0);
+  pointer-events: auto;
+  animation: slideDown 0.4s ease-out;
 }
 
 .dropdown-content {
@@ -871,7 +872,6 @@ nav ul li a.active .nav-arrow {
 }
 
 .level-column {
-  border-right: 1px solid rgba(56, 189, 248, 0.15);
   padding: 0 15px;
   min-height: 100%;
 }
@@ -883,42 +883,45 @@ nav ul li a.active .nav-arrow {
 /* 一级分类列 */
 .level-1-column {
   width: 200px;
-  background: linear-gradient(135deg, rgba(79, 172, 254, 0.05) 0%, rgba(0, 242, 254, 0.05) 100%);
-  border-radius: 8px 0 0 8px;
+  background: rgba(59, 130, 246, 0.05);
+  border-radius: 12px 0 0 12px;
+  border-right: 1px solid rgba(226, 232, 240, 0.6);
 }
 
 /* 二级分类列 */
 .level-2-column {
   width: 220px;
-  background: linear-gradient(135deg, rgba(56, 189, 248, 0.04) 0%, rgba(14, 165, 233, 0.04) 100%);
+  background: rgba(248, 250, 252, 0.5);
+  border-right: 1px solid rgba(226, 232, 240, 0.6);
 }
 
 /* 三级产品列 */
 .level-3-column {
   width: 280px;
-  border-radius: 0 8px 8px 0;
+  border-radius: 0 12px 12px 0;
+  background: rgba(255, 255, 255, 0.8);
 }
 
 /* 列标题 */
 .level-header {
-  padding: 15px 20px;
-  color: rgba(255, 255, 255, 0.9);
-  font-weight: 700;
-  font-size: 1.1rem;
-  border-bottom: 2px solid rgba(79, 172, 254, 0.2);
-  margin-bottom: 15px;
+  padding: 12px 16px;
+  color: #1e293b;
+  font-weight: 600;
+  font-size: 14px;
+  border-bottom: 2px solid rgba(59, 130, 246, 0.2);
+  margin-bottom: 12px;
   text-align: center;
-  background: linear-gradient(135deg, rgba(79, 172, 254, 0.1) 0%, rgba(0, 242, 254, 0.1) 100%);
-  border-radius: 6px;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-  letter-spacing: 0.5px;
+  background: rgba(59, 130, 246, 0.08);
+  border-radius: 8px;
+  letter-spacing: -0.01em;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 /* 菜单项通用样式 */
 .menu-item {
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   border-radius: 8px;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
 }
@@ -927,23 +930,27 @@ nav ul li a.active .nav-arrow {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 16px;
+  padding: 12px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   z-index: 1;
 }
 
 .item-title {
-  font-weight: 600;
-  letter-spacing: 0.3px;
-  transition: all 0.3s ease;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 14px;
+  text-align: left;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 .item-arrow {
-  font-size: 0.8rem;
-  transition: all 0.3s ease;
-  opacity: 0.7;
+  font-size: 0.7rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.6;
+  color: #64748b;
 }
 
 .item-link {
@@ -959,101 +966,102 @@ nav ul li a.active .nav-arrow {
 
 /* 一级分类样式 */
 .level-1-item {
-  background: linear-gradient(135deg, rgba(79, 172, 254, 0.08) 0%, rgba(0, 242, 254, 0.08) 100%);
-  border: 1px solid rgba(79, 172, 254, 0.15);
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.15);
 }
 
 .level-1-item .item-content {
-  color: rgba(255, 255, 255, 0.9);
+  color: #1e293b;
 }
 
 .level-1-item .item-title {
-  font-size: 1.05rem;
-  font-weight: 550;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .level-1-item:hover,
 .level-1-item.active {
-  background: linear-gradient(135deg, rgba(79, 172, 254, 0.15) 0%, rgba(0, 242, 254, 0.15) 100%);
-  border-color: rgba(79, 172, 254, 0.3);
-  transform: translateX(5px);
-  box-shadow: 0 5px 20px rgba(79, 172, 254, 0.2);
+  background: rgba(59, 130, 246, 0.15);
+  border-color: rgba(59, 130, 246, 0.3);
+  transform: translateX(3px);
+  box-shadow: 0 3px 12px rgba(59, 130, 246, 0.2);
 }
 
 .level-1-item:hover .item-title,
 .level-1-item.active .item-title {
-  color: #ffffff;
+  color: #1e40af;
   font-weight: 700;
 }
 
 .level-1-item:hover .item-arrow,
 .level-1-item.active .item-arrow {
-  color: #4facfe;
-  transform: translateX(3px);
+  color: #3b82f6;
+  transform: translateX(2px);
   opacity: 1;
 }
 
 /* 二级分类样式 */
 .level-2-item {
-  background: linear-gradient(135deg, rgba(56, 189, 248, 0.06) 0%, rgba(14, 165, 233, 0.06) 100%);
-  border: 1px solid rgba(56, 189, 248, 0.12);
+  background: rgba(248, 250, 252, 0.8);
+  border: 1px solid rgba(226, 232, 240, 0.6);
 }
 
 .level-2-item .item-content {
-  color: rgba(255, 255, 255, 0.85);
+  color: #475569;
 }
 
 .level-2-item .item-title {
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 500;
 }
 
 .level-2-item:hover,
 .level-2-item.active {
-  background: linear-gradient(135deg, rgba(56, 189, 248, 0.12) 0%, rgba(14, 165, 233, 0.12) 100%);
-  border-color: rgba(56, 189, 248, 0.25);
-  transform: translateX(4px);
-  box-shadow: 0 4px 16px rgba(56, 189, 248, 0.15);
+  background: rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.25);
+  transform: translateX(2px);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.15);
 }
 
 .level-2-item:hover .item-title,
 .level-2-item.active .item-title {
-  color: #ffffff;
-  font-weight: 650;
+  color: #1e40af;
+  font-weight: 600;
 }
 
 .level-2-item:hover .item-arrow,
 .level-2-item.active .item-arrow {
-  color: #38bdf8;
-  transform: translateX(2px);
+  color: #3b82f6;
+  transform: translateX(1px);
   opacity: 1;
 }
 
 /* 三级产品样式 */
 .level-3-item {
   border: 1px solid transparent;
+  background: rgba(255, 255, 255, 0.6);
 }
 
 .level-3-item .item-content {
-  color: rgba(255, 255, 255, 0.8);
-  padding: 10px 16px;
+  color: #64748b;
 }
 
 .level-3-item .item-title {
-  font-size: 0.95rem;
+  font-size: 13px;
   font-weight: 500;
 }
 
 .level-3-item:hover {
-  border-color: rgba(100, 116, 139, 0.2);
-  transform: translateX(3px);
-  box-shadow: 0 3px 12px rgba(100, 116, 139, 0.12);
+  background: rgba(59, 130, 246, 0.08);
+  border-color: rgba(59, 130, 246, 0.2);
+  transform: translateX(1px);
 }
 
 .level-3-item:hover .item-title {
-  color: #e2e8f0;
+  color: #1e40af;
   font-weight: 600;
 }
+</style>
 
 /* 动画效果 */
 @keyframes slideInRight {
@@ -1221,4 +1229,3 @@ nav ul li a:active {
 .lang-switch span {
   animation: langSwitchFade 0.3s ease forwards;
 }
-</style> 

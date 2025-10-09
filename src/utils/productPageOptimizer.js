@@ -1,216 +1,7 @@
-<template>
-  <div class="product-detail-page page-content">
-    <!-- 产品头部 -->
-    <div class="product-hero">
-      <div class="container">
-        <div class="breadcrumb">
-          <RouterLink to="/">首页</RouterLink>
-          <CustomIcons name="chevron-right" :size="16" class="breadcrumb-separator" />
-          <RouterLink to="/technology">产品中心</RouterLink>
-          <CustomIcons name="chevron-right" :size="16" class="breadcrumb-separator" />
-          <span>立体防控</span>
-          <CustomIcons name="chevron-right" :size="16" class="breadcrumb-separator" />
-          <span>侦探感知</span>
-          <CustomIcons name="chevron-right" :size="16" class="breadcrumb-separator" />
-          <span>光电识别</span>
-        </div>
-        <div class="product-hero-content">
-          <h1 class="product-title">光电识别系统</h1>
-          <p class="product-subtitle">可见光与红外双光谱识别技术</p>
-        </div>
-      </div>
-    </div>
-    
-    <div class="container">
-      <!-- 产品概述 -->
-      <div class="product-overview">
-        <div class="product-image">
-          <img src="/images/products/optical.png" alt="光电识别系统" @error="handleImageError">
-        </div>
-        <div class="product-info">
-          <h2>产品概述</h2>
-          <p>该光电跟踪装置内置高清可见光透雾网络摄像头加热成像摄像机，内置智能目标检测和跟踪算法，在可见光、低照度、恶劣雾霾天气和夜间实现24小时不间断的目标识别和跟踪。机身采用高强度减震合金压铸外壳，整体三防喷涂、隔热、耐高温耐寒、耐冲击、耐腐蚀，具有良好的抗风减震性能。</p>
-        </div>
-      </div>
-      
-      <!-- 产品规格 -->
-      <div class="product-specifications">
-        <h2 class="section-title">产品规格</h2>
-        <p class="spec-note">* 注意：外观、规格和功能可能有所不同，恕不另行通知。</p>
-       <div class="specification-table">
-  <div class="spec-row">
-    <div class="spec-label">最大分辨率</div>
-    <div class="spec-value">1080P(1920x1080)</div>
-  </div>
-  <div class="spec-row">
-    <div class="spec-label">焦距</div>
-    <div class="spec-value">6.5～312mm 48倍光学连续变焦</div>
-  </div>
-  <div class="spec-row">
-    <div class="spec-label">最低照度</div>
-    <div class="spec-value">彩色:0.002Lux 黑白:0.0002Lux@(AGC ON)</div>
-  </div>
-  <div class="spec-row">
-    <div class="spec-label">透雾功能</div>
-    <div class="spec-value">光学透雾、电子透雾</div>
-  </div>
-  <div class="spec-row">
-    <div class="spec-label">探测器类型</div>
-    <div class="spec-value">非制冷氧化钒焦平面探测器</div>
-  </div>
-  <div class="spec-row">
-    <div class="spec-label">图像分辨率</div>
-    <div class="spec-value">640x512, 热成像编码:1280x1024</div>
-  </div>
-  <div class="spec-row">
-    <div class="spec-label">热像镜头焦距</div>
-    <div class="spec-value">75mm</div>
-  </div>
-  <div class="spec-row">
-    <div class="spec-label">视频压缩标准</div>
-    <div class="spec-value">H.265 / H.264 / MJPEG</div>
-  </div>
-  <div class="spec-row">
-    <div class="spec-label">帧率</div>
-    <div class="spec-value">25/30fps</div>
-  </div>
-  <div class="spec-row">
-    <div class="spec-label">OSD 字符叠加</div>
-    <div class="spec-value">多区智能OSD，支持多行国标字符，字体大小、颜色、位置可自定义</div>
-  </div>
-  <div class="spec-row">
-    <div class="spec-label">转台旋转范围</div>
-    <div class="spec-value">水平:0°～360°连续无限位旋转；垂直: -90°～+90°</div>
-  </div>
-  <div class="spec-row">
-    <div class="spec-label">预置位</div>
-    <div class="spec-value">256个</div>
-  </div>
-  <div class="spec-row">
-    <div class="spec-label">目标探测性能</div>
-    <div class="spec-value">可见光≥2.5Km 热成像≥1.2Km<br>(无人机35x35cm, 能见度≥20Km，温度≤20℃，湿度≤40%)</div>
-  </div>
-  <div class="spec-row">
-    <div class="spec-label">支持的协议</div>
-    <div class="spec-value">IPv4, TCP/IP, UDP, HTTP, DHCP, RTP/RTCP/RTSP, FTP, UPnP, DDNS, NTP, IGMP, ICMP</div>
-  </div>
-  <div class="spec-row">
-    <div class="spec-label">兼容协议</div>
-    <div class="spec-value">ONVIF, GB/T 28181</div>
-  </div>
-  <div class="spec-row">
-    <div class="spec-label">通讯接口</div>
-    <div class="spec-value">1个RJ45, 10M/100M自适应以太网接口</div>
-  </div>
-  <div class="spec-row">
-    <div class="spec-label">工作温度/湿度</div>
-    <div class="spec-value">-35℃～+60℃ / ＜90%RH</div>
-  </div>
-  <div class="spec-row">
-    <div class="spec-label">云台防护等级</div>
-    <div class="spec-value">IP66</div>
-  </div>
-  <div class="spec-row">
-    <div class="spec-label">电源输入</div>
-    <div class="spec-value">AC220V转DC24V±15%防水电源</div>
-  </div>
-  <div class="spec-row">
-    <div class="spec-label">功率</div>
-    <div class="spec-value">正常工作≤30W</div>
-  </div>
-  <div class="spec-row">
-    <div class="spec-label">重量(净重)</div>
-    <div class="spec-value">＜8KG</div>
-  </div>
-</div>
-      </div>
-      
-      <!-- 产品特点 -->
-      <div class="product-features">
-        <h2 class="section-title">产品特点</h2>
-        <div class="features-grid">
-          <div class="feature-card">
-            <div class="feature-icon">
-              <CustomIcons name="visible-light-imaging" :size="32" />
-            </div>
-            <h3>黑白名单功能</h3>
-            <p>4K超高清光电成像，提供清晰的目标图像</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">
-              <CustomIcons name="infrared-imaging" :size="32" />
-            </div>
-            <h3>多光谱全天候监测</h3>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">
-              <CustomIcons name="photoelectric-tracking" :size="32" />
-            </div>
-            <h3>远程探测和发现目标</h3>
-          </div>
-           <div class="feature-card">
-            <div class="feature-icon">
-              <CustomIcons name="multi-station-positioning" :size="32" />
-            </div>
-            <h3>智能区域计算</h3>
-          </div>
-        </div>
-      </div>
-      
-      <!-- 应用场景 -->
-      <div class="product-applications">
-        <h2 class="section-title">应用场景</h2>
-        <div class="applications-grid">
-          <div class="application-item">
-            <CustomIcons name="area-monitoring" :size="40" />
-            <span>夜间监控</span>
-          </div>
-          <div class="application-item">
-            <CustomIcons name="important-facilities" :size="40" />
-            <span>城市安防</span>
-          </div>
-          <div class="application-item">
-            <CustomIcons name="photoelectric-tracking" :size="40" />
-            <span>目标跟踪</span>
-          </div>
-          <div class="application-item">
-            <CustomIcons name="equipment-monitoring" :size="40" />
-            <span>实时监控</span>
-          </div>
-        </div>
-      </div>
-      
-      <!-- 联系咨询 -->
-      <div class="product-contact">
-        <div class="contact-content">
-          <h2>需要了解更多？</h2>
-          <p>我们的专业团队随时为您提供技术支持和解决方案</p>
-          <RouterLink to="/contact" class="btn btn-primary">联系我们</RouterLink>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
+// 产品详情页批量优化脚本
+// 用于统一应用现代化样式和自定义图标
 
-<script setup>
-import { onMounted } from 'vue'
-import CustomIcons from '@/components/icons/CustomIcons.vue'
-
-// 定义emit
-const emit = defineEmits(['page-loaded'])
-
-// 处理图片加载错误
-const handleImageError = (event) => {
-  event.target.src = '/images/products/default-product.jpg'
-}
-
-// 页面加载完成
-onMounted(() => {
-  emit('page-loaded')
-})
-</script>
-
-<style scoped>
+export const modernProductStyles = `
 * {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }
@@ -349,36 +140,6 @@ onMounted(() => {
   color: #475569;
   margin-bottom: 30px;
   font-weight: 400;
-}
-
-.product-specs h3 {
-  font-size: 1.3rem;
-  margin-bottom: 20px;
-  color: #1e293b;
-}
-
-.specs-grid {
-  display: grid;
-  gap: 15px;
-}
-
-.spec-item {
-  display: flex;
-  justify-content: space-between;
-  padding: 15px;
-  background: #f8fafc;
-  border-radius: 8px;
-  border: 1px solid #e2e8f0;
-}
-
-.spec-label {
-  font-weight: 500;
-  color: #374151;
-}
-
-.spec-value {
-  font-weight: 600;
-  color: #4facfe;
 }
 
 .section-title {
@@ -532,64 +293,6 @@ onMounted(() => {
 
 .application-item:hover span {
   color: white;
-}
-
-.product-specifications {
-  margin-bottom: 100px;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  padding: 50px;
-  border-radius: 24px;
-  box-shadow: 0 25px 60px rgba(59, 130, 246, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.spec-note {
-  text-align: center;
-  color: #64748b;
-  font-size: 0.95rem;
-  margin-bottom: 40px;
-  font-style: italic;
-  font-weight: 400;
-}
-
-.specification-table {
-  background: rgba(255, 255, 255, 0.98);
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 15px 40px rgba(59, 130, 246, 0.06);
-  border: 1px solid rgba(226, 232, 240, 0.8);
-}
-
-.spec-row {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  border-bottom: 1px solid #e2e8f0;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.spec-row:last-child {
-  border-bottom: none;
-}
-
-.spec-row:hover {
-  background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%);
-  transform: scale(1.01);
-}
-
-.spec-label {
-  padding: 20px 25px;
-  font-weight: 600;
-  color: #1e293b;
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-  border-right: 1px solid #e2e8f0;
-}
-
-.spec-value {
-  padding: 20px 25px;
-  color: #374151;
-  font-weight: 500;
-  line-height: 1.6;
 }
 
 .product-contact {
@@ -748,30 +451,6 @@ onMounted(() => {
     font-size: 2.2rem;
   }
   
-  .product-specifications {
-    padding: 30px 20px;
-    margin-bottom: 80px;
-  }
-  
-  .specification-table {
-    margin: 0 -10px;
-  }
-  
-  .spec-row {
-    grid-template-columns: 1fr;
-  }
-  
-  .spec-label {
-    border-right: none;
-    border-bottom: 1px solid #e2e8f0;
-    font-weight: 600;
-    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-  }
-  
-  .spec-value {
-    padding-top: 10px;
-  }
-  
   .btn {
     padding: 16px 32px;
     font-size: 1rem;
@@ -813,4 +492,39 @@ onMounted(() => {
     font-size: 1.9rem;
   }
 }
-</style>
+`;
+
+// 产品页面图标映射
+export const productIconMapping = {
+  // 雷达探测系列
+  'digital-channelization': '数字信道化处理',
+  'precision-direction-finding': '高精度测向', 
+  'multi-station-positioning': '多站协同定位',
+  'low-power': '低功耗',
+  
+  // 固定式反制系列
+  'full-frequency-coverage': '全频覆盖',
+  'jamming-distance': '干扰距离',
+  'multi-purpose': '一机多用',
+  'scalability': '可扩展性',
+  
+  // 光电探测系列
+  'infrared-imaging': '红外成像',
+  'visible-light-imaging': '可见光成像',
+  'photoelectric-tracking': '光电跟踪',
+  
+  // FPV无人机系列
+  'high-speed-flight': '高速飞行',
+  'racing-performance': '竞技性能',
+  
+  // 巡检系列
+  'inspection-route': '巡检路径',
+  'equipment-monitoring': '设备监控',
+  'emergency-response': '应急响应',
+  
+  // 应用场景图标
+  'airport-security': '机场安防',
+  'important-facilities': '重要设施', 
+  'border-protection': '边境防护',
+  'area-monitoring': '区域监控'
+};

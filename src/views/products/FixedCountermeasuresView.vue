@@ -2,19 +2,20 @@
   <div class="product-detail-page page-content">
     <!-- 产品头部 -->
     <div class="product-hero">
+      <div class="hero-background"></div>
       <div class="container">
         <div class="breadcrumb">
           <RouterLink to="/">首页</RouterLink>
-          <span>/</span>
+          <CustomIcons name="chevron-right" :size="16" class="breadcrumb-separator" />
           <RouterLink to="/technology">产品中心</RouterLink>
-          <span>/</span>
+          <CustomIcons name="chevron-right" :size="16" class="breadcrumb-separator" />
           <span>立体防控</span>
-          <span>/</span>
+          <CustomIcons name="chevron-right" :size="16" class="breadcrumb-separator" />
           <span>干扰反制</span>
         </div>
         <div class="product-hero-content">
           <h1 class="product-title">固定式无人机反制设备</h1>
-          <p class="product-subtitle"></p>
+          <p class="product-subtitle">高增益全向射频干扰技术，全频段无人机反制解决方案</p>
         </div>
       </div>
     </div>
@@ -81,28 +82,28 @@
         <div class="features-grid">
           <div class="feature-card">
             <div class="feature-icon">
-              <i class="fas fa-crosshairs"></i>
+              <CustomIcons name="full-frequency-coverage" :size="32" />
             </div>
             <h3>20MHz~6GHz全频覆盖</h3>
             <p> 配备高增益全向天线系统，采用全频段干扰方 式，覆盖20MHz~6GHz，且频段可自由编写， 覆盖95%无人机机型。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
-              <i class="fas fa-tachometer-alt"></i>
+              <CustomIcons name="jamming-distance" :size="32" />
             </div>
             <h3>干扰距离远</h3>
             <p>在平地无遮挡空旷区域干扰半径距离可达3公里， 城市环境干扰半径距离可达1公里。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
-              <i class="fas fa-chart-line"></i>
+              <CustomIcons name="multi-purpose" :size="32" />
             </div>
             <h3>一机多用</h3>
             <p>可单独做无人机打击设备，亦可做排爆干扰仪、 信号屏蔽器、对讲机屏蔽器使用。</p>
           </div>
          <div class="feature-card">
             <div class="feature-icon">
-              <i class="fas fa-chart-line"></i>
+              <CustomIcons name="scalability" :size="32" />
             </div>
             <h3>可扩展性强</h3>
             <p>设备可根据客户需求定制多模块、定制单通道 功率，可集成无人机探测系统，实现无人机侦 测反制一体化，支持设备组网工作。</p>
@@ -114,19 +115,27 @@
         <h2 class="section-title">应用场景</h2>
         <div class="applications-grid">
           <div class="application-item">
-            <i class="fas fa-plane"></i>
+            <div class="app-icon">
+              <CustomIcons name="airport-security" :size="32" />
+            </div>
             <span>机场安防</span>
           </div>
           <div class="application-item">
-            <i class="fas fa-building"></i>
+            <div class="app-icon">
+              <CustomIcons name="important-facilities" :size="32" />
+            </div>
             <span>重要设施</span>
           </div>
           <div class="application-item">
-            <i class="fas fa-shield-alt"></i>
+            <div class="app-icon">
+              <CustomIcons name="border-protection" :size="32" />
+            </div>
             <span>边境防护</span>
           </div>
           <div class="application-item">
-            <i class="fas fa-eye"></i>
+            <div class="app-icon">
+              <CustomIcons name="area-monitoring" :size="32" />
+            </div>
             <span>区域监控</span>
           </div>
         </div>
@@ -146,6 +155,7 @@
 
 <script setup>
 import { onMounted } from 'vue'
+import CustomIcons from '@/components/icons/CustomIcons.vue'
 
 // 定义emit
 const emit = defineEmits(['page-loaded'])
@@ -162,24 +172,56 @@ onMounted(() => {
 </script>
 
 <style scoped>
+/* 现代化设计系统 */
 .product-detail-page {
   padding-top: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 .product-hero {
-  background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
   padding: 150px 0 80px;
   color: white;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(59, 130, 246, 0.2);
+}
+
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.03"><circle cx="30" cy="30" r="30"/></g></svg>') repeat;
+  opacity: 0.3;
+  z-index: 1;
+}
+
+.product-hero .container {
+  position: relative;
+  z-index: 2;
 }
 
 .breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   margin-bottom: 30px;
   font-size: 0.9rem;
+  font-weight: 500;
+  position: relative;
+  z-index: 5;
 }
 
 .breadcrumb a {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.8);
   text-decoration: none;
+  transition: color 0.2s ease;
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
+  cursor: pointer;
 }
 
 .breadcrumb a:hover {
@@ -187,28 +229,36 @@ onMounted(() => {
 }
 
 .breadcrumb span {
-  margin: 0 10px;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.breadcrumb-separator {
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .product-title {
-  font-size: 3rem;
+  font-size: 3.5rem;
+  font-weight: 800;
   margin-bottom: 20px;
-  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
 }
 
 .product-subtitle {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
+  font-weight: 400;
   opacity: 0.9;
+  letter-spacing: 0.01em;
 }
 
 .product-overview {
   display: grid;
   grid-template-columns: 1fr 1.5fr;
-  gap: 60px;
-  margin: 80px 0;
+  gap: 80px;
+  margin: 100px 0;
   align-items: center;
 }
 
@@ -223,133 +273,163 @@ onMounted(() => {
 .product-image img {
   width: 416px;
   height: 416px;
-  border-radius: 12px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border-radius: 24px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
   object-fit: cover;
   object-position: center;
+  transition: transform 0.3s ease;
+}
+
+.product-image img:hover {
+  transform: scale(1.02);
 }
 
 .product-info h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 24px;
   color: #1e293b;
+  letter-spacing: -0.01em;
 }
 
 .product-info p {
-  font-size: 1.1rem;
+  font-size: 1.125rem;
   line-height: 1.8;
   color: #64748b;
-  margin-bottom: 30px;
+  margin-bottom: 32px;
+  font-weight: 400;
 }
 
 .section-title {
   text-align: center;
-  font-size: 2.2rem;
-  margin-bottom: 50px;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 60px;
   color: #1e293b;
+  letter-spacing: -0.01em;
 }
 
 .features-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 30px;
-  margin-bottom: 80px;
+  gap: 40px;
+  margin-bottom: 100px;
 }
 
 .feature-card {
   text-align: center;
-  padding: 40px 20px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease;
+  padding: 48px 32px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .feature-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-12px);
+  box-shadow: 0 30px 60px rgba(59, 130, 246, 0.2);
+  background: rgba(255, 255, 255, 0.95);
 }
 
 .feature-icon {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  width: 80px;
+  height: 80px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 20px;
-  font-size: 1.8rem;
+  margin: 0 auto 24px;
   color: white;
+  box-shadow: 0 15px 30px rgba(59, 130, 246, 0.3);
 }
 
 .feature-card h3 {
-  font-size: 1.3rem;
-  margin-bottom: 15px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 16px;
   color: #1e293b;
+  letter-spacing: -0.01em;
 }
 
 .feature-card p {
   color: #64748b;
   line-height: 1.6;
+  font-weight: 400;
+  font-size: 1rem;
 }
 
 .applications-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
-  margin-bottom: 80px;
+  gap: 32px;
+  margin-bottom: 100px;
 }
 
 .application-item {
   text-align: center;
-  padding: 30px 20px;
-  background: #f8fafc;
-  border-radius: 12px;
-  transition: all 0.3s ease;
+  padding: 32px 24px;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .application-item:hover {
-  background: white;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
 }
 
-.application-item i {
-  font-size: 2.5rem;
-  color: #4facfe;
-  margin-bottom: 15px;
-  display: block;
+.app-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  color: white;
+  box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
 }
 
 .application-item span {
   font-weight: 600;
   color: #1e293b;
+  font-size: 1rem;
 }
 
 .product-specifications {
-  margin-bottom: 80px;
+  margin-bottom: 100px;
 }
 
 .spec-note {
   text-align: center;
   color: #64748b;
-  font-size: 0.9rem;
-  margin-bottom: 30px;
+  font-size: 0.95rem;
+  margin-bottom: 40px;
   font-style: italic;
+  font-weight: 400;
 }
 
 .specification-table {
-  background: white;
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  border: 1px solid #e2e8f0;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .spec-row {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  border-bottom: 1px solid #e2e8f0;
-  transition: background-color 0.2s ease;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .spec-row:last-child {
@@ -357,91 +437,121 @@ onMounted(() => {
 }
 
 .spec-row:hover {
-  background-color: #f8fafc;
-}
-
-.spec-header {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-  color: white;
-  font-weight: 600;
-}
-
-.spec-header:hover {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+  transform: translateX(4px);
 }
 
 .spec-label {
-  padding: 15px 20px;
-  font-weight: 500;
+  padding: 20px 24px;
+  font-weight: 600;
   color: #374151;
-  background-color: #f8fafc;
-  border-right: 1px solid #e2e8f0;
-}
-
-.spec-header .spec-label {
-  background: transparent;
-  color: white;
-  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(248, 250, 252, 0.8);
+  border-right: 1px solid rgba(226, 232, 240, 0.3);
+  font-size: 0.95rem;
 }
 
 .spec-value {
-  padding: 15px 20px;
+  padding: 20px 24px;
   color: #1e293b;
-  font-weight: 400;
-}
-
-.spec-header .spec-value {
-  color: white;
-  font-weight: 600;
+  font-weight: 500;
+  font-size: 0.95rem;
 }
 
 .product-contact {
-  background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
-  border-radius: 20px;
-  padding: 60px;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  border-radius: 32px;
+  padding: 80px 60px;
   text-align: center;
   color: white;
-  margin: 80px 0;
+  margin: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.product-contact::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.05"><circle cx="30" cy="30" r="30"/></g></svg>') repeat;
+  opacity: 0.3;
+}
+
+.contact-content {
+  position: relative;
+  z-index: 1;
 }
 
 .contact-content h2 {
-  font-size: 2.2rem;
-  margin-bottom: 15px;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
 }
 
 .contact-content p {
-  font-size: 1.1rem;
+  font-size: 1.125rem;
+  font-weight: 400;
   opacity: 0.9;
-  margin-bottom: 30px;
+  margin-bottom: 32px;
 }
 
 .btn {
   display: inline-flex;
   align-items: center;
-  padding: 14px 30px;
-  border-radius: 30px;
+  padding: 16px 32px;
+  border-radius: 50px;
   font-weight: 600;
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 1.1rem;
 }
 
 .btn-primary {
-  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
   color: white;
-  box-shadow: 0 10px 20px rgba(79, 172, 254, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .btn-primary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 15px 25px rgba(79, 172, 254, 0.4);
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   color: white;
   text-decoration: none;
 }
 
+@media (max-width: 1200px) {
+  .product-overview {
+    gap: 60px;
+  }
+  
+  .features-grid {
+    gap: 30px;
+  }
+  
+  .applications-grid {
+    gap: 24px;
+  }
+}
+
 @media (max-width: 768px) {
+  .product-hero {
+    padding: 120px 0 60px;
+  }
+  
+  .product-title {
+    font-size: 2.5rem;
+  }
+  
   .product-overview {
     grid-template-columns: 1fr;
     gap: 40px;
+    margin: 60px 0;
   }
   
   .product-image img {
@@ -451,22 +561,34 @@ onMounted(() => {
   
   .features-grid {
     grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .feature-card {
+    padding: 32px 24px;
   }
   
   .applications-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
   
-  .product-title {
-    font-size: 2rem;
+  .application-item {
+    padding: 24px 16px;
   }
   
   .product-contact {
-    padding: 40px 20px;
+    padding: 60px 32px;
+    border-radius: 24px;
+  }
+  
+  .contact-content h2 {
+    font-size: 2rem;
   }
   
   .specification-table {
-    margin: 0 -10px;
+    margin: 0 -16px;
+    border-radius: 16px;
   }
   
   .spec-row {
@@ -475,18 +597,45 @@ onMounted(() => {
   
   .spec-label {
     border-right: none;
-    border-bottom: 1px solid #e2e8f0;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.3);
+    background: rgba(59, 130, 246, 0.1);
     font-weight: 600;
-    background-color: #f1f5f9;
-  }
-  
-  .spec-header .spec-label {
-    background: rgba(255, 255, 255, 0.1);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   }
   
   .spec-value {
-    padding-top: 10px;
+    padding-top: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-title {
+    font-size: 2rem;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .breadcrumb {
+    font-size: 0.8rem;
+  }
+  
+  .feature-icon {
+    width: 64px;
+    height: 64px;
+  }
+  
+  .app-icon {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .feature-card h3 {
+    font-size: 1.2rem;
+  }
+  
+  .applications-grid {
+    grid-template-columns: 1fr;
   }
 }
 </style>

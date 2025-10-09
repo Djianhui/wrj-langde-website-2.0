@@ -221,98 +221,186 @@ onMounted(() => {
 </script>
 
 <style scoped>
+/* 现代化应用案例页面设计 */
 .cases-page {
   padding-top: 0;
-  padding-bottom: 80px;
+  padding-bottom: 120px;
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* 英雄区域现代化设计 */
 .hero-section {
-  background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('/images/cases-hero.jpg');
+  background: linear-gradient(135deg, 
+    rgba(59, 130, 246, 0.9) 0%, 
+    rgba(139, 92, 246, 0.8) 50%,
+    rgba(59, 130, 246, 0.9) 100%), 
+    url('/images/cases-hero.jpg');
   background-size: cover;
   background-position: center;
-  padding: 80px 0;
-  margin-bottom: 60px;
-  color: var(--light-text);
+  background-attachment: fixed;
+  padding: 100px 0;
+  margin-bottom: 80px;
+  color: #ffffff;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.hero-section .container {
+  position: relative;
+  z-index: 2;
 }
 
 .hero-section .section-title {
-  color: var(--light-text);
+  color: #ffffff;
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  letter-spacing: -0.02em;
 }
 
 .hero-section .section-desc {
-  max-width: 800px;
+  max-width: 650px;
   margin: 0 auto;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.2rem;
+  line-height: 1.6;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
+/* 现代化筛选栏设计 */
 .filter-bar {
-  margin-bottom: 40px;
-  padding: 20px;
-  background: rgba(15, 23, 42, 0.05);
-  border-radius: 8px;
+  margin-bottom: 60px;
+  padding: 30px;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.95) 0%, 
+    rgba(248, 250, 252, 0.9) 100%);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 
+    0 8px 32px rgba(59, 130, 246, 0.08),
+    0 2px 16px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .filter-group {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 15px;
 }
 
 .filter-group span {
-  font-weight: 500;
-  color: var(--text-color);
+  font-weight: 600;
+  color: #0f172a;
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
 }
 
 .filter-btn {
-  padding: 8px 16px;
-  background: var(--bg-color);
-  border: 1px solid var(--border-color);
-  border-radius: 20px;
-  font-size: 0.9rem;
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 2px solid rgba(59, 130, 246, 0.2);
+  border-radius: 25px;
+  font-size: 0.95rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: 'Inter', sans-serif;
+  backdrop-filter: blur(10px);
 }
 
 .filter-btn.active {
-  background: var(--primary-color);
-  color: white;
-  border-color: var(--primary-color);
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+  transform: translateY(-2px);
 }
 
 .filter-btn:hover:not(.active) {
-  background: rgba(14, 165, 233, 0.1);
-  border-color: var(--primary-color);
+  background: linear-gradient(135deg, 
+    rgba(59, 130, 246, 0.1) 0%, 
+    rgba(147, 197, 253, 0.15) 100%);
+  border-color: #3b82f6;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.15);
 }
 
+/* 现代化案例网格 */
 .cases-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 30px;
-  margin-bottom: 50px;
+  gap: 40px;
+  margin-bottom: 80px;
 }
 
+/* 现代化案例卡片设计 */
 .case-card {
-  border-radius: 12px;
+  border-radius: 24px;
   overflow: hidden;
-  box-shadow: var(--shadow);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  background: var(--bg-color);
-  height: 100%; /* 确保卡片高度一致 */
+  box-shadow: 
+    0 8px 32px rgba(59, 130, 246, 0.08),
+    0 2px 16px rgba(0, 0, 0, 0.04);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.95) 0%, 
+    rgba(255, 255, 255, 0.9) 100%);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  height: 100%;
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+
+.case-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(59, 130, 246, 0.4) 50%, 
+    transparent 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
 
 .case-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 
+    0 20px 40px rgba(59, 130, 246, 0.15),
+    0 8px 24px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.case-card:hover::before {
+  opacity: 1;
 }
 
 .case-img {
   position: relative;
-  height: 240px; /* 增加图片高度 */
+  height: 260px;
   overflow: hidden;
 }
 
@@ -320,37 +408,45 @@ onMounted(() => {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .case-card:hover .case-img img {
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
+/* 现代化标签设计 */
 .case-tag {
   position: absolute;
-  top: 15px;
-  right: 15px;
-  padding: 5px 12px;
-  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
-  color: white;
+  top: 20px;
+  right: 20px;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  color: #ffffff;
   font-size: 0.8rem;
-  font-weight: 600;
-  border-radius: 15px;
+  font-weight: 700;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  letter-spacing: 0.5px;
+  font-family: 'Inter', sans-serif;
 }
 
 .case-info {
-  padding: 25px;
+  padding: 32px;
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
 .case-info h3 {
-  font-size: 1.3rem;
-  margin-bottom: 15px;
+  font-size: 1.4rem;
+  margin-bottom: 16px;
   line-height: 1.4;
-  color: var(--text-color);
+  color: #0f172a;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: -0.01em;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -359,168 +455,271 @@ onMounted(() => {
 
 .case-info p {
   color: #64748b;
-  font-size: 0.95rem;
+  font-size: 1rem;
   line-height: 1.6;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  font-family: 'Inter', sans-serif;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  flex: 1; /* 让描述文本占据剩余空间 */
+  flex: 1;
 }
 
 .case-meta {
-  margin-top: auto; /* 将元信息推到底部 */
+  margin-top: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 0.9rem;
+  padding-top: 20px;
+  border-top: 1px solid rgba(226, 232, 240, 0.6);
 }
 
 .case-date {
   color: #94a3b8;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
 }
 
 .case-link {
-  color: var(--primary-color);
+  color: #3b82f6;
   font-weight: 600;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
+  position: relative;
+}
+
+.case-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+  transition: width 0.3s ease;
 }
 
 .case-link:hover {
-  color: var(--secondary-color);
+  color: #1d4ed8;
 }
 
-/* 无案例提示样式 */
+.case-link:hover::after {
+  width: 100%;
+}
+
+/* 无案例提示样式优化 */
 .no-cases {
-  padding: 50px 0;
+  padding: 80px 0;
   text-align: center;
+  background: linear-gradient(135deg, 
+    rgba(248, 250, 252, 0.8) 0%, 
+    rgba(241, 245, 249, 0.9) 100%);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
 }
 
 .no-cases p {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: #64748b;
+  font-family: 'Inter', sans-serif;
 }
 
-/* 分页控件样式 */
+/* 现代化分页控件 */
 .pagination {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 15px;
-  margin-top: 50px;
+  gap: 20px;
+  margin-top: 80px;
 }
 
 .page-btn {
-  min-width: 120px; /* 添加最小宽度确保按钮大小一致 */
-  justify-content: center; /* 确保内容居中 */
+  min-width: 140px;
+  justify-content: center;
   display: inline-flex;
   align-items: center;
-  padding: 10px 20px;
-  border: 1px solid var(--border-color);
-  border-radius: 30px;
-  background: var(--bg-color);
-  color: var(--text-color);
-  font-size: 0.9rem;
-  font-weight: 500;
+  padding: 14px 28px;
+  border: 2px solid rgba(59, 130, 246, 0.2);
+  border-radius: 50px;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.9) 0%, 
+    rgba(248, 250, 252, 0.8) 100%);
+  color: #0f172a;
+  font-size: 0.95rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  font-family: 'Inter', sans-serif;
 }
 
 .page-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+  background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
 }
 
 .page-btn:not(:disabled):hover {
-  background: var(--primary-color);
-  color: white;
-  border-color: var(--primary-color);
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  color: #ffffff;
+  border-color: transparent;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
 }
 
 .page-btn.prev i {
-  margin-right: 8px;
+  margin-right: 10px;
 }
 
 .page-btn.next i {
-  margin-left: 8px;
+  margin-left: 10px;
 }
 
 .page-numbers {
   display: flex;
-  gap: 8px;
+  gap: 10px;
 }
 
 .page-number {
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: var(--light-bg);
-  color: var(--text-color);
-  font-size: 0.9rem;
-  font-weight: 500;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.8) 0%, 
+    rgba(248, 250, 252, 0.9) 100%);
+  color: #0f172a;
+  font-size: 0.95rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid rgba(59, 130, 246, 0.1);
+  backdrop-filter: blur(10px);
+  font-family: 'Inter', sans-serif;
 }
 
 .page-number.active {
-  background: var(--primary-color);
-  color: white;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
 }
 
 .page-number:not(.active):hover {
-  background: rgba(14, 165, 233, 0.2);
+  background: linear-gradient(135deg, 
+    rgba(59, 130, 246, 0.1) 0%, 
+    rgba(147, 197, 253, 0.2) 100%);
+  border-color: #3b82f6;
+  transform: translateY(-2px);
 }
 
 /* 响应式调整 */
 @media (max-width: 1200px) {
   .cases-grid {
     grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .case-img {
-    height: 200px;
-  }
-}
-
-@media (max-width: 768px) {
-  .cases-grid {
-    grid-template-columns: 1fr;
+    gap: 30px;
   }
   
   .case-img {
     height: 220px;
   }
   
+  .hero-section .section-title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .hero-section {
+    padding: 80px 0;
+    background-attachment: scroll;
+  }
+  
+  .filter-bar {
+    padding: 24px;
+  }
+  
+  .case-info {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cases-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+  
+  .case-img {
+    height: 240px;
+  }
+  
   .filter-group {
     flex-direction: column;
     align-items: flex-start;
+    gap: 12px;
   }
   
   .filter-btn {
-    margin-bottom: 8px;
+    padding: 10px 20px;
+    font-size: 0.9rem;
   }
   
-  /* 响应式分页控件 */
   .page-numbers {
     display: none;
   }
   
   .case-info h3 {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+  }
+  
+  .hero-section .section-title {
+    font-size: 2.2rem;
+  }
+  
+  .hero-section .section-desc {
+    font-size: 1.1rem;
   }
 }
 
 @media (max-width: 576px) {
+  .cases-page {
+    padding-bottom: 80px;
+  }
+  
+  .hero-section {
+    padding: 60px 0;
+    margin-bottom: 40px;
+  }
+  
+  .hero-section .section-title {
+    font-size: 1.9rem;
+  }
+  
+  .filter-bar {
+    padding: 20px;
+    margin-bottom: 40px;
+  }
+  
   .case-img {
-    height: 180px;
+    height: 200px;
   }
   
   .case-info {
     padding: 20px;
   }
-}
-</style> 
+  
+  .case-info h3 {
+    font-size: 1.2rem;
+  }
+  
+  .page-btn {
+    min-width: 120px;
+    padding: 12px 20px;
+    font-size: 0.9rem;
+  }
+}</style> 
