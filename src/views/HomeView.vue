@@ -23,8 +23,25 @@
     <template v-else>
       <DroneDefenseScene />
       <main>
-      <!-- 主横幅 - 添加更具科技感的设计 -->
+      <!-- 主横幅 - 优化版本，动画展现 -->
       <section class="hero defense-hero">
+        <!-- 动画背景元素 -->
+        <div class="hero-animation-bg">
+          <div class="electromagnetic-waves">
+            <div class="wave wave-1"></div>
+            <div class="wave wave-2"></div>
+            <div class="wave wave-3"></div>
+          </div>
+          <div class="floating-particles">
+            <div class="particle" v-for="n in 15" :key="n" :style="{animationDelay: (n * 0.3) + 's'}"></div>
+          </div>
+        </div>
+        
+        <!-- 品牌标识置于右上角 -->
+        <div class="brand-corner">
+          <img src="/images/about/logo.png" alt="LANDER" class="corner-logo" @error="handleImageError">
+        </div>
+        
         <svg width="0" height="0">
           <defs>
             <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -33,63 +50,30 @@
             </linearGradient>
           </defs>
         </svg>
+        
         <div class="hero-content-wrapper">
           <div class="container">
             <div class="hero-content">
-              <!-- <div class="tech-badge">{{ isZh ? '领先科技 · 智能防御' : 'Leading Technology · Smart Defense' }}</div> -->
-              <div class="hero-logo">
-                <img src="/images/about/logo.png" alt="LANDER" class="brand-logo-img" @error="handleImageError">
+              <!-- 主标题 -->
+              <h1 class="main-headline">
+                {{ isZh ? '全域电磁空间，尽在掌握' : 'Complete Electromagnetic Domain Control' }}
+              </h1>
+              
+              <!-- 副标题 -->
+              <p class="sub-headline">
+                {{ isZh ? '构建"感、探、防、控"一体化的电磁安防新体系' : 'Building an integrated electromagnetic security system for sensing, detection, protection, and control' }}
+              </p>
+              
+              <!-- 行动号召按钮 -->
+              <div class="hero-actions">
+                <RouterLink to="/technology" class="btn btn-primary btn-hero">
+                  <span>{{ isZh ? '了解产品详情' : 'Explore Products' }}</span>
+                  <svg class="btn-icon" viewBox="0 0 24 24" fill="none">
+                    <path d="M13 7L18 12L13 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6 12H18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </RouterLink>
               </div>
-              <h2 class="tech-headline">{{ currentSiteInfo.slogan }}</h2>
-              <!-- <p>{{ currentSiteInfo.description }}</p> -->
-              <!-- <div class="hero-buttons">
-                <RouterLink to="/technology" class="btn btn-primary">
-                  {{ isZh ? '无线技术核心驱动' : 'Anti-Drone Solutions' }}
-                  <span class="btn-arrow"><i class="fas fa-arrow-right"></i></span>
-                </RouterLink>
-                <RouterLink to="/contact" class="btn btn-outline">
-                  {{ isZh ? '安全咨询' : 'Security Consultation' }}
-                  <span class="btn-arrow"><i class="fas fa-arrow-right"></i></span>
-                </RouterLink>
-              </div> -->
-              <!-- <div class="hero-stats">
-                <div class="stat">
-                  <div class="stat-circle">
-                    <svg viewBox="0 0 36 36" class="circular-chart">
-                      <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                      <path class="circle" stroke-dasharray="99.9, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                    </svg>
-                    <span class="stat-number">99.9%</span>
-                  </div>
-                  <span class="stat-label">{{ isZh ? '拦截成功率' : 'Interception Rate' }}</span>
-                </div>
-                <div class="stat">
-                  <div class="stat-circle">
-                    <svg viewBox="0 0 36 36" class="circular-chart">
-                      <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                      <path class="circle" stroke-dasharray="90, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                    </svg>
-                    <span class="stat-number">10km+</span>
-                  </div>
-                  <span class="stat-label">{{ isZh ? '探测范围' : 'Detection Range' }}</span>
-                </div>
-                <div class="stat">
-                  <div class="stat-circle">
-                    <svg viewBox="0 0 36 36" class="circular-chart">
-                      <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                      <path class="circle" stroke-dasharray="100, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                    </svg>
-                    <span class="stat-number">24/7</span>
-                  </div>
-                  <span class="stat-label">{{ isZh ? '全天候防护' : '24/7 Protection' }}</span>
-                </div>
-              </div> -->
-              <!-- <div class="scrolldown-wrapper">
-                <a href="#features" class="scrolldown">
-                  <span>{{ isZh ? '探索更多' : 'Explore More' }}</span>
-                  <i class="fas fa-chevron-down"></i>
-                </a>
-              </div> -->
             </div>
           </div>
         </div>
@@ -943,308 +927,285 @@ const emit = defineEmits(['page-loaded'])
   align-items: center;
   overflow: hidden;
   background: linear-gradient(135deg, 
-    rgba(248, 250, 252, 0.95) 0%, 
-    rgba(249, 241, 245, 0.98) 25%,
-    rgba(119, 229, 235, 0.95) 50%,
-    rgba(26, 136, 247, 0.98) 100%
+    rgba(15, 23, 42, 0.95) 0%, 
+    rgba(30, 41, 59, 0.98) 25%,
+    rgba(51, 65, 85, 0.95) 50%,
+    rgba(15, 23, 42, 0.98) 100%
   );
   font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+/* 动画背景元素 */
+.hero-animation-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* 电磁波动画 */
+.electromagnetic-waves {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 800px;
+}
+
+.wave {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid rgba(79, 172, 254, 0.3);
+  border-radius: 50%;
+  animation: waveExpand 4s ease-out infinite;
+}
+
+.wave-1 {
+  width: 200px;
+  height: 200px;
+  animation-delay: 0s;
+}
+
+.wave-2 {
+  width: 400px;
+  height: 400px;
+  animation-delay: 1.3s;
+}
+
+.wave-3 {
+  width: 600px;
+  height: 600px;
+  animation-delay: 2.6s;
+}
+
+@keyframes waveExpand {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 1;
+    border-width: 3px;
+  }
+  70% {
+    opacity: 0.7;
+    border-width: 2px;
+  }
+  100% {
+    width: 800px;
+    height: 800px;
+    opacity: 0;
+    border-width: 1px;
+  }
+}
+
+/* 漂浮粒子 */
+.floating-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: linear-gradient(45deg, #4facfe, #00f2fe);
+  border-radius: 50%;
+  animation: particleFloat 8s ease-in-out infinite;
+  box-shadow: 0 0 10px rgba(79, 172, 254, 0.6);
+}
+
+.particle:nth-child(odd) {
+  left: calc(10% + 5vw * var(--random-x, 1));
+  animation-duration: 6s;
+}
+
+.particle:nth-child(even) {
+  right: calc(10% + 5vw * var(--random-x, 1));
+  animation-duration: 10s;
+}
+
+.particle:nth-child(3n) {
+  width: 6px;
+  height: 6px;
+  animation-duration: 7s;
+}
+
+@keyframes particleFloat {
+  0%, 100% {
+    transform: translateY(100vh) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  90% {
+    opacity: 1;
+    transform: translateY(-10vh) scale(1);
+  }
+}
+
+/* 品牌标识角落定位 */
+.brand-corner {
+  position: absolute;
+  top: 50px;
+  right: 30px;
+  z-index: 10;
+  animation: fadeInDown 1s ease-out 0.5s both;
+}
+
+.corner-logo {
+  height: 60px;
+  max-width: 200px;
+  object-fit: contain;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 4px 15px rgba(79, 172, 254, 0.3));
+}
+
+.corner-logo:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 6px 20px rgba(79, 172, 254, 0.5));
 }
 
 .hero-content-wrapper {
   position: relative;
   width: 100%;
-  z-index: 2;
-  background: linear-gradient(135deg, 
-    rgba(158, 179, 247, 0.7) 0%, 
-    rgba(248, 250, 252, 0.8) 100%
-  );
-  padding: 100px 0;
-  backdrop-filter: blur(20px) saturate(180%);
-  border-bottom: 1px solid rgba(147, 197, 253, 0.2);
+  z-index: 5;
+  padding: 120px 0;
 }
 
 .hero-content {
   position: relative;
-  max-width: 900px;
-  color: #0f172a;
-  text-shadow: none;
-  animation: fadeInUp 1s ease-out;
+  max-width: 1000px;
+  color: #ffffff;
+  text-align: center;
   margin: 0 auto;
-  text-align: center;
 }
 
-.tech-badge {
-  display: inline-block;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(147, 197, 253, 0.15) 100%);
-  backdrop-filter: blur(12px);
-  padding: 10px 20px;
-  border-radius: 25px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #1e40af;
-  margin-bottom: 25px;
-  border: 1px solid rgba(59, 130, 246, 0.25);
-  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.15);
-  animation: fadeInDown 0.8s ease-out 0.3s both;
-  letter-spacing: 0.5px;
-}
-
-/* LANDER Logo样式 - 现代优化版本 */
-.hero-logo {
-  text-align: center;
-  margin-bottom: 35px;
-  animation: fadeInDown 0.8s ease-out 0.2s both;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.brand-logo-img {
-  height: 130px;
-  max-width: 520px;
-  object-fit: contain;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  filter: brightness(0.95) contrast(1.1) drop-shadow(0 8px 25px rgba(59, 130, 246, 0.25));
-  border-radius: 12px;
-}
-
-.brand-logo-img:hover {
-  transform: translateY(-3px) scale(1.03);
-  filter: brightness(1) contrast(1.15) drop-shadow(0 12px 35px rgba(59, 130, 246, 0.35));
-}
-
-.tech-headline {
-  font-size: 3.2rem;
-  margin-bottom: 2rem;
-  font-weight: 800;
-  line-height: 1.15;
-  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
+/* 主标题样式 - 粗壮有力 */
+.main-headline {
+  font-size: 4.5rem;
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 30px;
+  background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #ffffff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: none;
   position: relative;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
   font-family: 'Inter', sans-serif;
+  animation: slideInUp 1.2s ease-out;
 }
 
-/* .tech-headline::after {
+.main-headline::after {
   content: '';
   position: absolute;
-  bottom: -10px;
-  left: 0;
-  width: 80px;
-  height: 4px;
-  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
-  border-radius: 2px;
-  
-} */
-
-/* .tech-headline::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
+  bottom: -15px;
   left: 50%;
   transform: translateX(-50%);
-  width: 80px;
-  height: 4px;
+  width: 120px;
+  height: 5px;
   background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
-  border-radius: 2px;
-} */
+  border-radius: 3px;
+  animation: scaleInX 1s ease-out 0.8s both;
+}
 
-.hero-content p {
-  font-size: 1.15rem;
-  margin-bottom: 2.5rem;
-  color: #64748b;
-  max-width: 650px;
-  line-height: 1.7;
-  font-weight: 400;
+/* 副标题样式 */
+.sub-headline {
+  font-size: 1.4rem;
+  margin-bottom: 50px;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 800px;
   margin-left: auto;
   margin-right: auto;
+  line-height: 1.6;
+  font-weight: 400;
   font-family: 'Inter', sans-serif;
+  animation: slideInUp 1.2s ease-out 0.3s both;
 }
 
-.hero-buttons {
+/* 行动号召按钮区域 */
+.hero-actions {
   display: flex;
   justify-content: center;
-  gap: 25px;
-  margin-top: 40px;
-  animation: fadeInUp 0.8s ease-out 0.6s both;
+  margin-top: 50px;
+  animation: slideInUp 1.2s ease-out 0.6s both;
 }
 
-.btn {
+.btn-hero {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  padding: 16px 32px;
-  border-radius: 50px;
-  font-size: 1rem;
-  font-weight: 600;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
+  gap: 15px;
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  color: #ffffff;
+  border: none;
+  padding: 20px 40px;
+  border-radius: 60px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 8px 25px rgba(79, 172, 254, 0.4),
+    0 4px 15px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
   overflow: hidden;
   font-family: 'Inter', sans-serif;
-  letter-spacing: 0.25px;
+  letter-spacing: 0.5px;
 }
 
-.btn::before {
+.btn-hero::before {
   content: '';
   position: absolute;
   top: 0;
   left: -100%;
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.2);
-  transition: all 0.4s ease;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: all 0.6s ease;
 }
 
-.btn:hover::before {
+.btn-hero:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 
+    0 15px 35px rgba(79, 172, 254, 0.6),
+    0 8px 25px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+}
+
+.btn-hero:hover::before {
   left: 100%;
 }
 
-.btn-primary {
-  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-  color: #ffffff;
-  border: none;
-  font-weight: 600;
-  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4), 0 2px 8px rgba(0, 0, 0, 0.1);
+.btn-hero:active {
+  transform: translateY(-3px) scale(1.02);
 }
 
-.btn-primary:hover {
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5), 0 4px 12px rgba(0, 0, 0, 0.15);
-  transform: translateY(-2px);
-  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-}
-
-.btn-outline {
-  background: rgba(255, 255, 255, 0.8);
-  border: 2px solid rgba(59, 130, 246, 0.3);
-  color: #1e40af;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-}
-
-.btn-outline:hover {
-  border-color: #3b82f6;
-  background: rgba(59, 130, 246, 0.08);
-  color: #1d4ed8;
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15);
-  transform: translateY(-2px);
-}
-
-.btn-arrow {
-  margin-left: 10px;
+.btn-icon {
+  width: 20px;
+  height: 20px;
   transition: transform 0.3s ease;
 }
 
-.btn:hover .btn-arrow {
+.btn-hero:hover .btn-icon {
   transform: translateX(5px);
 }
 
-.hero-stats {
-  display: flex;
-  gap: 40px;
-  margin-top: 50px;
-  animation: fadeInUp 0.8s ease-out 0.9s both;
-}
-
-.stat {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.stat-circle {
-  position: relative;
-  width: 90px;
-  height: 90px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.circular-chart {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.circle-bg {
-  fill: none;
-  stroke: rgba(255, 255, 255, 0.1);
-  stroke-width: 2;
-}
-
-.circle {
-  fill: none;
-  stroke: url(#gradient);
-  stroke-width: 2.5;
-  stroke-linecap: round;
-  animation: progress 2s ease-out forwards;
-}
-
-@keyframes progress {
-  0% {
-    stroke-dasharray: 0, 100;
-  }
-}
-
-.stat-number {
-  position: absolute;
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #fff;
-}
-
-.stat-label {
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.8);
-  margin-top: 10px;
-  font-weight: 500;
-}
-
-.scrolldown-wrapper {
-  margin-top: 50px;
-  text-align: center;
-  animation: fadeInUp 0.8s ease-out 1.2s both;
-}
-
-.scrolldown {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  color: rgba(255, 255, 255, 0.7);
-  transition: all 0.3s ease;
-}
-
-.scrolldown:hover {
-  color: #fff;
-}
-
-.scrolldown span {
-  font-size: 0.9rem;
-  margin-bottom: 8px;
-}
-
-.scrolldown i {
-  animation: bounce 1.5s infinite;
-}
-
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-10px);
-  }
-  60% {
-    transform: translateY(-5px);
-  }
-}
-
-@keyframes fadeInUp {
+/* 动画定义 */
+@keyframes slideInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(60px);
   }
   to {
     opacity: 1;
@@ -1255,13 +1216,148 @@ const emit = defineEmits(['page-loaded'])
 @keyframes fadeInDown {
   from {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(-30px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
+
+@keyframes scaleInX {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) scaleX(0);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) scaleX(1);
+  }
+}
+
+/* 响应式调整 */
+@media (max-width: 1200px) {
+  .main-headline {
+    font-size: 3.8rem;
+  }
+  
+  .sub-headline {
+    font-size: 1.3rem;
+  }
+  
+  .electromagnetic-waves {
+    width: 600px;
+    height: 600px;
+  }
+  
+  .wave {
+    max-width: 600px;
+    max-height: 600px;
+  }
+}
+
+@media (max-width: 991px) {
+  .main-headline {
+    font-size: 3.2rem;
+  }
+  
+  .sub-headline {
+    font-size: 1.2rem;
+    padding: 0 20px;
+  }
+  
+  .hero-content-wrapper {
+    padding: 100px 0;
+  }
+  
+  .brand-corner {
+    top: 20px;
+    right: 20px;
+  }
+  
+  .corner-logo {
+    height: 50px;
+    max-width: 160px;
+  }
+}
+
+@media (max-width: 767px) {
+  .main-headline {
+    font-size: 2.5rem;
+    margin-bottom: 25px;
+  }
+  
+  .main-headline::after {
+    width: 80px;
+    height: 4px;
+  }
+  
+  .sub-headline {
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+  }
+  
+  .btn-hero {
+    padding: 16px 32px;
+    font-size: 1.1rem;
+    gap: 12px;
+  }
+  
+  .electromagnetic-waves {
+    width: 400px;
+    height: 400px;
+  }
+  
+  .brand-corner {
+    top: 15px;
+    right: 15px;
+  }
+  
+  .corner-logo {
+    height: 40px;
+    max-width: 120px;
+  }
+}
+
+@media (max-width: 576px) {
+  .main-headline {
+    font-size: 2rem;
+  }
+  
+  .sub-headline {
+    font-size: 1rem;
+  }
+  
+  .btn-hero {
+    padding: 14px 28px;
+    font-size: 1rem;
+    gap: 10px;
+  }
+  
+  .btn-icon {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .hero-content-wrapper {
+    padding: 80px 0;
+  }
+  
+  .electromagnetic-waves {
+    width: 300px;
+    height: 300px;
+  }
+  
+  .corner-logo {
+    height: 35px;
+    max-width: 100px;
+  }
+}
+
+/* 旧的LANDER Logo样式删除 */
+/* .hero-logo, .brand-logo-img, .tech-headline 已被替换为新的主副标题和角落 logo */
+
+
 
 /* 安全防御特性 - 现代优化版本 */
 .defense-features {
@@ -1713,10 +1809,6 @@ const emit = defineEmits(['page-loaded'])
 }
 
 @media (max-width: 991px) {
-  .tech-headline {
-    font-size: 2.6rem;
-  }
-  
   .hero-stats {
     gap: 20px;
   }
@@ -1817,25 +1909,9 @@ const emit = defineEmits(['page-loaded'])
 }
 
 @media (max-width: 576px) {
-  .tech-headline {
-    font-size: 2rem;
-  }
-  
-  .hero-content p {
-    font-size: 1rem;
-  }
-  
-  .stat-circle {
-    width: 70px;
-    height: 70px;
-  }
-  
-  .stat-number {
-    font-size: 1.2rem;
-  }
-  
-  .stat-label {
-    font-size: 0.9rem;
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
   }
   
   .section-title {
@@ -1857,11 +1933,6 @@ const emit = defineEmits(['page-loaded'])
   
   .feature-chart {
     padding: 16px 20px 20px;
-  }
-  
-  .btn {
-    padding: 14px 28px;
-    font-size: 0.95rem;
   }
   
   .feature-icon.modern-icon {
@@ -1919,6 +1990,52 @@ const emit = defineEmits(['page-loaded'])
     font-size: 0.65rem;
     padding: 3px 8px;
   }
+}
+
+/* 通用按钮样式 */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 16px 32px;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.25px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4), 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5), 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+}
+
+.btn-outline {
+  background: rgba(255, 255, 255, 0.8);
+  border: 2px solid rgba(59, 130, 246, 0.3);
+  color: #1e40af;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.btn-outline:hover {
+  border-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.08);
+  color: #1d4ed8;
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15);
+  transform: translateY(-2px);
 }
 
 /* 反无人机系统部分 */
@@ -2958,53 +3075,7 @@ const emit = defineEmits(['page-loaded'])
     margin-top: 20px;
   }
   
-  /* 响应式调整 */
-  @media (max-width: 992px) {
-    .contact-content {
-      grid-template-columns: 1fr;
-      gap: 40px;
-    }
-    
-    .contact-info {
-      grid-template-columns: 1fr;
-    }
-    
-    .info-card:first-child {
-      grid-row: auto;
-    }
-    
-    /* LANDER Logo响应式 */
-    .brand-logo-img {
-      height: 90px;
-      max-width: 360px;
-    }
-    
-    .tech-headline {
-      font-size: 2.8rem;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .brand-logo-img {
-      height: 70px;
-      max-width: 280px;
-    }
-    
-    .tech-headline {
-      font-size: 2.2rem;
-    }
-  }
-  
-  @media (max-width: 576px) {
-    .brand-logo-img {
-      height: 60px;
-      max-width: 240px;
-    }
-    
-    .tech-headline {
-      font-size: 1.8rem;
-    }
-  }
+
 
   /* 地址图片样式 - 现代优化版本 */
   .address-image {
