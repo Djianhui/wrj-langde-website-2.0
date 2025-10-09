@@ -771,7 +771,7 @@ watch(globalLoading, (newVal) => {
     // 全局加载完成后，延迟一小段时间再显示页面，确保动画流畅
     setTimeout(() => {
       isPageLoading.value = false
-    }, 300)
+    }, 100)
   }
 })
 
@@ -944,9 +944,9 @@ const emit = defineEmits(['page-loaded'])
   overflow: hidden;
   background: linear-gradient(135deg, 
     rgba(248, 250, 252, 0.95) 0%, 
-    rgba(241, 245, 249, 0.98) 25%,
-    rgba(236, 254, 255, 0.95) 50%,
-    rgba(219, 234, 254, 0.98) 100%
+    rgba(249, 241, 245, 0.98) 25%,
+    rgba(119, 229, 235, 0.95) 50%,
+    rgba(26, 136, 247, 0.98) 100%
   );
   font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
@@ -956,7 +956,7 @@ const emit = defineEmits(['page-loaded'])
   width: 100%;
   z-index: 2;
   background: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.7) 0%, 
+    rgba(158, 179, 247, 0.7) 0%, 
     rgba(248, 250, 252, 0.8) 100%
   );
   padding: 100px 0;
