@@ -2679,8 +2679,8 @@ const getTechImage = (techId) => {
 
 .categories-content {
   display: grid;
-  grid-template-columns: 350px 1fr;
-  gap: 40px;
+  grid-template-columns: 300px 1fr;
+  gap: 30px;
   min-height: 600px;
   align-items: start;
   width: 100%;
@@ -2703,6 +2703,7 @@ const getTechImage = (techId) => {
   height: fit-content;
   max-height: calc(100vh - 100px);
   overflow: hidden;
+  min-width: 280px;
 }
 
 .tree-container {
@@ -3243,13 +3244,15 @@ const getTechImage = (techId) => {
   padding: 40px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   border: 1px solid rgba(226, 232, 240, 0.6);
+  overflow: hidden;
 }
 
-/* 产品列表容器固定尺寸 */
+/* 产品列表容器响应式尺寸 */
 #product-list-container {
-  width: 1200px;
-  height: 1200px;
-  overflow: auto;
+  width: 100%;
+  max-width: 1200px;
+  min-height: 600px;
+  overflow: visible;
   position: relative;
   scroll-margin-top: 100px;
 }
@@ -3545,20 +3548,48 @@ const getTechImage = (techId) => {
 }
 
 /* 响应式设计 */
+@media (max-width: 1200px) {
+  .product-center-container {
+    max-width: 100%;
+    padding: 0 15px;
+  }
+  
+  .categories-content {
+    grid-template-columns: 260px 1fr;
+    gap: 20px;
+  }
+  
+  .category-tree {
+    min-width: 260px;
+  }
+  
+  .category-details {
+    padding: 30px;
+  }
+  
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 15px;
+  }
+}
+
 @media (max-width: 1024px) {
   .product-center-container {
-    max-width: 1200px;
+    max-width: 100%;
     padding: 0 15px;
   }
   
   .categories-content {
     grid-template-columns: 1fr;
-    gap: 30px;
-    max-width: 1000px;
+    gap: 20px;
+    max-width: 100%;
   }
   
   .category-tree {
     order: 2;
+    position: static;
+    max-height: none;
   }
   
   .category-details {
@@ -3572,28 +3603,43 @@ const getTechImage = (techId) => {
   }
   
   .product-categories {
-    padding: 60px 20px;
+    padding: 40px 15px;
     border-radius: 15px;
   }
   
   .section-title {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
   
   .categories-content {
-    gap: 20px;
+    gap: 15px;
     max-width: 100%;
   }
   
-  .category-tree,
+  .category-tree {
+    padding: 0;
+    border-radius: 12px;
+  }
+  
+  .tree-container {
+    padding: 15px;
+    max-height: none;
+  }
+  
   .category-details {
     padding: 20px;
   }
   
   #product-list-container {
     width: 100%;
-    height: 800px;
-    max-width: 1200px;
+    min-height: 400px;
+    max-width: 100%;
+  }
+  
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 10px;
   }
   
   .detail-title {
@@ -3616,21 +3662,50 @@ const getTechImage = (techId) => {
   }
   
   .product-categories {
-    padding: 40px 15px;
+    padding: 30px 10px;
     border-radius: 12px;
   }
   
   .section-title {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
   }
   
   .section-subtitle {
-    font-size: 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .tree-container {
+    padding: 10px;
   }
   
   .tree-children {
-    margin-left: 10px;
-    padding-left: 10px;
+    margin-left: 8px;
+    padding-left: 8px;
+  }
+  
+  .tree-node {
+    padding: 12px;
+    height: 45px;
+  }
+  
+  .node-text {
+    font-size: 13px;
+  }
+  
+  .category-details {
+    padding: 15px;
+  }
+  
+  .product-list-header {
+    margin-bottom: 20px;
+  }
+  
+  .list-title {
+    font-size: 16px;
+  }
+  
+  .list-subtitle {
+    font-size: 12px;
   }
   
   .btn {
@@ -3640,8 +3715,30 @@ const getTechImage = (techId) => {
   
   #product-list-container {
     width: 100%;
-    height: 600px;
-    max-width: 1200px;
+    min-height: 400px;
+    max-width: 100%;
+  }
+  
+  .products-grid {
+    padding: 5px;
+    gap: 15px;
+  }
+  
+  .product-card {
+    border-radius: 12px;
+  }
+  
+  .product-info {
+    padding: 15px;
+    min-height: 80px;
+  }
+  
+  .product-name {
+    font-size: 15px;
+  }
+  
+  .product-description {
+    font-size: 12px;
   }
 }
 </style>
