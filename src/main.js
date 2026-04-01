@@ -6,6 +6,9 @@ import router from './router'
 import './assets/main.css'
 import './assets/responsive.css'
 
+// 导入 Font Awesome
+import '@fortawesome/fontawesome-free/css/all.min.css'
+
 // 导入语言相关的store和插件
 import { useLanguageStore } from './store/modules/language'
 import { useTranslationsStore } from './store/modules/translations'

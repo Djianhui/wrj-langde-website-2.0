@@ -463,12 +463,15 @@ onMounted(() => {
   flex: 0 0 220px;
   overflow: hidden;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .news-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 

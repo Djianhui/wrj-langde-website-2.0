@@ -162,14 +162,14 @@ const currentSiteInfo = computed(() => {
     contactInfo: {
       address: '浙江省杭州市西湖区文三路478号华星科技大厦A座5楼',
       phone: '1547554068',
-      email: '1547554068@qq.com'
+      email: '173462959@qq.com'
     }
   } : {
     companyName: 'Hangzhou Lande Intelligent Technology Co., Ltd.',
     contactInfo: {
       address: '5F, Building A, Huaxing Technology Building, No. 478 Wensan Road, Xihu District, Hangzhou, Zhejiang',
       phone: '1547554068',
-      email: '1547554068@qq.com'
+      email: '173462959@qq.com'
     }
   }
 })

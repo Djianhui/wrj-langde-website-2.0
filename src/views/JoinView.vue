@@ -39,8 +39,8 @@
       
       <div class="join-contact">
         <h2>{{ t('contact', '联系我们') }}</h2>
-        <p v-if="isZh">如果您对我们的职位感兴趣，请将简历发送至：<a href="mailto:hr@landeintelligent.com">1547554068@qq.com</a></p>
-        <p v-else>If you are interested in our positions, please send your resume to: <a href="mailto:hr@landeintelligent.com">1547554068@qq.com</a></p>
+        <p v-if="isZh">如果您对我们的职位感兴趣，请将简历发送至：<a href="mailto:hr@landeintelligent.com">173462959@qq.com</a></p>
+        <p v-else>If you are interested in our positions, please send your resume to: <a href="mailto:hr@landeintelligent.com">173462959@qq.com</a></p>
       </div>
     </div>
   </div>
@@ -167,9 +167,9 @@ const currentPositions = computed(() => {
 // 申请职位方法
 const applyPosition = (id) => {
   if (isZh.value) {
-    alert('感谢您的申请，请将简历发送至1547554068@qq.com，并注明职位编号：' + id)
+    alert('感谢您的申请，请将简历发送至173462959@qq.com，并注明职位编号：' + id)
   } else {
-    alert('Thank you for your application. Please send your resume to 1547554068@qq.com, and specify position ID: ' + id)
+    alert('Thank you for your application. Please send your resume to 173462959@qq.com, and specify position ID: ' + id)
   }
 }
 </script>

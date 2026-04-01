@@ -50,9 +50,12 @@ export const useContentStore = defineStore('content', () => {
       slogan: '智能全域电磁安防一体化平台',
       description: '领先的反无人机系统及反无人机解决方案提供商',
       contactInfo: {
-        address: '浙江省杭州市滨江区科技园区创新大厦A座15楼',
-        phone: '15211191964',
-        email: '1547554061@qq.com'
+        addresses: [
+          '浙江省杭州市滨江区科技园区创新大厦 A 座 15 楼',
+          '湖南省长沙市岳麓区延年江境酒店 802'
+        ],
+        phone: '13548973785',
+        email: '173462959@qq.com'
       }
     },
     en: {
@@ -60,9 +63,12 @@ export const useContentStore = defineStore('content', () => {
       slogan: 'Intelligent all-domain electromagnetic security integrated platform',
       description: 'Leading provider of anti-drone systems and solutions',
       contactInfo: {
-        address: '15F, Building A, Innovation Tower, Science & Technology Park, Binjiang District, Hangzhou, Zhejiang',
-        phone: '15211191964',
-        email: '1547554061@qq.com'
+        addresses: [
+          '15F, Building A, Innovation Tower, Science & Technology Park, Binjiang District, Hangzhou, Zhejiang',
+          'Room 802, Yanian Jiangjing Hotel, Yuelu District, Changsha, Hunan'
+        ],
+        phone: '13548973785',
+        email: '173462959@qq.com'
       }
     }
   })
@@ -430,7 +436,7 @@ export const useContentStore = defineStore('content', () => {
         { year: 2020, event: '公司成立，专注无人机技术研发' },
         { year: 2021, event: '获得天使轮融资，推出首款侦察无人机产品' },
         { year: 2022, event: '完成A轮融资，研发团队扩展至50人，获得多项核心专利' },
-        { year: 2023, event: '推出反无人机防御系统，获得国家高新技术企业认证' },
+        { year: 2023, event: '推出反无人机防御系统' },
         { year: 2024, event: '完成B轮融资，成立无人机技术研究院，开始国际市场拓展' },
         { year: 2025, event: '服务客户突破100家，成功案例超过100个，产品远销海外多个国家' }
       ],

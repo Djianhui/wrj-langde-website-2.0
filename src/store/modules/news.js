@@ -10,94 +10,89 @@ export const useNewsStore = defineStore('news', {
       language: computed(() => languageStore.language),
       news: {
         zh: [
+          
+          
           {
-            id: 1,
-            title: '朗德智能成功研发新一代反无人机系统，拦截距离突破10公里',
-            category: 'company',
-            categoryName: '公司新闻',
-            date: '2024-06-10',
-            image: '/images/products/fpv-5.png',
-            summary: '朗德智能宣布其新一代反无人机系统"天盾-X"成功通过最终测试，拦截距离突破10公里大关，成为国内领先的反无人机解决方案。',
+            id: 3,
+            title: '全球反无人机系统市场规模达630亿美元，智能识别与协同反制成技术焦点',
+            category: 'industry',
+            categoryName: '行业动态',
+            date: '2025-11-15',
+            image: '/images/products/xyxw.png',
+            summary: '2025年全球反无人机系统市场规模达630亿美元，技术创新聚焦智能识别与协同反制，AI声光电复合探测技术识别准确率提升至98%。',
             content: `
-              <p>杭州，2024年6月10日 — 朗德智能科技有限公司今日宣布，经过三年的研发，其新一代反无人机系统"天盾-X"已成功通过最终测试，正式投入市场。该系统在多项关键指标上取得突破，尤其是拦截距离首次超过10公里，大幅领先业内同类产品。</p>
+              <p>北京，2025年11月15日 — 据最新行业研究报告显示，2025年全球反无人机系统市场规模已达630亿美元，较2024年的85亿美元实现跨越式增长。低空安全已成为全球各国关注的焦点领域。</p>
 
-              <p>"天盾-X"系统采用了多项自主研发的创新技术，包括全新的毫米波雷达探测阵列、多频段干扰模块和AI目标识别系统。在实际测试中，系统能够在10秒内探测、识别和干扰非授权无人机，成功率达到98.5%。</p>
+              <p>技术创新层面，2025年行业焦点集中于智能识别与协同反制。基于人工智能的声光电复合探测技术识别准确率提升至98%，多基站协同干扰系统有效应对无人机蜂群威胁。系统集成化与智能响应成为主导趋势。</p>
 
-              <p>朗德智能CEO王明表示："'天盾-X'系统的成功研发标志着我国反无人机技术迈入了新阶段。我们将这一技术突破应用于国家重要基础设施保护、大型活动安保和边境管控等关键领域，为国家安全提供更加坚实的保障。"</p>
+              <p>在民用领域，反无人机系统主要用于保障机场、能源网络、港口、数据中心等关键基础设施的安全。其应用场景包括防止无人机"黑飞"、闯入禁飞区、恶意携带危险物品等。国家发改委明确强调"安全是低空经济发展的首要前提"，定调低空经济"无安全，不低空"。</p>
 
-              <p>据了解，"天盾-X"系统已在多个国家重大活动的安保工作中得到应用，表现出色。该系统同时支持固定部署和车载移动部署，具有快速响应、全天候作战和网络协同作战等特点。</p>
+              <p>2025年9月，中科星图"御航·低空反无平台"圆满完成九三阅兵低空安全保障任务，展示了国产反无人机系统的实战能力。同期举办的北京国际两用先进技术装备展上，多款固定翼、旋翼、特种无人机及反无人机装备集中亮相，低空安防与信息安全技术成为焦点。</p>
 
-              <p>业内专家指出，随着无人机技术的普及，非授权无人机带来的安全威胁日益严峻。朗德智能的这一技术突破，将为解决这一全球性安全挑战提供中国方案。</p>
-
-              <p>朗德智能还宣布，将在下个月举办的国际防务展上全面展示"天盾-X"系统，并计划与多个国家和地区的安全部门开展合作。</p>
+              <p>广州花都警方已织密无人机"黑飞"管控网，科技赋能助力十五运会低空安保。历正科技低空无人机防控设备制造项目正式落地宜兴，推动低空无人机防御产品实现规模化生产。业内专家指出，2026年的反无人机行业，正是因为有了这些"静默"的守护者，才让低空飞行的安全边界不断清晰。</p>
             `
           },
           {
-            id: 2,
-            title: '朗德智能与国家电网达成战略合作，无人机巡检覆盖五省电力设施',
-            category: 'company',
-            categoryName: '公司新闻',
-            date: '2024-05-22',
-            image: '/images/products/fpv-7.png',
-            summary: '朗德智能与国家电网签署战略合作协议，将在五省区域部署智能无人机巡检系统，实现电力设施的智能化、自动化巡检。',
+            id: 4,
+            title: '无人机制造销售收入同比激增38.4%，产业进入规模化发展阶段',
+            category: 'industry',
+            categoryName: '行业动态',
+            date: '2025-11-10',
+            image: '/images/products/patrol-drone.png',
+            summary: '国家税务总局数据显示，10月份我国无人机制造销售收入同比激增38.4%，工业级无人机应用进入规模化阶段，多场景应用重塑产业格局。',
             content: `
-              <p>北京，2024年5月22日 — 朗德智能科技有限公司今日与国家电网有限公司在北京签署战略合作协议，双方将在华东、华北五省区域内合作部署智能无人机巡检系统，覆盖超过10000公里的高压输电线路和3000座变电站。</p>
+              <p>北京，2025年11月10日 — 国家税务总局发布的最新数据显示，10月份我国高技术产业销售收入同比增长13.6%，其中无人机制造销售收入同比激增38.4%。这一亮眼数据背后，是人工智能、大数据等技术与无人机产业的深度融合。</p>
 
-              <p>根据协议，朗德智能将为国家电网提供包括巡检无人机、自动充电站、智能巡检路径规划和缺陷识别AI系统在内的全套解决方案。该系统将大幅提升电力设施巡检的效率和准确性，降低人工巡检的安全风险和成本。</p>
+              <p>商务部研究院分析指出，无人机引领低空经济腾飞，政策技术双轮驱动，多场景应用重塑产业格局。无人机物流、农业植保、电力巡检、应急救援等应用场景不断拓展，推动着产业向更深层次发展。</p>
 
-              <p>国家电网设备部主任李强表示："电力设施的安全运行关系到国计民生。引入朗德智能的无人机巡检系统，是我们推进电网智能化运维的重要一步。这将显著提升我们发现和处理电力设施隐患的能力，提高供电可靠性。"</p>
+              <p>农业无人机市场持续扩大。根据《大疆&农民日报：农业无人机行业白皮书（2024&2025）》显示，农业无人机作业面积持续增长，精准农业成为新趋势。赛迪研究院报告也指出，高层建筑消防场景无人机应用正在提升消防救援效能。</p>
 
-              <p>朗德智能首席运营官张华介绍，该公司为电力行业定制的无人机巡检系统具有多项特色功能，包括恶劣天气条件下的稳定飞行能力、红外热成像检测、厘米级精准定位和基于深度学习的缺陷自动识别等。系统投入使用后，预计将使巡检效率提高300%以上，每年可为国家电网节省运维成本数亿元。</p>
+              <p>工业级无人机应用进入规模化阶段。电力巡检、油气管道巡查、通信基站维护等传统领域需求稳定增长，同时城市空中交通、无人机配送等新兴领域也在快速崛起。</p>
 
-              <p>据悉，双方合作的第一阶段项目将于今年7月启动，首先在江苏、浙江两省试点，年底前扩展至其他三省。这也是目前国内电力行业最大规模的无人机巡检应用项目。</p>
-
-              <p>业内分析认为，此次合作标志着工业级无人机应用进入规模化阶段，也将为朗德智能在智能无人机领域的领先地位提供有力支撑。</p>
+              <p>产业的快速发展也对反无人机技术提出了更高要求。如何在保障低空飞行安全的同时，有效防范非授权无人机的威胁，成为行业面临的重要课题。反无人机技术与无人机产业的协同发展，将是未来低空经济健康发展的关键。</p>
             `
           }
         ],
         en: [
+          
           {
-            id: 1,
-            title: 'Lande Intelligent Successfully Develops New Generation of Anti-Drone System with 10KM Interception Range',
-            category: 'company',
-            categoryName: 'Company News',
-            date: '2024-06-10',
-            image: '/images/about/logo-ld.png',
-            summary: 'Lande Intelligent announces its new generation anti-drone system "Sky Shield-X" has successfully passed final testing, with interception distance breaking the 10-kilometer mark, becoming the leading anti-drone solution in China.',
+            id: 3,
+            title: 'Global Anti-Drone System Market Reaches $63 Billion, Smart Recognition and Coordinated Countermeasures Become Tech Focus',
+            category: 'industry',
+            categoryName: 'Industry Updates',
+            date: '2025-11-15',
+            image: '/images/products/radar-detection.png',
+            summary: 'The global anti-drone system market reached $63 billion in 2025. Technology innovation focuses on smart recognition and coordinated countermeasures, with AI-powered acoustic-optical detection achieving 98% accuracy.',
             content: `
-              <p>Hangzhou, June 10, 2024 — Hangzhou Lande Intelligent Technology Co., Ltd. announced today that after three years of research and development, its new generation anti-drone system "Sky Shield-X" has successfully passed final testing and is officially entering the market. The system has achieved breakthroughs in several key indicators, especially the interception distance exceeding 10 kilometers for the first time, significantly ahead of similar products in the industry.</p>
+              <p>Beijing, November 15, 2025 — According to the latest industry research report, the global anti-drone system market has reached $63 billion in 2025, a leap-forward growth from $8.5 billion in 2024. Low-altitude security has become a focus area for countries worldwide.</p>
 
-              <p>The "Sky Shield-X" system employs multiple innovative technologies developed in-house, including a new millimeter-wave radar detection array, multi-frequency jamming module, and AI target recognition system. In actual tests, the system was able to detect, identify, and interfere with unauthorized drones within 10 seconds, with a success rate of 98.5%.</p>
+              <p>In terms of technology innovation, the industry focus in 2025 concentrates on smart recognition and coordinated countermeasures. AI-based acoustic-optical composite detection technology has improved recognition accuracy to 98%, and multi-base station coordinated jamming systems effectively address drone swarm threats. System integration and intelligent response have become dominant trends.</p>
 
-              <p>Lande Intelligent CEO Wang Ming stated: "The successful development of the 'Sky Shield-X' system marks a new stage in China's anti-drone technology. We will apply this technological breakthrough to critical areas such as national infrastructure protection, large event security, and border control, providing more solid protection for national security."</p>
+              <p>In the civilian sector, anti-drone systems are mainly used to ensure the security of critical infrastructure such as airports, energy networks, ports, and data centers. Application scenarios include preventing unauthorized drone flights, intrusions into no-fly zones, and malicious carrying of dangerous items. The National Development and Reform Commission explicitly emphasizes that "safety is the primary prerequisite for low-altitude economic development."</p>
 
-              <p>It is understood that the "Sky Shield-X" system has been applied in the security work of multiple major national events and has performed excellently. The system supports both fixed deployment and vehicle-mounted mobile deployment, featuring rapid response, all-weather operations, and networked collaborative combat capabilities.</p>
+              <p>In September 2025, the "Yuhang Low-Altitude Anti-Drone Platform" by Zhongke Xingtu successfully completed the low-altitude security mission for the September 3rd military parade, demonstrating the combat capabilities of domestic anti-drone systems. At the same time, the Beijing International Dual-Use Advanced Technology Equipment Exhibition showcased multiple fixed-wing, rotary-wing, and special-purpose drones and anti-drone equipment.</p>
 
-              <p>Industry experts point out that with the popularization of drone technology, the security threats posed by unauthorized drones are becoming increasingly serious. Lande Intelligent's technological breakthrough will provide a Chinese solution to this global security challenge.</p>
-
-              <p>Lande Intelligent also announced that it will fully showcase the "Sky Shield-X" system at the International Defense Exhibition next month and plans to cooperate with security departments in multiple countries and regions.</p>
+              <p>Guangzhou Huadu Police have established a comprehensive drone "illegal flight" control network, with technology empowerment supporting the 15th National Games low-altitude security. Lizheng Technology\'s low-altitude drone defense equipment manufacturing project has officially landed in Yixing, promoting large-scale production of low-altitude drone defense products.</p>
             `
           },
           {
-            id: 2,
-            title: 'Lande Intelligent Reaches Strategic Cooperation with State Grid, Drone Inspection to Cover Power Facilities in Five Provinces',
-            category: 'company',
-            categoryName: 'Company News',
-            date: '2024-05-22',
-            image: '/images/about/logo-ld.png',
-            summary: 'Lande Intelligent signs strategic cooperation agreement with State Grid to deploy intelligent drone inspection systems in five provinces, achieving intelligent and automated inspection of power facilities.',
+            id: 4,
+            title: 'Drone Manufacturing Sales Revenue Surges 38.4% Year-on-Year, Industry Enters Large-Scale Development Stage',
+            category: 'industry',
+            categoryName: 'Industry Updates',
+            date: '2025-11-10',
+            image: '/images/products/patrol-drone.png',
+            summary: 'State Taxation Administration data shows drone manufacturing sales revenue surged 38.4% year-on-year in October. Industrial drone applications enter large-scale development stage.',
             content: `
-              <p>Beijing, May 22, 2024 — Hangzhou Lande Intelligent Technology Co., Ltd. signed a strategic cooperation agreement with State Grid Corporation of China in Beijing today. The two parties will cooperate to deploy intelligent drone inspection systems in five provinces across Eastern and Northern China, covering over 10,000 kilometers of high-voltage transmission lines and 3,000 substations.</p>
+              <p>Beijing, November 10, 2025 — The latest data released by the State Taxation Administration shows that in October, China\'s high-tech industry sales revenue increased by 13.6% year-on-year, with drone manufacturing sales revenue surging by 38.4%. Behind this impressive data is the deep integration of artificial intelligence, big data, and other technologies with the drone industry.</p>
 
-              <p>According to the agreement, Lande Intelligent will provide State Grid with a complete solution including inspection drones, automatic charging stations, intelligent inspection path planning, and AI defect recognition systems. The system will significantly improve the efficiency and accuracy of power facility inspections while reducing the safety risks and costs of manual inspections.</p>
+              <p>Analysis by the Ministry of Commerce Research Institute points out that drones are leading the takeoff of the low-altitude economy, with policy and technology driving dual-wheel drive, and multi-scenario applications reshaping the industrial pattern. Drone logistics, agricultural plant protection, power inspection, emergency rescue, and other application scenarios continue to expand, driving the industry to deeper levels.</p>
 
-              <p>Li Qiang, Director of the Equipment Department of State Grid, stated: "The safe operation of power facilities is related to the national economy and people's livelihood. Introducing Lande Intelligent's drone inspection system is an important step in promoting the intelligent operation and maintenance of the power grid. This will significantly enhance our ability to discover and address potential hazards in power facilities and improve the reliability of power supply."</p>
+              <p>The agricultural drone market continues to expand. According to the "DJI & Farmers Daily: Agricultural Drone Industry White Paper (2024 & 2025)," the operating area of agricultural drones continues to grow, and precision agriculture has become a new trend. The CCID Research Institute report also points out that drone applications in high-rise building fire scenes are improving fire rescue efficiency.</p>
 
-              <p>Zhang Hua, Chief Operating Officer of Lande Intelligent, introduced that the company's drone inspection system customized for the power industry has multiple special features, including stable flight capability in adverse weather conditions, infrared thermal imaging detection, centimeter-level precision positioning, and automatic defect recognition based on deep learning. After the system is put into use, it is expected to improve inspection efficiency by more than 300% and save State Grid billions of yuan in maintenance costs annually.</p>
+              <p>Industrial drone applications have entered a large-scale development stage. Traditional fields such as power inspection, oil and gas pipeline inspection, and communication base station maintenance have stable growth in demand, while emerging fields such as urban air mobility and drone delivery are also rapidly rising.</p>
 
-              <p>It is reported that the first phase of the cooperation project will start in July this year, first piloting in Jiangsu and Zhejiang provinces, and expanding to the other three provinces by the end of the year. This is also the largest-scale drone inspection application project in China's power industry currently.</p>
-
-              <p>Industry analysis believes that this cooperation marks the industrial-grade drone application entering a scale-up phase and will provide strong support for Lande Intelligent's leading position in the intelligent drone field.</p>
+              <p>The rapid development of the industry has also put forward higher requirements for anti-drone technology. How to ensure low-altitude flight safety while effectively preventing threats from unauthorized drones has become an important issue facing the industry. The coordinated development of anti-drone technology and the drone industry will be the key to the healthy development of the future low-altitude economy.</p>
             `
           }
         ]

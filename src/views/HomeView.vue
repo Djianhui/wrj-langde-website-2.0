@@ -302,9 +302,8 @@
               <div class="img-frame">
                 <img :src="displayedAboutData.image" alt="朗德智能公司环境" @error="handleImageError">
                 <div class="img-badge">
-                  <span>{{ isZh ? '创立于2025年' : 'Founded in 2025' }}</span>
+                  <span>{{ isZh ? '专业 · 创新 · 可靠' : 'Founded in 2025' }}</span>
                   <span class="img-badge-sep"></span>
-                  <span>{{ isZh ? '国家高新技术企业' : 'National High-Tech Enterprise' }}</span>
                 </div>
               </div>
             </div>
@@ -336,33 +335,27 @@
                   </div>
                   <h3>{{ isZh ? '公司地址' : 'Company Address' }}</h3>
                 </div>
-                <div class="info-content">
-                  <p class="address-text">{{ currentSiteInfo.contactInfo.address }}</p>
-                  <div class="address-image modern-address-image">
-                    <img src="/images/company/company-location.jpg.svg" alt="公司地址" @error="handleAddressImageError">
-                    <div class="address-overlay modern-overlay">
-                      <div class="address-marker modern-marker">
-                        <div class="marker-icon">
-                          <svg viewBox="0 0 16 16" fill="currentColor">
-                            <path d="M8 2C6.34 2 5 3.34 5 5c0 2.63 3 6.5 3 6.5s3-3.87 3-6.5c0-1.66-1.34-3-3-3z"/>
-                            <circle cx="8" cy="5" r="1" fill="white"/>
-                          </svg>
-                        </div>
-                        <span>{{ isZh ? '朗德智能' : 'Lande Intelligence' }}</span>
+                <div v-for="(address, index) in currentSiteInfo.contactInfo.addresses" :key="index" class="address-item">
+                  <div class="address-label">
+                    <span class="location-badge" :class="index === 0 ? 'headquarters' : 'branch'">
+                      <i class="fas fa-building"></i>
+                      {{ index === 0 ? (isZh ? '公司总部' : 'Headquarters') : (isZh ? '分公司' : 'Branch Office') }}
+                    </span>
+                  </div>
+                  <p>{{ address }}</p>
+                  <div class="address-image">
+                    <img :src="index === 0 ? '/images/company/company-location.jpg.svg' : '/images/company/csdz.png'" alt="公司地址" @error="handleAddressImageError">
+                    <div class="address-overlay">
+                      <div class="address-marker">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>{{ isZh ? '朗德智能' : 'Lande' }}</span>
                       </div>
                     </div>
                   </div>
-                  <div class="contact-actions">
-                    <a href="https://ditu.amap.com/search?query=浙江省杭州市滨江区科技园区创新大厦" target="_blank" class="contact-link primary-link">
-                      <svg viewBox="0 0 16 16" fill="currentColor" class="link-icon">
-                        <path d="M8 2C6.34 2 5 3.34 5 5c0 2.63 3 6.5 3 6.5s3-3.87 3-6.5c0-1.66-1.34-3-3-3z"/>
-                      </svg>
-                      {{ isZh ? '获取导航' : 'Get Directions' }}
-                      <svg viewBox="0 0 16 16" fill="currentColor" class="arrow-icon">
-                        <path d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-                      </svg>
-                    </a>
-                  </div>
+                  <a :href="`https://ditu.amap.com/search?query=${encodeURIComponent(address)}`" target="_blank" class="info-link">
+                    {{ isZh ? '获取导航' : 'Get Directions' }}
+                    <i class="fas fa-arrow-right"></i>
+                  </a>
                 </div>
               </div>
               
@@ -910,6 +903,11 @@ const emit = defineEmits(['page-loaded'])
 /* 全局样式优化 */
 * {
   font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* 保留 Font Awesome 图标字体 */
+.fas, .far, .fab, .fa-solid, .fa-regular, .fa-brands, .fa {
+  font-family: var(--fa-style-family-classic, "Font Awesome 6 Free"), "Font Awesome 5 Free", FontAwesome;
 }
 
 .home-view {
@@ -1836,6 +1834,118 @@ const emit = defineEmits(['page-loaded'])
   }
 }
 
+/* 地址卡片样式 */
+.address-item {
+  margin-bottom: 30px;
+  padding: 0 20px;
+}
+
+.address-item:last-child {
+  margin-bottom: 0;
+}
+
+.address-label {
+  margin-bottom: 12px;
+}
+
+.location-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.location-badge.headquarters {
+  background: #e8f0fe;
+  color: #3b82f6;
+}
+
+.location-badge.branch {
+  background: #e6f4f1;
+  color: #10b981;
+}
+
+.location-badge i {
+  font-size: 0.8rem;
+}
+
+.address-item p {
+  margin: 12px 0;
+  line-height: 1.8;
+  color: #333;
+  font-size: 1rem;
+  text-align: left;
+}
+
+.info-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #3b82f6;
+  font-weight: 500;
+  font-size: 0.95rem;
+  margin-top: 12px;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: #e8f0fe;
+}
+
+.info-link i {
+  font-size: 0.8rem;
+}
+
+.address-image {
+  position: relative;
+  width: calc(100% + 40px);
+  height: 180px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 12px -20px;
+  background: #f5f5f5;
+}
+
+.address-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.address-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.address-marker {
+  background: white;
+  border-radius: 20px;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.address-marker i {
+  color: #3b82f6;
+  font-size: 16px;
+}
+
+.address-marker span {
+  font-weight: 500;
+  color: #333;
+  font-size: 0.95rem;
+}
+
 @media (max-width: 767px) {
   .hero-buttons {
     flex-direction: column;
@@ -1891,10 +2001,6 @@ const emit = defineEmits(['page-loaded'])
   
   .info-content {
     padding: 0 24px 24px;
-  }
-  
-  .address-image.modern-address-image {
-    height: 200px;
   }
   
   .info-icon.modern-info-icon {

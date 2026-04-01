@@ -53,17 +53,25 @@
                   </div>
                   <h3>{{ isZh ? '公司地址' : 'Company Address' }}</h3>
                 </div>
-                <p>{{ currentSiteInfo.contactInfo.address }}</p>
-                <div class="address-image">
-                  <img src="/images/company/company-location.jpg.svg" alt="公司地址" @error="handleAddressImageError">
-                  <div class="address-overlay">
-                    <div class="address-marker">
-                      <i class="fas fa-map-marker-alt"></i>
-                      <span>{{ isZh ? '朗德智能' : 'Lande' }}</span>
+                <div v-for="(address, index) in currentSiteInfo.contactInfo.addresses" :key="index" class="address-item">
+                  <div class="address-label">
+                    <span class="location-badge" :class="index === 0 ? 'headquarters' : 'branch'">
+                      <i class="fas fa-building"></i>
+                      {{ index === 0 ? (isZh ? '公司总部' : 'Headquarters') : (isZh ? '分公司' : 'Branch Office') }}
+                    </span>
+                  </div>
+                  <p>{{ address }}</p>
+                  <div class="address-image">
+                    <img :src="index === 0 ? '/images/company/company-location.jpg.svg' : '/images/company/csdz.png'" alt="公司地址" @error="handleAddressImageError">
+                    <div class="address-overlay">
+                      <div class="address-marker">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>{{ isZh ? '朗德智能' : 'Lande' }}</span>
+                      </div>
                     </div>
                   </div>
+                  <a :href="`https://ditu.amap.com/search?query=${encodeURIComponent(address)}`" target="_blank" class="info-link">{{ isZh ? '获取导航' : 'Get Directions' }} <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <a href="https://ditu.amap.com/search?query=浙江省杭州市滨江区科技园区创新大厦" target="_blank" class="info-link">{{ isZh ? '获取导航' : 'Get Directions' }} <i class="fas fa-arrow-right"></i></a>
               </div>
               <div class="info-card">
                 <div class="info-header">
@@ -129,15 +137,15 @@ const currentSiteInfo = computed(() => {
     companyName: '杭州朗德智能科技有限公司',
     contactInfo: {
       address: '浙江省杭州市滨江区科技园区创新大厦A座15楼',
-      phone: '15211191964',
-      email: '1547554061@qq.com'
+      phone: '13548973785',
+      email: '173462959@qq.com'
     }
   } : {
     companyName: 'Hangzhou Lande Intelligent Technology Co., Ltd.',
     contactInfo: {
       address: '15F, Building A, Innovation Tower, Science & Technology Park, Binjiang District, Hangzhou, Zhejiang',
-      phone: '15211191964',
-      email: '1547554061@qq.com'
+      phone: '13548973785',
+      email: '173462959@qq.com'
     }
   }
 })
@@ -666,6 +674,53 @@ onMounted(async () => {
   line-height: 1.7;
   font-size: 1.05rem;
   font-family: 'Inter', sans-serif;
+}
+
+.address-item {
+  margin-bottom: 30px;
+}
+
+.address-item:last-child {
+  margin-bottom: 0;
+}
+
+.address-label {
+  margin-bottom: 12px;
+}
+
+.location-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.location-badge.headquarters {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(139, 92, 246, 0.1) 100%);
+  color: #3b82f6;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.location-badge.branch {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(5, 150, 105, 0.1) 100%);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.location-badge i {
+  font-size: 0.75rem;
+}
+
+.address-item p {
+  margin-bottom: 10px;
+}
+
+.address-item .info-link {
+  margin-top: 8px;
 }
 
 .info-link {
