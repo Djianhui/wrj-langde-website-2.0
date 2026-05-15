@@ -95,28 +95,28 @@
         <div class="features-grid">
           <div class="feature-card">
             <div class="feature-icon">
-              <CustomIcons name="long-distance-monitoring" :size="32" />
+              <i class="fas fa-binoculars"></i>
             </div>
             <h3>监测距离远</h3>
             <p>对于船只有效探测距离可达100m~5.0km，距离远， 是一种原理先进的传感器， 在近海领域都有非常广泛的应用。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
-              <CustomIcons name="video-evidence" :size="32" />
+              <i class="fas fa-video"></i>
             </div>
             <h3>录像取证</h3>
             <p>架设方便、重量轻、操作简单，执法过程录像取证系统记录入侵目标的视频和入侵轨迹。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
-              <CustomIcons name="environmental-adaptation" :size="32" />
+              <i class="fas fa-cloud-sun-rain"></i>
             </div>
             <h3>环境适应性强</h3>
             <p>可在恶劣天气下工作， 全天候运行， 可按照预案设置智能工作。</p>
           </div>
            <div class="feature-card">
             <div class="feature-icon">
-              <CustomIcons name="high-convenience" :size="32" />
+              <i class="fas fa-hand-pointer"></i>
             </div>
             <h3>便捷性更高</h3>
             <p>便携、重量轻、体积小;  对架设环境要求较低可在灯杆或原有基建上进行安装，节约资源。</p>
@@ -144,15 +144,6 @@
             <CustomIcons name="real-time-monitoring" :size="40" />
             <span>实时监控</span>
           </div>
-        </div>
-      </div>
-      
-      <!-- 联系咨询 -->
-      <div class="product-contact">
-        <div class="contact-content">
-          <h2>需要了解更多？</h2>
-          <p>我们的专业团队随时为您提供技术支持和解决方案</p>
-          <RouterLink to="/contact" class="btn btn-primary">联系我们</RouterLink>
         </div>
       </div>
     </div>

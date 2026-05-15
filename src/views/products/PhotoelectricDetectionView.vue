@@ -110,21 +110,21 @@
         <div class="features-grid">
           <div class="feature-card">
             <div class="feature-icon">
-              <CustomIcons name="multi-sensor-fusion" :size="32" />
+              <i class="fas fa-layer-group"></i>
             </div>
             <h3>雷达+频谱+光电三级联动</h3>
             <p>探测系统由频谱侦测、雷达探测和光电跟踪组成，结合主动与被动探测手段有效互补，实现5公里范围内的高效无人机监测与跟踪。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
-              <CustomIcons name="all-weather" :size="32" />
+              <i class="fas fa-cloud-sun-rain"></i>
             </div>
             <h3>可连续工作</h3>
             <p>设备能够全天候持续监测打击和记录防区空域，即使在浓雾和雷雨等恶劣天气条件下也能保持稳定运行。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
-              <CustomIcons name="multi-level-control" :size="32" />
+              <i class="fas fa-sitemap"></i>
             </div>
             <h3>多级别管控</h3>
             <p>雷达探测、无线电侦测和光电跟踪可设置为多级别联动处置模式，以确保灵活应对各种威胁。</p>
@@ -159,15 +159,6 @@
             <CustomIcons name="real-time-monitoring" :size="40" />
             <span>实时监控</span>
           </div>
-        </div>
-      </div>
-      
-      <!-- 联系咨询 -->
-      <div class="product-contact">
-        <div class="contact-content">
-          <h2>需要了解更多？</h2>
-          <p>我们的专业团队随时为您提供技术支持和解决方案</p>
-          <RouterLink to="/contact" class="btn btn-primary">联系我们</RouterLink>
         </div>
       </div>
     </div>

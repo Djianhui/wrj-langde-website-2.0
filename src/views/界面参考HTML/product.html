@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>产品中心 - 朗德智能科技</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Manrope:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#fbf8ff",
+                        "surface-tint": "#004ced",
+                        "secondary-fixed-dim": "#4cd6ff",
+                        "on-secondary-fixed": "#001f28",
+                        "surface-variant": "#e1e1ef",
+                        "on-secondary-fixed-variant": "#004e60",
+                        "tertiary-fixed": "#d3e4fe",
+                        "surface-container": "#ededfb",
+                        "inverse-on-surface": "#f0effe",
+                        "tertiary-fixed-dim": "#b7c8e1",
+                        "on-primary-fixed": "#001452",
+                        "tertiary-container": "#57677e",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#b7c4ff",
+                        "on-primary-container": "#dfe3ff",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#b7eaff",
+                        "on-tertiary-fixed": "#0b1c30",
+                        "outline-variant": "#c3c5d9",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#38485d",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "background": "#fbf8ff",
+                        "surface": "#fbf8ff",
+                        "on-background": "#191b25",
+                        "secondary-container": "#00ccf9",
+                        "outline": "#737688",
+                        "tertiary": "#3f4f65",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#003ec7",
+                        "primary-fixed": "#dde1ff",
+                        "on-secondary-container": "#005266",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed-variant": "#0038b6",
+                        "surface-dim": "#d9d9e7",
+                        "surface-container-low": "#f3f2ff",
+                        "surface-container-high": "#e7e7f5",
+                        "on-surface": "#191b25",
+                        "inverse-primary": "#b7c4ff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-container": "#d6e6ff",
+                        "secondary": "#00677f",
+                        "inverse-surface": "#2e303a",
+                        "primary-container": "#0052ff",
+                        "surface-container-highest": "#e1e1ef",
+                        "on-surface-variant": "#434656"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "sm": "12px",
+                        "xs": "4px",
+                        "lg": "48px",
+                        "xl": "80px",
+                        "base": "8px",
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "md": "24px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Manrope"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "headline-xl-mobile": ["Manrope"],
+                        "headline-xl": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "letterSpacing": "0", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "headline-xl-mobile": ["32px", { "lineHeight": "1.1", "fontWeight": "700" }],
+                        "headline-xl": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="docked full-width top-0 sticky z-50 bg-surface/90 dark:bg-surface-dim/90 backdrop-blur-md border-b border-outline-variant/30 dark:border-outline/20">
+<div class="flex justify-between items-center w-full px-lg max-w-container-max mx-auto h-xl">
+<!-- Brand -->
+<a class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed flex items-center gap-sm" href="#">
+<span class="material-symbols-outlined text-[32px]" data-weight="fill">flight_takeoff</span>
+                朗德智能科技
+            </a>
+<!-- Navigation Links (Desktop) -->
+<div class="hidden md:flex items-center gap-lg h-full">
+<a class="h-full flex items-center text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-all duration-200 px-sm font-body-md text-body-md" href="#">首页</a>
+<!-- Active Navigation Item -->
+<a class="h-full flex items-center text-primary dark:text-primary-fixed border-b-2 border-primary dark:border-primary-fixed pb-1 hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-all duration-200 px-sm font-body-md text-body-md font-semibold active:scale-[0.98] transition-all duration-300 ease-in-out" href="#">产品中心</a>
+<a class="h-full flex items-center text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-all duration-200 px-sm font-body-md text-body-md" href="#">应用案例</a>
+<a class="h-full flex items-center text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-all duration-200 px-sm font-body-md text-body-md" href="#">技术研发</a>
+<a class="h-full flex items-center text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-all duration-200 px-sm font-body-md text-body-md" href="#">关于我们</a>
+</div>
+<!-- Trailing Action -->
+<div class="hidden md:flex items-center">
+<button class="bg-primary text-on-primary hover:bg-primary/90 px-gutter py-sm rounded-DEFAULT font-label-sm text-label-sm uppercase tracking-wider transition-colors">
+                    联系我们
+                </button>
+</div>
+<!-- Mobile Menu Toggle (Decorative) -->
+<button class="md:hidden text-on-surface">
+<span class="material-symbols-outlined text-[28px]">menu</span>
+</button>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="max-w-container-max mx-auto px-md md:px-lg py-lg md:py-xl flex flex-col md:flex-row gap-xl min-h-[819px]">
+<!-- Sidebar Navigation -->
+<aside class="w-full md:w-[280px] shrink-0">
+<div class="md:sticky md:top-[120px]">
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg mb-lg text-on-surface">产品目录</h1>
+<nav class="flex flex-col gap-sm">
+<!-- Level 1: 无人机防控类 -->
+<div class="mb-sm">
+<div class="font-body-lg text-body-lg font-bold text-on-surface mb-xs flex items-center justify-between py-xs border-b border-outline-variant/30">
+                            无人机防控类
+                            <span class="material-symbols-outlined text-[20px] text-outline">expand_more</span>
+</div>
+<!-- Level 2: 侦探感知类产品 -->
+<div class="ml-base mt-xs">
+<div class="font-body-md text-body-md font-semibold text-on-surface-variant py-xs">
+                                侦探感知类产品
+                            </div>
+<!-- Level 3 -->
+<div class="ml-md flex flex-col border-l border-outline-variant/30">
+<!-- ACTIVE LEVEL 3 -->
+<a class="relative pl-sm py-[6px] font-body-md text-body-md text-primary font-bold before:content-[''] before:absolute before:left-[-1px] before:top-0 before:bottom-0 before:w-[2px] before:bg-primary bg-primary/5 rounded-r-DEFAULT" href="#">
+                                    雷达探测
+                                </a>
+<a class="relative pl-sm py-[6px] font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-low rounded-r-DEFAULT" href="#">
+                                    光电识别
+                                </a>
+<a class="relative pl-sm py-[6px] font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-low rounded-r-DEFAULT" href="#">
+                                    频谱侦测
+                                </a>
+</div>
+</div>
+<!-- Level 2: 干扰反制类产品 -->
+<div class="ml-base mt-sm">
+<div class="font-body-md text-body-md font-semibold text-on-surface-variant py-xs flex items-center justify-between cursor-pointer group">
+                                干扰反制类产品
+                                <span class="material-symbols-outlined text-[18px] text-outline opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</div>
+</div>
+<!-- Level 2: 一体化防御类 -->
+<div class="ml-base mt-sm">
+<div class="font-body-md text-body-md font-semibold text-on-surface-variant py-xs flex items-center justify-between cursor-pointer group">
+                                一体化防御类
+                                <span class="material-symbols-outlined text-[18px] text-outline opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Level 1: 低空经济类 -->
+<div class="mt-md">
+<div class="font-body-lg text-body-lg font-bold text-on-surface mb-xs flex items-center justify-between py-xs border-b border-outline-variant/30 cursor-pointer">
+                            低空经济类
+                            <span class="material-symbols-outlined text-[20px] text-outline">chevron_right</span>
+</div>
+</div>
+</nav>
+</div>
+</aside>
+<!-- Product Grid Area -->
+<section class="flex-1">
+<!-- Header/Breadcrumb area -->
+<div class="mb-lg flex items-center justify-between">
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-xs flex items-center gap-xs">
+                        无人机防控类 <span class="material-symbols-outlined text-[14px]">chevron_right</span> 侦探感知类产品
+                    </div>
+<h2 class="font-headline-xl text-headline-xl-mobile md:text-headline-xl text-on-surface">雷达探测</h2>
+</div>
+</div>
+<!-- Product Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Product Card 1 -->
+<div class="group bg-surface-container-lowest rounded-xl overflow-hidden border border-outline-variant/30 hover:border-primary/50 hover:shadow-[0_8px_30px_rgb(15,23,42,0.08)] transition-all duration-300 flex flex-col">
+<div class="aspect-[4/3] w-full bg-surface-container relative overflow-hidden">
+<img alt="低空雷达探测" class="w-full h-full object-cover mix-blend-multiply opacity-90 group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="A striking digital studio photograph of a highly sophisticated, minimalist low-altitude military radar system. The metallic surface reflects a cool, clinical white light in a pristine laboratory setting. The background is a vast, blurred bright white space, contrasting with subtle tech-blue glowing accents on the radar's geometric antennae. The overall aesthetic is clean, precise, and screams high-stakes corporate aerospace engineering." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-cPA_XUlZheqcmt6VA53nTsecV4BZMBjIupDw3neE-yltFiSx55We1uj7jVLRh5JNLkpsJcyvnPtHfT0fkUGZFovKX08d_NmDT9oeBdfilndvEKUEZvTlF6dM_dM9QG3EuR-aOjSpztlJ7Ywr-oqJd6nzMb_116QDoseoLNdez2ZP9rUW7f8shlxrvPkE3xP5soR41WUJrQ7_2R3PzF8b4FrnaZY86LmEF4SM4hv9GNzn0vBsGgPfymGCa_ifYowvqmc8ULCcVsbf"/>
+<div class="absolute top-sm right-sm bg-surface-container-lowest/80 backdrop-blur-sm px-sm py-xs rounded-full border border-outline-variant/20 flex items-center gap-xs">
+<span class="w-[6px] h-[6px] rounded-full bg-secondary-container"></span>
+<span class="font-label-sm text-label-sm text-on-surface text-[10px]">Active Scanning</span>
+</div>
+</div>
+<div class="p-lg flex flex-col flex-1">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-sm group-hover:text-primary transition-colors">低空雷达探测</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-lg flex-1">
+                            支持独立侦测识别无人机的远程识别及频率信号。采用先进的三维相控阵技术，在复杂城市或野外环境中实现低空微小目标的精准捕捉与轨迹预测。
+                        </p>
+<div class="mt-auto">
+<button class="bg-transparent border border-outline hover:border-primary text-on-surface hover:text-primary px-gutter py-[10px] rounded-DEFAULT font-label-sm text-label-sm transition-all flex items-center gap-sm group/btn">
+                                了解详情
+                                <span class="material-symbols-outlined text-[16px] group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group bg-surface-container-lowest rounded-xl overflow-hidden border border-outline-variant/30 hover:border-primary/50 hover:shadow-[0_8px_30px_rgb(15,23,42,0.08)] transition-all duration-300 flex flex-col">
+<div class="aspect-[4/3] w-full bg-surface-container relative overflow-hidden">
+<img alt="近海安防雷达" class="w-full h-full object-cover mix-blend-multiply opacity-90 group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="A sleek, modern product shot of an advanced maritime security radar dome. The device is matte white with precise panel gaps, sitting on a subtly reflective surface in a bright, light-mode studio. Minimalist ambient lighting creates soft shadows that emphasize the cylindrical shape. Small, intense tech-blue indicator lights provide a singular pop of color against the monochromatic, corporate tech aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCD-JQRyPdT46Ussn3n7_fXfpYCA4v1C5VARyo2cN0rMA1t8N8PyOjCjbkVaynWX-HNEYJmtpiYgG292tbLILykrpRpfRQVdKoUgIiTH0L_XwTtIG656ZSzUj__yW7MX0P0e95PriI4pwU-q3AE7hVgEvCIb2rePJKkJg71nlXUJVtiexoRAYGzEWz98Qk3RtT34hLiokGLql4_VdDxNq9C3G_B49V5Jgbfc3wcbXr9nN2gnvAPG4KlYnm3Wopqyl4t8GXXKHa3GTwH"/>
+<div class="absolute top-sm right-sm bg-surface-container-lowest/80 backdrop-blur-sm px-sm py-xs rounded-full border border-outline-variant/20 flex items-center gap-xs">
+<span class="w-[6px] h-[6px] rounded-full bg-secondary-container"></span>
+<span class="font-label-sm text-label-sm text-on-surface text-[10px]">Maritime Grade</span>
+</div>
+</div>
+<div class="p-lg flex flex-col flex-1">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-sm group-hover:text-primary transition-colors">近海安防雷达</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-lg flex-1">
+                            专为近海复杂高盐雾环境设计，具备高精度多目标跟踪能力。能有效克服海浪杂波干扰，实现对海面小型快艇及低空掠海飞行器的全天候监控。
+                        </p>
+<div class="mt-auto">
+<button class="bg-transparent border border-outline hover:border-primary text-on-surface hover:text-primary px-gutter py-[10px] rounded-DEFAULT font-label-sm text-label-sm transition-all flex items-center gap-sm group/btn">
+                                了解详情
+                                <span class="material-symbols-outlined text-[16px] group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="full-width bottom-0 bg-surface-container-lowest dark:bg-surface-dim border-t border-outline-variant/30 dark:border-outline/20">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter py-lg px-lg max-w-container-max mx-auto">
+<!-- Brand Column -->
+<div class="col-span-1 md:col-span-2 flex flex-col gap-sm">
+<div class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-surface-variant flex items-center gap-sm">
+<span class="material-symbols-outlined text-[28px]" data-weight="fill">shield_locked</span>
+                    朗德智能科技
+                </div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs max-w-[400px]">
+                    致力于提供先进的低空安全解决方案与智能感知技术，保障空域纯净与安全。
+                </p>
+</div>
+<!-- Links Column -->
+<div class="col-span-1 flex flex-col gap-sm">
+<span class="font-label-sm text-label-sm text-on-surface uppercase tracking-wider mb-xs">相关链接</span>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200" href="#">隐私政策</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200" href="#">法律声明</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200" href="#">诚聘英才</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200" href="#">合作伙伴</a>
+</div>
+<!-- Copyright Column -->
+<div class="col-span-1 flex flex-col justify-end">
+<div class="font-body-md text-body-md text-on-surface-variant dark:text-surface-variant mt-lg md:mt-0">
+                    © 2024 杭州朗德智能科技有限公司 版权所有
+                </div>
+</div>
+</div>
+</footer>
+</body></html>

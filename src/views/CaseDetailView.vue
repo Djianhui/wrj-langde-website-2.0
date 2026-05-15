@@ -1,1014 +1,943 @@
 <template>
-  <div class="case-detail-page page-content">
-    <div v-if="caseData" class="detail-container">
-      <!-- 面包屑导航 -->
-      <div class="breadcrumb-wrapper">
-        <div class="breadcrumb">
-          <RouterLink to="/cases">{{ casesPage.title }}</RouterLink>
-          <span class="separator">/</span>
-          <span class="current">{{ caseData.title }}</span>
-        </div>
-      </div>
-      
-      <!-- 案例头部信息 -->
-      <div class="case-hero">
-        <div class="hero-content">
-          <div class="case-tag">{{ caseData.tag }}</div>
-          <h1 class="case-title">{{ caseData.title }}</h1>
-          <div class="case-meta">
-            <div class="meta-item">
-              <i class="fas fa-calendar"></i>
-              <span>{{ isZh ? '发布日期：' : 'Published: ' }}{{ caseData.date }}</span>
-            </div>
-          </div>
-        </div>
-        
-        <div class="hero-banner">
-          <img :src="caseData.image || '/images/cases/default.jpg'" :alt="caseData.title">
-        </div>
-      </div>
-      
-      <!-- 主要内容区域 -->
-      <div class="main-content">
-        <!-- 案例亮点 -->
-        <section class="content-section highlight-section">
-          <div class="section-content">
-            <div class="case-highlight">
-              <div class="quote-icon">
-                <i class="fas fa-quote-left"></i>
-              </div>
-              <p class="highlight-text">{{ caseData.highlight }}</p>
-            </div>
-          </div>
-        </section>
-        
-        <!-- 案例结果 -->
-        <section class="content-section results-section" v-if="caseData.results">
-          <div class="section-header">
-            <h2 class="section-title">{{ casesPage.results }}</h2>
-            <div class="section-line"></div>
-          </div>
-          <div class="section-content">
-            <div class="results-grid">
-              <div class="result-card" v-for="(result, index) in caseData.results" :key="index">
-                <div class="result-icon">
-                  <i :class="getResultIcon(index)"></i>
-                </div>
-                <div class="result-content">
-                  <div class="result-text">{{ result }}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        
-        <!-- 详细内容 -->
-        <section class="content-section details-section">
-          <div class="section-header">
-            <h2 class="section-title">{{ isZh ? '详细介绍' : 'Details' }}</h2>
-            <div class="section-line"></div>
-          </div>
-          <div class="section-content">
-            <div class="case-details" v-html="caseData.content"></div>
-          </div>
-        </section>
-        
-        <!-- 操作区域 -->
-        <section class="content-section actions-section">
-          <div class="case-actions">
-            <RouterLink to="/cases" class="back-btn">
+  <div class="case-detail-page">
+    <template v-if="caseData">
+      <!-- Section 1: Case Overview (Hero) -->
+      <section class="overview-section">
+        <div class="container">
+          <div class="back-link">
+            <RouterLink to="/cases">
               <i class="fas fa-arrow-left"></i>
-              <span>{{ casesPage.backToList }}</span>
+              <span>{{ isZh ? '返回案例列表' : 'Back to Cases' }}</span>
             </RouterLink>
-            
-            <div class="case-share">
-              <span class="share-label">{{ isZh ? '分享：' : 'Share: ' }}</span>
-              <div class="share-icons">
-                <a href="#" class="share-icon"><i class="fab fa-weixin"></i></a>
-                <a href="#" class="share-icon"><i class="fab fa-weibo"></i></a>
-                <a href="#" class="share-icon"><i class="fas fa-link"></i></a>
+          </div>
+
+          <div class="overview-grid">
+            <!-- Large Image -->
+            <div class="overview-media">
+              <img
+                :src="caseData.image || '/images/cases/default.jpg'"
+                :alt="caseData.title"
+                @error="onImageError"
+              />
+              <div class="media-overlay"></div>
+              <div class="media-caption">
+                <span class="media-tag">{{ caseData.tag }}</span>
+                <h1 class="media-title">{{ caseData.title }}</h1>
               </div>
             </div>
-          </div>
-        </section>
-      </div>
-      
-      <!-- 相关案例 -->
-      <div class="related-section" v-if="relatedCases.length > 0">
-        <div class="section-header">
-          <h2 class="section-title">{{ casesPage.relatedCases }}</h2>
-          <div class="section-line"></div>
-        </div>
-        <div class="related-content">
-          <div class="related-grid">
-            <div v-for="item in relatedCases" :key="item.id" class="related-card">
-              <RouterLink :to="`/cases/${item.id}`">
-                <div class="related-image">
-                  <img :src="item.image || '/images/cases/default.jpg'" :alt="item.title">
-                  <div class="image-overlay">
-                    <i class="fas fa-arrow-right"></i>
+
+            <!-- Meta Card -->
+            <aside class="meta-card">
+              <div>
+                <h2 class="meta-heading">{{ isZh ? '项目概览' : 'Project Overview' }}</h2>
+                <div class="meta-list">
+                  <div class="meta-item">
+                    <p class="meta-label">
+                      <i class="far fa-calendar"></i>
+                      {{ isZh ? '发布日期' : 'Published' }}
+                    </p>
+                    <p class="meta-value">{{ caseData.date }}</p>
+                  </div>
+                  <div class="meta-item">
+                    <p class="meta-label">
+                      <i class="fas fa-layer-group"></i>
+                      {{ isZh ? '应用领域' : 'Industry' }}
+                    </p>
+                    <p class="meta-value">{{ caseData.tag }}</p>
+                  </div>
+                  <div class="meta-item" v-if="caseData.results && caseData.results.length">
+                    <p class="meta-label">
+                      <i class="fas fa-bullseye"></i>
+                      {{ isZh ? '核心成果' : 'Key Outcomes' }}
+                    </p>
+                    <ul class="meta-results">
+                      <li v-for="(r, i) in caseData.results.slice(0, 3)" :key="i">
+                        <span class="dot"></span>
+                        <span>{{ r }}</span>
+                      </li>
+                    </ul>
                   </div>
                 </div>
-                <div class="related-info">
-                  <h3 class="related-title">{{ item.title }}</h3>
-                  <div class="related-tag">{{ item.tag }}</div>
+              </div>
+              <div class="meta-divider">
+                <p class="meta-label">{{ isZh ? '负责团队' : 'Delivery Team' }}</p>
+                <p class="meta-value">{{ isZh ? '朗德智能交付中心' : 'Lande Delivery Center' }}</p>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Highlight + Metrics -->
+      <section class="insight-section">
+        <div class="container">
+          <div class="insight-grid">
+            <!-- Text: Highlight & Content Summary -->
+            <div class="insight-text">
+              <div class="insight-block">
+                <h3 class="insight-heading">
+                  <i class="fas fa-exclamation-triangle"></i>
+                  {{ isZh ? '核心价值' : 'Core Value' }}
+                </h3>
+                <p class="insight-paragraph">{{ caseData.summary }}</p>
+              </div>
+
+              <div class="insight-card">
+                <h3 class="insight-heading">
+                  <i class="fas fa-shield-alt"></i>
+                  {{ isZh ? '朗德智能解决方案' : 'Lande Solution' }}
+                </h3>
+                <p class="insight-paragraph insight-quote">
+                  <i class="fas fa-quote-left"></i>
+                  {{ caseData.highlight }}
+                </p>
+                <ul class="check-list" v-if="caseData.results && caseData.results.length">
+                  <li v-for="(r, i) in caseData.results" :key="i">
+                    <i class="fas fa-check-circle"></i>
+                    <span>{{ r }}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Metrics Bento -->
+            <div class="metrics-bento">
+              <div
+                v-for="(metric, i) in metricsCards"
+                :key="i"
+                class="metric-card"
+                :class="{ 'metric-card--wide': metric.wide }"
+              >
+                <p class="metric-label">{{ metric.label }}</p>
+                <div class="metric-value">
+                  <span class="metric-number">{{ metric.number }}</span>
+                  <span class="metric-unit" v-if="metric.unit">{{ metric.unit }}</span>
                 </div>
-              </RouterLink>
+                <p class="metric-hint" v-if="metric.hint">
+                  <i class="fas fa-arrow-trend-up" v-if="metric.trend"></i>
+                  {{ metric.hint }}
+                </p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    
-    <div v-else class="detail-container">
-      <div class="loading-case">
-        <div v-if="isLoading" class="spinner"></div>
-        <div v-else class="not-found">
-          <h2>{{ isZh ? '未找到案例' : 'Case Not Found' }}</h2>
-          <p>{{ isZh ? '您查找的案例不存在或已被移除' : 'The case you are looking for does not exist or has been removed' }}</p>
-          <RouterLink to="/cases" class="btn">{{ casesPage.backToList }}</RouterLink>
+      </section>
+
+      <!-- Section 3: Details + Testimonial -->
+      <section class="details-section">
+        <div class="container">
+          <div class="details-grid">
+            <div class="details-content">
+              <h3 class="section-heading">{{ isZh ? '项目详情' : 'Project Details' }}</h3>
+              <div class="rich-text" v-html="caseData.content"></div>
+            </div>
+
+            <aside class="testimonial">
+              <i class="fas fa-quote-left testimonial-icon"></i>
+              <blockquote class="testimonial-text">
+                {{ isZh
+                  ? '朗德智能的系统让防区真正做到"可见、可控、可管"，极大提升了运营安全底线。'
+                  : 'Lande\'s system makes our protection zone truly "visible, controllable and manageable", significantly raising our operational safety baseline.' }}
+              </blockquote>
+              <!-- <div class="testimonial-author">
+                <div class="author-avatar">
+                  <i class="fas fa-user"></i>
+                </div>
+                <div>
+                  <p class="author-name">{{ isZh ? '项目客户' : 'Project Client' }}</p>
+                  <p class="author-title">{{ caseData.tag }} · {{ isZh ? '负责人' : 'Director' }}</p>
+                </div>
+              </div> -->
+            </aside>
+          </div>
         </div>
+      </section>
+
+      <!-- Section 4: Related Cases -->
+      <section class="related-section" v-if="relatedCases.length > 0">
+        <div class="container">
+          <div class="related-header">
+            <h2 class="section-heading">{{ isZh ? '相关应用案例' : 'Related Cases' }}</h2>
+            <RouterLink to="/cases" class="view-all">
+              <span>{{ isZh ? '查看全部' : 'View All' }}</span>
+              <i class="fas fa-arrow-right"></i>
+            </RouterLink>
+          </div>
+
+          <div class="related-grid">
+            <RouterLink
+              v-for="item in relatedCases"
+              :key="item.id"
+              :to="`/cases/${item.id}`"
+              class="related-card"
+            >
+              <div class="related-media">
+                <img
+                  :src="item.image || '/images/cases/default.jpg'"
+                  :alt="item.title"
+                  @error="onImageError"
+                />
+              </div>
+              <div class="related-body">
+                <span class="related-tag">{{ item.tag }}</span>
+                <h4 class="related-title">{{ item.title }}</h4>
+                <p class="related-desc">{{ item.summary }}</p>
+              </div>
+            </RouterLink>
+          </div>
+        </div>
+      </section>
+    </template>
+
+    <div v-else class="not-found-wrapper">
+      <div v-if="isLoading" class="spinner"></div>
+      <div v-else class="not-found">
+        <h2>{{ isZh ? '未找到案例' : 'Case Not Found' }}</h2>
+        <p>
+          {{ isZh
+            ? '您查找的案例不存在或已被移除'
+            : 'The case you are looking for does not exist or has been removed' }}
+        </p>
+        <RouterLink to="/cases" class="not-found-btn">
+          <i class="fas fa-arrow-left"></i>
+          {{ isZh ? '返回案例列表' : 'Back to Cases' }}
+        </RouterLink>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useCasesStore } from '../store/modules/cases'
 import { useLanguage } from '@/mixins/language'
 
-// 获取语言相关功能
-const { isZh, isEn, getCasesPage } = useLanguage()
-
-// 获取案例相关翻译
-const casesPage = computed(() => getCasesPage())
-
+const { isZh } = useLanguage()
 const route = useRoute()
-const caseId = route.params.id
 const casesStore = useCasesStore()
 const isLoading = ref(true)
 
-// 获取案例数据
 const caseData = computed(() => {
   isLoading.value = false
-  return casesStore.getCaseById(caseId)
+  return casesStore.getCaseById(route.params.id)
 })
 
-// 获取相关案例
 const relatedCases = computed(() => {
   if (!caseData.value) return []
-  
-  return casesStore.getAllCases
-    .filter(item => item.id !== parseInt(caseId) && item.tag === caseData.value.tag)
-    .slice(0, 3)
+  const all = casesStore.getAllCases || []
+  const currentId = parseInt(route.params.id)
+  // 优先取同 tag 的案例
+  const sameTag = all.filter(
+    item => item.id !== currentId && item.tag === caseData.value.tag
+  )
+  if (sameTag.length >= 3) return sameTag.slice(0, 3)
+  // 不足 3 条时，用其他案例补齐
+  const others = all.filter(
+    item => item.id !== currentId && item.tag !== caseData.value.tag
+  )
+  return [...sameTag, ...others].slice(0, 3)
 })
 
-// 根据索引获取结果图标
-const getResultIcon = (index) => {
-  const icons = [
-    'fas fa-check-circle',
-    'fas fa-chart-line',
-    'fas fa-shield-alt',
-    'fas fa-bolt'
-  ]
-  return icons[index % icons.length]
+// 从 results 构造 metrics 卡片（支持数字提取+单位）
+const metricsCards = computed(() => {
+  const results = caseData.value?.results || []
+  if (!results.length) return []
+
+  const cards = results.slice(0, 4).map((text, idx) => {
+    const match = String(text).match(/([<>≥≤]?\s*\d+[\.\d]*%?\+?)\s*(.*)/)
+    if (match) {
+      const numberPart = match[1].trim()
+      const rest = match[2].trim()
+      return {
+        label: rest || (isZh.value ? '核心指标' : 'Key Metric'),
+        number: numberPart,
+        unit: '',
+        hint: text,
+        trend: idx === 0,
+        wide: idx === 0
+      }
+    }
+    return {
+      label: isZh.value ? '关键成果' : 'Key Outcome',
+      number: '★',
+      unit: '',
+      hint: text,
+      trend: false,
+      wide: idx === 0
+    }
+  })
+  return cards
+})
+
+const onImageError = (e) => {
+  e.target.src = '/images/cases/default.jpg'
 }
 </script>
 
 <style scoped>
-/* 页面基础样式 */
 .case-detail-page {
-  padding: 0;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  background: #fbf8ff;
+  color: #191b25;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   min-height: 100vh;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.detail-container {
-  max-width: 1200px;
+.container {
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 100px 20px 80px;
+  padding: 0 48px;
 }
 
-/* 面包屑导航 */
-.breadcrumb-wrapper {
-  margin-bottom: 40px;
+/* Section 1: Overview */
+.overview-section {
+  padding: 80px 0 48px;
 }
 
-.breadcrumb {
+.back-link {
+  margin-bottom: 24px;
+}
+
+.back-link a {
   display: inline-flex;
   align-items: center;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  padding: 14px 24px;
-  border-radius: 50px;
-  border: 1px solid rgba(59, 130, 246, 0.1);
-  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.1);
-  font-size: 0.95rem;
-  font-weight: 500;
-}
-
-/* 案例英雄区域 */
-.case-hero {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: center;
-  margin-bottom: 80px;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  border-radius: 32px;
-  padding: 60px;
-  box-shadow: 0 20px 80px rgba(59, 130, 246, 0.08);
-  border: 1px solid rgba(59, 130, 246, 0.1);
-}
-
-.case-title {
-  font-size: 3rem;
-  margin-bottom: 24px;
-  line-height: 1.1;
-  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
-.hero-banner {
-  border-radius: 24px;
-  overflow: hidden;
-  box-shadow: 0 20px 60px rgba(59, 130, 246, 0.15);
-  aspect-ratio: 16/10;
-}
-
-/* 主要内容区域 */
-.main-content {
-  display: flex;
-  flex-direction: column;
-  gap: 60px;
-  margin-bottom: 80px;
-}
-
-.content-section {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  border-radius: 24px;
-  box-shadow: 0 12px 48px rgba(59, 130, 246, 0.06);
-  border: 1px solid rgba(59, 130, 246, 0.08);
-}
-
-.section-title {
-  font-size: 2rem;
-  margin-bottom: 16px;
-  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  gap: 6px;
+  color: #003ec7;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
   font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
 }
 
-/* 结果展示区域 */
-.results-grid {
+.back-link a:hover {
+  text-decoration: underline;
+}
+
+.back-link i {
+  font-size: 14px;
+}
+
+.overview-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: 2fr 1fr;
   gap: 24px;
+  align-items: stretch;
 }
 
-.result-card {
-  display: flex;
-  gap: 20px;
-  padding: 32px;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 20px;
-  border: 1px solid rgba(59, 130, 246, 0.08);
-  min-height: 140px;
-  transition: all 0.4s ease;
-}
-
-.result-icon {
-  width: 64px;
-  height: 64px;
-  border-radius: 16px;
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.3);
-  flex-shrink: 0;
-}
-
-.breadcrumb {
-  display: flex;
-  align-items: center;
-  margin-bottom: 40px;
-  font-size: 0.95rem;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
-  padding: 12px 20px;
-  border-radius: 50px;
-  border: 1px solid rgba(59, 130, 246, 0.1);
-  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.1);
-  font-family: 'Inter', sans-serif;
-  width: fit-content;
-}
-
-.breadcrumb a {
-  color: #3b82f6;
-  font-weight: 500;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.breadcrumb a:hover {
-  color: #8b5cf6;
-  transform: translateY(-1px);
-}
-
-.separator {
-  margin: 0 10px;
-  color: #94a3b8;
-}
-
-.current {
-  color: #64748b;
-  max-width: 300px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.case-header {
-  margin-bottom: 50px;
-  text-align: center;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(20px);
-  border-radius: 24px;
-  padding: 50px;
-  box-shadow: 0 20px 60px rgba(59, 130, 246, 0.08);
-  border: 1px solid rgba(59, 130, 246, 0.1);
+.overview-media {
   position: relative;
+  border-radius: 8px;
   overflow: hidden;
-}
-
-.case-header::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
-  border-radius: 24px 24px 0 0;
-}
-
-.case-tag {
-  display: inline-block;
-  padding: 10px 24px;
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  color: white;
-  border-radius: 50px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  margin-bottom: 25px;
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
-  letter-spacing: 0.5px;
-  font-family: 'Inter', sans-serif;
-  position: relative;
-  overflow: hidden;
-}
-
-.case-tag::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s ease;
-}
-
-.case-tag:hover::before {
-  left: 100%;
-}
-
-.case-title {
-  font-size: 2.5rem;
-  margin-bottom: 25px;
-  line-height: 1.2;
-  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  font-family: 'Inter', sans-serif;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  position: relative;
-}
-
-.case-title::after {
-  content: '';
-  position: absolute;
-  bottom: -8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 3px;
-  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
-  border-radius: 2px;
-}
-
-.case-meta {
-  display: flex;
-  justify-content: center;
-  color: #64748b;
-  font-size: 0.9rem;
-}
-
-.meta-item {
-  display: flex;
-  align-items: center;
-  margin: 0 10px;
-}
-
-.meta-item i {
-  margin-right: 8px;
-  color: #3b82f6;
-  font-size: 0.9rem;
-}
-
-.case-banner {
-  width: 100%;
+  background: #ededfb;
   height: 500px;
-  border-radius: 24px;
-  overflow: hidden;
-  margin-bottom: 60px;
-  box-shadow: 0 25px 80px rgba(59, 130, 246, 0.15);
-  position: relative;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(195, 197, 217, 0.3);
 }
 
-.case-banner:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 35px 100px rgba(59, 130, 246, 0.2);
-}
-
-.case-banner::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, transparent 0%, rgba(59, 130, 246, 0.05) 100%);
-  pointer-events: none;
-}
-
-.case-banner img {
+.overview-media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.case-content-wrapper {
-  max-width: 900px;
-  margin: 0 auto;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(20px);
-  border-radius: 24px;
-  padding: 60px;
-  box-shadow: 0 20px 60px rgba(59, 130, 246, 0.08);
-  border: 1px solid rgba(59, 130, 246, 0.1);
-  position: relative;
-}
-
-.case-highlight {
-  position: relative;
-  padding: 40px 60px;
-  margin-bottom: 50px;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.03) 100%);
-  border-radius: 20px;
-  font-size: 1.3rem;
-  line-height: 1.7;
-  font-style: italic;
-  color: #1e293b;
-  border: 1px solid rgba(59, 130, 246, 0.1);
-  box-shadow: 0 10px 40px rgba(59, 130, 246, 0.05);
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-}
-
-.case-highlight i {
+.media-overlay {
   position: absolute;
-  color: #3b82f6;
-  opacity: 0.2;
+  inset: 0;
+  background: linear-gradient(to top, rgba(46, 48, 58, 0.75) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+.media-caption {
+  position: absolute;
+  left: 48px;
+  right: 48px;
+  bottom: 48px;
+  color: #ffffff;
+}
+
+.media-tag {
+  display: inline-block;
+  background: #003ec7;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 6px 12px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.media-title {
+  font-family: 'Manrope', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.meta-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #ffffff;
+  border: 1px solid #c3c5d9;
+  border-radius: 8px;
+  padding: 48px;
+  box-shadow: 0 4px 24px rgba(15, 23, 42, 0.08);
+}
+
+.meta-heading {
+  font-family: 'Manrope', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #191b25;
+  margin: 0 0 32px;
+}
+
+.meta-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.meta-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #434656;
+  margin: 0 0 6px;
+}
+
+.meta-label i {
+  font-size: 14px;
+  color: #003ec7;
+}
+
+.meta-value {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #191b25;
+  margin: 0;
+}
+
+.meta-results {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.meta-results li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  color: #191b25;
+  line-height: 1.5;
+}
+
+.meta-results .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #003ec7;
+  flex-shrink: 0;
+}
+
+.meta-divider {
+  padding-top: 24px;
+  border-top: 1px solid #c3c5d9;
+  margin-top: 48px;
+}
+
+/* Section 2: Insight + Metrics */
+.insight-section {
+  background: #f3f2ff;
+  border-top: 1px solid rgba(195, 197, 217, 0.5);
+  border-bottom: 1px solid rgba(195, 197, 217, 0.5);
+  padding: 80px 0;
+}
+
+.insight-grid {
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: 24px;
+}
+
+.insight-text {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.insight-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #191b25;
+  margin: 0 0 24px;
+}
+
+.insight-heading i {
+  color: #003ec7;
   font-size: 28px;
 }
 
-.case-highlight i.fa-quote-left {
-  top: 15px;
-  left: 15px;
-}
-
-.case-highlight i.fa-quote-right {
-  bottom: 15px;
-  right: 15px;
-}
-
-.case-results {
-  margin-bottom: 50px;
-}
-
-.case-results h3 {
-  font-size: 1.6rem;
-  margin-bottom: 30px;
-  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-align: center;
-  font-weight: 600;
+.insight-paragraph {
   font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+  color: #434656;
+  margin: 0;
+}
+
+.insight-card {
+  background: #ffffff;
+  border: 1px solid #c3c5d9;
+  border-radius: 8px;
+  padding: 48px;
+  box-shadow: 0 4px 24px rgba(15, 23, 42, 0.08);
+}
+
+.insight-card .insight-paragraph {
+  font-size: 16px;
+  margin: 0 0 24px;
+}
+
+.insight-quote {
   position: relative;
+  padding-left: 36px;
+  color: #191b25;
+  font-style: italic;
 }
 
-.case-results h3::after {
-  content: '';
+.insight-quote i {
   position: absolute;
-  bottom: -8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 2px;
-  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
-  border-radius: 2px;
+  left: 0;
+  top: 4px;
+  color: #003ec7;
+  opacity: 0.3;
+  font-size: 22px;
 }
 
-.results-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-}
-
-.result-item {
+.check-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 30px 20px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 10px 40px rgba(59, 130, 246, 0.1);
-  border: 1px solid rgba(59, 130, 246, 0.1);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  gap: 12px;
+}
+
+.check-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #191b25;
+}
+
+.check-list i {
+  color: #003ec7;
+  font-size: 20px;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+/* Metrics Bento */
+.metrics-bento {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  align-content: start;
+}
+
+.metric-card {
+  background: #ffffff;
+  border: 1px solid #c3c5d9;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 4px 24px rgba(15, 23, 42, 0.08);
   position: relative;
   overflow: hidden;
 }
 
-.result-item::before {
+.metric-card--wide {
+  grid-column: span 2;
+}
+
+.metric-card--wide::after {
   content: '';
   position: absolute;
   top: 0;
-  left: 0;
   right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
+  bottom: 0;
+  width: 50%;
+  background: linear-gradient(90deg, transparent, rgba(0, 62, 199, 0.08));
+  pointer-events: none;
 }
 
-.result-item:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 60px rgba(59, 130, 246, 0.2);
+.metric-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #434656;
+  margin: 0 0 8px;
+  position: relative;
+  z-index: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-.result-item:hover::before {
-  transform: scaleX(1);
+.metric-value {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  position: relative;
+  z-index: 1;
 }
 
-.result-icon {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+.metric-number {
+  font-family: 'Manrope', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #003ec7;
+}
+
+.metric-card:not(.metric-card--wide) .metric-number {
+  font-size: 36px;
+  color: #191b25;
+}
+
+.metric-unit {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  color: #434656;
+}
+
+.metric-hint {
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
-  transition: all 0.3s ease;
+  gap: 6px;
+  margin: 8px 0 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: #00677f;
+  position: relative;
+  z-index: 1;
 }
 
-.result-item:hover .result-icon {
-  transform: scale(1.1) rotate(5deg);
-  box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4);
+.metric-hint i {
+  font-size: 12px;
 }
 
-.result-icon i {
+/* Section 3: Details + Testimonial */
+.details-section {
+  padding: 80px 0;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+}
+
+.section-heading {
+  font-family: 'Manrope', sans-serif;
   font-size: 24px;
-  color: white;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #191b25;
+  margin: 0 0 32px;
 }
 
-.result-content {
-  flex: 1;
+.rich-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #434656;
+}
+
+.rich-text :deep(h2) {
+  font-family: 'Manrope', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #191b25;
+  margin: 32px 0 16px;
+  padding-left: 16px;
+  position: relative;
+}
+
+.rich-text :deep(h2::before) {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 3px;
+  background: #003ec7;
+  border-radius: 2px;
+}
+
+.rich-text :deep(p) {
+  margin: 0 0 16px;
+}
+
+.rich-text :deep(ul),
+.rich-text :deep(ol) {
+  margin: 0 0 20px;
+  padding-left: 24px;
+}
+
+.rich-text :deep(li) {
+  margin-bottom: 8px;
+  line-height: 1.7;
+}
+
+.rich-text :deep(strong) {
+  color: #191b25;
+  font-weight: 600;
+}
+
+.testimonial {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.result-text {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: #1e293b;
-  font-weight: 500;
-  margin: 0;
+.testimonial-icon {
+  font-size: 48px;
+  color: rgba(0, 62, 199, 0.2);
+  margin-bottom: 24px;
 }
 
-/* 详细内容区域 */
-.case-details {
-  line-height: 1.8;
-  color: #475569;
-  font-size: 1.1rem;
-  font-weight: 400;
-}
-
-.case-details h2 {
-  font-size: 1.8rem;
-  margin: 40px 0 24px;
-  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.testimonial-text {
+  font-family: 'Manrope', sans-serif;
+  font-size: 24px;
   font-weight: 600;
-  position: relative;
-  padding-left: 24px;
+  line-height: 1.4;
+  color: #191b25;
+  margin: 0 0 24px;
+  quotes: none;
 }
 
-.case-details h2::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 4px;
-  height: 28px;
-  background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
-  border-radius: 2px;
-}
-
-/* 案例亮点区域 */
-.case-highlight {
-  position: relative;
-  padding: 50px 60px;
-  text-align: center;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.03) 0%, rgba(139, 92, 246, 0.02) 100%);
-  border-radius: 20px;
-  border: 1px solid rgba(59, 130, 246, 0.08);
-}
-
-.quote-icon {
-  position: absolute;
-  top: 20px;
-  left: 30px;
-  color: #3b82f6;
-  opacity: 0.2;
-  font-size: 2.5rem;
-}
-
-.highlight-text {
-  font-size: 1.4rem;
-  line-height: 1.8;
-  color: #1e293b;
-  font-style: italic;
-  font-weight: 400;
-  margin: 0;
-}
-
-/* 节标题样式 */
-.section-header {
-  padding: 40px 40px 0;
-  text-align: center;
-}
-
-.section-line {
-  width: 80px;
-  height: 3px;
-  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
-  border-radius: 2px;
-  margin: 0 auto 32px;
-}
-
-.section-content {
-  padding: 0 40px 40px;
-}
-
-/* 操作区域 */
-.case-actions {
+.testimonial-author {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 32px 0;
-  border-top: 2px solid rgba(59, 130, 246, 0.08);
-  margin-top: 40px;
-}
-
-.back-btn {
-  display: inline-flex;
   align-items: center;
   gap: 12px;
-  padding: 16px 32px;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.08) 100%);
-  color: #3b82f6;
-  border-radius: 50px;
-  font-weight: 600;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(59, 130, 246, 0.2);
-  text-decoration: none;
 }
 
-.back-btn:hover {
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(59, 130, 246, 0.3);
-}
-
-.case-share {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.share-label {
-  color: #64748b;
-  font-weight: 500;
-}
-
-.share-icons {
-  display: flex;
-  gap: 8px;
-}
-
-.share-icon {
-  width: 44px;
-  height: 44px;
+.author-avatar {
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  background: rgba(59, 130, 246, 0.08);
+  background: #e1e1ef;
+  border: 1px solid #c3c5d9;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #3b82f6;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(59, 130, 246, 0.15);
-  text-decoration: none;
+  color: #434656;
+  font-size: 20px;
 }
 
-.share-icon:hover {
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  color: white;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
-}
-
-.case-details {
-  line-height: 1.8;
-  color: #475569;
+.author-name {
   font-family: 'Inter', sans-serif;
-  font-size: 1.05rem;
-}
-
-.case-details h2 {
-  font-size: 1.7rem;
-  margin: 40px 0 20px;
-  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-size: 16px;
   font-weight: 600;
-  position: relative;
+  color: #191b25;
+  margin: 0;
 }
 
-.case-details h2::before {
-  content: '';
-  position: absolute;
-  left: -20px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 4px;
-  height: 24px;
-  background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
-  border-radius: 2px;
+.author-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #434656;
+  margin: 2px 0 0;
 }
 
-.case-details p {
-  margin-bottom: 20px;
+/* Section 4: Related */
+.related-section {
+  background: #ededfb;
+  padding: 80px 0;
 }
 
-.case-details ul {
-  margin-bottom: 20px;
-  padding-left: 20px;
-}
-
-.case-details li {
-  margin-bottom: 10px;
-}
-
-.case-footer {
+.related-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-top: 50px;
-  padding-top: 30px;
-  border-top: 2px solid rgba(59, 130, 246, 0.1);
+  align-items: flex-end;
+  padding-bottom: 12px;
+  margin-bottom: 48px;
+  border-bottom: 1px solid rgba(195, 197, 217, 0.6);
 }
 
-.back-btn {
+.related-header .section-heading {
+  margin: 0;
+  font-size: 32px;
+  letter-spacing: -0.01em;
+}
+
+.view-all {
   display: inline-flex;
   align-items: center;
-  padding: 12px 24px;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
-  color: #3b82f6;
-  border-radius: 50px;
-  font-weight: 600;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 1px solid rgba(59, 130, 246, 0.2);
+  gap: 6px;
+  color: #003ec7;
   font-family: 'Inter', sans-serif;
-}
-
-.back-btn:hover {
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
-}
-
-.case-share {
-  display: flex;
-  align-items: center;
-}
-
-.case-share span {
-  margin-right: 10px;
-  color: #64748b;
-}
-
-.share-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: rgba(59, 130, 246, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 6px;
-  color: #3b82f6;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 1px solid rgba(59, 130, 246, 0.2);
-}
-
-.share-icon:hover {
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  color: white;
-  transform: translateY(-3px) scale(1.1);
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
-}
-
-.related-cases {
-  margin-top: 100px;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(20px);
-  border-radius: 24px;
-  padding: 60px;
-  box-shadow: 0 20px 60px rgba(59, 130, 246, 0.08);
-  border: 1px solid rgba(59, 130, 246, 0.1);
-}
-
-.related-cases h2 {
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 50px;
-  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-size: 12px;
   font-weight: 600;
-  font-family: 'Inter', sans-serif;
-  position: relative;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
 }
 
-.related-cases h2::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 3px;
-  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
-  border-radius: 2px;
+.view-all:hover {
+  text-decoration: underline;
+}
+
+.view-all i {
+  font-size: 14px;
 }
 
 .related-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
+  gap: 24px;
 }
 
-.related-case {
-  border-radius: 20px;
+.related-card {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border: 1px solid #c3c5d9;
+  border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 10px 40px rgba(59, 130, 246, 0.1);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(59, 130, 246, 0.1);
-  position: relative;
-  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
-.related-case::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
-  z-index: 2;
+.related-card:hover {
+  box-shadow: 0 8px 30px rgba(15, 23, 42, 0.12);
+  transform: translateY(-2px);
 }
 
-.related-case:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 25px 80px rgba(59, 130, 246, 0.2);
-}
-
-.related-case:hover::before {
-  transform: scaleX(1);
-}
-
-.related-img {
+.related-media {
   height: 200px;
   overflow: hidden;
-  position: relative;
+  background: #ededfb;
 }
 
-.related-img::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, transparent 0%, rgba(59, 130, 246, 0.05) 100%);
-  pointer-events: none;
-}
-
-.related-img img {
+.related-media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.5s ease;
 }
 
-.related-case:hover .related-img img {
+.related-card:hover .related-media img {
   transform: scale(1.05);
 }
 
-.related-case h3 {
-  padding: 20px;
-  font-size: 1.1rem;
-  line-height: 1.5;
-  color: #1e293b;
-  font-weight: 500;
-  font-family: 'Inter', sans-serif;
-  min-height: 80px;
+.related-body {
+  padding: 24px;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.loading-case {
-  min-height: 500px;
+.related-tag {
+  display: inline-block;
+  background: #e1e1ef;
+  color: #434656;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 4px;
+  align-self: flex-start;
+  margin-bottom: 4px;
+}
+
+.related-title {
+  font-family: 'Manrope', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #191b25;
+  margin: 0;
+  transition: color 0.2s ease;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.related-card:hover .related-title {
+  color: #003ec7;
+}
+
+.related-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #434656;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Not Found */
+.not-found-wrapper {
+  min-height: 60vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(20px);
-  border-radius: 24px;
-  margin: 40px 0;
-  box-shadow: 0 20px 60px rgba(59, 130, 246, 0.08);
-  border: 1px solid rgba(59, 130, 246, 0.1);
+  padding: 80px 24px;
 }
 
 .spinner {
-  width: 60px;
-  height: 60px;
-  border: 4px solid rgba(59, 130, 246, 0.1);
-  border-left-color: #3b82f6;
-  border-top-color: #8b5cf6;
+  width: 48px;
+  height: 48px;
+  border: 3px solid rgba(0, 62, 199, 0.15);
+  border-top-color: #003ec7;
   border-radius: 50%;
-  animation: spin 1s linear infinite;
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+  animation: spin 0.8s linear infinite;
 }
 
 @keyframes spin {
@@ -1016,134 +945,135 @@ const getResultIcon = (index) => {
 }
 
 .not-found {
-  max-width: 500px;
-  padding: 40px;
+  max-width: 480px;
+  text-align: center;
 }
 
 .not-found h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-family: 'Manrope', sans-serif;
+  font-size: 32px;
   font-weight: 600;
-  font-family: 'Inter', sans-serif;
+  color: #191b25;
+  margin: 0 0 16px;
 }
 
 .not-found p {
-  color: #64748b;
-  margin-bottom: 30px;
-  font-size: 1.1rem;
+  font-size: 16px;
+  color: #434656;
+  margin: 0 0 32px;
   line-height: 1.6;
-  font-family: 'Inter', sans-serif;
 }
 
-.not-found .btn {
+.not-found-btn {
   display: inline-flex;
   align-items: center;
-  padding: 14px 28px;
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  color: white;
-  border-radius: 50px;
-  font-weight: 600;
+  gap: 8px;
+  padding: 12px 24px;
+  background: #003ec7;
+  color: #ffffff;
+  border-radius: 6px;
   font-family: 'Inter', sans-serif;
-  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s ease;
 }
 
-.not-found .btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4);
+.not-found-btn:hover {
+  background: #0038b6;
 }
 
-/* 响应式调整 */
-@media (max-width: 768px) {
-  .case-detail-page {
-    padding-top: 80px;
-    padding-bottom: 60px;
+/* Responsive */
+@media (max-width: 1024px) {
+  .overview-grid,
+  .insight-grid,
+  .details-grid {
+    grid-template-columns: 1fr;
   }
-  
-  .case-header {
-    padding: 40px 30px;
-    margin-bottom: 40px;
+
+  .overview-media {
+    height: 400px;
   }
-  
-  .case-title {
-    font-size: 2rem;
+
+  .media-title {
+    font-size: 36px;
   }
-  
-  .case-banner {
-    height: 350px;
-    margin-bottom: 50px;
+
+  .details-grid {
+    gap: 48px;
   }
-  
-  .case-content-wrapper {
-    padding: 40px 30px;
-  }
-  
-  .case-highlight {
-    padding: 30px 40px;
-    font-size: 1.2rem;
-  }
-  
+
   .related-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
-  
-  .related-cases {
-    padding: 40px 30px;
-  }
-  
-  .breadcrumb {
-    margin-bottom: 30px;
   }
 }
 
-@media (max-width: 576px) {
-  .case-header {
-    padding: 30px 20px;
-    margin-bottom: 30px;
+@media (max-width: 768px) {
+  .container {
+    padding: 0 24px;
   }
-  
-  .case-title {
-    font-size: 1.7rem;
+
+  .overview-section,
+  .insight-section,
+  .details-section,
+  .related-section {
+    padding-top: 48px;
+    padding-bottom: 48px;
   }
-  
-  .case-banner {
-    height: 250px;
-    margin-bottom: 40px;
+
+  .overview-media {
+    height: 300px;
   }
-  
-  .case-content-wrapper {
-    padding: 30px 20px;
+
+  .media-caption {
+    left: 24px;
+    right: 24px;
+    bottom: 24px;
   }
-  
-  .results-grid {
-    grid-template-columns: 1fr;
-    gap: 15px;
+
+  .media-title {
+    font-size: 28px;
   }
-  
-  .case-footer {
-    flex-direction: column;
-    gap: 25px;
+
+  .meta-card,
+  .insight-card {
+    padding: 32px 24px;
   }
-  
+
+  .insight-heading {
+    font-size: 24px;
+  }
+
+  .metric-card--wide .metric-number {
+    font-size: 36px;
+  }
+
+  .testimonial-text {
+    font-size: 20px;
+  }
+
   .related-grid {
     grid-template-columns: 1fr;
   }
-  
-  .case-highlight {
-    padding: 25px 30px;
-    font-size: 1.1rem;
+
+  .related-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
   }
-  
-  .related-cases {
-    padding: 30px 20px;
-  }
-  
-  .case-share {
-    justify-content: center;
+
+  .related-header .section-heading {
+    font-size: 24px;
   }
 }
-</style> 
+
+@media (max-width: 480px) {
+  .metrics-bento {
+    grid-template-columns: 1fr;
+  }
+
+  .metric-card--wide {
+    grid-column: span 1;
+  }
+}
+</style>

@@ -130,28 +130,28 @@
         <div class="features-grid">
           <div class="feature-card">
             <div class="feature-icon">
-              <CustomIcons name="smart-spraying" :size="32" />
+              <i class="fas fa-mobile-screen-button"></i>
             </div>
             <h3>全自主作业</h3>
             <p>免遥控器,手机即可实现路径规划、一键作业、断点续喷:自动返航等操作。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
-              <CustomIcons name="easy-operation" :size="32" />
+              <i class="fas fa-graduation-cap"></i>
             </div>
             <h3>简单易学</h3>
             <p>2小时学习即可快速上手,3天即可独立作业。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
-              <CustomIcons name="multi-terrain" :size="32" />
+              <i class="fas fa-mountain-sun"></i>
             </div>
             <h3>多场景作业</h3>
             <p>配有雷达仿地系统,可适应多种地形,对不同作物进行精准喷洒。</p>
           </div>
          <div class="feature-card">
             <div class="feature-icon">
-              <CustomIcons name="portable-transport" :size="32" />
+              <i class="fas fa-truck-fast"></i>
             </div>
             <h3>易转运</h3>
             <p>尾梁采用快速折叠结构,折叠后整机长度缩小30%,运输、携带便捷;飞机自带机轮,方便田间转场。</p>
@@ -164,30 +164,21 @@
         <h2 class="section-title">应用场景</h2>
         <div class="applications-grid">
           <div class="application-item">
-            <CustomIcons name="field-crops" :size="40" />
+            <i class="fas fa-wheat-awn"></i>
             <span>大田作物</span>
           </div>
           <div class="application-item">
-            <CustomIcons name="orchard-management" :size="40" />
+            <i class="fas fa-apple-whole"></i>
             <span>果园管理</span>
           </div>
           <div class="application-item">
-            <CustomIcons name="vegetable-planting" :size="40" />
+            <i class="fas fa-carrot"></i>
             <span>蔬菜种植</span>
           </div>
           <div class="application-item">
-            <CustomIcons name="economic-crops" :size="40" />
+            <i class="fas fa-seedling"></i>
             <span>经济作物</span>
           </div>
-        </div>
-      </div>
-      
-      <!-- 联系咨询 -->
-      <div class="product-contact">
-        <div class="contact-content">
-          <h2>需要了解更多？</h2>
-          <p>我们的专业团队随时为您提供技术支持和解决方案</p>
-          <RouterLink to="/contact" class="btn btn-primary">联系我们</RouterLink>
         </div>
       </div>
     </div>

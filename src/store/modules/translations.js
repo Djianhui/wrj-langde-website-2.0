@@ -40,9 +40,7 @@ export const useTranslationsStore = defineStore('translations', () => {
         ]
       },
       { text: '应用案例', link: '/cases', id: 'cases' },
-      { text: '新闻中心', link: '/news', id: 'news' },
-      { text: '关于我们', link: '/about', id: 'about' },
-      { text: '招聘信息', link: '/join', id: 'join' }
+      { text: '关于我们', link: '/about', id: 'about' }
     ],
     en: [
       { text: 'Home', link: '/', id: 'home' },
@@ -80,9 +78,7 @@ export const useTranslationsStore = defineStore('translations', () => {
         ]
       },
       { text: 'Case Studies', link: '/cases', id: 'cases' },
-      { text: 'News', link: '/news', id: 'news' },
-      { text: 'About Us', link: '/about', id: 'about' },
-      { text: 'Careers', link: '/join', id: 'join' }
+      { text: 'About Us', link: '/about', id: 'about' }
     ]
   })
   
@@ -93,7 +89,7 @@ export const useTranslationsStore = defineStore('translations', () => {
       slogan: '智能全域电磁安防一体化平台',
       description: '领先的反无人机系统及反无人机解决方案提供商',
       contactInfo: {
-        address: '浙江省杭州市滨江区科技园区创新大厦A座15楼',
+        address: '浙江省杭州市上城区明石路515号明石商业大厦9楼9173室',
         phone: '0571-8888 9999',
         email: 'info@landedrone.com'
       }
@@ -366,11 +362,11 @@ export const useTranslationsStore = defineStore('translations', () => {
       title: '杭州朗德智能科技有限公司',
       paragraphs: [
         '杭州朗德智能科技有限公司成立于2025年4月14日，企业注册地址位于浙江省杭州市上城区环站东路768号东站花园商务中心1幢12楼1208室，经营范围包含：智能无人飞行器制造；智能无人飞行器销售；人工智能应用软件开发；人工智能硬件销售；智能机器人的研发等。',
-        '朗德智能秉持"科技护航，安全至上"的企业理念，以技术创新为驱动，以客户需求为导向，打造了一系列具有自主知识产权的无人机产品和反无人机系统。目前，公司产品已在国防安全、电力巡检、边境监控、机场防护等多个领域得到广泛应用。'
+        '朗德智能秉持"科技护航，安全至上"的企业理念，以技术创新为驱动，以客户需求为导向，打造了一系列具有自主知识产权的无人机产品和反无人机系统。'
       ],
       stats: [
         { value: '2025', description: '成立于浙江杭州' },
-        { value: '50+', description: '核心专利技术' },
+        { value: '3+', description: '核心专利技术' },
         { value: '100+', description: '成功项目案例' }
       ],
       culture: {

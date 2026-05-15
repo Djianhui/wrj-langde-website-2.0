@@ -95,28 +95,28 @@
         <div class="features-grid">
           <div class="feature-card">
             <div class="feature-icon">
-              <CustomIcons name="advanced-technology" :size="32" />
+              <i class="fas fa-microchip"></i>
             </div>
             <h3>采用先进的DBF技术</h3>
             <p>可发射多波束技术可以提高抗干扰能力，雷达视频融合无盲区主动立体防御。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
-              <CustomIcons name="multi-band-selection" :size="32" />
+              <i class="fas fa-wave-square"></i>
             </div>
             <h3>可选C、X、S波段</h3>
             <p>根据不同场景可选择C波段、X波段、S波段等配置，来满足使用需求。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
-              <CustomIcons name="multi-target-detection" :size="32" />
+              <i class="fas fa-crosshairs"></i>
             </div>
             <h3>多目标检测</h3>
             <p>同时监测多达上百批目标，架设方便，灵活性高。</p>
           </div>
            <div class="feature-card">
             <div class="feature-icon">
-              <CustomIcons name="long-distance-monitoring" :size="32" />
+              <i class="fas fa-binoculars"></i>
             </div>
             <h3>监测距离远</h3>
             <p>对于无人机有效探测距离可达100m~2.0km，距离远，是一种原理先进的传感器，在陆海空领域都有非常广泛的应用</p>
@@ -144,15 +144,6 @@
             <CustomIcons name="real-time-monitoring" :size="40" />
             <span>实时监控</span>
           </div>
-        </div>
-      </div>
-      
-      <!-- 联系咨询 -->
-      <div class="product-contact">
-        <div class="contact-content">
-          <h2>需要了解更多？</h2>
-          <p>我们的专业团队随时为您提供技术支持和解决方案</p>
-          <RouterLink to="/contact" class="btn btn-primary">联系我们</RouterLink>
         </div>
       </div>
     </div>

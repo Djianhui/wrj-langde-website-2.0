@@ -1,3319 +1,1112 @@
 <template>
   <div class="home-view">
-    <!-- 在页面头部添加字体引用 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <div class="home-loading" v-if="isPageLoading">
-      <div class="loading-spinner-container">
-        <div class="loading-spinner"></div>
-        <span>{{ isZh ? '页面加载中...' : 'Loading...' }}</span>
-      </div>
-    </div>
-    <div v-else-if="loadError" class="error-container">
-      <div class="error-message">
-        <i class="fas fa-exclamation-circle"></i>
-        <p>{{ isZh ? '加载失败，请刷新页面重试' : 'Loading failed, please refresh and try again' }}</p>
-        <button class="btn btn-primary" @click="initPageData">
-          {{ isZh ? '重试' : 'Retry' }}
-        </button>
-      </div>
-    </div>
-    <template v-else>
-      <DroneDefenseScene />
-      <main>
-      <!-- 主横幅 - 优化版本，动画展现 -->
-      <section class="hero defense-hero">
-        <!-- 动画背景元素 -->
-        <div class="hero-animation-bg">
-          <div class="electromagnetic-waves">
-            <div class="wave wave-1"></div>
-            <div class="wave wave-2"></div>
-            <div class="wave wave-3"></div>
-          </div>
-          <div class="floating-particles">
-            <div class="particle" v-for="n in 15" :key="n" :style="{animationDelay: (n * 0.3) + 's'}"></div>
-          </div>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <main>
+      <!-- ===== HERO ===== -->
+      <section class="hero-section">
+        <div class="hero-bg-layer">
+          <div class="hero-gradient-overlay"></div>
+          <div class="hero-bg-img" :style="{backgroundImage: `url('/images/cases/index_01.png')`}"></div>
         </div>
-        
-        <!-- 品牌标识置于右上角 -->
-        <div class="brand-corner">
-          <img src="/images/about/logo.png" alt="LANDER" class="corner-logo" @error="handleImageError">
-        </div>
-        
-        <svg width="0" height="0">
-          <defs>
-            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#4facfe" />
-              <stop offset="100%" stop-color="#00f2fe" />
-            </linearGradient>
-          </defs>
-        </svg>
-        
-        <div class="hero-content-wrapper">
-          <div class="container">
-            <div class="hero-content">
-              <!-- 主标题 -->
-              <h1 class="main-headline">
-                {{ isZh ? '全域电磁空间，尽在掌握' : 'Complete Electromagnetic Domain Control' }}
-              </h1>
-              
-              <!-- 副标题 -->
-              <p class="sub-headline">
-                {{ isZh ? '构建"感、探、防、控"一体化的电磁安防新体系' : 'Building an integrated electromagnetic security system for sensing, detection, protection, and control' }}
-              </p>
-              
-              <!-- 行动号召按钮 -->
-              <div class="hero-actions">
-                <RouterLink to="/technology" class="btn btn-primary btn-hero">
-                  <span>{{ isZh ? '了解产品详情' : 'Explore Products' }}</span>
-                  <svg class="btn-icon" viewBox="0 0 24 24" fill="none">
-                    <path d="M13 7L18 12L13 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M6 12H18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </RouterLink>
+        <div class="hero-container">
+          <div class="hero-content">
+            <!-- 徽章 -->
+            <div class="hero-badge">
+              <svg viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;flex-shrink:0">
+                <path d="M12 1L3 5v6c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V5l-9-4z"/>
+              </svg>
+              <span>{{ isZh ? '自主知识产权 · 低空安全领航者' : 'Independent IP · Low-Altitude Safety Leader' }}</span>
+            </div>
+
+            <!-- 标题 -->
+            <h1 class="hero-title">
+              {{ isZh ? '科技护航，' : 'Technology Protects,' }}<br/>
+              <span class="hero-title-accent">{{ isZh ? '安全至上' : 'Safety First' }}</span>
+            </h1>
+
+            <!-- 副标题 -->
+            <p class="hero-desc">
+              {{ isZh
+                ? '杭州朗德智能科技致力于打造具有自主知识产权的无人机产品和反无人机系统，为全球低空安全保驾护航。'
+                : 'Hangzhou Lande Intelligent Technology is dedicated to creating drone products and anti-drone systems with independent IP, safeguarding global low-altitude safety.' }}
+            </p>
+
+            <!-- CTA 按钮 -->
+            <div class="hero-btns">
+              <RouterLink to="/technology" class="btn-primary-solid">
+                {{ isZh ? '了解防控方案' : 'Explore Solutions' }}
+                <svg viewBox="0 0 24 24" fill="none" style="width:20px;height:20px">
+                  <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </RouterLink>
+              <RouterLink to="/technology" class="btn-surface">
+                {{ isZh ? '查看产品目录' : 'View Product Catalog' }}
+              </RouterLink>
+            </div>
+
+            <!-- 统计数据 -->
+            <div class="hero-stats">
+              <div class="stat-item">
+                <p class="stat-num">2025</p>
+                <p class="stat-label">{{ isZh ? '公司创立于杭州' : 'Founded in Hangzhou' }}</p>
+              </div>
+              <div class="stat-item">
+                <p class="stat-num">100%</p>
+                <p class="stat-label">{{ isZh ? '自主研发产权' : 'Self-developed IP' }}</p>
+              </div>
+              <div class="stat-item">
+                <p class="stat-num">24/7</p>
+                <p class="stat-label">{{ isZh ? '全方位安全防御' : 'Comprehensive Defense' }}</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- 安全防御特性展示 - 新增板块 -->
-      <section id="features" class="defense-features section">
-        <div class="tech-particles"></div>
-        <div class="container">
-          <div class="section-header">
-            <h2 class="section-title">{{ isZh ? '核心优势' : 'Core Advantages' }}</h2>
-            <p class="section-desc">{{ isZh ? '专业的反无人机系统，提供全方位的安全防护能力' : 'Professional anti-drone system providing comprehensive security protection' }}</p>
+      <!-- ===== 核心技术领域 ===== -->
+      <section class="products-section">
+        <div class="lander-container">
+          <!-- 标题行 -->
+          <div class="products-header">
+            <div>
+              <h2 class="sec-title">{{ isZh ? '核心技术领域' : 'Core Technology Domains' }}</h2>
+              <p class="sec-desc">{{ isZh
+                ? '针对低空领域的复杂挑战，我们提供从全时域侦测到全手段反制的闭环解决方案，深度赋能低空经济。'
+                : 'For complex challenges in the low-altitude domain, we provide closed-loop solutions from full-time detection to full-means countermeasures.' }}</p>
+            </div>
+            <!-- <div class="nav-arrows">
+              <button class="arrow-btn">
+                <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
+                  <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <button class="arrow-btn">
+                <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
+                  <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div> -->
           </div>
-          <div class="features-grid">
-            <div class="feature-card modern-card">
-              <div class="feature-header">
-                <div class="feature-icon-wrapper">
-                  <div class="feature-icon modern-icon">
-                    <svg viewBox="0 0 24 24" fill="none" class="icon-svg">
-                      <path d="M12 2L2 7v6c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1"/>
-                      <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                  </div>
-                  <div class="feature-badge">{{ isZh ? '防护' : 'SHIELD' }}</div>
-                </div>
-                <h3>{{ isZh ? '全方位防护' : 'Comprehensive Protection' }}</h3>
-              </div>
-              <p>{{ isZh ? '多传感器融合探测系统，实现360°无死角覆盖，有效防御各类无人机威胁' : 'Multi-sensor fusion detection system, achieving 360° coverage with no blind spots, effectively defending against various drone threats' }}</p>
-              <div class="feature-metrics">
-                <div class="metric-item">
-                  <div class="metric-icon">
-                    <svg viewBox="0 0 16 16" fill="currentColor">
-                      <circle cx="8" cy="8" r="3" fill="currentColor"/>
-                    </svg>
-                  </div>
-                  <span>{{ isZh ? '雷达 + 光电 + 频谱' : 'Radar + Optics + Spectrum' }}</span>
-                </div>
-                <div class="metric-item">
-                  <div class="metric-icon">
-                    <svg viewBox="0 0 16 16" fill="currentColor">
-                      <circle cx="8" cy="8" r="3" fill="currentColor"/>
-                    </svg>
-                  </div>
-                  <span>{{ isZh ? '三维立体探测系统' : '3D Detection System' }}</span>
-                </div>
-              </div>
-              <div class="feature-chart">
-                <div class="chart-progress">
-                  <div class="progress-bar" data-progress="95" style="--progress: 95%"></div>
-                  <span class="progress-label">{{ isZh ? '覆盖率 95%' : 'Coverage 95%' }}</span>
-                </div>
-              </div>
+
+          <!-- 无人机防控类 -->
+          <div class="cat-block">
+            <div class="cat-row">
+              <div class="cat-line"></div>
+              <h3 class="cat-name primary-cat">{{ isZh ? '无人机防控类' : 'Anti-Drone Defense' }}</h3>
+              <div class="cat-line"></div>
             </div>
-            
-            <div class="feature-card modern-card">
-              <div class="feature-header">
-                <div class="feature-icon-wrapper">
-                  <div class="feature-icon modern-icon">
-                    <svg viewBox="0 0 24 24" fill="none" class="icon-svg">
-                      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1"/>
-                    </svg>
-                  </div>
-                  <div class="feature-badge">{{ isZh ? '响应' : 'SPEED' }}</div>
+            <div class="p-cards-grid">
+              <div class="p-card glass-card" v-for="(card, i) in preventionCards" :key="i">
+                <div class="p-card-img">
+                  <img :src="card.image" :alt="isZh ? card.titleZh : card.titleEn" @error="onImgError">
+                  <span class="p-card-tag">{{ isZh ? card.tagZh : card.tagEn }}</span>
                 </div>
-                <h3>{{ isZh ? '快速响应' : 'Rapid Response' }}</h3>
-              </div>
-              <p>{{ isZh ? '自动识别威胁等级，毫秒级决策，秒级拦截，确保关键区域安全' : 'Automatic threat level identification, millisecond-level decision making, second-level interception, ensuring key area security' }}</p>
-              <div class="feature-metrics">
-                <div class="metric-item">
-                  <div class="metric-icon">
-                    <svg viewBox="0 0 16 16" fill="currentColor">
-                      <circle cx="8" cy="8" r="3" fill="currentColor"/>
-                    </svg>
-                  </div>
-                  <span>{{ isZh ? '360°无盲区覆盖' : '360° Coverage' }}</span>
-                </div>
-                <div class="metric-item">
-                  <div class="metric-icon">
-                    <svg viewBox="0 0 16 16" fill="currentColor">
-                      <circle cx="8" cy="8" r="3" fill="currentColor"/>
-                    </svg>
-                  </div>
-                  <span>{{ isZh ? '立体化分层防御' : 'Layered Defense' }}</span>
-                </div>
-              </div>
-              <div class="feature-chart">
-                <div class="response-time-chart">
-                  <div class="time-indicator">
-                    <span class="time-value">< 100ms</span>
-                    <span class="time-label">{{ isZh ? '响应时间' : 'Response Time' }}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="feature-card modern-card">
-              <div class="feature-header">
-                <div class="feature-icon-wrapper">
-                  <div class="feature-icon modern-icon">
-                    <svg viewBox="0 0 24 24" fill="none" class="icon-svg">
-                      <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1"/>
-                    </svg>
-                  </div>
-                  <div class="feature-badge">{{ isZh ? '智能' : 'AI' }}</div>
-                </div>
-                <h3>{{ isZh ? '智能分析' : 'Intelligent Analysis' }}</h3>
-              </div>
-              <p>{{ isZh ? 'AI深度学习算法，准确识别无人机型号与意图，误报率低于0.1%' : 'AI deep learning algorithms, accurately identifying drone models and intentions, with a false alarm rate below 0.1%' }}</p>
-              <div class="feature-metrics">
-                <div class="metric-item">
-                  <div class="metric-icon">
-                    <svg viewBox="0 0 16 16" fill="currentColor">
-                      <circle cx="8" cy="8" r="3" fill="currentColor"/>
-                    </svg>
-                  </div>
-                  <span>{{ isZh ? '识别2000+型号' : 'Identify 2000+ Models' }}</span>
-                </div>
-                <div class="metric-item">
-                  <div class="metric-icon">
-                    <svg viewBox="0 0 16 16" fill="currentColor">
-                      <circle cx="8" cy="8" r="3" fill="currentColor"/>
-                    </svg>
-                  </div>
-                  <span>{{ isZh ? '行为意图分析' : 'Intent Analysis' }}</span>
-                </div>
-              </div>
-              <div class="feature-chart">
-                <div class="accuracy-chart">
-                  <div class="accuracy-circle">
-                    <svg viewBox="0 0 42 42" class="donut">
-                      <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="#e2e8f0" stroke-width="3"></circle>
-                      <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="url(#accuracyGradient)" stroke-width="3" stroke-dasharray="98 2" stroke-dashoffset="0" class="accuracy-progress"></circle>
-                    </svg>
-                    <div class="accuracy-text">
-                      <span class="accuracy-value">99.9%</span>
-                      <span class="accuracy-label">{{ isZh ? '准确率' : 'Accuracy' }}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="feature-card modern-card">
-              <div class="feature-header">
-                <div class="feature-icon-wrapper">
-                  <div class="feature-icon modern-icon">
-                    <svg viewBox="0 0 24 24" fill="none" class="icon-svg">
-                      <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1"/>
-                    </svg>
-                  </div>
-                  <div class="feature-badge">{{ isZh ? '集成' : 'SYSTEM' }}</div>
-                </div>
-                <h3>{{ isZh ? '系统集成' : 'System Integration' }}</h3>
-              </div>
-              <p>{{ isZh ? '模块化设计，可灵活适配各类场景需求，与现有安防系统无缝对接' : 'Modular design, flexibly adapting to various scenario requirements, seamlessly connecting with existing security systems' }}</p>
-              <div class="feature-metrics">
-                <div class="metric-item">
-                  <div class="metric-icon">
-                    <svg viewBox="0 0 16 16" fill="currentColor">
-                      <circle cx="8" cy="8" r="3" fill="currentColor"/>
-                    </svg>
-                  </div>
-                  <span>{{ isZh ? '多协议接口支持' : 'Multi-protocol Support' }}</span>
-                </div>
-                <div class="metric-item">
-                  <div class="metric-icon">
-                    <svg viewBox="0 0 16 16" fill="currentColor">
-                      <circle cx="8" cy="8" r="3" fill="currentColor"/>
-                    </svg>
-                  </div>
-                  <span>{{ isZh ? '定制化方案开发' : 'Custom Development' }}</span>
-                </div>
-              </div>
-              <div class="feature-chart">
-                <div class="integration-chart">
-                  <div class="integration-nodes">
-                    <div class="node active"></div>
-                    <div class="node active"></div>
-                    <div class="node active"></div>
-                    <div class="connection-line"></div>
-                  </div>
-                  <span class="integration-label">{{ isZh ? '无缝集成' : 'Seamless Integration' }}</span>
+                <div class="p-card-body">
+                  <h4>{{ isZh ? card.titleZh : card.titleEn }}</h4>
+                  <ul>
+                    <li v-for="(f, fi) in (isZh ? card.featZh : card.featEn)" :key="fi">
+                      <span class="dot-primary"></span>{{ f }}
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
           </div>
-          
-          <!-- 添加SVG渐变定义 -->
-          <svg width="0" height="0" style="position: absolute;">
-            <defs>
-              <linearGradient id="accuracyGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#3b82f6" />
-                <stop offset="100%" stop-color="#8b5cf6" />
-              </linearGradient>
-            </defs>
-          </svg>
-        </div>
-      </section>
-      
-      <!-- 关于我们 -->
-      <section id="about" class="about section">
-        <div class="about-shape"></div>
-        <div class="container">
-          <div class="section-header">
-            <h2 class="section-title">{{ isZh ? '关于我们' : 'About Us' }}</h2>
-            <p class="section-desc">{{ isZh ? '朗德智能专注于无人机技术研发与反无人机系统集成' : 'Lande Intelligent focuses on drone technology R&D and anti-drone system integration' }}</p>
-          </div>
-          <div class="about-content">
-            <div class="about-text">
-              <div class="about-badge">{{ isZh ? '专业 · 创新 · 可靠' : 'Professional · Innovative · Reliable' }}</div>
-              <h3>{{ displayedAboutData.title }}</h3>
-              <p v-for="(paragraph, index) in displayedAboutData.paragraphs" :key="index">{{ paragraph }}</p>
-              <div class="about-stats">
-                <div class="stat-item" v-for="(stat, index) in displayedAboutData.stats" :key="index">
-                  <div class="stat-bg"></div>
-                  <span class="stat-num" v-html="stat.value"></span>
-                  <span class="stat-desc">{{ stat.description }}</span>
-                </div>
-              </div>
-              <div class="about-actions">
-                <!-- <RouterLink to="/about" class="btn btn-primary">{{ isZh ? '了解更多' : 'Learn More' }}</RouterLink>
-                <RouterLink to="/join" class="btn btn-outline">{{ isZh ? '加入我们' : 'Join Us' }}</RouterLink> -->
-              </div>
+
+          <!-- 低空经济类 -->
+          <div class="cat-block">
+            <div class="cat-row">
+              <div class="cat-line"></div>
+              <h3 class="cat-name secondary-cat">{{ isZh ? '低空经济类' : 'Low-Altitude Economy' }}</h3>
+              <div class="cat-line"></div>
             </div>
-            <div class="about-img">
-              <div class="img-frame">
-                <img :src="displayedAboutData.image" alt="朗德智能公司环境" @error="handleImageError">
-                <div class="img-badge">
-                  <span>{{ isZh ? '专业 · 创新 · 可靠' : 'Founded in 2025' }}</span>
-                  <span class="img-badge-sep"></span>
+            <div class="bento-grid">
+              <!-- 大卡 -->
+              <div class="bento-main glass-card">
+                <div class="bento-main-inner">
+                  <div class="bento-main-text">
+                    <span class="bento-label">{{ isZh ? '专业植保' : 'Agricultural' }}</span>
+                    <h4>{{ isZh ? '农业植保无人机' : 'Agricultural Drone' }}</h4>
+                    <p>{{ isZh
+                      ? '采用先进的载重系统与喷洒技术，支持全自主航线规划，极大提升农作业效率，引领智慧农业转型。'
+                      : 'Advanced payload and spraying tech with autonomous route planning, greatly improving agricultural efficiency.' }}</p>
+                    <RouterLink to="/technology" class="bento-link">
+                      {{ isZh ? '查看详情' : 'View Details' }}
+                      <svg viewBox="0 0 24 24" fill="none" width="18" height="18">
+                        <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </RouterLink>
+                  </div>
+                  <div class="bento-main-img">
+                    <img src="/images/tech/detection.jpg" alt="农业植保" @error="onImgError">
+                  </div>
                 </div>
+              </div>
+              <!-- 小卡 -->
+              <div class="bento-side glass-card">
+                <div class="bento-side-img">
+                  <img src="/images/tech/index_06.jpg" alt="FPV" @error="onImgError">
+                </div>
+                <h4>{{ isZh ? 'FPV/巡查无人机' : 'FPV / Patrol Drone' }}</h4>
+                <p>{{ isZh ? '针对电力、安防等领域设计的高性能飞行平台。' : 'High-performance platform for power inspection and security.' }}</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- 联系我们 - 现代化重新设计 -->
-      <section id="contact" class="contact section modern-contact">
-        <div class="contact-bg-pattern"></div>
-        <div class="container">
-          <div class="section-header">
-            <h2 class="section-title">{{ isZh ? '联系我们' : 'Contact Us' }}</h2>
-            <p class="section-desc">{{ isZh ? '随时随地与我们的专业团队取得联系，解答您的问题与需求' : 'Get in touch with our professional team anytime, anywhere to answer your questions and needs' }}</p>
+      <!-- ===== 全场景应用覆盖 ===== -->
+      <section class="scenes-section">
+        <div class="lander-container">
+          <div class="text-center-block">
+            <h2 class="sec-title">{{ isZh ? '全场景应用覆盖' : 'Full-Scenario Coverage' }}</h2>
+            <p class="sec-desc">{{ isZh
+              ? '朗德智能科技的产品已成功部署于多个关键领域，在复杂环境下展现卓越的可靠性与有效性。'
+              : 'Lande Intelligent products have been deployed in multiple critical sectors, demonstrating outstanding reliability.' }}</p>
           </div>
-          <div class="contact-content">
-            <div class="contact-info">
-              <!-- 公司地址卡片 -->
-              <div class="info-card modern-info-card featured-card">
-                <div class="info-header">
-                  <div class="info-icon-wrapper">
-                    <div class="info-icon modern-info-icon">
-                      <svg viewBox="0 0 24 24" fill="none" class="contact-icon-svg">
-                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1"/>
-                        <circle cx="12" cy="9" r="2.5" stroke="currentColor" stroke-width="2" fill="none"/>
-                      </svg>
-                    </div>
-                    <div class="info-badge">{{ isZh ? '地址' : 'LOCATION' }}</div>
-                  </div>
-                  <h3>{{ isZh ? '公司地址' : 'Company Address' }}</h3>
-                </div>
-                <div v-for="(address, index) in currentSiteInfo.contactInfo.addresses" :key="index" class="address-item">
-                  <div class="address-label">
-                    <span class="location-badge" :class="index === 0 ? 'headquarters' : 'branch'">
-                      <i class="fas fa-building"></i>
-                      {{ index === 0 ? (isZh ? '公司总部' : 'Headquarters') : (isZh ? '分公司' : 'Branch Office') }}
-                    </span>
-                  </div>
-                  <p>{{ address }}</p>
-                  <div class="address-image">
-                    <img :src="index === 0 ? '/images/company/company-location.jpg.svg' : '/images/company/csdz.png'" alt="公司地址" @error="handleAddressImageError">
-                    <div class="address-overlay">
-                      <div class="address-marker">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>{{ isZh ? '朗德智能' : 'Lande' }}</span>
-                      </div>
-                    </div>
-                  </div>
-                  <a :href="`https://ditu.amap.com/search?query=${encodeURIComponent(address)}`" target="_blank" class="info-link">
-                    {{ isZh ? '获取导航' : 'Get Directions' }}
-                    <i class="fas fa-arrow-right"></i>
-                  </a>
-                </div>
-              </div>
-              
-              <!-- 联系电话卡片 -->
-              <div class="info-card modern-info-card">
-                <div class="info-header">
-                  <div class="info-icon-wrapper">
-                    <div class="info-icon modern-info-icon">
-                      <svg viewBox="0 0 24 24" fill="none" class="contact-icon-svg">
-                        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.76 19.76 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.76 19.76 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1"/>
-                      </svg>
-                    </div>
-                    <div class="info-badge">{{ isZh ? '热线' : 'PHONE' }}</div>
-                  </div>
-                  <h3>{{ isZh ? '联系电话' : 'Phone' }}</h3>
-                </div>
-                <div class="info-content">
-                  <p class="contact-value">{{ currentSiteInfo.contactInfo.phone }}</p>
-                  <div class="contact-actions">
-                    <a :href="`tel:${currentSiteInfo.contactInfo.phone}`" class="contact-link primary-link">
-                      <svg viewBox="0 0 16 16" fill="currentColor" class="link-icon">
-                        <path d="M15.854.146a.5.5 0 0 1 0 .708L11.707 5l1.147 1.146a.5.5 0 0 1-.708.708L11 5.707 6.854 9.854a.5.5 0 0 1-.708-.708L10.293 5 9.146 3.854a.5.5 0 0 1 .708-.708L11 4.293 15.146.146a.5.5 0 0 1 .708 0z"/>
-                        <path d="M3.5 0a.5.5 0 0 1 .5.5v1.293l4.146-4.147a.5.5 0 0 1 .708.708L4.707 2.5H6a.5.5 0 0 1 0 1H3.5a.5.5 0 0 1-.5-.5v-3a.5.5 0 0 1 .5-.5z"/>
-                      </svg>
-                      {{ isZh ? '拨打电话' : 'Call Us' }}
-                      <svg viewBox="0 0 16 16" fill="currentColor" class="arrow-icon">
-                        <path d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              
-              <!-- 电子邮箱卡片 -->
-              <div class="info-card modern-info-card">
-                <div class="info-header">
-                  <div class="info-icon-wrapper">
-                    <div class="info-icon modern-info-icon">
-                      <svg viewBox="0 0 24 24" fill="none" class="contact-icon-svg">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1"/>
-                        <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2" fill="none"/>
-                      </svg>
-                    </div>
-                    <div class="info-badge">{{ isZh ? '邮箱' : 'EMAIL' }}</div>
-                  </div>
-                  <h3>{{ isZh ? '电子邮箱' : 'Email' }}</h3>
-                </div>
-                <div class="info-content">
-                  <p class="contact-value">{{ currentSiteInfo.contactInfo.email }}</p>
-                  <div class="contact-actions">
-                    <a :href="`mailto:${currentSiteInfo.contactInfo.email}`" class="contact-link primary-link">
-                      <svg viewBox="0 0 16 16" fill="currentColor" class="link-icon">
-                        <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z"/>
-                      </svg>
-                      {{ isZh ? '发送邮件' : 'Send Email' }}
-                      <svg viewBox="0 0 16 16" fill="currentColor" class="arrow-icon">
-                        <path d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-                      </svg>
-                    </a>
-                  </div>
-                </div>
+          <div class="scenes-grid">
+            <div class="scene-card" v-for="(s, i) in scenarioItems" :key="i">
+              <img :src="s.image" :alt="isZh ? s.titleZh : s.titleEn" @error="onImgError">
+              <div class="scene-overlay">
+                <h5>{{ isZh ? s.titleZh : s.titleEn }}</h5>
+                <p>{{ isZh ? s.descZh : s.descEn }}</p>
               </div>
             </div>
-            <ContactForm />
           </div>
         </div>
       </section>
 
-      
+      <!-- ===== 关于我们 ===== -->
+      <section class="about-section">
+        <div class="about-deco-stripe"></div>
+        <div class="lander-container">
+          <div class="about-grid">
+            <!-- 左侧文字 -->
+            <div>
+              <h2 class="sec-title">{{ isZh ? '关于朗德智能科技' : 'About Lande Intelligent' }}</h2>
+              <div class="about-body">
+                <p v-for="(para, i) in displayedAboutData.paragraphs" :key="i">{{ para }}</p>
+              </div>
+              <div class="about-feats">
+                <div class="about-feat">
+                  <div class="feat-icon-box">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22">
+                      <path d="M12 1L3 5v6c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V5l-9-4zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h6>{{ isZh ? '卓越品质' : 'Premium Quality' }}</h6>
+                    <p>{{ isZh ? '严苛的军工级测试标准' : 'Military-grade testing standards' }}</p>
+                  </div>
+                </div>
+                <div class="about-feat">
+                  <div class="feat-icon-box">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22">
+                      <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18L20 8.09v7.82L12 19.82 4 15.91V8.09L12 4.18zM8 9v2h8V9H8zm0 4v2h8v-2H8z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h6>{{ isZh ? '系统整合' : 'System Integration' }}</h6>
+                    <p>{{ isZh ? '软硬件一体化深度融合' : 'Deep hardware-software integration' }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- 右侧图片 -->
+            <div class="about-img-col">
+              <div class="about-img-frame">
+                <img :src="displayedAboutData.image || '/images/about/company.jpg'" alt="朗德智能科技" @error="onImgError">
+              </div>
+              <div class="about-badge-float">
+                <span class="badge-big"> 17</span>
+                <span class="badge-small">{{ isZh ? '软件著作权' : 'Core Patents' }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-
- 
     </main>
-    </template>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, computed, inject, watch } from 'vue'
-import { storeToRefs } from 'pinia'
+import { ref, computed } from 'vue'
 import { useContentStore } from '@/store/modules/content'
-import { useRouter } from 'vue-router'
-import ContactForm from '@/components/ContactForm.vue'
-import DroneDefenseScene from '@/components/DroneDefenseScene.vue'
-import DroneDefenseAnimation from '@/components/DroneDefenseAnimation.vue'
-import CompanyMap from '@/components/CompanyMap.vue'
 import { useLanguage } from '@/mixins/language'
 
-// 使用语言相关功能
-const { isZh, isEn, currentLanguage, getTechnologies, getCurrentSiteInfo, getCurrentTechnologies, getCurrentCases, getCurrentNews, getCurrentAboutData } = useLanguage()
+const { isZh, getCurrentAboutData } = useLanguage()
 
-const router = useRouter()
-const contentStore = useContentStore()
-const { siteInfo, technologies, cases, news, aboutData } = storeToRefs(contentStore)
+// 初始化 store（触发数据预加载）
+useContentStore()
 
-// 获取当前语言的技术数据
-const currentTechnologies = computed(() => {
-  // 尝试从语言混入获取
-  const techsFromMixin = getTechnologies();
-  if (techsFromMixin && techsFromMixin.length > 0) {
-    return techsFromMixin;
+// 防控类产品卡片
+const preventionCards = computed(() => [
+  {
+    image: '/images/tech/index_02.jpg',
+    tagZh: '侦探感知', tagEn: 'Detection',
+    titleZh: '侦探感知系统', titleEn: 'Detection & Sensing System',
+    featZh: ['雷达探测系统', '高精度光电识别', '全频谱侦测模块'],
+    featEn: ['Radar Detection', 'High-Precision EO Recognition', 'Full-Spectrum Detection']
+  },
+  {
+    image: '/images/tech/jamming.jpg',
+    tagZh: '干扰反制', tagEn: 'Jamming',
+    titleZh: '防御打击装备', titleEn: 'Defense Strike Equipment',
+    featZh: ['固定式全向侦测干扰', '便携式无人机打击枪', '多波段定向压制'],
+    featEn: ['Fixed Omnidirectional Jamming', 'Portable Strike Gun', 'Multi-Band Suppression']
+  },
+  {
+    image: '/images/tech/interception.jpg',
+    tagZh: '一体化防御', tagEn: 'Integrated',
+    titleZh: '综合防御系统', titleEn: 'Integrated Defense System',
+    featZh: ['车载侦打一体系统', '四位一体智能防御阵列', '区域级低空网格化监控'],
+    featEn: ['Vehicle-mounted System', 'Four-in-one Defense Array', 'Regional Grid Monitoring']
   }
-  
-  // 尝试从contentStore的计算属性获取
-  const techsFromStore = getCurrentTechnologies.value;
-  if (techsFromStore && techsFromStore.length > 0) {
-    return techsFromStore;
+])
+
+// 应用场景
+const scenarioItems = computed(() => [
+  {
+    titleZh: '国防安全', titleEn: 'National Defense',
+    descZh: '为军事基地的低空空域提供实时防御与干扰反制。',
+    descEn: 'Real-time defense and jamming for military base airspace.',
+    image: '/images/cases/index_08.png'
+  },
+  {
+    titleZh: '电力巡检', titleEn: 'Power Inspection',
+    descZh: '利用无人机搭载热成像仪，精准识别输电线路隐患。',
+    descEn: 'Using drones with thermal imaging to identify transmission line risks.',
+    image: '/images/cases/index_09.png'
+  },
+  {
+    titleZh: '边境监控', titleEn: 'Border Surveillance',
+    descZh: '构建全天候无人化边境巡逻网络，提升边防态势感知能力。',
+    descEn: 'Building all-weather unmanned border patrol networks.',
+    image: '/images/cases/index_10.png'
+  },
+  {
+    titleZh: '机场防护', titleEn: 'Airport Protection',
+    descZh: '部署无损干扰系统，有效阻止黑飞无人机闯入机场敏感空域。',
+    descEn: 'Non-destructive jamming preventing illegal drones from airport airspace.',
+    image: '/images/cases/index_11.png'
   }
-  
-  // 使用默认数据
-  return defaultTechnologies.value;
-});
+])
 
-// 获取网站基本信息
-const currentSiteInfo = computed(() => {
-  // 尝试从contentStore的计算属性获取
-  const infoFromStore = getCurrentSiteInfo.value;
-  if (infoFromStore && infoFromStore.companyName) {
-    return infoFromStore;
-  }
-  
-  // 使用默认数据
-  return defaultSiteInfo.value;
-});
+// 关于我们数据
+const defaultAboutData = computed(() => isZh.value ? {
+  paragraphs: [
+    '杭州朗德智能科技有限公司成立于2025年4月14日，坐落于创新高地中国杭州。我们是一家专注于无人机及反无人机系统研发、生产与销售的高科技企业。',
+    '公司核心团队由来自航空航天、电子对抗、人工智能等领域的资深专家组成。我们坚持"技术驱动、安全为本"的核心价值观，致力于为全球客户提供最前沿的低空安全解决方案。'
+  ],
+  image: '/images/about/company.jpg'
+} : {
+  paragraphs: [
+    'Hangzhou Lande Intelligent Technology Co., Ltd. was established in April 2025, located in Hangzhou, China. We are a high-tech enterprise focused on R&D, production and sales of drones and anti-drone systems.',
+    'Our core team consists of senior experts from aerospace, electronic warfare, and artificial intelligence fields. We adhere to "Technology Drives, Safety First", providing cutting-edge low-altitude security solutions.'
+  ],
+  image: '/images/about/company.jpg'
+})
 
-// 从App.vue中获取全局加载状态
-const globalLoading = inject('isLoading', ref(true))
-// 页面本地加载状态
-const isPageLoading = ref(true)
-
-// 默认技术数据
-const defaultTechnologies = computed(() => {
-  return isZh.value ? [
-    {
-      id: 'detection',
-      title: '无人机探测系统',
-      description: '多传感器融合的无人机探测系统，可实现全天候、全方位监控',
-      icon: 'fas fa-shield-alt',
-      details: '采用雷达、光电、无线电信号等多种探测手段相结合，探测距离可达10公里，能够有效识别小型低空慢速目标...',
-      image: '/images/tech/detection.jpg'
-    },
-    {
-      id: 'jamming',
-      title: '电子干扰系统',
-      description: '高效定向干扰系统，可阻断无人机控制链路和导航信号',
-      icon: 'fas fa-shield-alt',
-      details: '针对常见无人机通信频段设计的智能干扰系统，可实现定向精准干扰，防止误伤其他电子设备...',
-      image: '/images/tech/jamming.jpg'
-    },
-    {
-      id: 'interception',
-      title: '无人机拦截系统',
-      description: '多种拦截手段组合的综合防御系统，可安全处置入侵无人机',
-      icon: 'fas fa-shield-alt',
-      details: '集成网枪、捕获无人机等多种物理拦截手段，同时搭载智能决策系统，可根据场景自动选择最佳拦截方案...',
-      image: '/images/tech/interception.jpg'
-    }
-  ] : [
-    {
-      id: 'detection',
-      title: 'Drone Detection System',
-      description: 'Multi-sensor fusion detection system for all-weather, all-round surveillance',
-      icon: 'fas fa-shield-alt',
-      details: 'Combines radar, optoelectronic, and radio signal detection methods, with a detection range of up to 10 kilometers, effectively identifying small low-altitude slow-moving targets...',
-      image: '/images/tech/detection.jpg'
-    },
-    {
-      id: 'jamming',
-      title: 'Electronic Jamming System',
-      description: 'Efficient directional jamming system that blocks drone control links and navigation signals',
-      icon: 'fas fa-shield-alt',
-      details: 'Smart jamming system designed for common drone communication bands, enabling precise directional jamming to prevent damage to other electronic devices...',
-      image: '/images/tech/jamming.jpg'
-    },
-    {
-      id: 'interception',
-      title: 'Drone Interception System',
-      description: 'Comprehensive defense system combining multiple interception methods for safe disposal of intruding drones',
-      icon: 'fas fa-shield-alt',
-      details: 'Integrates multiple physical interception methods such as net guns and capture drones, equipped with intelligent decision-making systems to automatically select the best interception solution based on the scenario...',
-      image: '/images/tech/interception.jpg'
-    }
-  ];
-});
-
-// 默认网站基本信息
-const defaultSiteInfo = computed(() => {
-  return isZh.value ? {
-    companyName: '杭州朗德智能科技有限公司',
-    slogan: '智能全域电磁安防一体化平台',
-    description: '',
-    contactInfo: {
-      address: '浙江省杭州市滨江区科技园区创新大厦A座15楼',
-      phone: '0571-8888 9999',
-      email: 'info@landedrone.com'
-    }
-  } : {
-    companyName: 'Hangzhou Lande Intelligent Technology Co., Ltd.',
-    slogan: 'Intelligent all-domain electromagnetic security integrated platform',
-    description: '',
-    contactInfo: {
-      address: '15F, Building A, Innovation Tower, Science & Technology Park, Binjiang District, Hangzhou, Zhejiang',
-      phone: '0571-8888 9999',
-      email: 'info@landedrone.com'
-    }
-  };
-});
-
-// 默认关于我们数据
-const defaultAboutData = computed(() => {
-  return isZh.value ? {
-    title: '杭州朗德智能科技有限公司',
-    paragraphs: [
-      '杭州朗德智能科技有限公司成立于2025年4月14日，企业注册地址位于浙江省杭州市上城区环站东路768号东站花园商务中心1幢12楼1208室，经营范围包含：智能无人飞行器制造；智能无人飞行器销售；人工智能应用软件开发；人工智能硬件销售；智能机器人的研发等。',
-      '朗德智能秉持"科技护航，安全至上"的企业理念，以技术创新为驱动，以客户需求为导向，打造了一系列具有自主知识产权的无人机产品和反无人机系统。目前，公司产品已在国防安全、电力巡检、边境监控、机场防护等多个领域得到广泛应用。'
-    ],
-    stats: [
-      { value: '2025', description: '成立于浙江杭州' },
-      { value: '50+', description: '核心专利技术' },
-      { value: '100+', description: '成功项目案例' }
-    ],
-    image: '/images/about/company.jpg'
-  } : {
-    title: 'Hangzhou Lande Intelligent Technology Co., Ltd.',
-    paragraphs: [
-      'Hangzhou Lande Intelligent Technology Co., Ltd. was established on April 14, 2025. The company is registered at Room 1208, 12F, Building 1, East Station Garden Business Center, 768 Huanzhan East Road, Shangcheng District, Hangzhou, Zhejiang Province. Its business scope includes: intelligent UAV manufacturing; intelligent UAV sales; AI application software development; AI hardware sales; intelligent robot R&D, etc.',
-      'Lande Intelligent adheres to the corporate philosophy of "Technology Protection, Safety First", driven by technological innovation and guided by customer needs. It has created a series of drone products and anti-drone systems with independent intellectual property rights. Currently, the company\'s products have been widely applied in various fields such as defense security, power inspection, border monitoring, and airport protection.'
-    ],
-    stats: [
-      { value: '2025', description: 'Founded in Hangzhou, Zhejiang' },
-      { value: '50+', description: 'Core patents' },
-      { value: '100+', description: 'Successful projects' }
-    ],
-    image: '/images/about/company.jpg'
-  };
-});
-
-// 默认案例数据
-const defaultCases = computed(() => {
-  return isZh.value ? [
-    {
-      id: 1,
-      title: '某国际机场反无人机防御系统部署',
-      summary: '为大型国际机场提供全方位的反无人机防御系统，实现24小时不间断保护，有效防止无人机干扰航班起降。',
-      image: '/images/cases/military-defense.jpg',
-      tag: '空域安全',
-      highlight: '先进的雷达探测和干扰技术，为机场空域提供全方位防护，有效拦截非法入侵无人机',
-      results: ['探测范围覆盖机场全域', '无人机威胁处置成功率99.9%', '系统可靠性达99.99%']
-    },
-    {
-      id: 2,
-      title: '边境地区侦察无人机监控系统',
-      summary: '为边境地区提供高性能侦察无人机系统，实现大范围边境线的智能化、自动化监控。',
-      image: '/images/cases/border-security.jpg',
-      tag: '安全防护',
-      highlight: '高性能侦察无人机系统实现大范围监控，提升边境安全防护能力',
-      results: ['边境监控覆盖率提升80%', '异常事件响应时间缩短70%', '24小时全天候监控能力']
-    },
-    {
-      id: 3,
-      title: '大型电网输电线路巡检无人机系统',
-      summary: '为国家电网提供专业工业无人机巡检系统，实现输电线路的自动化检测和故障预警。',
-      image: '/images/cases/power-inspection.jpg',
-      tag: '工业应用',
-      highlight: '专业工业无人机系统提供高效线路巡检，预警潜在故障，降低维护成本',
-      results: ['线路巡检效率提升300%', '故障预警准确率达95%', '人力成本降低60%']
-    }
-  ] : [
-    {
-      id: 1,
-      title: 'Airport Anti-Drone Defense System Deployment',
-      summary: 'Providing comprehensive anti-drone defense systems for large international airports, achieving 24-hour uninterrupted protection and effectively preventing drones from interfering with flights.',
-      image: '/images/cases/military-defense.jpg',
-      tag: 'Airspace Security',
-      highlight: 'Advanced radar detection and jamming technology provides comprehensive protection for airport airspace, effectively intercepting illegal intruding drones',
-      results: ['Detection range covers the entire airport', '99.9% success rate in drone threat handling', '99.99% system reliability']
-    },
-    {
-      id: 2,
-      title: 'Border Area Reconnaissance Drone Monitoring System',
-      summary: 'Providing high-performance reconnaissance drone systems for border areas to achieve intelligent, automated monitoring of large border areas.',
-      image: '/images/cases/border-security.jpg',
-      tag: 'Security Protection',
-      highlight: 'High-performance reconnaissance drone system achieves wide-range monitoring, enhancing border security protection capabilities',
-      results: ['Border monitoring coverage increased by 80%', 'Abnormal event response time reduced by 70%', '24-hour all-weather monitoring capability']
-    },
-    {
-      id: 3,
-      title: 'Large-scale Power Grid Line Inspection Drone System',
-      summary: 'Providing professional industrial drone inspection systems for the national power grid to achieve automated detection and fault early warning for power transmission lines.',
-      image: '/images/cases/power-inspection.jpg',
-      tag: 'Industrial Applications',
-      highlight: 'Professional industrial drone system provides efficient line inspection, warning of potential failures, and reducing maintenance costs',
-      results: ['Line inspection efficiency increased by 300%', 'Fault early warning accuracy reached 95%', 'Labor costs reduced by 60%']
-    }
-  ];
-});
-
-// 默认新闻数据
-const defaultNews = computed(() => {
-  return isZh.value ? [
-    {
-      id: 1,
-      category: 'company',
-      title: '朗德智能推出新一代高性能反无人机系统',
-      summary: '近日，朗德智能正式发布新一代高性能反无人机系统，该系统集成了先进的雷达探测、人工智能识别和精准干扰技术。',
-      date: '2025-06-15',
-      day: '15',
-      month: '06 / 2025'
-    },
-    {
-      id: 2,
-      category: 'company',
-      title: '朗德智能反无人机系统在国际防务展览会获得广泛关注',
-      summary: '朗德智能参加2025年国际防务展览会，展示的系列无人机产品获得国内外客户广泛关注和好评。',
-      date: '2025-06-08',
-      day: '08',
-      month: '06 / 2025'
-    },
-    {
-      id: 3,
-      category: 'company',
-      title: '朗德智能与航空航天大学建立产学研合作',
-      summary: '朗德智能与国内知名航空航天大学签署战略合作协议，双方将在无人机技术研发和人才培养方面展开深度合作。',
-      date: '2025-05-30',
-      day: '30',
-      month: '05 / 2025'
-    }
-  ] : [
-    {
-      id: 1,
-      category: 'company',
-      title: 'Lande Intelligent Launches New Generation of High-Performance Anti-Drone Systems',
-      summary: 'Recently, Lande Intelligent officially released a new generation of high-performance anti-drone systems, integrating advanced radar detection, AI recognition, and precise jamming technologies.',
-      date: '2025-06-15',
-      day: '15',
-      month: '06 / 2025'
-    },
-    {
-      id: 2,
-      category: 'company',
-      title: 'Lande Intelligent Anti-Drone Systems Receive Wide Attention at International Defense Exhibition',
-      summary: 'Lande Intelligent participated in the 2025 International Defense Exhibition, where its series of drone products received widespread attention and praise from domestic and international customers.',
-      date: '2025-06-08',
-      day: '08',
-      month: '06 / 2025'
-    },
-    {
-      id: 3,
-      category: 'company',
-      title: 'Lande Intelligent Establishes Industry-Academia-Research Cooperation with Aerospace University',
-      summary: 'Lande Intelligent signed a strategic cooperation agreement with a renowned domestic aerospace university, and the two parties will engage in in-depth cooperation in drone technology R&D and talent training.',
-      date: '2025-05-30',
-      day: '30',
-      month: '05 / 2025'
-    }
-  ];
-});
-
-// 根据默认数据或API数据获取最新新闻
-const latestNews = computed(() => {
-  const newsFromStore = getCurrentNews.value;
-  if (newsFromStore && Array.isArray(newsFromStore) && newsFromStore.length > 0) {
-    return newsFromStore.slice(0, 3);
-  }
-  return defaultNews.value;
-});
-
-// 根据默认数据或API数据获取案例
-const casesWithHighlights = computed(() => {
-  const casesFromStore = getCurrentCases.value;
-  if (casesFromStore && Array.isArray(casesFromStore) && casesFromStore.length > 0) {
-    return casesFromStore.slice(0, 3);
-  }
-  return defaultCases.value;
-});
-
-// 根据默认数据或API数据获取关于我们数据
 const displayedAboutData = computed(() => {
-  const aboutDataFromStore = getCurrentAboutData.value;
-  if (aboutDataFromStore && aboutDataFromStore.title) {
-    return aboutDataFromStore;
-  }
-  return defaultAboutData.value;
-});
-
-// 监听全局数据加载完成
-watch(globalLoading, (newVal) => {
-  if (!newVal) {
-    // 全局加载完成后，延迟一小段时间再显示页面，确保动画流畅
-    setTimeout(() => {
-      isPageLoading.value = false
-    }, 100)
-  }
+  const d = getCurrentAboutData.value
+  return (d && d.paragraphs) ? d : defaultAboutData.value
 })
 
-// 技术卡片悬停效果
-const handleTechHover = (event) => {
-  const card = event.currentTarget
-  card.style.transform = 'translateY(-10px)'
-  card.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.2)'
+const onImgError = (e) => {
+  e.target.style.background = 'linear-gradient(135deg,#e2e8f0,#cbd5e1)'
+  e.target.style.display = 'block'
 }
 
-const handleTechLeave = (event) => {
-  const card = event.currentTarget
-  card.style.transform = ''
-  card.style.boxShadow = ''
-}
-
-// 案例卡片悬停效果
-const handleCaseHover = (event) => {
-  const card = event.currentTarget
-  const overlay = card.querySelector('.case-overlay')
-  if (overlay) {
-    overlay.style.opacity = '1'
-  }
-}
-
-const handleCaseLeave = (event) => {
-  const card = event.currentTarget
-  const overlay = card.querySelector('.case-overlay')
-  if (overlay) {
-    overlay.style.opacity = '0'
-  }
-}
-
-// 监听语言变化
-watch(currentLanguage, () => {
-  // 当语言变化时，可以在这里执行一些操作
-  console.log('语言已变更:', currentLanguage.value)
-})
-
-// 导航到指定案例分类
-const navigateToCase = (tag) => {
-  router.push({
-    path: '/cases',
-    query: { category: tag }
-  })
-}
-
-// 处理新闻项悬停
-const handleNewsHover = (event) => {
-  event.currentTarget.style.transform = 'translateY(-5px)'
-  event.currentTarget.style.boxShadow = 'var(--shadow)'
-}
-
-const handleNewsLeave = (event) => {
-  event.currentTarget.style.transform = 'translateY(0)'
-  event.currentTarget.style.boxShadow = 'none'
-}
-
-// 处理图片加载错误
-const handleImageError = (event) => {
-  event.target.src = 'https://via.placeholder.com/800x450?text=图片加载失败'
-}
-
-// 处理地址图片加载错误
-const handleAddressImageError = (event) => {
-  event.target.src = '/images/company/company-location-placeholder.jpg.svg'
-}
-
-// 翻译案例标签
-const translateCaseTag = (tag) => {
-  if (!tag) return '';
-  
-  const tagMap = {
-    '空域安全': 'Airspace Security',
-    '安防监控': 'Security Monitoring',
-    '工业应用': 'Industrial Applications',
-    '安全防护': 'Security Protection'
-  }
-  return tagMap[tag] || tag
-}
-
-// 翻译案例标题
-const translateCaseTitle = (title) => {
-  if (!title) return '';
-  
-  if (title.includes('机场')) {
-    return 'Airport Anti-Drone Defense System Deployment'
-  } else if (title.includes('边境')) {
-    return 'Border Area Drone Surveillance System'
-  } else if (title.includes('电网')) {
-    return 'Large-scale Power Grid Line Inspection Drone System'
-  }
-  return title
-}
-
-// 翻译案例高亮内容
-const translateCaseHighlight = (highlight) => {
-  if (!highlight) return '';
-  
-  if (highlight.includes('先进的雷达探测')) {
-    return 'Advanced radar detection and jamming technology provides comprehensive protection for airport airspace, effectively intercepting illegal intruding drones'
-  } else if (highlight.includes('高性能侦察')) {
-    return 'High-performance reconnaissance drone system achieves wide-range monitoring, enhancing border security protection capabilities'
-  } else if (highlight.includes('专业工业无人机')) {
-    return 'Professional industrial drone system provides efficient line inspection, warning of potential failures, and reducing maintenance costs'
-  }
-  return highlight
-}
-
-// 组件挂载时，初始化数据
-onMounted(() => {
-  // 组件挂载后将isPageLoading设置为false
-  // 添加一点延迟，让页面有时间准备
-  setTimeout(() => {
-    isPageLoading.value = false
-    // 发送页面加载完成事件
-    emit('page-loaded')
-    
-    // 初始化进度条动画
-    initProgressBars()
-  }, 500)
-})
-
-// 初始化进度条动画
-const initProgressBars = () => {
-  // 使用 Intersection Observer 来监听元素进入视口
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const progressBar = entry.target.querySelector('.progress-bar')
-        if (progressBar) {
-          // 设置 CSS 变量来控制进度条宽度
-          const progress = progressBar.getAttribute('data-progress') || '95'
-          progressBar.style.setProperty('--progress', progress + '%')
-        }
-      }
-    })
-  }, { threshold: 0.3 })
-  
-  // 观察所有特性卡片
-  setTimeout(() => {
-    const featureCards = document.querySelectorAll('.feature-card.modern-card')
-    featureCards.forEach(card => observer.observe(card))
-  }, 100)
-}
-
-// 定义emit
 const emit = defineEmits(['page-loaded'])
 </script>
 
 <style scoped>
-/* 全局样式优化 */
-* {
-  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
-/* 保留 Font Awesome 图标字体 */
-.fas, .far, .fab, .fa-solid, .fa-regular, .fa-brands, .fa {
-  font-family: var(--fa-style-family-classic, "Font Awesome 6 Free"), "Font Awesome 5 Free", FontAwesome;
+/* ===== TOKENS ===== */
+:root {
+  --primary: #003ec7;
+  --secondary: #00677f;
+  --surface: #fbf8ff;
+  --surface-low: #f3f2ff;
+  --surface-high: #e7e7f5;
+  --on-surface: #191b25;
+  --on-surface-var: #434656;
+  --outline-var: #c3c5d9;
 }
 
 .home-view {
-  font-feature-settings: 'cv01', 'cv02', 'cv03', 'cv04';
+  font-family: 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
+  background: #fbf8ff;
+  color: #191b25;
 }
 
-/* 主横幅增强，适配3D背景 - 现代优化版本 */
-.hero {
-  position: relative;
+.fas, .fa {
+  font-family: "Font Awesome 6 Free", "Font Awesome 5 Free", FontAwesome;
+}
+
+/* ===== LAYOUT ===== */
+.lander-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ===== LOADING ===== */
+.page-loading {
   min-height: 100vh;
   display: flex;
-  align-items: center;
-  overflow: hidden;
-  background: linear-gradient(135deg, 
-    rgba(15, 23, 42, 0.95) 0%, 
-    rgba(30, 41, 59, 0.98) 25%,
-    rgba(51, 65, 85, 0.95) 50%,
-    rgba(15, 23, 42, 0.98) 100%
-  );
-  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-}
-
-/* 动画背景元素 */
-.hero-animation-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: 1;
-}
-
-/* 电磁波动画 */
-.electromagnetic-waves {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 800px;
-  height: 800px;
-}
-
-.wave {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: 2px solid rgba(79, 172, 254, 0.3);
-  border-radius: 50%;
-  animation: waveExpand 4s ease-out infinite;
-}
-
-.wave-1 {
-  width: 200px;
-  height: 200px;
-  animation-delay: 0s;
-}
-
-.wave-2 {
-  width: 400px;
-  height: 400px;
-  animation-delay: 1.3s;
-}
-
-.wave-3 {
-  width: 600px;
-  height: 600px;
-  animation-delay: 2.6s;
-}
-
-@keyframes waveExpand {
-  0% {
-    width: 0;
-    height: 0;
-    opacity: 1;
-    border-width: 3px;
-  }
-  70% {
-    opacity: 0.7;
-    border-width: 2px;
-  }
-  100% {
-    width: 800px;
-    height: 800px;
-    opacity: 0;
-    border-width: 1px;
-  }
-}
-
-/* 漂浮粒子 */
-.floating-particles {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.particle {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  background: linear-gradient(45deg, #4facfe, #00f2fe);
-  border-radius: 50%;
-  animation: particleFloat 8s ease-in-out infinite;
-  box-shadow: 0 0 10px rgba(79, 172, 254, 0.6);
-}
-
-.particle:nth-child(odd) {
-  left: calc(10% + 5vw * var(--random-x, 1));
-  animation-duration: 6s;
-}
-
-.particle:nth-child(even) {
-  right: calc(10% + 5vw * var(--random-x, 1));
-  animation-duration: 10s;
-}
-
-.particle:nth-child(3n) {
-  width: 6px;
-  height: 6px;
-  animation-duration: 7s;
-}
-
-@keyframes particleFloat {
-  0%, 100% {
-    transform: translateY(100vh) scale(0);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  90% {
-    opacity: 1;
-    transform: translateY(-10vh) scale(1);
-  }
-}
-
-/* 品牌标识角落定位 */
-.brand-corner {
-  position: absolute;
-  top: 50px;
-  right: 30px;
-  z-index: 10;
-  animation: fadeInDown 1s ease-out 0.5s both;
-}
-
-.corner-logo {
-  height: 60px;
-  max-width: 200px;
-  object-fit: contain;
-  transition: all 0.3s ease;
-  filter: drop-shadow(0 4px 15px rgba(79, 172, 254, 0.3));
-}
-
-.corner-logo:hover {
-  transform: scale(1.05);
-  filter: drop-shadow(0 6px 20px rgba(79, 172, 254, 0.5));
-}
-
-.hero-content-wrapper {
-  position: relative;
-  width: 100%;
-  z-index: 5;
-  padding: 120px 0;
-}
-
-.hero-content {
-  position: relative;
-  max-width: 1000px;
-  color: #ffffff;
-  text-align: center;
-  margin: 0 auto;
-}
-
-/* 主标题样式 - 粗壮有力 */
-.main-headline {
-  font-size: 4.5rem;
-  font-weight: 900;
-  line-height: 1.1;
-  margin-bottom: 30px;
-  background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #ffffff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: none;
-  position: relative;
-  letter-spacing: -0.03em;
-  font-family: 'Inter', sans-serif;
-  animation: slideInUp 1.2s ease-out;
-}
-
-.main-headline::after {
-  content: '';
-  position: absolute;
-  bottom: -15px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 120px;
-  height: 5px;
-  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
-  border-radius: 3px;
-  animation: scaleInX 1s ease-out 0.8s both;
-}
-
-/* 副标题样式 */
-.sub-headline {
-  font-size: 1.4rem;
-  margin-bottom: 50px;
-  color: rgba(255, 255, 255, 0.85);
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 1.6;
-  font-weight: 400;
-  font-family: 'Inter', sans-serif;
-  animation: slideInUp 1.2s ease-out 0.3s both;
-}
-
-/* 行动号召按钮区域 */
-.hero-actions {
-  display: flex;
-  justify-content: center;
-  margin-top: 50px;
-  animation: slideInUp 1.2s ease-out 0.6s both;
-}
-
-.btn-hero {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 15px;
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-  color: #ffffff;
-  border: none;
-  padding: 20px 40px;
-  border-radius: 60px;
-  font-size: 1.2rem;
-  font-weight: 700;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 
-    0 8px 25px rgba(79, 172, 254, 0.4),
-    0 4px 15px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  overflow: hidden;
-  font-family: 'Inter', sans-serif;
-  letter-spacing: 0.5px;
-}
-
-.btn-hero::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transition: all 0.6s ease;
-}
-
-.btn-hero:hover {
-  transform: translateY(-5px) scale(1.05);
-  box-shadow: 
-    0 15px 35px rgba(79, 172, 254, 0.6),
-    0 8px 25px rgba(0, 0, 0, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
-}
-
-.btn-hero:hover::before {
-  left: 100%;
-}
-
-.btn-hero:active {
-  transform: translateY(-3px) scale(1.02);
-}
-
-.btn-icon {
-  width: 20px;
-  height: 20px;
-  transition: transform 0.3s ease;
-}
-
-.btn-hero:hover .btn-icon {
-  transform: translateX(5px);
-}
-
-/* 动画定义 */
-@keyframes slideInUp {
-  from {
-    opacity: 0;
-    transform: translateY(60px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes scaleInX {
-  from {
-    opacity: 0;
-    transform: translateX(-50%) scaleX(0);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(-50%) scaleX(1);
-  }
-}
-
-/* 响应式调整 */
-@media (max-width: 1200px) {
-  .main-headline {
-    font-size: 3.8rem;
-  }
-  
-  .sub-headline {
-    font-size: 1.3rem;
-  }
-  
-  .electromagnetic-waves {
-    width: 600px;
-    height: 600px;
-  }
-  
-  .wave {
-    max-width: 600px;
-    max-height: 600px;
-  }
-}
-
-@media (max-width: 991px) {
-  .main-headline {
-    font-size: 3.2rem;
-  }
-  
-  .sub-headline {
-    font-size: 1.2rem;
-    padding: 0 20px;
-  }
-  
-  .hero-content-wrapper {
-    padding: 100px 0;
-  }
-  
-  .brand-corner {
-    top: 20px;
-    right: 20px;
-  }
-  
-  .corner-logo {
-    height: 50px;
-    max-width: 160px;
-  }
-}
-
-@media (max-width: 767px) {
-  .main-headline {
-    font-size: 2.5rem;
-    margin-bottom: 25px;
-  }
-  
-  .main-headline::after {
-    width: 80px;
-    height: 4px;
-  }
-  
-  .sub-headline {
-    font-size: 1.1rem;
-    margin-bottom: 40px;
-  }
-  
-  .btn-hero {
-    padding: 16px 32px;
-    font-size: 1.1rem;
-    gap: 12px;
-  }
-  
-  .electromagnetic-waves {
-    width: 400px;
-    height: 400px;
-  }
-  
-  .brand-corner {
-    top: 15px;
-    right: 15px;
-  }
-  
-  .corner-logo {
-    height: 40px;
-    max-width: 120px;
-  }
-}
-
-@media (max-width: 576px) {
-  .main-headline {
-    font-size: 2rem;
-  }
-  
-  .sub-headline {
-    font-size: 1rem;
-  }
-  
-  .btn-hero {
-    padding: 14px 28px;
-    font-size: 1rem;
-    gap: 10px;
-  }
-  
-  .btn-icon {
-    width: 18px;
-    height: 18px;
-  }
-  
-  .hero-content-wrapper {
-    padding: 80px 0;
-  }
-  
-  .electromagnetic-waves {
-    width: 300px;
-    height: 300px;
-  }
-  
-  .corner-logo {
-    height: 35px;
-    max-width: 100px;
-  }
-}
-
-/* 旧的LANDER Logo样式删除 */
-/* .hero-logo, .brand-logo-img, .tech-headline 已被替换为新的主副标题和角落 logo */
-
-
-
-/* 安全防御特性 - 现代优化版本 */
-.defense-features {
-  padding: 120px 0;
-  position: relative;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
-  overflow: hidden;
-}
-
-.tech-particles {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: 
-    radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.03) 0%, transparent 50%),
-    radial-gradient(circle at 75% 75%, rgba(147, 197, 253, 0.05) 0%, transparent 50%);
-  animation: particleFloat 30s ease-in-out infinite alternate;
-}
-
-@keyframes particleFloat {
-  0% {
-    transform: translateY(0) rotate(0deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-20px) rotate(2deg);
-    opacity: 0.8;
-  }
-}
-
-.section-header {
-  text-align: center;
-  margin-bottom: 80px;
-}
-
-.section-title {
-  font-size: 2.8rem;
-  margin-bottom: 20px;
-  position: relative;
-  display: inline-block;
-  font-weight: 800;
-  color: #0f172a;
-  font-family: 'Inter', sans-serif;
-  letter-spacing: -0.025em;
-}
-
-.section-title::after {
-  content: '';
-  position: absolute;
-  bottom: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 4px;
-  background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
-  border-radius: 2px;
-}
-
-.section-desc {
-  font-size: 1.2rem;
-  color: #64748b;
-  max-width: 650px;
-  margin: 0 auto;
-  line-height: 1.6;
-  font-family: 'Inter', sans-serif;
-}
-
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 35px;
-}
-
-/* 现代化特性卡片设计 */
-.feature-card.modern-card {
-  background: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.95) 0%, 
-    rgba(255, 255, 255, 0.9) 100%);
-  backdrop-filter: blur(20px) saturate(180%);
-  border-radius: 24px;
-  padding: 0;
-  box-shadow: 
-    0 8px 32px rgba(59, 130, 246, 0.08),
-    0 2px 8px rgba(0, 0, 0, 0.04),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  height: auto;
-  display: flex;
   flex-direction: column;
-}
-
-.feature-card.modern-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, 
-    transparent 0%, 
-    rgba(59, 130, 246, 0.4) 50%, 
-    transparent 100%);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.feature-card.modern-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 
-    0 20px 40px rgba(59, 130, 246, 0.15),
-    0 8px 24px rgba(0, 0, 0, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
-}
-
-.feature-card.modern-card:hover::before {
-  opacity: 1;
-}
-
-/* 特性头部区域 */
-.feature-header {
-  padding: 32px 32px 24px;
-  position: relative;
-}
-
-.feature-icon-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.feature-icon.modern-icon {
-  width: 64px;
-  height: 64px;
-  border-radius: 18px;
-  background: linear-gradient(135deg, 
-    rgba(59, 130, 246, 0.1) 0%, 
-    rgba(147, 197, 253, 0.15) 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid rgba(59, 130, 246, 0.15);
-  position: relative;
-  overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.feature-icon.modern-icon::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transform: rotate(-45deg) translateX(-100%);
-  transition: transform 0.6s ease;
-}
-
-.feature-card.modern-card:hover .feature-icon.modern-icon {
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  border-color: rgba(255, 255, 255, 0.3);
-  transform: scale(1.1) rotate(5deg);
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
-}
-
-.feature-card.modern-card:hover .feature-icon.modern-icon::before {
-  transform: rotate(-45deg) translateX(100%);
-}
-
-.icon-svg {
-  width: 32px;
-  height: 32px;
-  color: #3b82f6;
-  transition: all 0.4s ease;
-}
-
-.feature-card.modern-card:hover .icon-svg {
-  color: #ffffff;
-  transform: scale(1.1);
-}
-
-.feature-badge {
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  color: #ffffff;
-  font-size: 0.7rem;
-  font-weight: 700;
-  padding: 4px 10px;
-  border-radius: 12px;
-  letter-spacing: 0.5px;
-  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
-  font-family: 'Inter', sans-serif;
-}
-
-.feature-header h3 {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #0f172a;
-  margin: 0;
-  line-height: 1.3;
-  font-family: 'Inter', sans-serif;
-  letter-spacing: -0.01em;
-}
-
-.feature-card.modern-card p {
-  color: #64748b;
-  line-height: 1.6;
-  margin: 0 32px 24px;
-  font-size: 0.95rem;
-  font-family: 'Inter', sans-serif;
-}
-
-/* 特性指标区域 */
-.feature-metrics {
-  padding: 0 32px;
-  margin-bottom: 24px;
-}
-
-.metric-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 12px;
-  font-size: 0.88rem;
-  color: #475569;
-  font-family: 'Inter', sans-serif;
-}
-
-.metric-icon {
-  width: 16px;
-  height: 16px;
-  margin-right: 12px;
-  color: #3b82f6;
-  opacity: 0.7;
-}
-
-/* 图表区域样式 */
-.feature-chart {
-  padding: 24px 32px 32px;
-  background: linear-gradient(135deg, 
-    rgba(248, 250, 252, 0.8) 0%, 
-    rgba(241, 245, 249, 0.9) 100%);
-  margin-top: auto;
-  border-radius: 0 0 24px 24px;
-  border-top: 1px solid rgba(226, 232, 240, 0.6);
-}
-
-/* 进度条图表 */
-.chart-progress {
-  position: relative;
-}
-
-.progress-bar {
-  width: 100%;
-  height: 8px;
-  background: #e2e8f0;
-  border-radius: 4px;
-  overflow: hidden;
-  position: relative;
-}
-
-.progress-bar::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: var(--progress, 95%);
-  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
-  border-radius: 4px;
-  animation: progressFill 2s ease-out 0.5s both;
-}
-
-@keyframes progressFill {
-  from { width: 0; }
-  to { width: var(--progress, 95%); }
-}
-
-.progress-label {
-  display: block;
-  margin-top: 8px;
-  font-size: 0.8rem;
-  color: #64748b;
-  font-weight: 600;
-  font-family: 'Inter', sans-serif;
-}
-
-/* 响应时间图表 */
-.response-time-chart {
-  text-align: center;
-}
-
-.time-indicator {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.time-value {
-  font-size: 1.8rem;
-  font-weight: 800;
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 4px;
-  font-family: 'Inter', sans-serif;
-}
-
-.time-label {
-  font-size: 0.8rem;
-  color: #64748b;
-  font-weight: 500;
-  font-family: 'Inter', sans-serif;
-}
-
-/* 准确率环形图表 */
-.accuracy-chart {
-  display: flex;
-  justify-content: center;
-}
-
-.accuracy-circle {
-  position: relative;
-  width: 84px;
-  height: 84px;
-}
-
-.donut {
-  width: 100%;
-  height: 100%;
-  transform: rotate(-90deg);
-}
-
-.accuracy-progress {
-  stroke-linecap: round;
-  animation: drawCircle 2s ease-out 0.5s both;
-}
-
-@keyframes drawCircle {
-  from { stroke-dasharray: 0 100; }
-  to { stroke-dasharray: 98 2; }
-}
-
-.accuracy-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-}
-
-.accuracy-value {
-  display: block;
-  font-size: 1rem;
-  font-weight: 800;
-  color: #3b82f6;
-  line-height: 1;
-  font-family: 'Inter', sans-serif;
-}
-
-.accuracy-label {
-  font-size: 0.7rem;
-  color: #64748b;
-  font-weight: 500;
-  font-family: 'Inter', sans-serif;
-}
-
-/* 集成图表 */
-.integration-chart {
-  text-align: center;
-}
-
-.integration-nodes {
-  display: flex;
   align-items: center;
   justify-content: center;
   gap: 16px;
-  margin-bottom: 12px;
-  position: relative;
-}
-
-.node {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #e2e8f0;
-  transition: all 0.4s ease;
-  position: relative;
-}
-
-.node.active {
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  box-shadow: 0 0 12px rgba(59, 130, 246, 0.4);
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.2); opacity: 0.8; }
-}
-
-.connection-line {
-  position: absolute;
-  top: 50%;
-  left: 20px;
-  right: 20px;
-  height: 2px;
-  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
-  border-radius: 1px;
-  z-index: -1;
-  animation: lineGrow 1.5s ease-out 1s both;
-}
-
-@keyframes lineGrow {
-  from { transform: scaleX(0); }
-  to { transform: scaleX(1); }
-}
-
-.integration-label {
-  font-size: 0.8rem;
+  background: #fbf8ff;
   color: #64748b;
-  font-weight: 500;
-  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
 }
 
-/* 响应式调整 - 现代优化版本 */
-@media (max-width: 1200px) {
-  .features-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
-  }
-  
-  .section-title {
-    font-size: 2.4rem;
-  }
-  
-  .feature-card.modern-card {
-    margin-bottom: 20px;
-  }
-  
-  .contact-content {
-    grid-template-columns: 1fr 1.2fr;
-    gap: 35px;
-  }
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid rgba(0, 62, 199, 0.15);
+  border-top-color: #003ec7;
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
 }
 
-@media (max-width: 991px) {
-  .hero-stats {
-    gap: 20px;
-  }
-  
-  .hero-content-wrapper {
-    padding: 80px 0;
-  }
-  
-  .about-content {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-  
-  .contact-content {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-  
-  .contact-info {
-    grid-template-columns: 1fr;
-  }
-  
-  .info-card.featured-card {
-    grid-row: auto;
-  }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ===== HERO ===== */
+.hero-section {
+  position: relative;
+  min-height: 85vh;
+  overflow: hidden;
+  background: #fbf8ff;
 }
 
-/* 地址卡片样式 */
-.address-item {
-  margin-bottom: 30px;
-  padding: 0 20px;
+.hero-bg-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
 }
 
-.address-item:last-child {
+/* 从左侧浅色渐变到透明，右侧露出图片 */
+.hero-gradient-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to right,
+    #fbf8ff 0%,
+    rgba(251, 248, 255, 0.85) 45%,
+    rgba(251, 248, 255, 0.3) 70%,
+    transparent 100%
+  );
+}
+
+.hero-bg-img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center right;
+  background-repeat: no-repeat;
+}
+
+/* 容器：用 calc 动态计算左边距，与 .nav-container（max-width:1280 margin:0 auto padding:0 24px）的 logo 位置完全对齐 */
+.hero-container {
+  position: relative !important;
+  z-index: 2;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  /* 左右 padding = max(24, (视窗宽 - 1280) / 2 + 24)，与 .nav-container 中 logo 的实际位置一致 */
+  padding: 80px max(24px, calc((100vw - 1280px) / 2 + 24px)) 56px !important;
+  min-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.hero-content {
+  max-width: 580px;
+  /* 覆盖全局 main.css 的 .hero-content { margin: 0 auto; padding-top: 80px; } */
+  margin: 0 !important;
+  padding-top: 0 !important;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+}
+
+/* 徽章 */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  width: fit-content;
+  max-width: 100%;
+  gap: 8px;
+  background: rgba(0, 62, 199, 0.08);
+  color: #003ec7;
+  border: 1px solid rgba(0, 62, 199, 0.18);
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+/* 标题 */
+.hero-title {
+  font-family: 'Manrope', 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', sans-serif;
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #191b25;
+  margin-bottom: 20px;
+}
+
+.hero-title-accent {
+  color: #003ec7;
+}
+
+/* 副标题 */
+.hero-desc {
+  font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #434656;
+  margin-bottom: 36px;
+  max-width: 480px;
+}
+
+/* 按钮组 */
+.hero-btns {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
   margin-bottom: 0;
 }
 
-.address-label {
-  margin-bottom: 12px;
-}
-
-.location-badge {
+.btn-primary-solid {
   display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-  border-radius: 16px;
-  font-size: 0.85rem;
-  font-weight: 500;
-}
-
-.location-badge.headquarters {
-  background: #e8f0fe;
-  color: #3b82f6;
-}
-
-.location-badge.branch {
-  background: #e6f4f1;
-  color: #10b981;
-}
-
-.location-badge i {
-  font-size: 0.8rem;
-}
-
-.address-item p {
-  margin: 12px 0;
-  line-height: 1.8;
-  color: #333;
-  font-size: 1rem;
-  text-align: left;
-}
-
-.info-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: #3b82f6;
-  font-weight: 500;
-  font-size: 0.95rem;
-  margin-top: 12px;
-  text-decoration: none;
-  padding: 8px 16px;
-  border-radius: 8px;
-  background: #e8f0fe;
-}
-
-.info-link i {
-  font-size: 0.8rem;
-}
-
-.address-image {
-  position: relative;
-  width: calc(100% + 40px);
-  height: 180px;
-  border-radius: 12px;
-  overflow: hidden;
-  margin: 12px -20px;
-  background: #f5f5f5;
-}
-
-.address-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.address-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.address-marker {
-  background: white;
-  border-radius: 20px;
-  padding: 10px 20px;
-  display: flex;
   align-items: center;
   gap: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-
-.address-marker i {
-  color: #3b82f6;
-  font-size: 16px;
-}
-
-.address-marker span {
-  font-weight: 500;
-  color: #333;
+  background: #003ec7;
+  color: #fff;
+  padding: 14px 32px;
+  border-radius: 10px;
   font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: box-shadow 0.25s, transform 0.2s;
+  box-shadow: 0 4px 14px rgba(0, 62, 199, 0.3);
 }
 
-@media (max-width: 767px) {
-  .hero-buttons {
-    flex-direction: column;
-    gap: 18px;
-  }
-  
-  .hero-stats {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
-  }
-  
-  .features-grid {
-    grid-template-columns: 1fr;
-    gap: 25px;
-  }
-  
-  .section-title {
-    font-size: 2.2rem;
-  }
-  
-  .section-desc {
-    font-size: 1.1rem;
-    padding: 0 15px;
-  }
-  
-  .feature-header {
-    padding: 24px 24px 18px;
-  }
-  
-  .feature-card.modern-card p {
-    margin: 0 24px 20px;
-  }
-  
-  .feature-metrics {
-    padding: 0 24px;
-  }
-  
-  .feature-chart {
-    padding: 20px 24px 24px;
-  }
-  
-  .defense-features,
-  .about,
-  .contact.modern-contact {
-    padding: 80px 0;
-  }
-  
-  /* 联系我们响应式 */
-  .info-header {
-    padding: 24px 24px 18px;
-  }
-  
-  .info-content {
-    padding: 0 24px 24px;
-  }
-  
-  .info-icon.modern-info-icon {
-    width: 56px;
-    height: 56px;
-  }
-  
-  .contact-icon-svg {
-    width: 28px;
-    height: 28px;
-  }
+.btn-primary-solid:hover {
+  box-shadow: 0 10px 28px rgba(0, 62, 199, 0.45);
+  transform: translateY(-2px);
 }
 
-@media (max-width: 576px) {
-  .features-grid {
-    grid-template-columns: 1fr;
-    gap: 25px;
-  }
-  
-  .section-title {
-    font-size: 1.8rem;
-  }
-  
-  .feature-header {
-    padding: 20px 20px 16px;
-  }
-  
-  .feature-card.modern-card p {
-    margin: 0 20px 16px;
-    font-size: 0.9rem;
-  }
-  
-  .feature-metrics {
-    padding: 0 20px;
-  }
-  
-  .feature-chart {
-    padding: 16px 20px 20px;
-  }
-  
-  .feature-icon.modern-icon {
-    width: 56px;
-    height: 56px;
-  }
-  
-  .icon-svg {
-    width: 28px;
-    height: 28px;
-  }
-  
-  .feature-header h3 {
-    font-size: 1.2rem;
-  }
-  
-  /* 联系我们移动端优化 */
-  .info-header {
-    padding: 20px 20px 16px;
-  }
-  
-  .info-content {
-    padding: 0 20px 20px;
-  }
-  
-  .info-header h3 {
-    font-size: 1.2rem;
-  }
-  
-  .address-text,
-  .contact-value {
-    font-size: 0.9rem;
-  }
-  
-  .address-image.modern-address-image {
-    height: 180px;
-  }
-  
-  .info-icon.modern-info-icon {
-    width: 50px;
-    height: 50px;
-  }
-  
-  .contact-icon-svg {
-    width: 24px;
-    height: 24px;
-  }
-  
-  .contact-link.primary-link {
-    padding: 10px 16px;
-    font-size: 0.85rem;
-  }
-  
-  .info-badge {
-    font-size: 0.65rem;
-    padding: 3px 8px;
-  }
-}
-
-/* 通用按钮样式 */
-.btn {
+.btn-surface {
   display: inline-flex;
   align-items: center;
-  padding: 16px 32px;
-  border-radius: 50px;
-  font-size: 1rem;
-  font-weight: 600;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-  font-family: 'Inter', sans-serif;
-  letter-spacing: 0.25px;
+  background: #e7e8ec;
+  color: #191b25;
+  padding: 14px 32px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 700;
   text-decoration: none;
-  border: none;
-  cursor: pointer;
+  border: 1px solid rgba(195, 197, 217, 0.4);
+  transition: background 0.2s, transform 0.2s;
 }
 
-.btn-primary {
-  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-  color: #ffffff;
-  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4), 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.btn-primary:hover {
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5), 0 4px 12px rgba(0, 0, 0, 0.15);
-  transform: translateY(-2px);
-  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-}
-
-.btn-outline {
-  background: rgba(255, 255, 255, 0.8);
-  border: 2px solid rgba(59, 130, 246, 0.3);
-  color: #1e40af;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-}
-
-.btn-outline:hover {
-  border-color: #3b82f6;
-  background: rgba(59, 130, 246, 0.08);
-  color: #1d4ed8;
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15);
+.btn-surface:hover {
+  background: #dcdde3;
   transform: translateY(-2px);
 }
 
-/* 反无人机系统部分 */
-.defense-tech {
-  position: relative;
-  background-color: #0a192f;
-  color: #fff;
-}
-
-.tech-bg-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('https://via.placeholder.com/1920x1080?text=科技背景');
-  background-size: cover;
-  opacity: 0.1;
-}
-
-.tech-glow {
-  position: absolute;
-  top: 30%;
-  right: 10%;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(79, 172, 254, 0.3) 0%, rgba(0, 0, 0, 0) 70%);
-  filter: blur(50px);
-  animation: glow 8s infinite alternate;
-  z-index: 1;
-}
-
-@keyframes glow {
-  0% {
-    opacity: 0.5;
-    transform: scale(1);
-  }
-  100% {
-    opacity: 0.8;
-    transform: scale(1.5);
-  }
-}
-
-.section-header.light .section-title,
-.section-header.light .section-desc {
-  color: #fff;
-}
-
-.section-header.light .section-title::after {
-  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
-}
-
-.tech-showcase {
+/* 统计数据：推到 Hero 底部 */
+.hero-stats {
+  margin-top: auto;
+  padding-top: 28px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-  margin: 50px 0;
-  position: relative;
-  z-index: 2;
+  gap: 32px;
+  border-top: 1px solid rgba(195, 197, 217, 0.25);
+  max-width: 540px;
 }
 
-.tech-item {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  padding: 30px;
-  border-radius: 16px;
-  transition: all 0.4s ease;
-  position: relative;
-  overflow: hidden;
+.stat-num {
+  font-family: 'Manrope', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #003ec7;
+  margin-bottom: 4px;
+  letter-spacing: -0.01em;
 }
 
-.tech-item:hover {
-  background: rgba(255, 255, 255, 0.1);
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+.stat-label {
+  font-size: 0.82rem;
+  color: #64748b;
+  line-height: 1.4;
 }
 
-.tech-icon {
-  width: 60px;
-  height: 60px;
-  border-radius: 16px;
-  background: linear-gradient(135deg, rgba(79, 172, 254, 0.2) 0%, rgba(0, 242, 254, 0.2) 100%);
+/* Hero 响应式 */
+@media (max-width: 1100px) {
+  .hero-title { font-size: 2.6rem; }
+}
+
+@media (max-width: 900px) {
+  .hero-title { font-size: 2.4rem; }
+  .hero-container { padding: 72px 24px 40px !important; }
+  .hero-gradient-overlay {
+    background: linear-gradient(to right, #fbf8ff 0%, rgba(251,248,255,0.92) 60%, rgba(251,248,255,0.5) 100%);
+  }
+  .stat-num { font-size: 1.5rem; }
+}
+
+@media (max-width: 600px) {
+  .hero-section { min-height: auto; }
+  .hero-container { padding: 60px 20px 36px !important; min-height: auto; }
+  .hero-title { font-size: 2rem; }
+  .hero-desc { font-size: 0.95rem; }
+  .hero-btns { flex-direction: column; margin-bottom: 32px; }
+  .btn-primary-solid, .btn-surface { width: 100%; justify-content: center; }
+  .hero-stats { grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 24px; }
+  .stat-num { font-size: 1.25rem; }
+  .hero-bg-img { opacity: 0.15; }
+  .hero-gradient-overlay { background: rgba(251,248,255,0.7); }
+}
+
+/* ===== SHARED SECTION STYLES ===== */
+.sec-title {
+  font-family: 'Manrope', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #191b25;
+  margin-bottom: 14px;
+  letter-spacing: -0.02em;
+}
+
+.sec-desc {
+  font-size: 0.97rem;
+  color: #434656;
+  line-height: 1.65;
+}
+
+.text-center-block {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 56px;
+}
+
+/* Glass card style */
+.glass-card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(115, 118, 136, 0.1);
+}
+
+/* ===== PRODUCTS SECTION ===== */
+.products-section {
+  padding: 80px 0;
+  background: #fbf8ff;
+}
+
+.products-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  margin-bottom: 56px;
+}
+
+.products-header > div:first-child {
+  max-width: 540px;
+}
+
+.nav-arrows {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.arrow-btn {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1.5px solid #c3c5d9;
+  background: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
-  color: #4facfe;
-  font-size: 24px;
+  cursor: pointer;
+  color: #434656;
+  transition: all 0.2s;
 }
 
-.tech-item h3 {
-  font-size: 1.3rem;
-  margin-bottom: 15px;
+.arrow-btn:hover {
+  background: #003ec7;
+  border-color: #003ec7;
   color: #fff;
 }
 
-.tech-item p {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 0.95rem;
-  line-height: 1.6;
-}
+/* Category header */
+.cat-block { margin-bottom: 56px; }
 
-.tech-number {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  font-size: 3rem;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.05);
-  line-height: 1;
-}
-
-.tech-video {
-  margin-top: 60px;
-  position: relative;
-  z-index: 2;
-  display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  gap: 40px;
+.cat-row {
+  display: flex;
   align-items: center;
+  gap: 20px;
+  margin-bottom: 32px;
 }
 
-.video-container {
+.cat-line {
+  flex: 1;
+  height: 1px;
+  background: rgba(195, 197, 217, 0.35);
+}
+
+.cat-name {
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.primary-cat { color: #003ec7; }
+.secondary-cat { color: #00677f; }
+
+/* 3-column product cards */
+.p-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.p-card {
+  border-radius: 14px;
+  overflow: hidden;
+  transition: box-shadow 0.35s, transform 0.3s;
+}
+
+.p-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0, 62, 199, 0.1);
+}
+
+.p-card-img {
   position: relative;
-  border-radius: 16px;
+  aspect-ratio: 4/3;
   overflow: hidden;
 }
 
-.video-badge {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  background: rgba(15, 23, 42, 0.8);
-  color: #fff;
-  padding: 8px 16px;
-  border-radius: 30px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  z-index: 2;
-  backdrop-filter: blur(5px);
-  display: flex;
-  align-items: center;
-}
-
-.video-badge .dot {
-  width: 6px;
-  height: 6px;
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: 50%;
-  margin: 0 10px;
-}
-
-.video-container img {
-  width: 100%;
-  height: auto;
+.p-card-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
   display: block;
 }
 
-.video-caption {
-  padding: 20px 0;
+.p-card:hover .p-card-img img { transform: scale(1.06); }
+
+.p-card-tag {
+  position: absolute;
+  top: 14px; left: 14px;
+  background: #003ec7;
+  color: #fff;
+  padding: 3px 12px;
+  border-radius: 4px;
+  font-size: 0.73rem;
+  font-weight: 700;
 }
 
-.video-stats {
-  display: flex;
-  gap: 30px;
-  margin-bottom: 30px;
+.p-card-body {
+  padding: 18px 18px 22px;
 }
 
-.v-stat {
+.p-card-body h4 {
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #191b25;
+  margin-bottom: 12px;
+}
+
+.p-card-body ul {
+  list-style: none;
+  padding: 0; margin: 0;
   display: flex;
   flex-direction: column;
+  gap: 7px;
 }
 
-.v-number {
-  font-size: 1.8rem;
+.p-card-body li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.86rem;
+  color: #434656;
+}
+
+.dot-primary {
+  width: 6px; height: 6px;
+  background: #003ec7;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Bento grid */
+.bento-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+.bento-main {
+  border-radius: 14px;
+  padding: 28px;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.bento-main:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(0, 103, 127, 0.1);
+}
+
+.bento-main-inner {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+}
+
+.bento-main-text { flex: 1; }
+
+.bento-label {
+  display: block;
+  font-size: 0.72rem;
   font-weight: 700;
-  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 5px;
+  color: #00677f;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
 }
 
-.v-label {
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.7);
+.bento-main-text h4 {
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #191b25;
+  margin-bottom: 14px;
+  letter-spacing: -0.02em;
 }
 
-.video-caption h3 {
-  font-size: 1.8rem;
-  margin-bottom: 15px;
-  color: #fff;
+.bento-main-text p {
+  font-size: 0.93rem;
+  color: #434656;
+  line-height: 1.65;
+  margin-bottom: 22px;
 }
 
-.video-caption p {
-  color: rgba(255, 255, 255, 0.7);
-  margin-bottom: 25px;
-  font-size: 1rem;
-  line-height: 1.6;
-}
-
-.btn-video {
+.bento-link {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  background: transparent;
-  border: 2px solid rgba(79, 172, 254, 0.5);
-  color: #4facfe;
+  gap: 6px;
+  color: #003ec7;
+  font-weight: 700;
+  font-size: 0.93rem;
+  text-decoration: none;
+  transition: gap 0.2s;
 }
 
-.btn-video:hover {
-  background: rgba(79, 172, 254, 0.1);
-  border-color: #4facfe;
+.bento-link:hover { gap: 10px; }
+
+.bento-main-img {
+  width: 46%;
+  flex-shrink: 0;
+  aspect-ratio: 16/10;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
-/* 响应式调整 - 无人机和反无人机系统部分 */
-@media (max-width: 1200px) {
-  .solutions-grid,
-  .tech-showcase {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .tech-video {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
+.bento-main-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+.bento-side {
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.bento-side:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(0, 62, 199, 0.08);
+}
+
+.bento-side-img {
+  aspect-ratio: 1/1;
+  overflow: hidden;
+}
+
+.bento-side-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+.bento-side h4 {
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #191b25;
+  padding: 18px 18px 8px;
+}
+
+.bento-side p {
+  font-size: 0.86rem;
+  color: #434656;
+  padding: 0 18px 18px;
+  line-height: 1.55;
+}
+
+/* Products responsive */
+@media (max-width: 1100px) {
+  .p-cards-grid { grid-template-columns: repeat(2, 1fr); }
+  .bento-grid { grid-template-columns: 1fr; }
+  .bento-main-inner { flex-direction: column; }
+  .bento-main-img { width: 100%; aspect-ratio: 16/9; }
+  .bento-side-img { aspect-ratio: 16/9; }
 }
 
 @media (max-width: 767px) {
-  .solutions-grid,
-  .tech-showcase {
-    grid-template-columns: 1fr;
-  }
-  
-  .solution-features {
-    grid-template-columns: 1fr;
-  }
-  
-  .video-stats {
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .v-stat {
-    flex-direction: row;
-    align-items: center;
-    gap: 15px;
-  }
-  
-  .v-number {
-    margin-bottom: 0;
-  }
+  .products-section { padding: 60px 0; }
+  .products-header { flex-direction: column; align-items: flex-start; }
+  .p-cards-grid { grid-template-columns: 1fr; }
+  .sec-title { font-size: 1.65rem; }
 }
 
-  /* 应用案例部分增强 */
-  .cases {
-    background-color: #f1f5f9;
-    padding: 100px 0;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .cases::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at 80% 20%, rgba(56, 189, 248, 0.1) 0%, transparent 70%);
-    z-index: 1;
-  }
-  
-  .tech-dots {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image: radial-gradient(rgba(79, 172, 254, 0.2) 1px, transparent 1px);
-    background-size: 30px 30px;
-    opacity: 0.3;
-    z-index: 1;
-  }
-  
-  .cases .container {
-    position: relative;
-    z-index: 2;
-  }
-  
-  .cases-showcase {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 40px;
-    margin-top: 50px;
-  }
-  
-  /* 新增案例滑块样式 */
-  .cases-slider {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin-bottom: 30px;
-  }
-  
-  .case-slide {
-    background: #fff;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease;
-    height: 100%;
-    border: 1px solid rgba(226, 232, 240, 0.8);
-  }
-  
-  .case-slide:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  }
-  
-  .case-image {
-    position: relative;
-    height: 220px;
-    overflow: hidden;
-  }
-  
-  .case-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: all 0.5s ease;
-  }
-  
-  .case-slide:hover .case-image img {
-    transform: scale(1.1);
-  }
-  
-  .case-tag {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    background: rgba(15, 23, 42, 0.7);
-    color: #fff;
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    backdrop-filter: blur(5px);
-  }
-  
-  .case-content {
-    padding: 25px;
-  }
-  
-  .case-content h3 {
-    font-size: 1.3rem;
-    margin-bottom: 12px;
-    color: #0f172a;
-  }
-  
-  .case-content p {
-    color: #64748b;
-    margin-bottom: 20px;
-    line-height: 1.6;
-    font-size: 0.95rem;
-  }
-  
-  .case-link {
-    display: inline-flex;
-    align-items: center;
-    color: #4facfe;
-    font-weight: 600;
-    transition: all 0.3s ease;
-  }
-  
-  .case-link i {
-    margin-left: 8px;
-    transition: transform 0.3s ease;
-  }
-  
-  .case-link:hover {
-    color: #0f172a;
-  }
-  
-  .case-link:hover i {
-    transform: translateX(5px);
-  }
-  
-  .cases-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-  }
-  
-  .cases-cta {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 50px;
-    gap: 20px;
-  }
-  
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
-    color: #fff;
-    border: none;
-    padding: 14px 28px;
-    border-radius: 30px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    box-shadow: 0 10px 20px rgba(79, 172, 254, 0.3);
-  }
-  
-  .btn-primary:hover {
-    box-shadow: 0 15px 25px rgba(79, 172, 254, 0.4);
-    transform: translateY(-3px);
-  }
-  
-  .btn-outline {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: transparent;
-    color: #4facfe;
-    border: 2px solid rgba(79, 172, 254, 0.5);
-    padding: 14px 28px;
-    border-radius: 30px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-  }
-  
-  .btn-outline:hover {
-    background: rgba(79, 172, 254, 0.1);
-    border-color: #4facfe;
-    transform: translateY(-3px);
-  }
-  
-  .btn-outline i {
-    transition: transform 0.3s ease;
-  }
-  
-  .btn-outline:hover i {
-    transform: translateX(5px);
-  }
-  
-  /* 响应式调整 - 应用案例部分 */
-  @media (max-width: 1200px) {
-    .cases-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-    }
-  }
-  
-  @media (max-width: 767px) {
-    .cases-grid {
-      grid-template-columns: 1fr;
-      gap: 15px;
-    }
-    
-    .mini-case {
-      flex-direction: row;
-      align-items: center;
-      text-align: left;
-    }
-    
-    .mini-case-icon {
-      margin-right: 15px;
-      margin-bottom: 0;
-      width: 50px;
-      height: 50px;
-      font-size: 20px;
-      flex-shrink: 0;
-    }
-    
-    .mini-case-content {
-      text-align: left;
-    }
-    
-    .cases-cta {
-      flex-direction: column;
-      gap: 15px;
-    }
-  }
-  
-  @media (max-width: 576px) {
-    .cases {
-      padding: 70px 0;
-    }
-    
-    .section-title {
-      font-size: 1.8rem;
-    }
-    
-    .section-desc {
-      font-size: 1rem;
-    }
-    
-    .mini-case-content h4 {
-      font-size: 1rem;
-    }
-    
-    .mini-case-content p {
-      font-size: 0.85rem;
-    }
-    
-    .btn-primary, .btn-outline {
-      width: 100%;
-      justify-content: center;
-      padding: 12px 20px;
-      font-size: 0.95rem;
-    }
-  }
-  
-  /* 关于我们部分 - 现代优化版本 */
-  .about {
-    padding: 120px 0;
-    position: relative;
-    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-    overflow: hidden;
-  }
-  
-  .about-shape {
-    position: absolute;
-    top: -30%;
-    right: -15%;
-    width: 70%;
-    height: 160%;
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.04) 0%, rgba(147, 197, 253, 0.06) 100%);
-    border-radius: 35% 65% 65% 35% / 35% 35% 65% 65%;
-    z-index: 1;
-    animation: morphShape 25s ease-in-out infinite alternate;
-  }
-  
-  @keyframes morphShape {
-    0% {
-      border-radius: 35% 65% 65% 35% / 35% 35% 65% 65%;
-      transform: rotate(0deg);
-    }
-    50% {
-      border-radius: 60% 40% 40% 60% / 60% 60% 40% 40%;
-      transform: rotate(1deg);
-    }
-    100% {
-      border-radius: 45% 55% 35% 65% / 45% 35% 65% 55%;
-      transform: rotate(-1deg);
-    }
-  }
-  
-  .about .container {
-    position: relative;
-    z-index: 2;
-  }
-  
-  .about-content {
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 50px;
-    margin-top: 50px;
-    align-items: center;
-  }
-  
-  .about-badge {
-    display: inline-block;
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(147, 197, 253, 0.12) 100%);
-    color: #1e40af;
-    font-weight: 600;
-    padding: 10px 20px;
-    border-radius: 25px;
-    margin-bottom: 25px;
-    border: 1px solid rgba(59, 130, 246, 0.2);
-    font-size: 0.85rem;
-    letter-spacing: 0.5px;
-    font-family: 'Inter', sans-serif;
-  }
-  
-  .about-text h3 {
-    font-size: 2rem;
-    font-weight: 800;
-    color: #0f172a;
-    margin-bottom: 25px;
-    line-height: 1.3;
-    font-family: 'Inter', sans-serif;
-    letter-spacing: -0.02em;
-  }
-  
-  .about-text p {
-    color: #64748b;
-    line-height: 1.7;
-    margin-bottom: 18px;
-    font-size: 1rem;
-    font-family: 'Inter', sans-serif;
-  }
-  
-  .about-stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 20px;
-    margin: 30px 0;
-  }
-  
-  .stat-item {
-    position: relative;
-    padding: 20px;
-    border-radius: 18px;
-    text-align: center;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(248, 250, 252, 0.9) 100%);
-    border: 1px solid rgba(226, 232, 240, 0.6);
-    overflow: hidden;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-  }
-  
-  .stat-item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.1);
-  }
-  
-  .stat-bg {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
-  }
-  
-  .stat-num {
-    font-size: 2rem;
-    font-weight: 800;
-    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    display: block;
-    margin-bottom: 8px;
-    font-family: 'Inter', sans-serif;
-  }
-  
-  .stat-desc {
-    font-size: 0.9rem;
-    color: #64748b;
-    font-weight: 500;
-    font-family: 'Inter', sans-serif;
-  }
-  
-  .about-actions {
-    display: flex;
-    gap: 20px;
-    margin-top: 30px;
-  }
-  
-  .img-frame {
-    position: relative;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  }
-  
-  .img-frame img {
-    width: 100%;
-    height: auto;
-    display: block;
-    transition: all 0.5s ease;
-  }
-  
-  .img-frame:hover img {
-    transform: scale(1.05);
-  }
-  
-  .img-badge {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    background: rgba(15, 23, 42, 0.8);
-    color: #fff;
-    padding: 8px 16px;
-    border-radius: 30px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    backdrop-filter: blur(5px);
-    display: flex;
-    align-items: center;
-  }
-  
-  .img-badge-sep {
-    width: 5px;
-    height: 5px;
-    background: rgba(255, 255, 255, 0.5);
-    border-radius: 50%;
-    margin: 0 10px;
-  }
-  
-  /* 联系我们部分 - 现代化重新设计 */
-  .contact.modern-contact {
-    padding: 120px 0;
-    position: relative;
-    background: linear-gradient(135deg, 
-      #f8fafc 0%, 
-      #f1f5f9 25%,
-      #e2e8f0 50%,
-      #f8fafc 100%);
-    overflow: hidden;
-  }
-  
-  .contact-bg-pattern {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: 
-      radial-gradient(circle at 15% 25%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
-      radial-gradient(circle at 85% 75%, rgba(147, 197, 253, 0.08) 0%, transparent 50%),
-      radial-gradient(circle at 45% 85%, rgba(59, 130, 246, 0.03) 0%, transparent 40%);
-    opacity: 0.8;
-  }
-  
-  .contact.modern-contact .container {
-    position: relative;
-    z-index: 2;
-  }
-  
-  /* 联系我们内容布局 */
-  .contact-content {
-    display: grid;
-    grid-template-columns: 1fr 1.5fr;
-    gap: 50px;
-    margin-top: 60px;
-  }
-  
-  .contact-info {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-  
-  /* 现代化信息卡片 */
-  .info-card.modern-info-card {
-    background: linear-gradient(135deg, 
-      rgba(255, 255, 255, 0.95) 0%, 
-      rgba(255, 255, 255, 0.9) 100%);
-    border-radius: 24px;
-    padding: 0;
-    box-shadow: 
-      0 8px 32px rgba(59, 130, 246, 0.08),
-      0 2px 16px rgba(0, 0, 0, 0.04),
-      inset 0 1px 0 rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    backdrop-filter: blur(20px) saturate(180%);
-    overflow: hidden;
-    position: relative;
-  }
-  
-  .info-card.modern-info-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, 
-      transparent 0%, 
-      rgba(59, 130, 246, 0.4) 50%, 
-      transparent 100%);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-  }
-  
-  .info-card.modern-info-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 
-      0 20px 40px rgba(59, 130, 246, 0.15),
-      0 8px 24px rgba(0, 0, 0, 0.08),
-      inset 0 1px 0 rgba(255, 255, 255, 0.9);
-  }
-  
-  .info-card.modern-info-card:hover::before {
-    opacity: 1;
-  }
-  
-  /* 特色卡片样式 */
-  .info-card.featured-card {
-    grid-row: span 2;
-    background: linear-gradient(135deg, 
-      rgba(59, 130, 246, 0.02) 0%, 
-      rgba(255, 255, 255, 0.95) 25%,
-      rgba(255, 255, 255, 0.9) 100%);
-  }
-  
-  .info-card.featured-card::before {
-    background: linear-gradient(90deg, 
-      transparent 0%, 
-      rgba(59, 130, 246, 0.6) 50%, 
-      transparent 100%);
-  }
-  
-  /* 信息头部区域 */
-  .info-header {
-    padding: 32px 32px 24px;
-    position: relative;
-  }
-  
-  .info-icon-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
-  
-  .info-icon.modern-info-icon {
-    width: 64px;
-    height: 64px;
-    border-radius: 20px;
-    background: linear-gradient(135deg, 
-      rgba(59, 130, 246, 0.1) 0%, 
-      rgba(147, 197, 253, 0.15) 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid rgba(59, 130, 246, 0.15);
-    position: relative;
-    overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  .info-icon.modern-info-icon::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transform: rotate(-45deg) translateX(-100%);
-    transition: transform 0.6s ease;
-  }
-  
-  .info-card.modern-info-card:hover .info-icon.modern-info-icon {
-    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-    border-color: rgba(255, 255, 255, 0.3);
-    transform: scale(1.1) rotate(8deg);
-    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
-  }
-  
-  .info-card.modern-info-card:hover .info-icon.modern-info-icon::before {
-    transform: rotate(-45deg) translateX(100%);
-  }
-  
-  .contact-icon-svg {
-    width: 32px;
-    height: 32px;
-    color: #3b82f6;
-    transition: all 0.4s ease;
-  }
-  
-  .info-card.modern-info-card:hover .contact-icon-svg {
-    color: #ffffff;
-    transform: scale(1.1);
-  }
-  
-  .info-badge {
-    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-    color: #ffffff;
-    font-size: 0.7rem;
-    font-weight: 700;
-    padding: 4px 10px;
-    border-radius: 12px;
-    letter-spacing: 0.5px;
-    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
-    font-family: 'Inter', sans-serif;
-  }
-  
-  .info-header h3 {
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: #0f172a;
-    margin: 0;
-    line-height: 1.3;
-    font-family: 'Inter', sans-serif;
-    letter-spacing: -0.01em;
-  }
-  
-  /* 信息内容区域 */
-  .info-content {
-    padding: 0 32px 32px;
-  }
-  
-  .address-text,
-  .contact-value {
-    color: #64748b;
-    line-height: 1.6;
-    margin-bottom: 24px;
-    font-size: 1rem;
-    font-family: 'Inter', sans-serif;
-  }
-  
-  /* 现代化地址图片 */
-  .address-image.modern-address-image {
-    position: relative;
-    width: 100%;
-    height: 240px;
-    border-radius: 18px;
-    overflow: hidden;
-    margin: 20px 0 24px;
-    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15);
-    border: 2px solid rgba(255, 255, 255, 0.8);
-  }
-  
-  .address-image.modern-address-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  .address-image.modern-address-image:hover img {
-    transform: scale(1.08);
-  }
-  
-  .address-overlay.modern-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, 
-      rgba(59, 130, 246, 0.1) 0%, 
-      rgba(0, 0, 0, 0.2) 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .address-marker.modern-marker {
-    background: linear-gradient(135deg, 
-      rgba(255, 255, 255, 0.95) 0%, 
-      rgba(248, 250, 252, 0.9) 100%);
-    border-radius: 50px;
-    padding: 12px 20px;
-    display: flex;
-    align-items: center;
-    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.25);
-    backdrop-filter: blur(12px);
-    border: 2px solid rgba(255, 255, 255, 0.6);
-    transform: translateY(0);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  .address-image.modern-address-image:hover .address-marker.modern-marker {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 35px rgba(59, 130, 246, 0.35);
-  }
-  
-  .marker-icon {
-    width: 20px;
-    height: 20px;
-    margin-right: 8px;
-    color: #3b82f6;
-  }
-  
-  .address-marker.modern-marker span {
-    font-weight: 700;
-    color: #0f172a;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.9rem;
-  }
-  
-  /* 联系操作区域 */
-  .contact-actions {
-    margin-top: 20px;
-  }
-  
-  .contact-link.primary-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-    color: #ffffff;
-    padding: 12px 20px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.9rem;
-    font-family: 'Inter', sans-serif;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .contact-link.primary-link::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.2);
-    transition: all 0.4s ease;
-  }
-  
-  .contact-link.primary-link:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
-    background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
-  }
-  
-  .contact-link.primary-link:hover::before {
-    left: 100%;
-  }
-  
-  .link-icon {
-    width: 16px;
-    height: 16px;
-    flex-shrink: 0;
-  }
-  
-  .arrow-icon {
-    width: 14px;
-    height: 14px;
-    transition: transform 0.3s ease;
-    flex-shrink: 0;
-  }
-  
-  .contact-link.primary-link:hover .arrow-icon {
-    transform: translateX(4px);
-  }
-  
-  /* 地图卡片样式 */
-  .info-card:first-child {
-    grid-row: span 2;
-  }
-  
-  .info-card:first-child .info-link {
-    margin-top: 20px;
-  }
-  
+/* ===== SCENARIOS SECTION ===== */
+.scenes-section {
+  padding: 80px 0;
+  background: #f3f2ff;
+}
 
+.scenes-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
 
-  /* 地址图片样式 - 现代优化版本 */
-  .address-image {
-    position: relative;
-    width: 100%;
-    height: 220px;
-    border-radius: 16px;
-    overflow: hidden;
-    margin: 20px 0;
-    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15);
-    border: 2px solid rgba(255, 255, 255, 0.8);
-  }
+.scene-card {
+  position: relative;
+  height: 384px; /* h-96 = 24rem */
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+}
 
-  .address-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  }
+.scene-card img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+  display: block;
+}
 
-  .address-image:hover img {
-    transform: scale(1.08);
-  }
+.scene-card:hover img { transform: scale(1.08); }
 
-  .address-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(0,0,0,0.1) 0%, rgba(59, 130, 246, 0.3) 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.scene-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(25, 27, 37, 0.9) 0%, rgba(25,27,37,0.15) 50%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 22px;
+}
 
-  .address-marker {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.9) 100%);
-    border-radius: 30px;
-    padding: 12px 20px;
-    display: flex;
-    align-items: center;
-    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.25);
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(255, 255, 255, 0.6);
-    transform: translateY(0);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
+.scene-overlay h5 {
+  color: #fff;
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
 
-  .address-image:hover .address-marker {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 35px rgba(59, 130, 246, 0.35);
-  }
+.scene-overlay p {
+  font-size: 0.82rem;
+  color: rgba(195, 197, 217, 0.85);
+  line-height: 1.5;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.3s, transform 0.3s;
+}
 
-  .address-marker i {
-    color: #3b82f6;
-    font-size: 20px;
-    margin-right: 10px;
-  }
+.scene-card:hover .scene-overlay p {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-  .address-marker span {
-    font-weight: 700;
-    color: #0f172a;
-    font-family: 'Inter', sans-serif;
-  }
+@media (max-width: 1100px) {
+  .scenes-grid { grid-template-columns: repeat(2, 1fr); }
+}
 
-  /* 页面加载样式 - 现代优化版本 */
-  .home-loading {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
-    font-family: 'Inter', sans-serif;
-  }
+@media (max-width: 600px) {
+  .scenes-section { padding: 60px 0; }
+  .scenes-grid { grid-template-columns: 1fr; }
+  .scene-card { height: 260px; }
+}
 
-  .loading-spinner-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+/* ===== ABOUT SECTION ===== */
+.about-section {
+  padding: 80px 0;
+  background: #fbf8ff;
+  position: relative;
+  overflow: hidden;
+}
 
-  .loading-spinner {
-    width: 60px;
-    height: 60px;
-    border: 4px solid rgba(59, 130, 246, 0.2);
-    border-top: 4px solid #3b82f6;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin-bottom: 20px;
-  }
+/* 斜切装饰带 */
+.about-deco-stripe {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 33%;
+  height: 100%;
+  background: rgba(0, 62, 199, 0.04);
+  transform: skewX(-8deg) translateX(30%);
+  z-index: 0;
+}
 
-  .loading-spinner-container span {
-    color: #64748b;
-    font-size: 1rem;
-    font-weight: 500;
-    font-family: 'Inter', sans-serif;
-  }
+.about-section .lander-container {
+  position: relative;
+  z-index: 1;
+}
 
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
 
-  /* 添加错误状态样式 */
-  .error-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(15, 23, 42, 0.9);
-    z-index: 1000;
-  }
+.about-body p {
+  font-size: 0.97rem;
+  color: #434656;
+  line-height: 1.75;
+  margin-bottom: 16px;
+}
 
-  .error-message {
-    text-align: center;
-    color: #fff;
-    padding: 2rem;
-  }
+.about-feats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 28px;
+  padding-top: 28px;
+}
 
-  .error-message i {
-    font-size: 3rem;
-    color: #ef4444;
-    margin-bottom: 1rem;
-  }
+.about-feat {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
 
-  .error-message p {
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-  }
-</style> 
+.feat-icon-box {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  background: rgba(0, 62, 199, 0.08);
+  color: #003ec7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.25s, color 0.25s;
+}
+
+.about-feat:hover .feat-icon-box {
+  background: #003ec7;
+  color: #fff;
+}
+
+.about-feat h6 {
+  font-size: 0.93rem;
+  font-weight: 700;
+  color: #191b25;
+  margin: 0 0 4px;
+}
+
+.about-feat p {
+  font-size: 0.82rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.about-img-col {
+  position: relative;
+}
+
+.about-img-frame {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.12);
+}
+
+.about-img-frame img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.about-img-frame:hover img { transform: scale(1.04); }
+
+/* 浮动专利徽章 */
+.about-badge-float {
+  position: absolute;
+  bottom: -20px;
+  left: -28px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 62, 199, 0.15);
+  border-radius: 14px;
+  padding: 18px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 10px 28px rgba(0, 62, 199, 0.1);
+}
+
+.badge-big {
+  font-family: 'Manrope', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #003ec7;
+  line-height: 1;
+  margin-bottom: 3px;
+}
+
+.badge-small {
+  font-size: 0.77rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+@media (max-width: 1000px) {
+  .about-grid { grid-template-columns: 1fr; gap: 48px; }
+  .about-badge-float { left: 16px; bottom: 16px; }
+}
+
+@media (max-width: 767px) {
+  .about-section { padding: 60px 0; }
+  .about-feats { grid-template-columns: 1fr; }
+}
+</style>

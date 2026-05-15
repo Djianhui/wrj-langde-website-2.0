@@ -174,7 +174,7 @@ const app = createApp({
             info: [
                 {
                     icon: 'fas fa-map-marker-alt',
-                    text: '浙江省杭州市滨江区科技园区创新大厦A座15楼'
+                    text: '浙江省杭州市上城区明石路515号明石商业大厦9楼9173室'
                 },
                 {
                     icon: 'fas fa-phone',

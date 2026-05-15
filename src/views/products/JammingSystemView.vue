@@ -75,28 +75,28 @@
         <div class="features-grid">
           <div class="feature-card">
             <div class="feature-icon">
-              <CustomIcons name="multi-frequency-jamming" :size="32" />
+              <i class="fas fa-broadcast-tower"></i>
             </div>
             <h3>多频段同时压制</h3>
             <p> 确保压制无人机可能的遥控频段和导航信号</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
-              <CustomIcons name="directional-jamming" :size="32" />
+              <i class="fas fa-location-arrow"></i>
             </div>
             <h3>定向干扰</h3>
             <p>对周围其它方向的设备基本不受影响，附带杀伤小，可实现黑白名单干扰</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
-              <CustomIcons name="frequency-customization" :size="32" />
+              <i class="fas fa-sliders-h"></i>
             </div>
             <h3>多频段定制</h3>
             <p>可配置多个干扰频段，成本经济可行</p>
           </div>
          <div class="feature-card">
             <div class="feature-icon">
-              <CustomIcons name="all-weather-operation" :size="32" />
+              <i class="fas fa-cloud-sun-rain"></i>
             </div>
             <h3>全天候全天时</h3>
             <p>不受雨雪雾霄影响，可实现 7*24小时 360°全方位实时干扰</p>
@@ -131,15 +131,6 @@
             </div>
             <span>区域监控</span>
           </div>
-        </div>
-      </div>
-      
-      <!-- 联系咨询 -->
-      <div class="product-contact">
-        <div class="contact-content">
-          <h2>需要了解更多？</h2>
-          <p>我们的专业团队随时为您提供技术支持和解决方案</p>
-          <RouterLink to="/contact" class="btn btn-primary">联系我们</RouterLink>
         </div>
       </div>
     </div>

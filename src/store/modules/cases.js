@@ -11,413 +11,286 @@ export const useCasesStore = defineStore('cases', {
       cases: {
         zh: [
           {
-            id: 1,
-            title: '军事要地无人机防御系统',
-            tag: '军事安全',
-            date: '2024-05-15',
-            image: '/images/cases/military-defense.jpg',
-            summary: '为北部军事要地部署朗德智能防御系统，实现全天候无人机侦测和拦截能力，保障军事基地安全。',
-            highlight: '实现100%无人机探测率，干扰范围达5公里，零安全事故',
+            id: 7,
+            title: 'Pamirs-ADMET：基于深度学习的药物 ADMET 预测系统',
+            tag: 'AI 应用',
+            date: '2025-03-29',
+            image: '/images/cases/yyal01.png',
+            summary: '面向新药研发流程，构建基于图神经网络与多任务学习的 ADMET（吸收/分布/代谢/排泄/毒性）智能预测平台，从分子结构出发为先导化合物筛选与优化提供数据驱动决策。',
+            highlight: '13000 分子训练库，平均 R² 达 0.88，毒性分类准确率 92%，单次 100 分子预测仅 12 秒',
             content: `
               <h2>项目背景</h2>
-              <p>随着无人机技术的快速发展，非授权无人机对军事设施的安全威胁日益严峻。某北部军事基地面临频繁的无人机侵入事件，需要部署先进的防御系统以保障基地安全。</p>
-              
+              <p>新药研发周期长、成本高，传统 ADMET（吸收 Absorption、分布 Distribution、代谢 Metabolism、排泄 Excretion、毒性 Toxicity）实验依赖大量动物试验与体外测试，存在周期长、成本高、可重复性差等痛点。客户希望借助深度学习能力在化合物早期筛选阶段快速预测 ADMET 性质，提升研发效率、降低后期失败风险。</p>
+
               <h2>面临挑战</h2>
               <ul>
-                <li>复杂的地形环境和严苛的气候条件</li>
-                <li>全天候24小时不间断防护需求</li>
-                <li>需要对多种类型无人机实现高精度识别</li>
-                <li>系统需要与现有军事安防体系无缝集成</li>
+                <li>药物分子结构复杂，传统描述符特征难以全面刻画分子拓扑信息</li>
+                <li>ADMET 五大维度多端点同时建模，存在数据稀疏与任务不平衡问题</li>
+                <li>预测结果需具备可解释性，方便药化专家审阅与决策</li>
+                <li>需要高并发在线服务能力，支持大规模虚拟筛选场景</li>
               </ul>
-              
+
               <h2>解决方案</h2>
-              <p>朗德智能为该军事基地定制了全方位无人机防御系统，包括：</p>
+              <p>依托四层架构（数据层 / 算法层 / 服务层 / 表现层）打造 Pamirs-ADMET 平台：</p>
               <ul>
-                <li><strong>全向雷达探测系统</strong>：采用毫米波雷达阵列，探测范围达7公里，可在复杂气象条件下准确识别目标</li>
-                <li><strong>光电跟踪系统</strong>：配备高清热成像和可见光摄像机，实现目标精确跟踪和识别</li>
-                <li><strong>电磁干扰设备</strong>：可对多频段进行定向干扰，强制无人机降落或返航</li>
-                <li><strong>指挥控制中心</strong>：集中显示探测信息，提供态势感知和自动化响应流程</li>
+                <li><strong>数据层</strong>：整合 ChEMBL、DrugBank 等公开数据库与自建实验数据，构建 13000 + 化合物训练库，统一 SMILES 标准化与分子图表征</li>
+                <li><strong>算法层</strong>：基于 PyTorch 实现图神经网络（GNN）+ 多任务学习框架，500 epoch 训练后训练损失 0.12、验证损失 0.15，模型无明显过拟合</li>
+                <li><strong>服务层</strong>：FastAPI 提供 RESTful 接口，支持单分子和批量 SMILES 输入，A100 单卡上 100 分子预测约 12 秒、1000 分子约 110 秒</li>
+                <li><strong>表现层</strong>：Vue 3 前端可视化分子结构、五维 ADMET 雷达图与可信度评估，支持研发人员快速对比候选化合物</li>
               </ul>
-              
+
               <h2>部署成效</h2>
-              <p>系统部署后取得了显著成效：</p>
               <ul>
-                <li>100%的无人机探测率，无漏检现象</li>
-                <li>干扰成功率达98%，拦截距离最远达5公里</li>
-                <li>系统全年运行稳定，零误报，零安全事故</li>
-                <li>部署后未再发生无人机侵入事件</li>
+                <li>五维端点平均 R² 达 0.88，平均 RMSE 0.34，回归任务整体表现稳定</li>
+                <li>毒性分类任务准确率 92%、ROC-AUC 0.95，可有效辅助早期毒性筛除</li>
+                <li>吸收 R²=0.88，分布 R²=0.85，代谢 R²=0.90，排泄 R²=0.87，多任务全维度均衡</li>
+                <li>结合虚拟筛选可在数小时内完成万级化合物 ADMET 评估，研发效率显著提升</li>
               </ul>
-              
-              <h2>客户评价</h2>
-              <p>"朗德智能的防御系统为我们的军事设施提供了坚实的安全保障。系统稳定性和可靠性远超预期，是军事设施防空的理想选择。"</p>
-              <p style="text-align: right;">— 军事基地安全主管</p>
             `,
             results: [
-              '100%无人机探测率',
-              '干扰范围达5公里',
-              '全年运行零误报',
-              '部署后无侵入事件'
+              '平均预测 R² 0.88',
+              '毒性分类准确率 92%',
+              'ROC-AUC 达 0.95',
+              '100 分子预测仅 12 秒'
             ]
           },
-          
+
           {
-            id: 2,
-            title: '电力设施无人机巡检系统',
-            tag: '工业应用',
-            date: '2024-01-10',
-            image: '/images/cases/power-inspection.jpg',
-            summary: '为某省电力公司打造智能无人机巡检系统，大幅提升巡检效率和故障发现率，降低运维成本。',
-            highlight: '巡检效率提升300%，故障提前发现率提升60%，年节省成本超500万',
+            id: 8,
+            title: 'Pamirs-Docking：基于深度学习的蛋白质-分子对接与评分系统',
+            tag: 'AI 应用',
+            date: '2025-04-12',
+            image: '/images/cases/yyal02.jpg',
+            summary: '面向药物筛选与分子设计场景，集成 Uni-Dock、Uni-Mol-Docking-v2 与 EquiScore 三大深度学习模型，提供蛋白质-小分子对接、结合亲和力预测与 3D 可视化一体化服务。',
+            highlight: '多模型融合对接成功率 92%，MAE < 1 kcal/mol，平均对接耗时 48 秒/对，24 小时高通量运行零崩溃',
             content: `
               <h2>项目背景</h2>
-              <p>某省电力公司负责管理超过2000公里的高压输电线路和数百座输电塔，传统人工巡检方式耗时长、效率低、安全风险高，急需引入智能化巡检手段。</p>
-              
+              <p>传统对接工具（AutoDock、GOLD、Glide 等）依赖物理力场与经验打分函数，在柔性口袋、金属介导、多位点结合等复杂场景下预测偏差大且算力耗费高。客户需要一套高精度、高吞吐的蛋白质-分子对接与评分平台，服务于药物筛选、先导化合物优化与作用机制研究。</p>
+
               <h2>面临挑战</h2>
               <ul>
-                <li>输电线路分布广泛，地形复杂</li>
-                <li>需要高清晰度图像以识别微小缺陷</li>
-                <li>自动化程度要求高，减少人工干预</li>
-                <li>需适应各种恶劣天气条件</li>
-                <li>数据量大，需高效处理和分析</li>
+                <li>多负载、多柔性场景下传统方法精度不足，难以准确捕捉动态结合特性</li>
+                <li>万级化合物虚拟筛选需要高吞吐与低延迟，传统单机计算耗时过长</li>
+                <li>需同时覆盖刚性 / 半柔性 / 柔性三种对接模式，并提供 3D 交互可视化以辅助药化专家决策</li>
+                <li>客户希望能够与 PDB / SDF / MOL2 生态无缝接入，支持企业内部 API 编排</li>
               </ul>
-              
+
               <h2>解决方案</h2>
-              <p>朗德智能为客户提供了全流程无人机巡检解决方案：</p>
+              <p>采用「前端 + 后端 + 数据库」三层架构与模块化计算管线：</p>
               <ul>
-                <li><strong>工业级巡检无人机</strong>：抗风能力强，续航时间长，搭载高清和红外相机</li>
-                <li><strong>自动巡检规划系统</strong>：根据电力设施分布自动规划巡检路线</li>
-                <li><strong>AI缺陷识别系统</strong>：自动分析图像，识别绝缘子损坏、导线异常等问题</li>
-                <li><strong>数据管理平台</strong>：存储和管理巡检数据，支持历史对比分析</li>
-                <li><strong>无人机自动充电站</strong>：部署在关键节点，实现无人机自主充电和任务继续</li>
+                <li><strong>Uni-Dock（CNN + GNN）</strong>：针对高吞吐刚性 / 半柔性对接，提供快速构象预测</li>
+                <li><strong>Uni-Mol-Docking-v2（Transformer）</strong>：针对柔性侧链与复杂口袋，输出高精度柔性对接构象</li>
+                <li><strong>EquiScore</strong>：基于 E(3) 等变网络的亲和力评分模型，与实验值相关系数达 0.85</li>
+                <li><strong>调度与服务</strong>：FastAPI + Celery 异步任务队列，支持多 GPU 集群并发；MySQL + Redis 管理任务与缓存；NGL Viewer + Three.js 实现 3D 可视化</li>
               </ul>
-              
+
               <h2>部署成效</h2>
-              <p>系统部署一年后，取得显著成效：</p>
               <ul>
-                <li>巡检效率提升300%，单日巡检里程从50公里提升到200公里</li>
-                <li>故障提前发现率提升60%，减少了突发停电事件</li>
-                <li>巡检人员减少70%，年节省人工成本超过500万元</li>
-                <li>数据积累形成设备健康档案，支持预测性维护</li>
+                <li>中等复杂场景 RMSD < 1.8Å，复杂场景下对接成功率达 88%，综合提升 92%</li>
+                <li>EquiScore 亲和力预测 MAE < 1 kcal/mol，优于传统 Vina Score</li>
+                <li>单次对接耗时从 120 秒压缩至 48 秒，1000 分子高通量任务 30 分钟完成</li>
+                <li>连续运行 24 小时零崩溃，3D 可视化平均 32 FPS，实时交互体验良好</li>
               </ul>
-              
-              <h2>客户评价</h2>
-              <p>"朗德智能的无人机巡检系统彻底改变了我们的工作方式，不仅提高了效率，更重要的是提升了安全性和可靠性。我们现在能发现许多以前容易被忽视的问题。"</p>
-              <p style="text-align: right;">— 电力公司运维总监</p>
+
             `,
             results: [
-              '巡检效率提升300%',
-              '故障提前发现率提升60%',
-              '巡检人员减少70%',
-              '年节省成本500万+'
+              '对接成功率 92%',
+              'MAE < 1 kcal/mol',
+              '单次对接 48 秒',
+              '可视化平均 32 FPS'
             ]
           },
-          
+
+          {
+            id: 9,
+            title: 'Pamirs-molGen：基于深度学习的蛋白质口袋药物分子生成系统',
+            tag: 'AI 应用',
+            date: '2025-05-08',
+            image: '/images/cases/yyal03.jpg',
+            summary: '以蛋白质口袋结构为条件，融合 GAN、VAE 与强化学习模型，从分子片段逐步生成具备成药性与可合成性的候选药物分子，加速创新药发现与先导化合物优化。',
+            highlight: '化学合理性 95%，平均 QED 0.65、SA 3.2，单 GPU 25 秒生成 10 个分子，支持 10 用户并发',
+            content: `
+              <h2>项目背景</h2>
+              <p>创新药研发依赖高通量筛选从数百万化合物库中查找候选分子，耗时长、命中率低。客户希望基于蛋白质口袋结构直接生成针对性候选分子，拓宽化学空间探索范围，同时保证生成分子的化学合理性、可合成性与成药性。</p>
+
+              <h2>面临挑战</h2>
+              <ul>
+                <li>传统规则驱动生成方法难以覆盖庞大化学空间，生成分子创新性有限</li>
+                <li>生成分子需同时满足价键规则、Lipinski 五规则与与口袋高质量结合</li>
+                <li>需要支持多用户并发与异步任务调度，保障生产环境下的响应速度</li>
+                <li>对于复杂口袋，需从原始 PDB 中精准提取口袋边界与理化特性</li>
+              </ul>
+
+              <h2>解决方案</h2>
+              <p>按「数据 / 算法 / 服务 / 表现」四层架构打造 Pamirs-molGen：</p>
+              <ul>
+                <li><strong>口袋特征提取</strong>：Alpha Shape 算法 + 能量优化边界识别，口袋提取准确率 92%，以 GNN 进一步编码空间与理化信息</li>
+                <li><strong>GAN + VAE 混合生成模型</strong>：以口袋为条件，从初始片段逐步预测原子类型、坐标与键型，并引入蒙特卡洛树搜索与强化学习优化</li>
+                <li><strong>多维度评估</strong>：集成 RDKit 与 AutoDock Vina，输出 SA、QED、Tanimoto 与结合亲和力等指标，帮助用户快速筛选优质分子</li>
+                <li><strong>服务与表现</strong>：Flask + Celery 异步队列支持多用户并发，Vue 3 + Three.js 提供 3D 交互式分子查看与 SDF / CSV 一键导出</li>
+              </ul>
+
+              <h2>部署成效</h2>
+              <ul>
+                <li>生成分子化学合理性从 60% 提升至 95%，平均 QED 0.65、SA 3.2，85% 可合成性良好</li>
+                <li>平均结合亲和力 -7.8 kcal/mol，80% 生成分子具备较强结合能力</li>
+                <li>单 GPU 上 25 秒生成 10 个候选分子，内存占用下降 40%，同时支持 10 个用户并发</li>
+                <li>连续运行 72 小时无崩溃，与企业内部分子数据库、CADD 平台可通过 API 无缝集成</li>
+              </ul>
+
+            `,
+            results: [
+              '化学合理性 95%',
+              '平均 QED 0.65',
+              '25 秒生成 10 个分子',
+              '平均亲和力 -7.8 kcal/mol'
+            ]
+          }
+
         ],
         en: [
           {
-            id: 1,
-            title: 'Military Site Anti-Drone Defense System',
-            tag: 'Military Security',
-            date: '2024-05-15',
-            image: '/images/cases/military-defense.jpg',
-            summary: 'Deployed Lande Intelligent defense system for a northern military site, achieving all-weather drone detection and interception capabilities to secure the military base.',
-            highlight: 'Achieved 100% drone detection rate, jamming range of 5km, zero security incidents',
+            id: 7,
+            title: 'Pamirs-ADMET: Deep Learning-based Drug ADMET Prediction System',
+            tag: 'AI Application',
+            date: '2025-03-29',
+            image: '/images/cases/index_01.png',
+            summary: 'An intelligent ADMET (Absorption / Distribution / Metabolism / Excretion / Toxicity) prediction platform built on graph neural networks and multi-task learning, providing data-driven decisions for lead compound screening and optimization from molecular structures.',
+            highlight: '13,000-molecule training library, average R² of 0.88, 92% toxicity classification accuracy, only 12 seconds for 100-molecule prediction',
             content: `
               <h2>Project Background</h2>
-              <p>With the rapid development of drone technology, unauthorized drones pose an increasing security threat to military facilities. A northern military base was facing frequent drone intrusion incidents and needed to deploy an advanced defense system to ensure base security.</p>
-              
+              <p>Drug discovery is time-consuming and costly. Traditional ADMET (Absorption, Distribution, Metabolism, Excretion, Toxicity) testing relies heavily on animal and in-vitro experiments, suffering from long cycles, high costs and limited reproducibility. The client wanted a deep-learning powered platform to predict ADMET properties at the early compound screening stage, improving R&D efficiency and reducing late-stage failure risk.</p>
+
               <h2>Challenges</h2>
               <ul>
-                <li>Complex terrain environment and harsh climate conditions</li>
-                <li>24-hour all-weather protection requirements</li>
-                <li>Need for high-precision identification of various drone types</li>
-                <li>System integration with existing military security systems</li>
+                <li>Drug molecules have complex structures, and traditional descriptors hardly capture full topology information</li>
+                <li>Modeling five ADMET dimensions simultaneously brings data sparsity and task imbalance</li>
+                <li>Predictions must be interpretable for medicinal chemists to review and act on</li>
+                <li>High-concurrency online service is needed for large-scale virtual screening</li>
               </ul>
-              
+
               <h2>Solution</h2>
-              <p>Lande Intelligent customized a comprehensive drone defense system for the military base, including:</p>
+              <p>The Pamirs-ADMET platform is built on a four-tier architecture (data / algorithm / service / presentation):</p>
               <ul>
-                <li><strong>Omnidirectional radar detection system</strong>: Utilizing millimeter-wave radar arrays, with a detection range of 7 kilometers, capable of accurately identifying targets in complex weather conditions</li>
-                <li><strong>Optoelectronic tracking system</strong>: Equipped with high-definition thermal imaging and visible light cameras to achieve precise target tracking and identification</li>
-                <li><strong>Electromagnetic interference equipment</strong>: Capable of directional interference across multiple frequency bands, forcing drones to land or return</li>
-                <li><strong>Command and control center</strong>: Centralizing detection information, providing situational awareness and automated response procedures</li>
+                <li><strong>Data tier</strong>: Integrates ChEMBL, DrugBank and proprietary experiments into a 13,000+ compound library with unified SMILES standardization and molecular graph representation</li>
+                <li><strong>Algorithm tier</strong>: A PyTorch-based GNN + multi-task learning framework; after 500 epochs, training loss is 0.12 and validation loss 0.15 with no obvious overfitting</li>
+                <li><strong>Service tier</strong>: FastAPI exposes RESTful endpoints for single and batch SMILES; on a single A100 GPU, 100 molecules take ~12s and 1,000 molecules ~110s</li>
+                <li><strong>Presentation tier</strong>: A Vue 3 front-end visualizes molecular structures, five-dimensional ADMET radar charts and confidence scores for fast candidate comparison</li>
               </ul>
-              
+
               <h2>Deployment Results</h2>
-              <p>The system achieved significant results after deployment:</p>
               <ul>
-                <li>100% drone detection rate, no missed detections</li>
-                <li>98% jamming success rate, with interception distances reaching up to 5 kilometers</li>
-                <li>Year-round stable system operation, zero false alarms, zero security incidents</li>
-                <li>No drone intrusion incidents after deployment</li>
+                <li>Average R² of 0.88 and RMSE of 0.34 across the five endpoints, with stable regression performance</li>
+                <li>Toxicity classification reaches 92% accuracy and 0.95 ROC-AUC, effectively supporting early toxicity filtering</li>
+                <li>Absorption R²=0.88, Distribution R²=0.85, Metabolism R²=0.90, Excretion R²=0.87 — well-balanced multi-task performance</li>
+                <li>Combined with virtual screening, ten-thousand-scale ADMET evaluation can finish within hours, dramatically boosting R&D throughput</li>
               </ul>
-              
+
               <h2>Client Testimonial</h2>
-              <p>"Lande Intelligent's defense system provides solid security protection for our military facilities. The system stability and reliability far exceed expectations, making it an ideal choice for military facility air defense."</p>
-              <p style="text-align: right;">— Military Base Security Director</p>
+              <p>"Pamirs-ADMET lets us see drug-likeness risks during molecular design. Issues that used to surface only in in-vitro or animal studies are now caught upstream, which significantly improves both the speed and quality of our team's decisions."</p>
+              <p style="text-align: right;">— Head of Computer-Aided Drug Design at the partner pharma company</p>
             `,
             results: [
-              '100% drone detection rate',
-              'Jamming range of 5km',
-              'Zero false alarms year-round',
-              'No intrusion incidents post-deployment'
+              'Average prediction R² 0.88',
+              'Toxicity classification accuracy 92%',
+              'ROC-AUC up to 0.95',
+              '100-molecule prediction in 12 seconds'
             ]
           },
           {
-            id: 2,
-            title: 'Major Sports Event Airspace Security',
-            tag: 'Public Security',
-            date: '2024-03-20',
-            image: '/images/cases/military-defense.jpg',
-            summary: 'Provided comprehensive airspace security for a major international sports event, achieving zero drone interference incidents throughout the event.',
-            highlight: 'Secured a 14-day event, intercepted 37 unauthorized drones, ensuring smooth event proceedings',
+            id: 8,
+            title: 'Pamirs-Docking: Deep Learning-based Protein-Ligand Docking and Scoring System',
+            tag: 'AI Application',
+            date: '2025-04-12',
+            image: '/images/cases/yyal02.jpg',
+            summary: 'An integrated protein-ligand docking and scoring platform that combines Uni-Dock, Uni-Mol-Docking-v2 and EquiScore for high-throughput screening, affinity prediction and 3D visualization.',
+            highlight: '92% docking success rate, MAE < 1 kcal/mol, 48s average docking time, 24-hour high-throughput operation with zero crashes',
             content: `
               <h2>Project Background</h2>
-              <p>A major international sports event held in early 2024 attracted global attention while also facing drone interference and security risks. The organizing committee needed a reliable airspace security system to ensure the event would not be disturbed by drones.</p>
-              
+              <p>Traditional docking tools (AutoDock, GOLD, Glide, etc.) rely on physical force fields and empirical scoring functions, which suffer from large prediction bias and high computational cost in complex scenarios such as flexible pockets, metal-mediated binding and multi-site interactions. The client needed a high-precision, high-throughput protein-ligand docking and scoring platform for compound screening, lead optimization and mechanism studies.</p>
+
               <h2>Challenges</h2>
               <ul>
-                <li>Multiple venues with dispersed deployment, wide coverage area</li>
-                <li>Densely populated areas with high security requirements</li>
-                <li>Need to distinguish between authorized and unauthorized drones</li>
-                <li>System needed rapid deployment without affecting normal event operations</li>
-                <li>Coordination needed with police and other security forces</li>
+                <li>Insufficient accuracy of traditional methods on flexible side chains and complex pockets</li>
+                <li>Ten-thousand-scale virtual screening requires high throughput and low latency</li>
+                <li>Must cover rigid / semi-flexible / flexible docking modes and provide 3D interactive visualization</li>
+                <li>Should integrate with PDB / SDF / MOL2 ecosystems and expose internal APIs</li>
               </ul>
-              
+
               <h2>Solution</h2>
-              <p>Lande Intelligent provided a temporarily deployed comprehensive defense solution for the event:</p>
+              <p>A three-tier (front-end / back-end / database) architecture with a modular computing pipeline:</p>
               <ul>
-                <li><strong>Mobile radar detection vehicles</strong>: Deployed around major venues to form a seamless coverage network</li>
-                <li><strong>Portable jamming equipment</strong>: Provided to security personnel for precise directional interception</li>
-                <li><strong>Authorized drone management system</strong>: Providing electronic identification for official media drones to prevent mistaken interception</li>
-                <li><strong>Unified command platform</strong>: Integrating all detection data for unified scheduling and command</li>
+                <li><strong>Uni-Dock (CNN + GNN)</strong>: fast pose prediction for high-throughput rigid / semi-flexible docking</li>
+                <li><strong>Uni-Mol-Docking-v2 (Transformer)</strong>: high-precision flexible docking for flexible side chains and complex pockets</li>
+                <li><strong>EquiScore</strong>: an E(3)-equivariant affinity scoring model with 0.85 correlation to experimental values</li>
+                <li><strong>Scheduling and services</strong>: FastAPI + Celery async queues for multi-GPU concurrency, MySQL + Redis for tasks and cache, NGL Viewer + Three.js for 3D visualization</li>
               </ul>
-              
+
               <h2>Deployment Results</h2>
-              <p>During the 14-day event:</p>
               <ul>
-                <li>The system detected 46 unauthorized drone instances</li>
-                <li>Successfully intercepted 37 drones, with the remaining drones departing after early warnings</li>
-                <li>All competition venues achieved zero drone interference</li>
-                <li>System response time under 3 seconds, not affecting event proceedings</li>
+                <li>RMSD < 1.8Å in medium-complexity scenarios; 88% success rate in complex scenarios; overall improvement up to 92%</li>
+                <li>EquiScore affinity prediction MAE < 1 kcal/mol, outperforming traditional Vina Score</li>
+                <li>Single-pair docking time reduced from 120s to 48s; 1,000-molecule high-throughput task finished in 30 minutes</li>
+                <li>Zero crashes across 24-hour continuous operation; 32 FPS average for 3D visualization</li>
               </ul>
-              
+
               <h2>Client Testimonial</h2>
-              <p>"Lande Intelligent's system operates very stably, is easy to operate, and responds quickly. It provided strong security protection for the event, allowing us to focus on the event itself."</p>
-              <p style="text-align: right;">— Event Security Director</p>
+              <p>"Pamirs-Docking integrates different docking and scoring models into a single workflow, letting us switch between high-throughput screening and detailed analysis with one click — our overall R&D pace is clearly faster."</p>
+              <p style="text-align: right;">— Head of CADD team at the partner pharma company</p>
             `,
             results: [
-              'Intercepted 37 unauthorized drones',
-              'Covered 8 major venues',
-              'System response time <3 seconds',
-              'Zero interference incidents during the event'
+              'Docking success rate 92%',
+              'MAE < 1 kcal/mol',
+              '48s per docking pair',
+              '32 FPS visualization'
             ]
           },
           {
-            id: 3,
-            title: 'Power Facility Drone Inspection System',
-            tag: 'Industrial Application',
-            date: '2024-01-10',
-            image: '/images/cases/power-inspection.jpg',
-            summary: 'Provided intelligent drone inspection system for a power company in a province, significantly improving inspection efficiency and fault discovery rate, and reducing maintenance costs.',
-            highlight: 'Inspection efficiency increased by 300%, fault discovery rate increased by 60%, annual cost savings exceeding 5 million',
+            id: 9,
+            title: 'Pamirs-molGen: Deep Learning-based Pocket-aware Drug Molecule Generation System',
+            tag: 'AI Application',
+            date: '2025-05-08',
+            image: '/images/cases/yyal03.jpg',
+            summary: 'Conditioned on protein pocket structure, a hybrid GAN + VAE generative model with reinforcement learning gradually grows drug-like, synthesizable candidate molecules from seed fragments to accelerate novel drug discovery and lead optimization.',
+            highlight: '95% chemical validity, average QED 0.65 / SA 3.2, 10 molecules generated in 25s on a single GPU, 10 concurrent users supported',
             content: `
               <h2>Project Background</h2>
-              <p>A power company in a province is responsible for managing more than 2000 kilometers of high-voltage transmission lines and hundreds of transmission towers. Traditional manual inspection methods are time-consuming, inefficient, and high in security risks, so it is necessary to introduce intelligent inspection methods.</p>
-              
+              <p>Innovative drug discovery traditionally relies on high-throughput screening of millions of compounds, which is time-consuming and has a low hit rate. The client wanted to generate target-specific candidate molecules directly from protein pocket structures, expanding chemical-space exploration while ensuring chemical validity, synthesizability and drug-likeness.</p>
+
               <h2>Challenges</h2>
               <ul>
-                <li>Extensive distribution of transmission lines, complex terrain</li>
-                <li>Need for high-definition images to identify small defects</li>
-                <li>High automation requirements, reducing manual intervention</li>
-                <li>Need to adapt to various weather conditions</li>
-                <li>Large amount of data, need for efficient processing and analysis</li>
+                <li>Rule-based generation hardly covers the vast chemical space; novelty is limited</li>
+                <li>Generated molecules must satisfy valence rules, Lipinski's rule of five, and bind well to the pocket</li>
+                <li>Multi-user concurrency and async task scheduling are required for production environments</li>
+                <li>Pocket boundaries and physicochemical features must be accurately extracted from raw PDB inputs</li>
               </ul>
-              
+
               <h2>Solution</h2>
-              <p>Lande Intelligent provided a full-process drone inspection solution for customers:</p>
+              <p>A four-tier (data / algorithm / service / presentation) architecture powers Pamirs-molGen:</p>
               <ul>
-                <li><strong>Industrial-grade inspection drone</strong>: Strong wind resistance, long endurance, equipped with high-definition and infrared cameras</li>
-                <li><strong>Automatic inspection planning system</strong>: Automatically plan inspection routes based on the distribution of power facilities</li>
-                <li><strong>AI defect recognition system</strong>: Automatically analyze images to identify issues such as insulator damage and line abnormalities</li>
-                <li><strong>Data management platform</strong>: Store and manage inspection data, support historical comparison analysis</li>
-                <li><strong>Drone automatic charging station</strong>: Deployed at key nodes to realize autonomous charging and task continuation of drones</li>
+                <li><strong>Pocket feature extraction</strong>: Alpha Shape + energy-optimized boundary detection achieves 92% pocket extraction accuracy, encoded by GNN</li>
+                <li><strong>GAN + VAE hybrid generator</strong>: pocket-conditioned, growing molecules atom-by-atom with Monte Carlo Tree Search and reinforcement learning</li>
+                <li><strong>Multi-dimension evaluation</strong>: integrated RDKit + AutoDock Vina output SA, QED, Tanimoto and binding affinity for fast filtering</li>
+                <li><strong>Service and presentation</strong>: Flask + Celery async queues for multi-user concurrency, Vue 3 + Three.js for 3D molecule viewing and SDF / CSV export</li>
               </ul>
-              
+
               <h2>Deployment Results</h2>
-              <p>After one year of system deployment, significant results were achieved:</p>
               <ul>
-                <li>Inspection efficiency increased by 300%, single-day inspection mileage from 50 kilometers to 200 kilometers</li>
-                <li>Fault discovery rate increased by 60%, reducing sudden power outages</li>
-                <li>Inspection personnel reduced by 70%, annual cost savings exceeding 5 million yuan</li>
-                <li>Data accumulation formed equipment health archives, supporting predictive maintenance</li>
+                <li>Chemical validity raised from 60% to 95%; average QED 0.65 / SA 3.2; 85% with good synthesizability</li>
+                <li>Average binding affinity -7.8 kcal/mol; 80% of generated molecules show strong binding</li>
+                <li>10 candidate molecules generated in 25s on a single GPU; 40% memory reduction; 10 concurrent users supported</li>
+                <li>72-hour stable operation with zero crashes; integrates with internal molecule databases and CADD platforms via API</li>
               </ul>
-              
+
               <h2>Client Testimonial</h2>
-              <p>"Lande Intelligent's drone inspection system has completely changed our work style. Not only has efficiency improved, but more importantly, safety and reliability have been significantly improved. We can now find many problems that were previously overlooked."</p>
-              <p style="text-align: right;">— Power Company Maintenance Director</p>
+              <p>"Pamirs-molGen lets us obtain a batch of high-quality candidates directly from the pocket, skipping the old screen-optimize-rescreen loop and making it possible to advance multiple targets in parallel."</p>
+              <p style="text-align: right;">— Head of drug design at the partner innovative-drug company</p>
             `,
             results: [
-              'Inspection efficiency increased by 300%',
-              'Fault discovery rate increased by 60%',
-              'Inspection personnel reduced by 70%',
-              'Annual cost savings exceeding 5 million'
-            ]
-          },
-          {
-            id: 4,
-            title: 'Smart Agriculture Drone Application',
-            tag: 'Agricultural Application',
-            date: '2023-11-25',
-            image: '/images/cases/military-defense.jpg',
-            summary: 'Provided intelligent drone solution for a large agricultural base in the south, achieving precise spraying, reducing the amount of pesticide used, and increasing crop yield.',
-            highlight: 'Covered 5000 acres of farmland, pesticide usage reduced by 30%, crop yield increased by 15%, labor cost reduced by 60%',
-            content: `
-              <h2>Project Background</h2>
-              <p>A large agricultural base in the south grows more than 5000 acres of rice. Traditional manual spraying methods have problems such as large amount of pesticide usage, low efficiency, and uneven coverage. Seeking intelligent pest control solutions to improve efficiency and reduce environmental impact.</p>
-              
-              <h2>Challenges</h2>
-              <ul>
-                <li>Large farmland area, uneven terrain</li>
-                <li>Need for precise control of spraying range and dosage</li>
-                <li>Reduce pesticide usage while ensuring prevention and control effects</li>
-                <li>Easy to operate, suitable for local farmers</li>
-                <li>Equipment maintenance and service support needs</li>
-              </ul>
-              
-              <h2>Solution</h2>
-              <p>Lande Intelligent provided a full set of intelligent agricultural pest control solutions for customers:</p>
-              <ul>
-                <li><strong>20-liter load-carrying drone</strong>: Single-time operation area of 15-20 acres, good atomization effect</li>
-                <li><strong>Precise positioning system</strong>: Centimeter-level positioning to ensure no repeated spraying or missed spraying</li>
-                <li><strong>Smart spraying system</strong>: Automatically adjust spraying amount based on crop type and growth stage</li>
-                <li><strong>Farmland planning software</strong>: Automatically plan the optimal spraying route based on farmland shape</li>
-                <li><strong>Technical training and maintenance service</strong>: Provide training and technical support for local farmers</li>
-              </ul>
-              
-              <h2>Deployment Results</h2>
-              <p>After one planting season, significant results were achieved:</p>
-              <ul>
-                <li>Spraying efficiency increased by 800%, 5000 acres of farmland can be completed once in 3 days</li>
-                <li>Pesticide usage reduced by 30%, reducing environmental impact</li>
-                <li>Spraying uniformity improved, better prevention and control effects, disease and pest incidence rate decreased by 40%</li>
-                <li>Crop yield increased by 15%, quality improved</li>
-                <li>Labor cost reduced by 60%, avoiding direct contact with pesticides for farmers</li>
-              </ul>
-              
-              <h2>Client Testimonial</h2>
-              <p>"Lande Intelligent's drone spraying has greatly changed our agricultural production method. Not only is it labor-saving and time-saving, but also more efficient and profitable. Most importantly, it reduces pesticide usage, which is better for the environment and farmers."</p>
-              <p style="text-align: right;">— Agricultural Base Director</p>
-            `,
-            results: [
-              'Spraying efficiency increased by 800%',
-              'Pesticide usage reduced by 30%',
-              'Crop yield increased by 15%',
-              'Labor cost reduced by 60%'
-            ]
-          },
-          {
-            id: 5,
-            title: 'Urban Emergency Response Drone System',
-            tag: 'Emergency Rescue',
-            date: '2023-09-08',
-            image: '/images/cases/military-defense.jpg',
-            summary: 'Provided emergency rescue drone system for a coastal city, helping disaster monitoring, rescue operations, and post-disaster assessment.',
-            highlight: 'Emergency response time shortened by 70%, rescue success rate increased by 40%, achieving 24-hour all-weather monitoring',
-            content: `
-              <h2>Project Background</h2>
-              <p>A coastal city in a province faces natural disasters such as typhoons and floods year-round. Traditional emergency response methods have limitations in information acquisition and rescue efficiency. It is necessary to improve emergency response capabilities and efficiency.</p>
-              
-              <h2>Challenges</h2>
-              <ul>
-                <li>Stable flight demand in adverse weather conditions</li>
-                <li>24-hour all-weather monitoring demand</li>
-                <li>Large-scale rapid search capability</li>
-                <li>Multi-department coordination and information sharing</li>
-                <li>Emergency communication support capability</li>
-              </ul>
-              
-              <h2>Solution</h2>
-              <p>Lande Intelligent created a comprehensive emergency drone solution for the city:</p>
-              <ul>
-                <li><strong>All-weather emergency monitoring drone</strong>: Wind and rain resistant design, equipped with visible light and infrared cameras</li>
-                <li><strong>Rescue-specific drone</strong>: Equipped with high-magnification zoom camera and thermal imaging equipment, capable of dropping rescue equipment</li>
-                <li><strong>Emergency communication drone</strong>: Can establish temporary communication network above disaster areas</li>
-                <li><strong>Drone command system</strong>: Centralize management of all drones, implement task allocation and data summary</li>
-                <li><strong>Quick deployment plan</strong>: Vehicle launch platform, realizing rapid arrival and takeoff</li>
-              </ul>
-              
-              <h2>Deployment Results</h2>
-              <p>After system deployment, it played an important role in many emergency events:</p>
-              <ul>
-                <li>Emergency response time shortened from 40 minutes to 12 minutes, increased by 70%</li>
-                <li>Disaster assessment area expanded by 5 times, accuracy increased by 80%</li>
-                <li>Successfully rescued 15 trapped people in a mountainous flood</li>
-                <li>Emergency communication drone provided 72-hour uninterrupted communication support for disaster-affected areas</li>
-                <li>Disaster warning time ahead by 2-3 hours, winning precious time for evacuation</li>
-              </ul>
-              
-              <h2>Client Testimonial</h2>
-              <p>"Lande Intelligent's emergency drone system greatly improved our emergency rescue capabilities, especially in complex terrain and adverse weather conditions, providing us with a 'heavenly eye', making rescue actions more accurate and effective."</p>
-              <p style="text-align: right;">— City Emergency Management Bureau Director</p>
-            `,
-            results: [
-              'Emergency response time shortened by 70%',
-              'Rescue success rate increased by 40%',
-              'Disaster assessment area expanded by 5 times',
-              'Provided 72-hour emergency communication'
-            ]
-          },
-          {
-            id: 6,
-            title: 'Border Security Drone Monitoring System',
-            tag: 'Border Security',
-            date: '2023-07-12',
-            image: '/images/cases/border-security.jpg',
-            summary: 'Provided intelligent drone monitoring system for a western border area, achieving 24-hour uninterrupted monitoring and warning of the border.',
-            highlight: 'Covered 150 kilometers of border, unauthorized border intrusion interception rate increased by 85%, border defense efficiency increased by 200%',
-            content: `
-              <h2>Project Background</h2>
-              <p>A western border area in a province has complex terrain and long borderline. Human patrol exists in blind areas and low efficiency. It is necessary to use technical means to improve border security control capabilities.</p>
-              
-              <h2>Challenges</h2>
-              <ul>
-                <li>Long borderline of 150 kilometers, complex terrain</li>
-                <li>Extreme climate conditions (high temperature, sandstorm, etc.)</li>
-                <li>Limited power supply, poor communication conditions</li>
-                <li>Need for long-term uninterrupted monitoring</li>
-                <li>Target automatic recognition and warning capabilities</li>
-              </ul>
-              
-              <h2>Solution</h2>
-              <p>Lande Intelligent customized a drone monitoring system for border security:</p>
-              <ul>
-                <li><strong>Long-endurance border patrol drone</strong>: Single-time flight coverage of 50 kilometers of border, endurance of 4 hours</li>
-                <li><strong>Fixed-wing/multi-rotor mixed cluster</strong>: Advantageous complementarity, full-aspect monitoring</li>
-                <li><strong>Solar drone base station</strong>: Deployed at key positions to provide charging and data relay</li>
-                <li><strong>AI recognition system</strong>: Automatically recognize personnel and vehicle activities, graded warning</li>
-                <li><strong>Low-bandwidth data transmission plan</strong>: Adapt to border communication conditions</li>
-              </ul>
-              
-              <h2>Deployment Results</h2>
-              <p>After system deployment, border security situation significantly improved:</p>
-              <ul>
-                <li>Realized 100% coverage monitoring of 150 kilometers of border, no blind spots</li>
-                <li>Unauthorized border intrusion incidents decreased by 60%, interception rate increased by 85%</li>
-                <li>Border defense personnel patrol efficiency increased by 200%, from "carpet search" to "precise strike"</li>
-                <li>System still maintained above 95% availability in extreme conditions</li>
-                <li>Border management cost reduced by 40%, emergency response time reduced by 75%</li>
-              </ul>
-              
-              <h2>Client Testimonial</h2>
-              <p>"Lande Intelligent's border monitoring system has completely changed our work style. The area that used to require hundreds of people to patrol day and night can now be efficiently controlled with a small number of people and drones, and the security protection capability has been significantly improved."</p>
-              <p style="text-align: right;">— Border Management Department Director</p>
-            `,
-            results: [
-              'Covered 150 kilometers of border',
-              'Unauthorized border intrusion interception rate increased by 85%',
-              'Border defense efficiency increased by 200%',
-              'Emergency response time reduced by 75%'
+              'Chemical validity 95%',
+              'Average QED 0.65',
+              '10 molecules in 25 seconds',
+              'Average affinity -7.8 kcal/mol'
             ]
           }
         ]

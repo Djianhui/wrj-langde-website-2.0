@@ -82,28 +82,28 @@
         <div class="features-grid">
           <div class="feature-card">
             <div class="feature-icon">
-              <CustomIcons name="strike-gun-precision" :size="32" />
+              <i class="fas fa-bullseye"></i>
             </div>
             <h3>三频段精准干扰</h3>
             <p> 工作在5.8GHz、2.4GHz、1.5GHz三个核心频段，精准干扰无人机的遥控指令与视频传输链路。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
-              <CustomIcons name="long-range-jamming" :size="32" />
+              <i class="fas fa-broadcast-tower"></i>
             </div>
             <h3>远距离干扰</h3>
             <p>在平地无遮挡空旷区域干扰半径距离可达1.5公里，可实现无人机的安全驱离或强制返航。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
-              <CustomIcons name="handheld-design" :size="32" />
+              <i class="fas fa-hand-paper"></i>
             </div>
             <h3>便携式设计</h3>
             <p>采用便捷的枪型设计，便于单兵操作与迅速布防，重量约4KG（含电池）。</p>
           </div>
          <div class="feature-card">
             <div class="feature-icon">
-              <CustomIcons name="expandable-accessories" :size="32" />
+              <i class="fas fa-puzzle-piece"></i>
             </div>
             <h3>可扩展配件</h3>
             <p>配有标准导轨，可安装瑟伴弹夹、夜视仪、执法记录仪等多种专业设备。</p>
@@ -138,15 +138,6 @@
             </div>
             <span>区域监控</span>
           </div>
-        </div>
-      </div>
-      
-      <!-- 联系咨询 -->
-      <div class="product-contact">
-        <div class="contact-content">
-          <h2>需要了解更多？</h2>
-          <p>我们的专业团队随时为您提供技术支持和解决方案</p>
-          <RouterLink to="/contact" class="btn btn-primary">联系我们</RouterLink>
         </div>
       </div>
     </div>

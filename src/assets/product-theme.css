@@ -1,0 +1,726 @@
+/* ============================================================
+   产品详情页统一主题 —— 参考 product_detail.html (Material Design 3)
+   用高权重选择器 (body .product-detail-page .xxx) 覆盖各产品详情页的 scoped 样式
+   色板  : #003ec7 primary / #00677f secondary / #fbf8ff surface
+          #ffffff surface-lowest / #f3f2ff surface-low
+          #ededfb surface-container / #e1e1ef highest
+          #c3c5d9 outline-variant / #737688 outline
+          #191b25 on-surface / #434656 on-surface-variant
+   字体 : Manrope (headline) + Inter (body)
+   间距 : xl 80 / lg 48 / md 24 / sm 12 / base 8 / xs 4 / container 1280
+   ============================================================ */
+
+/* ---------- 根容器 ---------- */
+body .product-detail-page {
+  background: #fbf8ff !important;
+  color: #191b25 !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  min-height: 100vh;
+  padding-top: 0;
+}
+
+body .product-detail-page .container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 48px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ---------- Hero ---------- */
+body .product-detail-page .product-hero {
+  background: #fbf8ff !important;
+  padding: 80px 0 48px !important;
+  color: #191b25 !important;
+  box-shadow: none !important;
+  border-bottom: 1px solid rgba(195, 197, 217, 0.35);
+  position: relative;
+  overflow: visible !important;
+}
+
+body .product-detail-page .product-hero::before,
+body .product-detail-page .product-hero::after {
+  display: none !important;
+  content: none !important;
+}
+
+body .product-detail-page .product-hero .container {
+  padding: 0 48px !important;
+}
+
+body .product-detail-page .product-hero .breadcrumb {
+  display: flex !important;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(67, 70, 86, 0.7) !important;
+}
+
+body .product-detail-page .product-hero .breadcrumb a {
+  color: #434656 !important;
+  text-decoration: none !important;
+  transition: color 0.2s ease;
+  text-shadow: none !important;
+}
+
+body .product-detail-page .product-hero .breadcrumb a:hover {
+  color: #003ec7 !important;
+  text-shadow: none !important;
+}
+
+body .product-detail-page .product-hero .breadcrumb span {
+  color: rgba(67, 70, 86, 0.9) !important;
+  margin: 0 !important;
+}
+
+body .product-detail-page .product-hero .breadcrumb .breadcrumb-separator {
+  color: rgba(115, 118, 136, 0.6) !important;
+  margin: 0 4px !important;
+}
+
+body .product-detail-page .product-hero .product-hero-content {
+  max-width: 960px;
+}
+
+body .product-detail-page .product-hero .product-title {
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 48px !important;
+  font-weight: 700 !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.02em !important;
+  color: #191b25 !important;
+  margin: 0 0 16px !important;
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  -webkit-text-fill-color: #191b25 !important;
+  text-shadow: none !important;
+}
+
+body .product-detail-page .product-hero .product-subtitle {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 18px !important;
+  font-weight: 400 !important;
+  line-height: 1.6 !important;
+  color: #434656 !important;
+  margin: 0 !important;
+  opacity: 1 !important;
+  max-width: 720px;
+}
+
+/* ---------- 产品概述 ---------- */
+body .product-detail-page .product-overview {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 80px !important;
+  align-items: center !important;
+  margin: 80px 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+  backdrop-filter: none !important;
+  border-radius: 0 !important;
+}
+
+body .product-detail-page .product-overview .product-image {
+  background: #ffffff;
+  border: 1px solid rgba(195, 197, 217, 0.3);
+  border-radius: 12px;
+  padding: 48px;
+  box-shadow: 0 4px 24px rgba(15, 23, 42, 0.04);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  min-height: 360px;
+}
+
+body .product-detail-page .product-overview .product-image::before,
+body .product-detail-page .product-overview .product-image::after {
+  display: none !important;
+  content: none !important;
+}
+
+body .product-detail-page .product-overview .product-image img {
+  width: auto !important;
+  height: auto !important;
+  max-width: 100% !important;
+  max-height: 400px !important;
+  object-fit: contain !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body .product-detail-page .product-overview .product-image:hover img {
+  transform: scale(1.03);
+  box-shadow: none !important;
+}
+
+body .product-detail-page .product-overview .product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+body .product-detail-page .product-overview .product-info h2 {
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 32px !important;
+  font-weight: 600 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.01em !important;
+  color: #191b25 !important;
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  -webkit-text-fill-color: #191b25 !important;
+  margin: 0 0 8px !important;
+}
+
+body .product-detail-page .product-overview .product-info p {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 16px !important;
+  line-height: 1.6 !important;
+  color: #434656 !important;
+  margin: 0 !important;
+  font-weight: 400 !important;
+}
+
+/* ---------- 章节标题 ---------- */
+body .product-detail-page .section-title {
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 32px !important;
+  font-weight: 600 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.01em !important;
+  color: #191b25 !important;
+  text-align: left !important;
+  margin: 0 0 24px !important;
+  padding: 0 !important;
+  position: relative;
+}
+
+body .product-detail-page .section-title::after,
+body .product-detail-page .section-title::before {
+  display: none !important;
+  content: none !important;
+}
+
+/* ---------- 产品规格 ---------- */
+body .product-detail-page .product-specifications {
+  background: #ffffff !important;
+  border: 1px solid rgba(195, 197, 217, 0.4);
+  border-radius: 12px !important;
+  padding: 48px !important;
+  margin: 80px 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+body .product-detail-page .product-specifications .spec-note {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 14px !important;
+  color: #737688 !important;
+  font-style: normal !important;
+  text-align: left !important;
+  margin: 0 0 24px !important;
+  font-weight: 400 !important;
+}
+
+body .product-detail-page .specification-table {
+  background: transparent !important;
+  border: 1px solid rgba(195, 197, 217, 0.4) !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  box-shadow: none !important;
+}
+
+body .product-detail-page .spec-table {
+  width: 100%;
+  border-collapse: collapse !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 16px !important;
+}
+
+body .product-detail-page .spec-table thead th,
+body .product-detail-page .spec-table .spec-label-header,
+body .product-detail-page .spec-table .spec-header {
+  background: #ededfb !important;
+  color: #191b25 !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  padding: 16px 24px !important;
+  text-align: left !important;
+  border: none !important;
+  border-bottom: 1px solid rgba(195, 197, 217, 0.4) !important;
+}
+
+body .product-detail-page .spec-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+body .product-detail-page .spec-table tbody tr:hover {
+  background: #f3f2ff !important;
+  transform: none !important;
+}
+
+body .product-detail-page .spec-table tbody td {
+  padding: 16px 24px !important;
+  border: none !important;
+  border-bottom: 1px solid rgba(195, 197, 217, 0.25) !important;
+  text-align: left !important;
+  transition: none !important;
+}
+
+body .product-detail-page .spec-table tbody tr:last-child td {
+  border-bottom: none !important;
+}
+
+body .product-detail-page .spec-table .spec-label {
+  background: rgba(237, 237, 251, 0.3) !important;
+  color: #434656 !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  width: 30%;
+}
+
+body .product-detail-page .spec-table .spec-cell,
+body .product-detail-page .spec-table .spec-category {
+  color: #191b25 !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  font-feature-settings: 'tnum';
+  background: transparent !important;
+}
+
+body .product-detail-page .spec-table tbody tr:hover .spec-label,
+body .product-detail-page .spec-table tbody tr:hover .spec-cell,
+body .product-detail-page .spec-table tbody tr:hover .spec-category {
+  background: transparent !important;
+  color: #191b25 !important;
+}
+
+body .product-detail-page .spec-table tbody tr:hover .spec-label {
+  background: rgba(237, 237, 251, 0.5) !important;
+  color: #003ec7 !important;
+}
+
+/* ---------- 产品特点 Bento ---------- */
+body .product-detail-page .product-features {
+  margin: 80px 0 !important;
+}
+
+body .product-detail-page .features-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 24px !important;
+  margin: 0 !important;
+}
+
+body .product-detail-page .feature-card {
+  background: #ffffff !important;
+  border: 1px solid rgba(195, 197, 217, 0.4) !important;
+  border-radius: 12px !important;
+  padding: 32px !important;
+  text-align: left !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  box-shadow: 0 2px 12px rgba(15, 23, 42, 0.03) !important;
+  backdrop-filter: none !important;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease !important;
+  position: relative;
+  overflow: hidden;
+}
+
+body .product-detail-page .feature-card::before,
+body .product-detail-page .feature-card::after {
+  display: none !important;
+  content: none !important;
+}
+
+body .product-detail-page .feature-card:hover {
+  border-color: rgba(0, 62, 199, 0.3) !important;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06) !important;
+  transform: translateY(-2px) !important;
+}
+
+body .product-detail-page .feature-card .feature-icon {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 8px !important;
+  background: rgba(0, 62, 199, 0.1) !important;
+  color: #003ec7 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 0 24px !important;
+  font-size: 24px !important;
+  box-shadow: none !important;
+  transition: transform 0.3s ease !important;
+}
+
+body .product-detail-page .feature-card:hover .feature-icon {
+  transform: scale(1.08) !important;
+  box-shadow: none !important;
+}
+
+body .product-detail-page .feature-card .feature-icon .custom-icon,
+body .product-detail-page .feature-card .feature-icon .custom-icon svg {
+  color: #003ec7 !important;
+}
+
+body .product-detail-page .feature-card .feature-icon .custom-icon svg * {
+  stroke: #003ec7 !important;
+}
+
+body .product-detail-page .feature-card .feature-icon .custom-icon svg *[fill="currentColor"] {
+  fill: #003ec7 !important;
+}
+
+body .product-detail-page .feature-card h3 {
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
+  letter-spacing: -0.01em !important;
+  color: #191b25 !important;
+  margin: 0 0 12px !important;
+}
+
+body .product-detail-page .feature-card p {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 16px !important;
+  line-height: 1.6 !important;
+  color: #434656 !important;
+  font-weight: 400 !important;
+  margin: 0 !important;
+}
+
+/* ---------- 应用场景 ---------- */
+body .product-detail-page .product-applications {
+  margin: 80px 0 !important;
+}
+
+body .product-detail-page .applications-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 24px !important;
+  margin: 0 !important;
+}
+
+body .product-detail-page .application-item {
+  background: #ffffff !important;
+  border: 1px solid rgba(195, 197, 217, 0.4) !important;
+  border-radius: 12px !important;
+  padding: 32px 24px !important;
+  text-align: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 16px !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease !important;
+}
+
+body .product-detail-page .application-item:hover {
+  border-color: rgba(0, 62, 199, 0.3) !important;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06) !important;
+  transform: translateY(-2px) !important;
+  background: #ffffff !important;
+}
+
+body .product-detail-page .application-item i,
+body .product-detail-page .application-item .custom-icon {
+  color: #003ec7 !important;
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  -webkit-text-fill-color: #003ec7 !important;
+  margin: 0 !important;
+  font-size: 32px !important;
+}
+
+body .product-detail-page .application-item .custom-icon svg * {
+  stroke: #003ec7 !important;
+}
+
+body .product-detail-page .application-item span {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
+  color: #191b25 !important;
+}
+
+/* ---------- 联系咨询 CTA ---------- */
+body .product-detail-page .product-contact {
+  background: #003ec7 !important;
+  border-radius: 12px !important;
+  padding: 64px 48px !important;
+  margin: 80px 0 0 !important;
+  text-align: center !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
+  overflow: hidden;
+  position: relative;
+}
+
+body .product-detail-page .product-contact::before,
+body .product-detail-page .product-contact::after {
+  display: none !important;
+  content: none !important;
+}
+
+body .product-detail-page .product-contact .contact-content {
+  position: relative;
+  z-index: 2;
+}
+
+body .product-detail-page .product-contact .contact-content h2 {
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 32px !important;
+  font-weight: 700 !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.02em !important;
+  color: #ffffff !important;
+  margin: 0 0 12px !important;
+}
+
+body .product-detail-page .product-contact .contact-content p {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 16px !important;
+  line-height: 1.6 !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+  opacity: 1 !important;
+  margin: 0 0 32px !important;
+  font-weight: 400 !important;
+}
+
+body .product-detail-page .product-contact .btn,
+body .product-detail-page .product-contact .btn.btn-primary {
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: 12px 32px !important;
+  border-radius: 4px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  background: #ffffff !important;
+  color: #003ec7 !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  backdrop-filter: none !important;
+  text-decoration: none !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+body .product-detail-page .product-contact .btn.btn-primary:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15) !important;
+  background: #ffffff !important;
+  color: #003ec7 !important;
+}
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 1024px) {
+  body .product-detail-page .product-overview {
+    gap: 48px !important;
+  }
+
+  body .product-detail-page .features-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  body .product-detail-page .applications-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  body .product-detail-page .container,
+  body .product-detail-page .product-hero .container {
+    padding: 0 24px !important;
+  }
+
+  body .product-detail-page .product-hero {
+    padding: 96px 0 32px !important;
+  }
+
+  body .product-detail-page .product-hero .product-title {
+    font-size: 32px !important;
+    line-height: 1.25 !important;
+  }
+
+  body .product-detail-page .product-hero .product-subtitle,
+  body .product-detail-page .product-hero .product-description {
+    font-size: 15px !important;
+    line-height: 1.65 !important;
+  }
+
+  body .product-detail-page .product-overview {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+    margin: 48px 0 !important;
+    padding: 32px 24px !important;
+  }
+
+  body .product-detail-page .product-overview .product-image {
+    padding: 32px !important;
+    min-height: 260px !important;
+  }
+
+  body .product-detail-page .product-overview .product-image img {
+    width: 100% !important;
+    max-width: 320px !important;
+    height: auto !important;
+  }
+
+  body .product-detail-page .section-title {
+    font-size: 24px !important;
+    margin-bottom: 28px !important;
+  }
+
+  body .product-detail-page .features-grid,
+  body .product-detail-page .applications-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  body .product-detail-page .feature-card,
+  body .product-detail-page .application-item {
+    padding: 24px !important;
+  }
+
+  body .product-detail-page .product-specifications {
+    padding: 32px 24px !important;
+  }
+
+  body .product-detail-page .specification-table {
+    overflow-x: visible !important;
+    margin: 0 !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  body .product-detail-page .spec-table {
+    min-width: 0 !important;
+    width: 100% !important;
+    table-layout: fixed !important;
+    font-size: 13px !important;
+  }
+
+  body .product-detail-page .spec-table th,
+  body .product-detail-page .spec-table td {
+    padding: 10px 8px !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+    white-space: normal !important;
+    line-height: 1.55 !important;
+  }
+
+  body .product-detail-page .spec-table .spec-label,
+  body .product-detail-page .spec-table .spec-category {
+    width: 92px !important;
+    min-width: 92px !important;
+    padding: 10px 6px !important;
+    font-size: 13px !important;
+  }
+
+  body .product-detail-page .product-contact {
+    padding: 48px 24px !important;
+  }
+
+  body .product-detail-page .product-contact .contact-content h2 {
+    font-size: 24px !important;
+  }
+
+  body .product-detail-page .product-contact .contact-buttons {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+
+  body .product-detail-page .product-contact .btn-primary,
+  body .product-detail-page .product-contact .btn-secondary {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+}
+
+@media (max-width: 480px) {
+  body .product-detail-page .container,
+  body .product-detail-page .product-hero .container {
+    padding: 0 16px !important;
+  }
+
+  body .product-detail-page .product-hero {
+    padding: 88px 0 24px !important;
+  }
+
+  body .product-detail-page .product-hero .product-title {
+    font-size: 26px !important;
+  }
+
+  body .product-detail-page .product-hero .product-subtitle,
+  body .product-detail-page .product-hero .product-description {
+    font-size: 14px !important;
+  }
+
+  body .product-detail-page .product-overview {
+    padding: 24px 16px !important;
+    margin: 36px 0 !important;
+  }
+
+  body .product-detail-page .product-overview .product-image {
+    padding: 20px !important;
+    min-height: 220px !important;
+  }
+
+  body .product-detail-page .section-title {
+    font-size: 20px !important;
+    margin-bottom: 24px !important;
+  }
+
+  body .product-detail-page .feature-card,
+  body .product-detail-page .application-item {
+    padding: 20px !important;
+  }
+
+  body .product-detail-page .product-specifications {
+    padding: 24px 16px !important;
+  }
+
+  body .product-detail-page .product-contact {
+    padding: 40px 16px !important;
+  }
+
+  body .product-detail-page .spec-table {
+    font-size: 12px !important;
+  }
+
+  body .product-detail-page .spec-table th,
+  body .product-detail-page .spec-table td {
+    padding: 8px 6px !important;
+  }
+
+  body .product-detail-page .spec-table .spec-label,
+  body .product-detail-page .spec-table .spec-category {
+    width: 78px !important;
+    min-width: 78px !important;
+    padding: 8px 4px !important;
+    font-size: 12px !important;
+  }
+}

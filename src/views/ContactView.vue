@@ -1,143 +1,179 @@
 <template>
   <div class="contact-page page-content">
-    <!-- 背景装饰 -->
-    <div class="contact-bg-pattern"></div>
-    
-    <div class="container">
-      <!-- 页面标题区域 -->
-      <div class="page-header">
-        <h1 class="section-title">{{ isZh ? '联系我们' : 'Contact Us' }}</h1>
-        <div class="contact-intro">
-          <p>{{ isZh ? '如果您对我们的产品和服务有任何疑问，或者希望了解更多信息，请随时与我们联系。我们的专业团队将很乐意为您提供帮助。' : 'If you have any questions about our products and services, or want to learn more, please feel free to contact us. Our professional team will be happy to help you.' }}</p>
+    <!-- Hero Banner -->
+    <section class="contact-hero">
+      <div class="contact-hero-bg"></div>
+      <div class="contact-hero-inner">
+        <div class="contact-hero-content">
+          <h1 class="hero-title">{{ isZh ? '联系我们' : 'Contact Us' }}</h1>
+          <p class="hero-subtitle">
+            {{ isZh
+              ? '致力于通过领先的无人机技术与智能感知系统，保障每一片空域的安全与高效。朗德智能，与您共同探索科技的无限可能。'
+              : 'Dedicated to safeguarding every inch of airspace through leading UAV technology and intelligent perception systems. Lander Intelligence — exploring the boundless possibilities of technology with you.' }}
+          </p>
         </div>
       </div>
-      
-      <!-- 主要内容区域 -->
-      <div class="contact-content">
-        <!-- 联系信息卡片 -->
-        <div class="contact-info">
-          <div class="info-card featured-card">
-            <div class="info-header">
-              <div class="info-icon">
-                <svg viewBox="0 0 24 24" fill="none" class="icon-svg">
-                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1"/>
-                  <circle cx="12" cy="9" r="2.5" stroke="currentColor" stroke-width="2" fill="none"/>
-                </svg>
-              </div>
-              <div class="info-badge">{{ isZh ? '地址' : 'ADDRESS' }}</div>
-            </div>
-            <h3>{{ isZh ? '公司地址' : 'Company Address' }}</h3>
-            <p class="address-text">{{ currentSiteInfo.contactInfo.address }}</p>
-            
-            <!-- 地址地图图片 -->
-            <div class="address-image">
-              <img src="/images/company/company-location.jpg.svg" alt="公司地址" @error="handleAddressImageError">
-              <div class="address-overlay">
-                <div class="address-marker">
-                  <div class="marker-icon">
-                    <svg viewBox="0 0 16 16" fill="currentColor">
-                      <path d="M8 2C6.34 2 5 3.34 5 5c0 2.63 3 6.5 3 6.5s3-3.87 3-6.5c0-1.66-1.34-3-3-3z"/>
-                      <circle cx="8" cy="5" r="1" fill="white"/>
-                    </svg>
-                  </div>
-                  <span>{{ isZh ? '朗德智能' : 'Lande Intelligence' }}</span>
+    </section>
+
+    <!-- Contact Info & Inquiry Form -->
+    <section class="contact-main">
+      <div class="contact-main-inner">
+        <div class="contact-grid">
+          <!-- Left: Info Cards -->
+          <div class="info-column">
+            <!-- 办公地点 -->
+            <div class="info-card">
+              <div class="info-card-inner">
+                <div class="info-icon-wrap">
+                  <svg viewBox="0 0 24 24" fill="none" class="icon-svg">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="currentColor" stroke-width="2" fill="none"/>
+                    <circle cx="12" cy="9" r="2.5" stroke="currentColor" stroke-width="2" fill="none"/>
+                  </svg>
+                </div>
+                <div class="info-text">
+                  <h3 class="info-title">{{ isZh ? '办公地点' : 'Office Location' }}</h3>
+                  <p class="info-desc" v-for="(addr, idx) in currentSiteInfo.contactInfo.addresses" :key="idx">
+                    <span v-if="currentSiteInfo.contactInfo.addresses.length > 1" class="addr-label">{{ idx === 0 ? (isZh ? '总部：' : 'HQ: ') : (isZh ? '分部：' : 'Branch: ') }}</span>{{ addr }}
+                  </p>
                 </div>
               </div>
             </div>
-            
-            <div class="contact-actions">
-              <a href="https://ditu.amap.com/search?query=浙江省杭州市西湖区文三路478号华星科技大厦" target="_blank" class="contact-link primary-link">
-                <svg viewBox="0 0 16 16" fill="currentColor" class="link-icon">
-                  <path d="M8 2C6.34 2 5 3.34 5 5c0 2.63 3 6.5 3 6.5s3-3.87 3-6.5c0-1.66-1.34-3-3-3z"/>
-                </svg>
-                {{ isZh ? '获取导航' : 'Get Directions' }}
-                <svg viewBox="0 0 16 16" fill="currentColor" class="arrow-icon">
-                  <path d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-                </svg>
-              </a>
-            </div>
-          </div>
-          
-          <div class="info-card">
-            <div class="info-header">
-              <div class="info-icon">
-                <svg viewBox="0 0 24 24" fill="none" class="icon-svg">
-                  <path d="M22 16.92v3a2 2 0 01-2.18 2 19.76 19.76 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.76 19.76 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1"/>
-                </svg>
+
+            <!-- 电话 / 邮箱 合并卡 -->
+            <div class="info-card">
+              <div class="info-card-inner">
+                <div class="info-icon-wrap">
+                  <svg viewBox="0 0 24 24" fill="none" class="icon-svg">
+                    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.76 19.76 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.76 19.76 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" stroke="currentColor" stroke-width="2" fill="none"/>
+                  </svg>
+                </div>
+                <div class="info-text">
+                  <div class="info-block">
+                    <h3 class="info-title">{{ isZh ? '电话支持' : 'Phone' }}</h3>
+                    <p class="info-desc">{{ currentSiteInfo.contactInfo.phone }}</p>
+                  </div>
+                  <div class="info-block">
+                    <h3 class="info-title">{{ isZh ? '邮箱联系' : 'Email' }}</h3>
+                    <p class="info-desc">{{ currentSiteInfo.contactInfo.email }}</p>
+                  </div>
+                </div>
               </div>
-              <div class="info-badge">{{ isZh ? '热线' : 'PHONE' }}</div>
             </div>
-            <h3>{{ isZh ? '联系电话' : 'Contact Phone' }}</h3>
-            <p class="contact-value">{{ currentSiteInfo.contactInfo.phone }}</p>
-            <p class="contact-value secondary">400-688-7842</p>
-            <div class="contact-actions">
-              <a :href="`tel:${currentSiteInfo.contactInfo.phone}`" class="contact-link primary-link">
-                <svg viewBox="0 0 16 16" fill="currentColor" class="link-icon">
-                  <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122L9.98 10.848c-.297.059-.605-.05-.821-.267L5.934 7.356a.827.827 0 0 1-.267-.821l.418-1.805a.678.678 0 0 0-.122-.58L4.169 2.843a.678.678 0 0 0-.515-.515z"/>
-                </svg>
-                {{ isZh ? '拨打电话' : 'Call Us' }}
-                <svg viewBox="0 0 16 16" fill="currentColor" class="arrow-icon">
-                  <path d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-                </svg>
-              </a>
-            </div>
-          </div>
-          
-          <div class="info-card">
-            <div class="info-header">
-              <div class="info-icon">
-                <svg viewBox="0 0 24 24" fill="none" class="icon-svg">
-                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1"/>
-                  <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2" fill="none"/>
-                </svg>
+
+            <!-- 工作时间 -->
+            <div class="info-card">
+              <div class="info-card-inner">
+                <div class="info-icon-wrap">
+                  <svg viewBox="0 0 24 24" fill="none" class="icon-svg">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
+                    <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div class="info-text">
+                  <h3 class="info-title">{{ isZh ? '营业时间' : 'Working Hours' }}</h3>
+                  <p class="info-desc">
+                    {{ isZh ? '周一至周五：09:00 - 18:00' : 'Mon - Fri: 09:00 - 18:00' }}<br/>
+                    {{ isZh ? '周六及周日：预约接待' : 'Weekends: By appointment' }}
+                  </p>
+                </div>
               </div>
-              <div class="info-badge">{{ isZh ? '邮箱' : 'EMAIL' }}</div>
-            </div>
-            <h3>{{ isZh ? '电子邮箱' : 'Email Address' }}</h3>
-            <p class="contact-value">{{ currentSiteInfo.contactInfo.email }}</p>
-            <p class="contact-value secondary">1547556971@qq.com</p>
-            <div class="contact-actions">
-              <a :href="`mailto:${currentSiteInfo.contactInfo.email}`" class="contact-link primary-link">
-                <svg viewBox="0 0 16 16" fill="currentColor" class="link-icon">
-                  <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z"/>
-                </svg>
-                {{ isZh ? '发送邮件' : 'Send Email' }}
-                <svg viewBox="0 0 16 16" fill="currentColor" class="arrow-icon">
-                  <path d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-                </svg>
-              </a>
             </div>
           </div>
-          
-          <div class="info-card">
-            <div class="info-header">
-              <div class="info-icon">
-                <svg viewBox="0 0 24 24" fill="none" class="icon-svg">
-                  <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1"/>
-                  <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+
+          <!-- Right: Inquiry Form -->
+          <div class="form-column">
+            <div class="form-card">
+              <div class="form-header">
+                <h2 class="form-title">{{ isZh ? '在线咨询' : 'Online Inquiry' }}</h2>
+                <p class="form-subtitle">
+                  {{ isZh ? '请填写以下表单，我们的技术专家将在 24 小时内与您取得联系。' : 'Please fill out the form below. Our specialists will contact you within 24 hours.' }}
+                </p>
               </div>
-              <div class="info-badge">{{ isZh ? '时间' : 'TIME' }}</div>
+              <ContactForm />
             </div>
-            <h3>{{ isZh ? '工作时间' : 'Working Hours' }}</h3>
-            <p class="contact-value">{{ isZh ? '周一至周五: 9:00 - 18:00' : 'Mon - Fri: 9:00 - 18:00' }}</p>
-            <p class="contact-value secondary">{{ isZh ? '周末及节假日休息' : 'Weekends & Holidays: Closed' }}</p>
           </div>
-        </div>
-        
-        <!-- 联系表单 -->
-        <div class="contact-form-container">
-          <div class="form-header">
-            <h2>{{ isZh ? '在线咨询' : 'Online Inquiry' }}</h2>
-            <p>{{ isZh ? '填写以下表单，我们会尽快与您联系' : 'Fill out the form below and we will contact you as soon as possible' }}</p>
-          </div>
-          <ContactForm />
         </div>
       </div>
-      
-      <!-- 地图区域 -->
-     
-    </div>
+    </section>
+
+    <!-- Partner Section -->
+    <section class="partner-section">
+      <div class="partner-inner">
+        <div class="partner-header">
+          <span class="partner-label">{{ isZh ? 'GLOBAL NETWORK' : 'GLOBAL NETWORK' }}</span>
+          <h2 class="partner-title">{{ isZh ? '全球合作伙伴计划' : 'Global Partner Program' }}</h2>
+          <p class="partner-desc">
+            {{ isZh
+              ? '朗德智能正积极拓展全球业务版图，寻找具备专业资质与行业资源的合作伙伴，共同推进行业级无人机应用的普及。'
+              : 'Lander Intelligence is actively expanding its global footprint, seeking partners with professional qualifications and industry resources to jointly advance industrial UAV adoption.' }}
+          </p>
+        </div>
+
+        <div class="partner-grid">
+          <!-- 渠道分销 -->
+          <div class="partner-card">
+            <div class="partner-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M11 17l-5-5 2-2 3 3 7-7 2 2-9 9z"/>
+                <path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h7"/>
+              </svg>
+            </div>
+            <h4 class="partner-card-title">{{ isZh ? '渠道分销' : 'Channel Distribution' }}</h4>
+            <p class="partner-card-desc">{{ isZh ? '共享市场红利与品牌价值' : 'Share market dividends and brand value' }}</p>
+          </div>
+
+          <!-- 技术合作 -->
+          <div class="partner-card">
+            <div class="partner-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33h.01a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.01a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+              </svg>
+            </div>
+            <h4 class="partner-card-title">{{ isZh ? '技术合作' : 'Technical Collaboration' }}</h4>
+            <p class="partner-card-desc">{{ isZh ? '算法共享与系统深度融合' : 'Algorithm sharing and deep system integration' }}</p>
+          </div>
+
+          <!-- 特种定制 -->
+          <div class="partner-card">
+            <div class="partner-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <h4 class="partner-card-title">{{ isZh ? '特种定制' : 'Custom Solutions' }}</h4>
+            <p class="partner-card-desc">{{ isZh ? '为行业客户提供专属解决方案' : 'Tailored solutions for industry clients' }}</p>
+          </div>
+
+          <!-- 培训交付 -->
+          <div class="partner-card">
+            <div class="partner-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+              </svg>
+            </div>
+            <h4 class="partner-card-title">{{ isZh ? '培训交付' : 'Training & Delivery' }}</h4>
+            <p class="partner-card-desc">{{ isZh ? '完善的课程体系与实操训练' : 'Comprehensive curriculum and hands-on training' }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+      <div class="map-bg"></div>
+      <div class="map-grid-overlay"></div>
+      <div class="map-center">
+        <div class="map-pin">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="pin-icon">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+            <circle cx="12" cy="9" r="2.5"/>
+          </svg>
+          <span class="pin-text">{{ isZh ? '朗德智能总部 · 杭州' : 'Lander HQ · Hangzhou' }}</span>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -146,810 +182,650 @@ import { computed } from 'vue'
 import ContactForm from '@/components/ContactForm.vue'
 import { useLanguage } from '@/mixins/language'
 
-// 使用语言相关功能
 const { isZh, isEn, getCurrentSiteInfo } = useLanguage()
 
-// 获取当前语言的网站信息
 const currentSiteInfo = computed(() => {
   const siteInfoFromStore = getCurrentSiteInfo.value
   if (siteInfoFromStore && siteInfoFromStore.contactInfo) {
     return siteInfoFromStore
   }
-  
-  // 使用默认数据
   return isZh.value ? {
     companyName: '杭州朗德智能科技有限公司',
     contactInfo: {
-      address: '浙江省杭州市西湖区文三路478号华星科技大厦A座5楼',
-      phone: '1547554068',
+      addresses: [
+        '浙江省杭州市上城区明石路515号明石商业大厦9楼9173室',
+        '湖南省长沙市岳麓区延年江境酒店 802'
+      ],
+      phone: '13548973785',
       email: '173462959@qq.com'
     }
   } : {
     companyName: 'Hangzhou Lande Intelligent Technology Co., Ltd.',
     contactInfo: {
-      address: '5F, Building A, Huaxing Technology Building, No. 478 Wensan Road, Xihu District, Hangzhou, Zhejiang',
-      phone: '1547554068',
+      addresses: [
+        '15F, Building A, Innovation Tower, Science & Technology Park, Binjiang District, Hangzhou, Zhejiang',
+        'Room 802, Yanian Jiangjing Hotel, Yuelu District, Changsha, Hunan'
+      ],
+      phone: '13548973785',
       email: '173462959@qq.com'
     }
   }
 })
-
-// 处理地址图片加载错误
-const handleAddressImageError = (event) => {
-  event.target.src = '/images/company/company-location-placeholder.jpg'
-}
-
-// 处理地图图片加载错误
-const handleMapImageError = (event) => {
-  const altText = isZh.value ? '公司地图' : 'Company Map'
-  event.target.src = `https://via.placeholder.com/1200x400?text=${altText}`
-}
 </script>
 
 <style scoped>
-/* 全局样式优化 */
-* {
-  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-}
+/* =========================================================
+   ContactView — 对标 concat.html (Material Design 3)
+   色板：primary #003ec7 / surface #fbf8ff / surface-container-low #f3f2ff
+   surface-container-lowest #ffffff / outline-variant #c3c5d9
+   on-surface #191b25 / on-surface-variant #434656
+   字体：Manrope (headline) + Inter (body)
+   间距：xl 80 / lg 48 / md 24 / sm 12 / base 8 / xs 4
+   ========================================================= */
 
 .contact-page {
-  padding-top: 100px;
-  padding-bottom: 80px;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  background: #fbf8ff;
+  color: #191b25;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   min-height: 100vh;
+  padding-bottom: 0;
+}
+
+/* ---------- Hero Banner ---------- */
+.contact-hero {
   position: relative;
+  height: 400px;
   overflow: hidden;
+  display: flex;
+  align-items: center;
 }
 
-/* 背景装饰 */
-.contact-bg-pattern {
+.contact-hero-bg {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: 
-    radial-gradient(circle at 15% 25%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
-    radial-gradient(circle at 85% 75%, rgba(147, 197, 253, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 45% 85%, rgba(59, 130, 246, 0.03) 0%, transparent 40%);
-  opacity: 0.8;
+  inset: 0;
+  background-image:
+    linear-gradient(90deg, rgba(0, 20, 82, 0.72) 0%, rgba(0, 62, 199, 0.55) 45%, rgba(0, 62, 199, 0.2) 100%),
+    url('/images/contact/hero-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-/* 页面标题区域 */
-.page-header {
-  text-align: center;
-  margin-bottom: 80px;
-  position: relative;
-  z-index: 2;
-}
-
-.section-title {
-  font-size: 2.8rem;
-  margin-bottom: 30px;
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  position: relative;
-  font-family: 'Inter', sans-serif;
-}
-
-.section-title::after {
+.contact-hero-bg::after {
   content: '';
   position: absolute;
-  bottom: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 4px;
-  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
-  border-radius: 2px;
+  inset: 0;
+  background-image:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.35;
 }
 
-.contact-intro {
-  max-width: 800px;
-  margin: 30px auto 0;
-}
-
-.contact-intro p {
-  font-size: 1.2rem;
-  color: #64748b;
-  line-height: 1.8;
-  font-family: 'Inter', sans-serif;
-}
-
-/* 主要内容区域 */
-.contact-content {
-  display: grid;
-  grid-template-columns: 1fr 1.5fr;
-  gap: 60px;
-  margin-bottom: 100px;
+.contact-hero-inner {
   position: relative;
   z-index: 2;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
 }
 
-/* 联系信息卡片 */
-.contact-info {
+.contact-hero-content {
+  max-width: 640px;
+}
+
+.hero-title {
+  font-family: 'Manrope', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  margin: 0 0 24px;
+}
+
+.hero-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+  color: #dde1ff;
+  margin: 0;
+  max-width: 520px;
+}
+
+/* ---------- Main Section ---------- */
+.contact-main {
+  padding: 80px 0;
+}
+
+.contact-main-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.contact-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 30px;
+  grid-template-columns: 5fr 7fr;
+  gap: 48px;
+  align-items: start;
+}
+
+/* ---------- Left: Info Cards ---------- */
+.info-column {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .info-card {
-  background: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.95) 0%, 
-    rgba(255, 255, 255, 0.9) 100%);
-  backdrop-filter: blur(20px) saturate(180%);
-  border-radius: 24px;
-  padding: 0;
-  box-shadow: 
-    0 8px 32px rgba(59, 130, 246, 0.08),
-    0 2px 16px rgba(0, 0, 0, 0.04),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
-  position: relative;
-}
-
-.info-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, 
-    transparent 0%, 
-    rgba(59, 130, 246, 0.4) 50%, 
-    transparent 100%);
-  opacity: 0;
-  transition: opacity 0.4s ease;
+  background: #f3f2ff;
+  border: 1px solid rgba(195, 197, 217, 0.35);
+  border-radius: 8px;
+  padding: 24px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
 }
 
 .info-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 
-    0 20px 40px rgba(59, 130, 246, 0.15),
-    0 8px 24px rgba(0, 0, 0, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+  border-color: rgba(0, 62, 199, 0.3);
+  transform: translateY(-2px);
 }
 
-.info-card:hover::before {
-  opacity: 1;
-}
-
-/* 特色卡片（地址卡片）*/
-.info-card.featured-card {
-  background: linear-gradient(135deg, 
-    rgba(59, 130, 246, 0.02) 0%, 
-    rgba(255, 255, 255, 0.95) 25%,
-    rgba(255, 255, 255, 0.9) 100%);
-}
-
-.info-card.featured-card::before {
-  background: linear-gradient(90deg, 
-    transparent 0%, 
-    rgba(59, 130, 246, 0.6) 50%, 
-    transparent 100%);
-}
-
-/* 信息头部区域 */
-.info-header {
+.info-card-inner {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 32px 32px 24px;
+  align-items: flex-start;
+  gap: 24px;
 }
 
-.info-icon {
-  width: 64px;
-  height: 64px;
-  border-radius: 20px;
-  background: linear-gradient(135deg, 
-    rgba(59, 130, 246, 0.1) 0%, 
-    rgba(147, 197, 253, 0.15) 100%);
+.info-icon-wrap {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 4px;
+  background: rgba(0, 62, 199, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid rgba(59, 130, 246, 0.15);
-  position: relative;
-  overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.info-icon::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transform: rotate(-45deg) translateX(-100%);
-  transition: transform 0.6s ease;
-}
-
-.info-card:hover .info-icon {
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  border-color: rgba(255, 255, 255, 0.3);
-  transform: scale(1.1) rotate(8deg);
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
-}
-
-.info-card:hover .info-icon::before {
-  transform: rotate(-45deg) translateX(100%);
+  color: #003ec7;
 }
 
 .icon-svg {
-  width: 32px;
-  height: 32px;
-  color: #3b82f6;
-  transition: all 0.4s ease;
+  width: 24px;
+  height: 24px;
 }
 
-.info-card:hover .icon-svg {
-  color: #ffffff;
-  transform: scale(1.1);
-}
-
-.info-badge {
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  color: #ffffff;
-  font-size: 0.7rem;
-  font-weight: 700;
-  padding: 4px 10px;
-  border-radius: 12px;
-  letter-spacing: 0.5px;
-  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
-  font-family: 'Inter', sans-serif;
-}
-
-.info-card h3 {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #0f172a;
-  margin: 0 32px 20px;
-  line-height: 1.3;
-  font-family: 'Inter', sans-serif;
-  letter-spacing: -0.01em;
-}
-
-.address-text,
-.contact-value {
-  color: #64748b;
-  line-height: 1.6;
-  margin: 0 32px 16px;
-  font-size: 1rem;
-  font-family: 'Inter', sans-serif;
-}
-
-.contact-value.secondary {
-  color: #94a3b8;
-  font-size: 0.95rem;
-  margin-bottom: 8px;
-}
-
-.address-image {
-  position: relative;
-  width: calc(100% - 64px);
-  height: 240px;
-  border-radius: 18px;
-  overflow: hidden;
-  margin: 20px 32px 24px;
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15);
-  border: 2px solid rgba(255, 255, 255, 0.8);
-}
-
-.address-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.address-image:hover img {
-  transform: scale(1.08);
-}
-
-.address-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, 
-    rgba(59, 130, 246, 0.1) 0%, 
-    rgba(0, 0, 0, 0.2) 100%);
+.info-text {
+  flex: 1;
+  min-width: 0;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.address-marker {
-  background: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.95) 0%, 
-    rgba(248, 250, 252, 0.9) 100%);
-  border-radius: 50px;
-  padding: 12px 20px;
+.info-block {
   display: flex;
-  align-items: center;
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.25);
-  backdrop-filter: blur(12px);
-  border: 2px solid rgba(255, 255, 255, 0.6);
-  transform: translateY(0);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-direction: column;
+  gap: 4px;
 }
 
-.address-image:hover .address-marker {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 35px rgba(59, 130, 246, 0.35);
-}
-
-.marker-icon {
-  width: 20px;
-  height: 20px;
-  margin-right: 8px;
-  color: #3b82f6;
-}
-
-.address-marker span {
-  font-weight: 700;
-  color: #0f172a;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.9rem;
-}
-
-.contact-actions {
-  padding: 0 32px 32px;
-}
-
-.contact-link.primary-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  color: #ffffff;
-  padding: 12px 20px;
-  border-radius: 50px;
-  text-decoration: none;
+.info-title {
+  font-family: 'Manrope', sans-serif;
+  font-size: 18px;
   font-weight: 600;
-  font-size: 0.9rem;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: #191b25;
+  margin: 0 0 4px;
+}
+
+.info-block .info-title {
+  font-size: 16px;
+  margin: 0;
+}
+
+.info-desc {
   font-family: 'Inter', sans-serif;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
-  position: relative;
-  overflow: hidden;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #434656;
+  margin: 0;
 }
 
-.contact-link.primary-link::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.2);
-  transition: all 0.4s ease;
+.info-desc + .info-desc {
+  margin-top: 6px;
 }
 
-.contact-link.primary-link:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
-  background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+.addr-label {
+  display: inline-block;
+  min-width: 48px;
+  color: #003ec7;
+  font-weight: 600;
 }
 
-.contact-link.primary-link:hover::before {
-  left: 100%;
+/* ---------- Right: Form Card ---------- */
+.form-column {
+  min-width: 0;
 }
 
-.link-icon {
-  width: 16px;
-  height: 16px;
-  flex-shrink: 0;
-}
-
-.arrow-icon {
-  width: 14px;
-  height: 14px;
-  transition: transform 0.3s ease;
-  flex-shrink: 0;
-}
-
-.contact-link.primary-link:hover .arrow-icon {
-  transform: translateX(4px);
-}
-
-/* 联系表单容器 */
-.contact-form-container {
-  background: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.95) 0%, 
-    rgba(255, 255, 255, 0.9) 100%);
-  backdrop-filter: blur(20px) saturate(180%);
-  border-radius: 24px;
-  padding: 0;
-  box-shadow: 
-    0 8px 32px rgba(59, 130, 246, 0.08),
-    0 2px 16px rgba(0, 0, 0, 0.04),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  position: relative;
-  overflow: hidden;
-}
-
-.contact-form-container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
-  border-radius: 24px 24px 0 0;
+.form-card {
+  background: #ffffff;
+  border: 1px solid rgba(195, 197, 217, 0.5);
+  border-radius: 8px;
+  padding: 48px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
 }
 
 .form-header {
-  padding: 40px 40px 20px;
+  margin-bottom: 32px;
 }
 
-.form-header h2 {
-  font-size: 1.8rem;
-  color: #0f172a;
-  margin-bottom: 15px;
-  font-weight: 700;
-  font-family: 'Inter', sans-serif;
+.form-title {
+  font-family: 'Manrope', sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.2;
   letter-spacing: -0.01em;
+  color: #003ec7;
+  margin: 0 0 12px;
 }
 
-.form-header p {
-  color: #64748b;
-  margin-bottom: 0;
-  font-size: 1.05rem;
-  line-height: 1.6;
+.form-subtitle {
   font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #434656;
+  margin: 0;
 }
 
-/* 地图区域 */
-.map-section {
-  position: relative;
-  z-index: 2;
-}
-
-.map-section .section-header {
-  text-align: center;
-  margin-bottom: 50px;
-}
-
-.map-title {
-  font-size: 2.2rem;
-  color: #0f172a;
+/* ---------- ContactForm 子组件样式覆盖（使用 :deep） ---------- */
+:deep(.contact-form .form-group) {
   margin-bottom: 20px;
-  font-weight: 700;
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+}
+
+:deep(.contact-form label) {
+  display: block;
   font-family: 'Inter', sans-serif;
-  letter-spacing: -0.01em;
-  position: relative;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #434656;
+  margin-bottom: 8px;
 }
 
-.map-title::after {
-  content: '';
-  position: absolute;
-  bottom: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 3px;
-  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
-  border-radius: 2px;
-}
-
-.map-desc {
-  color: #64748b;
-  font-size: 1.1rem;
-  max-width: 600px;
-  margin: 0 auto;
-  line-height: 1.6;
-  font-family: 'Inter', sans-serif;
-}
-
-.map-container {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  border-radius: 24px;
-  padding: 40px;
-  box-shadow: 
-    0 20px 60px rgba(59, 130, 246, 0.08),
-    0 8px 32px rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  position: relative;
-  overflow: hidden;
-}
-
-.map-container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
-  border-radius: 24px 24px 0 0;
-}
-
-.map {
-  position: relative;
-  height: 400px;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15);
-}
-
-.map img {
+:deep(.contact-form .form-control) {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
+  padding: 12px 16px;
+  background: transparent;
+  border: 1px solid #c3c5d9;
+  border-radius: 4px;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  color: #191b25;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+  outline: none;
 }
 
-.map:hover img {
-  transform: scale(1.05);
+:deep(.contact-form .form-control:focus) {
+  border-color: #003ec7;
+  box-shadow: 0 0 0 1px #003ec7;
 }
 
-.map-overlay {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  z-index: 10;
+:deep(.contact-form textarea.form-control) {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.6;
 }
 
-.map-info {
-  background: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.95) 0%, 
-    rgba(248, 250, 252, 0.9) 100%);
-  backdrop-filter: blur(12px);
-  border-radius: 16px;
-  padding: 16px 20px;
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.25);
-  border: 2px solid rgba(255, 255, 255, 0.6);
+:deep(.contact-form .btn) {
+  width: 100%;
+  padding: 14px 24px;
+  background: #003ec7;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+:deep(.contact-form .btn:hover) {
+  background: #0038b6;
+}
+
+:deep(.contact-form .btn:active) {
+  transform: scale(0.98);
+}
+
+:deep(.contact-form .btn:disabled) {
+  background: #737688;
+  cursor: not-allowed;
+}
+
+:deep(.contact-form .alert) {
+  padding: 12px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+:deep(.contact-form .alert-success) {
+  background: rgba(0, 62, 199, 0.08);
+  color: #003ec7;
+  border: 1px solid rgba(0, 62, 199, 0.2);
+}
+
+:deep(.contact-form .alert-error) {
+  background: rgba(186, 26, 26, 0.08);
+  color: #ba1a1a;
+  border: 1px solid rgba(186, 26, 26, 0.2);
+}
+
+/* ---------- Partner Section ---------- */
+.partner-section {
+  background: #e7e7f5;
+  padding: 80px 0;
+  overflow: hidden;
+}
+
+.partner-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.partner-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.partner-label {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #003ec7;
+  margin-bottom: 8px;
+}
+
+.partner-title {
+  font-family: 'Manrope', sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #191b25;
+  margin: 0 0 12px;
+}
+
+.partner-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #434656;
+  max-width: 672px;
+  margin: 0 auto;
+}
+
+.partner-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.partner-card {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 48px 24px;
   display: flex;
+  flex-direction: column;
   align-items: center;
+  text-align: center;
   gap: 12px;
-  max-width: 300px;
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 }
 
-.map-marker {
-  width: 40px;
-  height: 40px;
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  border-radius: 50%;
+.partner-card:hover {
+  background: #003ec7;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 62, 199, 0.25);
+}
+
+.partner-icon {
+  color: #003ec7;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  flex-shrink: 0;
-  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
-.map-marker svg {
-  width: 20px;
-  height: 20px;
+.partner-icon svg {
+  width: 40px;
+  height: 40px;
 }
 
-.map-text h4 {
-  font-size: 1rem;
-  font-weight: 700;
-  color: #0f172a;
-  margin: 0 0 4px 0;
-  font-family: 'Inter', sans-serif;
+.partner-card:hover .partner-icon {
+  color: #ffffff;
+  transform: scale(1.08);
 }
 
-.map-text p {
-  font-size: 0.85rem;
-  color: #64748b;
+.partner-card-title {
+  font-family: 'Manrope', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #191b25;
   margin: 0;
-  line-height: 1.4;
+  transition: color 0.3s ease;
+}
+
+.partner-card:hover .partner-card-title {
+  color: #ffffff;
+}
+
+.partner-card-desc {
   font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #434656;
+  margin: 0;
+  transition: color 0.3s ease;
 }
 
-/* 响应式样式 */
-@media (max-width: 1200px) {
-  .contact-content {
-    grid-template-columns: 1fr 1.2fr;
-    gap: 50px;
+.partner-card:hover .partner-card-desc {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ---------- Map Section ---------- */
+.map-section {
+  position: relative;
+  height: 400px;
+  overflow: hidden;
+  background: #d9d9e7;
+}
+
+.map-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(135deg, rgba(0, 20, 82, 0.35) 0%, rgba(46, 48, 58, 0.25) 50%, rgba(0, 20, 82, 0.35) 100%),
+    url('/images/contact/map-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.map-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(90deg, rgba(183, 196, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(rgba(183, 196, 255, 0.05) 1px, transparent 1px);
+  background-size: 120px 120px;
+  opacity: 0.6;
+}
+
+.map-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.map-pin {
+  background: #fbf8ff;
+  border: 1px solid rgba(0, 62, 199, 0.2);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  padding: 24px 32px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #003ec7;
+  animation: map-pin-pulse 2.4s ease-in-out infinite;
+}
+
+.map-pin .pin-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.map-pin .pin-text {
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  color: #003ec7;
+}
+
+@keyframes map-pin-pulse {
+  0%, 100% {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(0, 62, 199, 0.45);
+    transform: scale(1);
   }
-  
-  .section-title {
-    font-size: 2.4rem;
+  50% {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 16px rgba(0, 62, 199, 0);
+    transform: scale(1.02);
   }
 }
 
-@media (max-width: 992px) {
-  .contact-content {
+/* ---------- 响应式 ---------- */
+@media (max-width: 1024px) {
+  .contact-grid {
     grid-template-columns: 1fr;
-    gap: 60px;
+    gap: 32px;
   }
-  
-  .contact-info {
+
+  .form-card {
+    padding: 32px;
+  }
+
+  .partner-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 25px;
-  }
-  
-  .info-card.featured-card {
-    grid-column: 1 / -1;
   }
 }
 
 @media (max-width: 768px) {
-  .contact-page {
-    padding-top: 80px;
-    padding-bottom: 60px;
+  .contact-hero {
+    height: 320px;
   }
-  
-  .contact-info {
-    grid-template-columns: 1fr;
-    gap: 20px;
+
+  .hero-title {
+    font-size: 32px;
   }
-  
-  .contact-intro p {
-    font-size: 1rem;
+
+  .hero-subtitle {
+    font-size: 16px;
+  }
+
+  .contact-main {
+    padding: 56px 0;
+  }
+
+  .contact-main-inner,
+  .contact-hero-inner {
     padding: 0 20px;
   }
-  
-  .info-header {
-    padding: 24px 24px 18px;
+
+  .info-card {
+    padding: 20px;
   }
-  
-  .info-card h3 {
-    margin: 0 24px 16px;
-    font-size: 1.2rem;
+
+  .info-card-inner {
+    gap: 16px;
   }
-  
-  .address-text,
-  .contact-value {
-    margin: 0 24px 12px;
-    font-size: 0.95rem;
+
+  .form-card {
+    padding: 24px;
   }
-  
-  .address-image {
-    width: calc(100% - 48px);
-    height: 200px;
-    margin: 16px 24px 20px;
+
+  .form-title {
+    font-size: 24px;
   }
-  
-  .contact-actions {
-    padding: 0 24px 24px;
+
+  .partner-section {
+    padding: 56px 0;
   }
-  
-  .info-icon {
-    width: 56px;
-    height: 56px;
+
+  .partner-inner {
+    padding: 0 20px;
   }
-  
-  .icon-svg {
-    width: 28px;
-    height: 28px;
+
+  .partner-title {
+    font-size: 24px;
   }
-  
-  .form-header {
-    padding: 30px 30px 15px;
+
+  .partner-card {
+    padding: 32px 20px;
   }
-  
-  .form-header h2 {
-    font-size: 1.5rem;
+
+  .map-section {
+    height: 320px;
   }
-  
-  .map-container {
-    padding: 30px;
+
+  .map-pin {
+    padding: 16px 20px;
   }
-  
-  .map {
-    height: 300px;
-  }
-  
-  .map-title {
-    font-size: 1.8rem;
+
+  .map-pin .pin-text {
+    font-size: 14px;
   }
 }
 
-@media (max-width: 576px) {
-  .contact-page {
-    padding-top: 70px;
-    padding-bottom: 50px;
+@media (max-width: 480px) {
+  .contact-hero {
+    height: 280px;
   }
-  
-  .section-title {
-    font-size: 2rem;
+
+  .hero-title {
+    font-size: 28px;
   }
-  
-  .info-header {
-    padding: 20px 20px 16px;
+
+  .info-icon-wrap {
+    width: 40px;
+    height: 40px;
   }
-  
-  .info-card h3 {
-    margin: 0 20px 12px;
-    font-size: 1.1rem;
-  }
-  
-  .address-text,
-  .contact-value {
-    margin: 0 20px 10px;
-    font-size: 0.9rem;
-  }
-  
-  .address-image {
-    width: calc(100% - 40px);
-    height: 180px;
-    margin: 12px 20px 16px;
-  }
-  
-  .contact-actions {
-    padding: 0 20px 20px;
-  }
-  
-  .contact-link.primary-link {
-    padding: 10px 16px;
-    font-size: 0.85rem;
-  }
-  
-  .info-icon {
-    width: 50px;
-    height: 50px;
-  }
-  
+
   .icon-svg {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
   }
-  
-  .info-badge {
-    font-size: 0.65rem;
-    padding: 3px 8px;
-  }
-  
-  .form-header {
-    padding: 24px 24px 12px;
-  }
-  
-  .form-header h2 {
-    font-size: 1.3rem;
-  }
-  
-  .map-container {
-    padding: 20px;
-  }
-  
-  .map {
-    height: 250px;
-  }
-  
-  .map-title {
-    font-size: 1.5rem;
-  }
-  
-  .map-info {
-    padding: 12px 16px;
-    max-width: 250px;
-  }
-  
-  .map-marker {
-    width: 35px;
-    height: 35px;
-  }
-  
-  .map-marker svg {
-    width: 18px;
-    height: 18px;
-  }
-  
-  .map-text h4 {
-    font-size: 0.9rem;
-  }
-  
-  .map-text p {
-    font-size: 0.75rem;
+
+  .partner-grid {
+    grid-template-columns: 1fr;
   }
 }
 </style>

@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>杭州朗德智能科技有限公司 - 科技护航，安全至上</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-primary": "#b7c4ff",
+                        "outline": "#737688",
+                        "tertiary": "#3f4f65",
+                        "outline-variant": "#c3c5d9",
+                        "on-primary-fixed": "#001452",
+                        "surface-container": "#ededfb",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-tint": "#004ced",
+                        "on-tertiary-fixed-variant": "#38485d",
+                        "secondary-fixed": "#b7eaff",
+                        "on-surface-variant": "#434656",
+                        "on-error": "#ffffff",
+                        "secondary-container": "#00ccf9",
+                        "primary-fixed-dim": "#b7c4ff",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#00677f",
+                        "surface-dim": "#d9d9e7",
+                        "surface": "#fbf8ff",
+                        "primary": "#003ec7",
+                        "surface-container-high": "#e7e7f5",
+                        "surface-container-highest": "#e1e1ef",
+                        "surface-variant": "#e1e1ef",
+                        "on-primary": "#ffffff",
+                        "on-secondary-container": "#005266",
+                        "on-tertiary-container": "#d6e6ff",
+                        "secondary-fixed-dim": "#4cd6ff",
+                        "on-secondary-fixed-variant": "#004e60",
+                        "on-background": "#191b25",
+                        "inverse-surface": "#2e303a",
+                        "on-error-container": "#93000a",
+                        "surface-bright": "#fbf8ff",
+                        "error": "#ba1a1a",
+                        "on-primary-container": "#dfe3ff",
+                        "on-tertiary": "#ffffff",
+                        "background": "#fbf8ff",
+                        "surface-container-low": "#f3f2ff",
+                        "primary-fixed": "#dde1ff",
+                        "tertiary-container": "#57677e",
+                        "tertiary-fixed-dim": "#b7c8e1",
+                        "primary-container": "#0052ff",
+                        "inverse-on-surface": "#f0effe",
+                        "on-primary-fixed-variant": "#0038b6",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#d3e4fe",
+                        "on-tertiary-fixed": "#0b1c30",
+                        "on-surface": "#191b25",
+                        "on-secondary-fixed": "#001f28"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "sm": "12px",
+                        "container-max": "1280px",
+                        "md": "24px",
+                        "lg": "48px",
+                        "base": "8px",
+                        "xs": "4px",
+                        "xl": "80px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Manrope"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "headline-xl": ["Manrope"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Manrope"],
+                        "headline-xl-mobile": ["Manrope"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "1.3", "letterSpacing": "0", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "headline-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "headline-xl-mobile": ["32px", {"lineHeight": "1.1", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(115, 118, 136, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary/20">
+<!-- TopNavBar -->
+<header class="docked full-width top-0 sticky z-50 bg-surface/80 backdrop-blur-md border-b border-outline-variant/30 h-20">
+<div class="flex justify-between items-center w-full px-gutter max-w-container-max mx-auto h-full">
+<div class="flex items-center gap-sm">
+<img alt="Lander Intelligent Technology Logo" class="h-10 w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCu-Yn_nTY0wBZLXyckqA8rFM3bZXCPOlDItT3z5lv2RQPKmR3koTt6JWOUKELLTSRJBHA_XgAfzSDQn-cWS4zNnxym3s9ZSsd1pprqvgmSt3Hjhy_q_JoZzD_5p7O03hr5KFK3XIc8RaUk_ab04Uh-EOsnMhyRWEm9pvNq0HfEljvEGMWbUZc5UuuVDDZB7AY4z1EQgp_QLFm6K6dNDmJvU4G3743MnEAmbpIomM79rZKlbMHUAS4Aq1wfdvXa9akb-0c4uT8CMgzD"/>
+<span class="font-headline-md text-headline-md font-bold text-primary">朗德智能科技</span>
+</div>
+<nav class="hidden md:flex items-center gap-lg">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-headline-md text-body-md" href="#">首页</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-headline-md text-body-md" href="#">产品中心</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-headline-md text-body-md" href="#">应用案例</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-headline-md text-body-md" href="#">关于我们</a>
+</nav>
+<div class="flex items-center gap-md">
+<div class="hidden lg:flex items-center bg-surface-container rounded-full px-4 py-2 border border-outline-variant/30">
+<span class="material-symbols-outlined text-outline mr-2" style="font-size: 18px;">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-32 placeholder:text-outline" placeholder="搜索产品..." type="text"/>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2.5 rounded-lg font-bold hover:opacity-90 transition-all active:scale-95">
+                    联系我们
+                </button>
+</div>
+</div>
+</header>
+<!-- Hero Section -->
+<section class="relative min-h-[85vh] flex items-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<div class="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent z-10"></div>
+<div class="w-full h-full bg-cover bg-center" data-alt="A sophisticated high-tech surveillance drone hovering over a modern coastal infrastructure at sunset. The lighting is dramatic, with warm golden rays hitting the carbon fiber fuselage of the drone, contrasting against a cool blue sky. The visual style is crisp and professional, emphasizing precision engineering and military-grade security. The overall mood is authoritative and protective, aligned with a corporate aerospace aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCGnCbTVUk6h3ZAA6Brzwh0jCDWOjDx30Y8JazjjYat8u60S_dx-1buNFQR6zjI3btM_-VpHZbqKI5PPpubalHoX2MW2JURLinjMiOPceTqxh-lz34-7Vh3FQq5qOoZ7J6FxuPeWXpBOlFgO4qDX6CZUl6K8Ed3YoF_4hRxVRye8lvRjT97meWh8WlRWvrUC-ygODl8jZJqosFfIYsasEANlhijQHDfo8d5Qii9b-0OylspIUnJp0aBQykm0eC22YvN2FjpUcG3w7Ov')">
+</div>
+</div>
+<div class="relative z-20 max-w-container-max mx-auto px-gutter w-full">
+<div class="max-w-2xl">
+<div class="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1 rounded-full mb-6 border border-primary/20">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="text-label-sm font-label-sm uppercase tracking-wider">自主知识产权 · 低空安全领航者</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl mb-6 text-on-background leading-tight">
+                    科技护航，<br/><span class="text-primary">安全至上</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-lg">
+                    杭州朗德智能科技致力于打造具有自主知识产权的无人机产品和反无人机系统，为全球低空安全保驾护航。
+                </p>
+<div class="flex flex-wrap gap-md">
+<button class="bg-primary text-on-primary px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:shadow-lg transition-all">
+                        了解防控方案
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="bg-surface-container-high text-on-surface px-8 py-4 rounded-xl font-bold border border-outline-variant/30 hover:bg-surface-container-highest transition-all">
+                        查看产品目录
+                    </button>
+</div>
+<div class="mt-16 grid grid-cols-3 gap-lg border-t border-outline-variant/20 pt-8">
+<div>
+<p class="text-primary font-bold text-headline-md">2025</p>
+<p class="text-on-surface-variant text-sm">公司创立于杭州</p>
+</div>
+<div>
+<p class="text-primary font-bold text-headline-md">100%</p>
+<p class="text-on-surface-variant text-sm">自主研发产权</p>
+</div>
+<div>
+<p class="text-primary font-bold text-headline-md">24/7</p>
+<p class="text-on-surface-variant text-sm">全方位安全防御</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Product Categories Section -->
+<section class="py-xl bg-surface">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="flex flex-col md:flex-row justify-between items-end mb-lg gap-md">
+<div class="max-w-xl">
+<h2 class="font-headline-lg text-headline-lg mb-4">核心技术领域</h2>
+<p class="text-on-surface-variant">针对低空领域的复杂挑战，我们提供从全时域侦测到全手段反制的闭环解决方案，深度赋能低空经济。 </p>
+</div>
+<div class="flex gap-2">
+<button class="p-3 rounded-full border border-outline-variant hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="p-3 rounded-full border border-outline-variant hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Category 1: Drone Prevention -->
+<div class="mb-xl">
+<div class="flex items-center gap-4 mb-8">
+<div class="h-px flex-1 bg-outline-variant/30"></div>
+<h3 class="font-headline-md text-headline-md text-primary">无人机防控类</h3>
+<div class="h-px flex-1 bg-outline-variant/30"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<!-- Prevention Card 1 -->
+<div class="glass-card p-base rounded-xl hover:shadow-xl transition-all duration-500 group">
+<div class="aspect-[4/3] rounded-lg overflow-hidden mb-6 relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A futuristic radar dish system with advanced phased-array panels, mounted on a high-tech platform overlooking a secure military perimeter. The lighting is cool-toned and clinical, highlighting the matte metallic finish and technical components of the sensors. The background features a blurred, high-contrast landscape of a strategic facility. The image conveys a sense of high-end electronic warfare and early detection technology." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIuiCg39A-X6D8pjtfy-lT95aHvA4yHIuoXqI7FsaaJodLYvjzgba2MHd3s0XeFKsb-hHnXTqp6CGTdozr3F1HlzCHG9_uH2SG0IRAbhikgVLxwcxULPsBIjNx8HRoquekJJ_elQry_SHesr1-XjSyL0vGFvqX-n_L-Yj2LGJW1tFRupXURW8R7sB5to06SHEpRLazu9Eso_Y6oaWfUTgbr1H8IydbbJSvlpUOimmWiEkJE9OFD_SPm4Drx3D7kArRwTEPoiT2MbTW"/>
+<div class="absolute top-4 left-4 bg-primary text-on-primary px-3 py-1 rounded text-xs font-bold">侦探感知</div>
+</div>
+<div class="px-4 pb-6">
+<h4 class="font-headline-md text-lg mb-2">侦探感知系统</h4>
+<ul class="space-y-2 text-on-surface-variant text-sm">
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span>雷达探测系统</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span>高精度光电识别</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span>全频谱侦测模块</li>
+</ul>
+</div>
+</div>
+<!-- Prevention Card 2 -->
+<div class="glass-card p-base rounded-xl hover:shadow-xl transition-all duration-500 group">
+<div class="aspect-[4/3] rounded-lg overflow-hidden mb-6 relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A handheld anti-drone jamming gun with a sleek, ergonomic design in dark slate gray and orange accents. The device is held by a security professional in tactical gear, pointing towards a clear blue sky. The focus is on the intricate detail of the antennae and the digital display interface. The lighting is bright day mode, creating sharp shadows and emphasizing the professional-grade hardware texture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMOvLXUl5QWTEysdNp6HVnd3IKkapSaZz5Nxy1omp4pjkkEnLOyh8sMah6JalrIIWriZF1LXg24hIBq7Kzk1DhRqcFwLGWOaqJYgPAIUgh7-7oHKZThMZRE2FneqBXOJ3pIqQvR-irQe71UKYICTm71M9dqcSJWPz2kQhxv_28LPm2-4RszF_RDE38W4e_6d9JcPcvK-eUKqrZE4TNMTHlaaNTojaHHZDtYjwun2abqApXCSjEA6v1qXZn0sCgZS857TGSKKbiMulj"/>
+<div class="absolute top-4 left-4 bg-primary text-on-primary px-3 py-1 rounded text-xs font-bold">干扰反制</div>
+</div>
+<div class="px-4 pb-6">
+<h4 class="font-headline-md text-lg mb-2">防御打击装备</h4>
+<ul class="space-y-2 text-on-surface-variant text-sm">
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span>固定式全向侦测干扰</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span>便携式无人机打击枪</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span>多波段定向压制</li>
+</ul>
+</div>
+</div>
+<!-- Prevention Card 3 -->
+<div class="glass-card p-base rounded-xl hover:shadow-xl transition-all duration-500 group">
+<div class="aspect-[4/3] rounded-lg overflow-hidden mb-6 relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="An integrated defense command vehicle featuring a roof-mounted mobile surveillance and jamming station. The vehicle is painted in a matte tactical finish, parked in a high-security zone under dramatic, high-contrast cloud cover. The image style is rugged yet technologically sophisticated, highlighting the mobility and 'detect-and-strike' capabilities of the system. The lighting emphasizes the metallic surfaces and optical lenses." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2FkAbVDslS1YTKIA2F7l40o8GqOTWS-_dTET7CjfnnM8NlTFccFf2kKTVyRcMgisCmR5VRHkv_8tsaytLascpDeAUXyNbuC3HH-9jlze2mVWBDVCerMk8QzAHvtsb0SYvDmzOLaaoXj0LnGUJf4K7nwiTCgkcmAih4MgKwYS59xPQ_C7lPA9zry1Wu9omE0_zaBs1lMX6gnF1wq6MHaegXrVtmpYMYCWUspA5H3ET-HJTTKe63DDEgPzD8gLcPg3UGk2q2mfMy1GC"/>
+<div class="absolute top-4 left-4 bg-primary text-on-primary px-3 py-1 rounded text-xs font-bold">一体化防御</div>
+</div>
+<div class="px-4 pb-6">
+<h4 class="font-headline-md text-lg mb-2">综合防御系统</h4>
+<ul class="space-y-2 text-on-surface-variant text-sm">
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span>车载侦打一体系统</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span>四位一体智能防御阵列</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span>区域级低空网格化监控</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Category 2: Low-Altitude Economy -->
+<div>
+<div class="flex items-center gap-4 mb-8">
+<div class="h-px flex-1 bg-outline-variant/30"></div>
+<h3 class="font-headline-md text-headline-md text-secondary">低空经济类</h3>
+<div class="h-px flex-1 bg-outline-variant/30"></div>
+</div>
+<div class="bento-grid">
+<div class="col-span-12 md:col-span-8 glass-card p-6 rounded-xl flex flex-col md:flex-row gap-md items-center">
+<div class="flex-1">
+<span class="text-secondary font-bold text-label-sm tracking-widest block mb-2">专业植保</span>
+<h4 class="font-headline-lg text-headline-lg mb-4">农业植保无人机</h4>
+<p class="text-on-surface-variant mb-6">采用先进的载重系统与喷洒技术，支持全自主航线规划，极大提升农作业效率，引领智慧农业转型。</p>
+<button class="text-primary font-bold flex items-center gap-2 group">
+                                查看详情 <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">east</span>
+</button>
+</div>
+<div class="w-full md:w-1/2 aspect-video rounded-lg overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A large, multi-rotor agricultural drone hovering low over a vibrant green tea plantation. The drone is actively spraying a fine mist over the crops. The morning light is soft and diffused, creating a serene and productive atmosphere. The focus is on the drone's robust carbon fiber frame and precision nozzles. The aesthetic is clean and modern, merging technology with nature." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeIUMXhHBoQfIv-0RpVRMyby2ucklL7UKQaxaKef0yGOyVrWvuO7qtHAxho1oIj4ZAREFFQLeB8llg9RKusj3Uj9y5KwcLmfLP7kRjd4BDcADRIe86xQW8ap_q6iuw73VLMBo5QltCSEEapdqhP5CtJqz_noVbXUhHofL87ZZdoAUpq3Bwtm0rFZYT8g9r0pSqwKQKX7rrm1NJ_9MqOWglKmMo4QE3mn14nzO2r8CEQwPngLukeQA7hQwL6TLzCnavOy522GGp-Lri"/>
+</div>
+</div>
+<div class="col-span-12 md:col-span-4 glass-card p-6 rounded-xl flex flex-col">
+<div class="aspect-square rounded-lg overflow-hidden mb-6">
+<img class="w-full h-full object-cover" data-alt="A high-speed FPV racing drone captured mid-flight through a neon-lit industrial hangar. The motion blur creates a sense of extreme speed and agility. The lighting is dark-mode inspired, with vibrant blue and cyan streaks of light tracing the drone's path. The visual style is high-energy and technical, highlighting the high-performance components and carbon fiber construction." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNWtmBHzVN_cK35ePH5p4Cva1oQNcc9DKI_7FoSUbE1w5JODo-JqZLzf3DK7G2vg-1L3HT34fl9k3eM5xHY7Y7Qp9xDsgJV7I65B1S87y8ydBHmSBwnZIi61eb0Msltzxlh2m6K2qBh60GMjIZLGQS-BNXnIk7ZfCyI7PyX4Lgi5ymoE9wFEMTG4qHRdE0GZ1cy6QUfcywbUaPMkMv43tCpOtUwL52mIL85SfAf8VgjUCDGMXju92RWTm_WHCfI8OVXvThaGHMm7Sb"/>
+</div>
+<h4 class="font-headline-md text-lg mb-2">FPV/巡查无人机</h4>
+<p class="text-sm text-on-surface-variant">针对电力、安防等领域设计的高性能飞行平台。</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Application Scenarios Section -->
+<section class="py-xl bg-surface-container-low">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="text-center max-w-2xl mx-auto mb-xl">
+<h2 class="font-headline-lg text-headline-xl-mobile md:text-headline-lg mb-4">全场景应用覆盖</h2>
+<p class="text-on-surface-variant">朗德智能科技的产品已成功部署于多个关键领域，在复杂环境下展现卓越的可靠性与有效性。</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-md">
+<div class="relative h-96 group overflow-hidden rounded-2xl cursor-pointer">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A military border outpost at night, with advanced surveillance sensors and thermal cameras overlooking a rugged valley. The scene is illuminated by moonlight and the soft glow of control monitors inside the facility. The mood is highly secure and watchful. The color palette is dominated by deep blues and cold grays, reflecting the seriousness of national defense operations." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDio03gr_aupfj-5ibCz3LyGu5olR1H0vY5XuDlHGuYg1LVrnP9yvVa6hqeHi_NneJh_caXQGN31tmLVecp0G1l0RgOsecAt2SNYl177BkHyUQONyPZ4NhevdYiCjvzi6TbFiB5_W1c-8HLInf5Py7fyBI1PAlFKg-FRSMcgI9bbpnUx5jdlcebv8omq5-1fGaHYVr8lSLDVNT1I7kbFsYfayb4pWtdxnC40k1VBUrpSxT9eeAsGrMK99rrLASYvigRRjOJfKWWsuly"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-background/90 via-on-background/20 to-transparent flex flex-col justify-end p-6">
+<h5 class="text-white font-bold text-xl mb-2">国防安全</h5>
+<p class="text-outline-variant text-sm opacity-0 group-hover:opacity-100 transition-opacity">为军事基地的低空空域提供实时防御与干扰反制。</p>
+</div>
+</div>
+<div class="relative h-96 group overflow-hidden rounded-2xl cursor-pointer">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="High-voltage power lines stretching across a dramatic mountain range under a stormy sky. A professional drone is visible in the frame, inspecting the insulators and cables. The lighting is high-contrast and industrial, emphasizing the scale and danger of the environment. The focus is on the reliability of the technology in difficult weather conditions." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCf5lzbWB39hzaJO_zobMRfYWHtCIbSx76o57SdQWV3siD5IR-JgcRQ7L7wqeo6mJkpgulFf3YLCN17yhjuiQEOW9XRVPZBmBTcJpoF7ubmo4FlsN0GhStVgCOxNWwbPLWVLlP2YTDhEBE2BtUnQJ1psR9f-XK4lkf6DSKuxxCMjiptOoDy5SLAYOlZ567AduQj9LdpkFa2X7vqoPxuMIXaWSabaTNjcMCfK4pinZYj42Vy2ns_M9V4avXu_BywSTsMZ5QLbsUJ9Boa"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-background/90 via-on-background/20 to-transparent flex flex-col justify-end p-6">
+<h5 class="text-white font-bold text-xl mb-2">电力巡检</h5>
+<p class="text-outline-variant text-sm opacity-0 group-hover:opacity-100 transition-opacity">利用无人机搭载热成像仪，精准识别输电线路隐患。</p>
+</div>
+</div>
+<div class="relative h-96 group overflow-hidden rounded-2xl cursor-pointer">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A wide-angle shot of a secure border fence running along a desert landscape during the golden hour. Solar-powered sensor towers and drone docking stations are integrated into the perimeter. The long shadows and warm light create a dramatic, high-security feel. The overall visual style is cinematic and professional, showcasing large-scale infrastructure protection." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlYgwk3NF-a0YfxoD5c_DafWbg1CILKgqFoNQ0vgjXyOdYYY6I5LI7lgNq65V2Bzl8N5xrzN__Hh_ws7kd87Gt-Nt6DiEJOsu609SmLoKJxLZFYPT-zdeLRv8qjO6Ot_5VTcgEwwP8tpOwdIb75PKkMZnGfO9pXBpfU5DQRffmAEAXmheSAkO2X8dGrgbvqq61Fb0pw5Gp3bwJjplCB905JN2YiHASQ1ye2hnJASMo6sJu9Gb-lc6GBCyYViPMBzmBEo7WGJb6IhlB"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-background/90 via-on-background/20 to-transparent flex flex-col justify-end p-6">
+<h5 class="text-white font-bold text-xl mb-2">边境监控</h5>
+<p class="text-outline-variant text-sm opacity-0 group-hover:opacity-100 transition-opacity">构建全天候无人化边境巡逻网络，提升边防态势感知能力。</p>
+</div>
+</div>
+<div class="relative h-96 group overflow-hidden rounded-2xl cursor-pointer">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A panoramic view of a major international airport terminal and runway from a control tower perspective. The image captures the complex logistics of ground operations and aircraft taxiing. High-tech icons representing drone detection zones are overlaid subtly. The aesthetic is extremely clean and organized, conveying the critical importance of safety in aviation environments." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6wx_a24c356rC1-mJ7f-lAI7Rw9eMkTdwUsjDk1IgCZp554O_qFG_KuQML5GdIHDyDTFASoVZSuerQPUdYBC82LuhRbyjNLNsBCzGQ1SgkhpoP4DDemwezcHpUQS5YGlLMYJTGVVibF1MVWKm2_0clLvf1V-0m8n_2QqU7kuZU4lR3iSkk8shIY2JS60yXkBNNMXwgP6hXAOL4rCISfWLRNrXTkXwo3ug4nldUc9bkgofNyDtlc-M5g-vPDvkvt8sSgJvb8WlJwR1"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-background/90 via-on-background/20 to-transparent flex flex-col justify-end p-6">
+<h5 class="text-white font-bold text-xl mb-2">机场防护</h5>
+<p class="text-outline-variant text-sm opacity-0 group-hover:opacity-100 transition-opacity">部署无损干扰系统，有效阻止黑飞无人机闯入机场敏感空域。</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- About Us Section -->
+<section class="py-xl bg-surface relative overflow-hidden">
+<div class="absolute right-0 top-0 w-1/3 h-full bg-primary/5 -skew-x-12 translate-x-1/2"></div>
+<div class="max-w-container-max mx-auto px-gutter relative z-10">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-xl items-center">
+<div>
+<h2 class="font-headline-lg text-headline-lg mb-6">关于朗德智能科技</h2>
+<div class="space-y-6 font-body-lg text-on-surface-variant">
+<p>
+                            杭州朗德智能科技有限公司成立于2025年，坐落于创新高地中国杭州。我们是一家专注于无人机及反无人机系统研发、生产与销售的高科技企业。
+                        </p>
+<p>
+                            公司核心团队由来自航空航天、电子对抗、人工智能等领域的资深专家组成。我们坚持“技术驱动、安全为本”的核心价值观，致力于为全球客户提供最前沿的低空安全解决方案。
+                        </p>
+<div class="grid grid-cols-2 gap-md pt-6">
+<div class="flex items-start gap-4">
+<div class="bg-primary-container p-3 rounded-lg text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+<div>
+<h6 class="font-bold text-on-surface">卓越品质</h6>
+<p class="text-sm">严苛的军工级测试标准</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="bg-primary-container p-3 rounded-lg text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">hub</span>
+</div>
+<div>
+<h6 class="font-bold text-on-surface">系统整合</h6>
+<p class="text-sm">软硬件一体化深度融合</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="relative">
+<div class="rounded-2xl overflow-hidden shadow-2xl">
+<img class="w-full h-full object-cover" data-alt="A modern, high-tech corporate office interior in Hangzhou, featuring sleek glass partitions, minimalist ergonomic furniture, and large windows with a view of a futuristic city skyline. The lighting is bright and natural, creating an atmosphere of transparency and innovation. The overall style is professional and sophisticated, reflecting a company at the forefront of the technology industry." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqUWLCjiCfUl8LPwUONV6x4Tg6I8LYSh9N31JXvdO_BcM-iu_QZ3Rf2dU6aJlj1VaJG-joJnq8cD2muOMgW4IoKWYd_dCYcgP6XjJ-gGK3N5hmPClgfDFsOxBbwAGC2S5Vz705Sp2hM1eEkyBmpGQUNhoA71siNr4iCHFPuwTVRJ8PeoQfZsK7AE5bspYRGw6sAO-gjinX_RZK6rUWeDv02IjqyEvjNOq34RieXH8fhmu_j3K-pokKizKceeE1AtCh6y0hEYKCOStY"/>
+</div>
+<div class="absolute -bottom-10 -left-10 glass-card p-lg rounded-xl hidden lg:block border border-primary/20">
+<div class="flex flex-col items-center">
+<span class="text-primary font-extrabold text-headline-xl">25+</span>
+<span class="text-on-surface-variant font-bold text-sm">核心专利技术</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="full-width bottom-0 bg-surface-container-highest border-t border-outline-variant/20">
+<div class="w-full py-xl px-gutter max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-4 gap-lg">
+<div class="col-span-1 md:col-span-1">
+<div class="flex items-center gap-2 mb-6">
+<img alt="Lander Intelligent Technology Logo" class="h-8 w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCu-Yn_nTY0wBZLXyckqA8rFM3bZXCPOlDItT3z5lv2RQPKmR3koTt6JWOUKELLTSRJBHA_XgAfzSDQn-cWS4zNnxym3s9ZSsd1pprqvgmSt3Hjhy_q_JoZzD_5p7O03hr5KFK3XIc8RaUk_ab04Uh-EOsnMhyRWEm9pvNq0HfEljvEGMWbUZc5UuuVDDZB7AY4z1EQgp_QLFm6K6dNDmJvU4G3743MnEAmbpIomM79rZKlbMHUAS4Aq1wfdvXa9akb-0c4uT8CMgzD"/>
+<span class="font-headline-md text-headline-md text-on-surface">朗德智能科技</span>
+</div>
+<p class="text-on-surface-variant text-sm mb-6">
+                    科技护航，安全至上。我们专注于低空空域安全，提供全流程、全手段的无人机防御解决方案。
+                </p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center hover:bg-primary hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-sm">mail</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center hover:bg-primary hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-sm">call</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center hover:bg-primary hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-sm">location_on</span>
+</a>
+</div>
+</div>
+<div>
+<h6 class="font-bold text-on-surface mb-6">快速链接</h6>
+<ul class="space-y-4">
+<li><a class="text-on-surface-variant hover:text-primary transition-colors font-body-md" href="#">首页</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors font-body-md" href="#">产品中心</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors font-body-md" href="#">应用案例</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors font-body-md" href="#">关于我们</a></li>
+</ul>
+</div>
+<div>
+<h6 class="font-bold text-on-surface mb-6">法律与支持</h6>
+<ul class="space-y-4">
+<li><a class="text-on-surface-variant hover:text-primary transition-colors font-body-md" href="#">隐私政策</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors font-body-md" href="#">法律声明</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors font-body-md" href="#">诚聘英才</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors font-body-md" href="#">合作伙伴</a></li>
+</ul>
+</div>
+<div>
+<h6 class="font-bold text-on-surface mb-6">联系详情</h6>
+<p class="text-on-surface-variant text-sm mb-4">
+                    地址：浙江省杭州市上城区明石路515号明石商业大厦9楼9173室
+                </p>
+<p class="text-on-surface-variant text-sm mb-4">
+                    电话：0571-XXXXXXXX
+                </p>
+<p class="text-on-surface-variant text-sm mb-4">
+                    邮箱：contact@lander-tech.com
+                </p>
+</div>
+</div>
+<div class="border-t border-outline-variant/10 py-6">
+<div class="max-w-container-max mx-auto px-gutter text-center">
+<p class="text-outline text-xs">
+                    © 2024 杭州朗德智能科技有限公司 版权所有 | 浙ICP备xxxxxxxx号
+                </p>
+</div>
+</div>
+</footer>
+</body></html>

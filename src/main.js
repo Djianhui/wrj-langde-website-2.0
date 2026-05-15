@@ -5,6 +5,7 @@ import router from './router'
 
 import './assets/main.css'
 import './assets/responsive.css'
+import './assets/product-theme.css'
 
 // 导入 Font Awesome
 import '@fortawesome/fontawesome-free/css/all.min.css'
@@ -212,16 +213,6 @@ const initApp = async () => {
     preloadImages().catch(error => {
       console.error('图片预加载失败:', error)
     })
-    
-    // 隐藏初始加载界面
-    const initLoading = document.getElementById('init-loading')
-    if (initLoading) {
-      initLoading.style.opacity = '0'
-      initLoading.style.transition = 'opacity 0.3s' // 缩短过渡时间
-      setTimeout(() => {
-        initLoading.style.display = 'none'
-      }, 300) // 缩短等待时间
-    }
   } catch (error) {
     console.error('应用初始化失败:', error)
     // 出错时也挂载应用，确保用户能看到界面

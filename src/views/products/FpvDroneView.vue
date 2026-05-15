@@ -104,28 +104,28 @@
         <div class="features-grid">
           <div class="feature-card">
             <div class="feature-icon">
-              <CustomIcons name="power-system" :size="32" />
+              <i class="fas fa-bolt"></i>
             </div>
             <h3>澎湃动力系统</h3>
             <p>搭载2207 1800KV大尺寸电机，配合BLITZ E45S 4合1电调（单路45A），构成强大的动力心脏。在6S高压电池的驱动下，爆发力惊人，响应迅如闪电。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
-              <CustomIcons name="agile-body" :size="32" />
+              <i class="fas fa-feather-alt"></i>
             </div>
             <h3>敏捷机身与清晰视野</h3>
             <p>采用Nazgul XL5等经典5寸机架，兼顾强度与轻量化。搭配RaceCam R1 Mini等低延迟FPV相机，捕捉前方每一个关键细节。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
-              <CustomIcons name="smart-flight" :size="32" />
+              <i class="fas fa-microchip"></i>
             </div>
             <h3>智慧飞行大脑</h3>
             <p>采用主流F4/F7高性能飞控（可选），确保飞行姿态稳定，算法处理迅速，为您提供精准可靠的操控基础。</p>
           </div>
          <div class="feature-card">
             <div class="feature-icon">
-              <CustomIcons name="endurance" :size="32" />
+              <i class="fas fa-battery-full"></i>
             </div>
             <h3>续航时间</h3>
             <p>空载状态16min、1.2kg载荷8min。</p>
@@ -138,30 +138,21 @@
         <h2 class="section-title">应用场景</h2>
         <div class="applications-grid">
           <div class="application-item">
-            <CustomIcons name="racing-competition" :size="40" />
+            <i class="fas fa-trophy" style="font-size:40px;color:#3b82f6;"></i>
             <span>竞速比赛</span>
           </div>
           <div class="application-item">
-            <CustomIcons name="freestyle-flight" :size="40" />
+            <i class="fas fa-wind" style="font-size:40px;color:#3b82f6;"></i>
             <span>花飞表演</span>
           </div>
           <div class="application-item">
-            <CustomIcons name="aerial-photography" :size="40" />
+            <i class="fas fa-camera" style="font-size:40px;color:#3b82f6;"></i>
             <span>航拍创作</span>
           </div>
           <div class="application-item">
-            <CustomIcons name="skill-training" :size="40" />
+            <i class="fas fa-graduation-cap" style="font-size:40px;color:#3b82f6;"></i>
             <span>技能训练</span>
           </div>
-        </div>
-      </div>
-      
-      <!-- 联系咨询 -->
-      <div class="product-contact">
-        <div class="contact-content">
-          <h2>需要了解更多？</h2>
-          <p>我们的专业团队随时为您提供技术支持和解决方案</p>
-          <RouterLink to="/contact" class="btn btn-primary">联系我们</RouterLink>
         </div>
       </div>
     </div>

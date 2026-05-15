@@ -1,35 +1,36 @@
 <template>
   <header :class="{'scrolled': isScrolled}">
-    <div class="container">
-      <!-- <div class="logo">
-        <img src="/images/about/logo-ld.png" :alt="isZh ? '朗德智能' : 'Lande Intelligent'" class="logo-img">
-      </div> -->
+    <div class="nav-container">
+      <!-- Logo -->
+      <div class="nav-logo">
+        <img src="/images/about/logo.png" alt="朗德智能" class="nav-logo-img">
+        <span class="nav-logo-text">朗德智能科技</span>
+      </div>
+
+      <!-- Nav links -->
       <nav :class="{'active': isMenuActive}">
         <ul>
-          <li v-for="(item, index) in currentNavItems" :key="index" 
-              :class="{'nav-item-active': currentRoute === item.id, 'has-dropdown': item.children}"
+          <li v-for="(item, index) in currentNavItems" :key="index"
+              :class="{'has-dropdown': item.children}"
               @mouseenter="showDropdown(item.id)"
               @mouseleave="hideDropdown(item.id)">
             <RouterLink :to="item.link" :class="{'active': currentRoute === item.id}" @click="closeMenu">
-              <span class="nav-item-text">{{ item.text }}</span>
-              <span v-if="item.id === 'products'" class="nav-item-badge">{{ isZh ? '核心' : 'Core' }}</span>
-              <i v-if="item.children" class="fas fa-chevron-down nav-arrow dropdown-arrow"></i>
-              <i v-else class="fas fa-chevron-right nav-arrow"></i>
+              {{ item.text }}
+              <i v-if="item.children" class="fas fa-chevron-down dropdown-arrow"></i>
             </RouterLink>
-            
+
             <!-- 多级下拉菜单 -->
-            <div v-if="item.children" 
-                 class="dropdown-menu" 
+            <div v-if="item.children"
+                 class="dropdown-menu"
                  :class="{'show': activeDropdown === item.id}"
                  @mouseenter="keepDropdown(item.id)"
                  @mouseleave="hideDropdown(item.id)">
               <div class="dropdown-content">
                 <div class="menu-levels">
-                  <!-- 一级分类列表 -->
                   <div class="level-column level-1-column">
                     <div class="level-header">产品分类</div>
-                    <div v-for="category in item.children" 
-                         :key="category.id" 
+                    <div v-for="category in item.children"
+                         :key="category.id"
                          class="menu-item level-1-item"
                          :class="{'active': hoveredCategory?.id === category.id}"
                          @mouseenter="setHoveredCategory(category)"
@@ -40,13 +41,12 @@
                       </div>
                     </div>
                   </div>
-                  
-                  <!-- 二级分类列表 -->
-                  <div v-if="hoveredCategory && hoveredCategory.children" 
+
+                  <div v-if="hoveredCategory && hoveredCategory.children"
                        class="level-column level-2-column">
                     <div class="level-header">{{ hoveredCategory.text }}</div>
-                    <div v-for="subcategory in hoveredCategory.children" 
-                         :key="subcategory.id" 
+                    <div v-for="subcategory in hoveredCategory.children"
+                         :key="subcategory.id"
                          class="menu-item level-2-item"
                          :class="{'active': hoveredSubcategory?.id === subcategory.id}"
                          @mouseenter="setHoveredSubcategory(subcategory)"
@@ -57,13 +57,12 @@
                       </div>
                     </div>
                   </div>
-                  
-                  <!-- 三级产品列表 -->
-                  <div v-if="hoveredSubcategory && hoveredSubcategory.children" 
+
+                  <div v-if="hoveredSubcategory && hoveredSubcategory.children"
                        class="level-column level-3-column">
                     <div class="level-header">{{ hoveredSubcategory.text }}</div>
-                    <div v-for="product in hoveredSubcategory.children" 
-                         :key="product.id" 
+                    <div v-for="product in hoveredSubcategory.children"
+                         :key="product.id"
                          class="menu-item level-3-item"
                          @click="handleProductClick(product.id)">
                       <div class="item-content">
@@ -75,14 +74,15 @@
               </div>
             </div>
           </li>
-          <!-- <li class="nav-item-lang">
-            <a href="#" class="lang-switch" @click.prevent="handleLanguageSwitch">
-              <i class="fas fa-globe"></i>
-              <span>{{ languageStore.currentLanguageText() }}</span>
-            </a>
-          </li> -->
         </ul>
       </nav>
+
+     <!-- 右侧：联系我们按钮 -->
+      <div class="nav-actions">
+        <RouterLink to="/contact" class="nav-cta">联系我们</RouterLink>
+      </div>
+
+      <!-- 移动端汉堡菜单 -->
       <div class="mobile-menu-btn" :class="{'active': isMenuActive}" @click.stop="toggleMenu">
         <span></span>
         <span></span>
@@ -95,31 +95,71 @@
   <div class="mobile-menu-overlay" :class="{'active': isMenuActive}" @click="closeMenu"></div>
 
   <RouterView />
-  
-  <!-- 浮动语言切换按钮 -->
-  <!-- <LanguageSwitcher floating v-show="!isMenuActive" /> -->
 
-  <footer>
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-logo">
-          <img src="/images/about/logo.png" :alt="isZh ? '朗德智能' : 'Lande Intelligent'" class="footer-logo-img">
-          <p>{{ currentFooterData.slogan }}</p>
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <!-- 第 1 列：Logo + slogan + 社交图标 -->
+      <div class="footer-col footer-brand">
+        <div class="footer-logo-row">
+          <img src="/images/about/logo.png" :alt="isZh ? '朗德智能' : 'Lande Intelligent'" class="footer-brand-logo">
+          <span class="footer-brand-name">{{ isZh ? '朗德智能科技' : 'Lande Intelligent' }}</span>
         </div>
-        <div class="footer-links">
-          <div class="link-group" v-for="(group, index) in currentFooterData.linkGroups" :key="index">
-            <h3>{{ group.title }}</h3>
-            <ul>
-              <li v-for="(link, linkIndex) in group.links" :key="linkIndex">
-                <RouterLink :to="link.url">{{ link.text }}</RouterLink>
-              </li>
-            </ul>
-          </div>
+        <p class="footer-slogan">
+          {{ isZh
+            ? '科技护航，安全至上。我们专注于低空空域安全，提供全流程、全手段的无人机防御解决方案。'
+            : 'Technology protects, safety first. We focus on low-altitude airspace security with end-to-end anti-drone defense solutions.' }}
+        </p>
+        <div class="footer-socials">
+          <a :href="`mailto:${footerContact.email}`" class="footer-social" :aria-label="isZh ? '邮箱' : 'Email'">
+            <i class="fas fa-envelope"></i>
+          </a>
+          <a :href="`tel:${footerContact.phone}`" class="footer-social" :aria-label="isZh ? '电话' : 'Phone'">
+            <i class="fas fa-phone"></i>
+          </a>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p>{{ currentFooterData.copyright }}</p>
-        <p>{{ currentFooterData.icp }}</p>
+
+      <!-- 第 2 列：快速链接 -->
+      <div class="footer-col">
+        <h6 class="footer-col-title">{{ isZh ? '快速链接' : 'Quick Links' }}</h6>
+        <ul class="footer-link-list">
+          <li><RouterLink to="/">{{ isZh ? '首页' : 'Home' }}</RouterLink></li>
+          <li><RouterLink to="/technology">{{ isZh ? '产品中心' : 'Products' }}</RouterLink></li>
+          <li><RouterLink to="/cases">{{ isZh ? '应用案例' : 'Cases' }}</RouterLink></li>
+          <li><RouterLink to="/about">{{ isZh ? '关于我们' : 'About Us' }}</RouterLink></li>
+        </ul>
+      </div>
+
+      <!-- 第 3 列：法律与支持 -->
+      <!-- <div class="footer-col">
+        <h6 class="footer-col-title">{{ isZh ? '法律与支持' : 'Legal & Support' }}</h6>
+        <ul class="footer-link-list">
+          <li><a href="#">{{ isZh ? '隐私政策' : 'Privacy Policy' }}</a></li>
+          <li><RouterLink to="/join">{{ isZh ? '诚聘英才' : 'Careers' }}</RouterLink></li>
+        </ul>
+      </div> -->
+
+      <!-- 第 4 列：联系详情 -->
+      <div class="footer-col">
+        <h6 class="footer-col-title">{{ isZh ? '联系详情' : 'Contact Details' }}</h6>
+        <p class="footer-contact-line">
+          <i class="fas fa-map-marker-alt footer-contact-icon"></i>
+          <span><span class="footer-contact-label">{{ isZh ? '地址：' : 'Address: ' }}</span>{{ footerContact.address }}</span>
+        </p>
+        <p class="footer-contact-line">
+          <i class="fas fa-phone-alt footer-contact-icon"></i>
+          <span><span class="footer-contact-label">{{ isZh ? '电话：' : 'Phone: ' }}</span>{{ footerContact.phone }}</span>
+        </p>
+        <p class="footer-contact-line">
+          <i class="fas fa-envelope footer-contact-icon"></i>
+          <span><span class="footer-contact-label">{{ isZh ? '邮箱：' : 'Email: ' }}</span>{{ footerContact.email }}</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="site-footer-bottom">
+      <div class="site-footer-bottom-inner">
+        <p>{{ currentFooterData.copyright }}{{ currentFooterData.icp ? ' | ' + currentFooterData.icp : '' }}</p>
       </div>
     </div>
   </footer>
@@ -131,71 +171,41 @@ import { RouterLink, RouterView, useRoute, useRouter } from 'vue-router'
 import { useContentStore } from '@/store/modules/content'
 import { useLanguageStore } from '@/store/modules/language'
 import { useTranslationsStore } from '@/store/modules/translations'
-import LanguageSwitcher from '@/components/LanguageSwitcher.vue'
 import { useLanguage } from '@/mixins/language'
 
-// 获取路由
 const router = useRouter()
-
-// 获取语言相关功能
 const languageStore = useLanguageStore()
 const { isZh, isEn, currentLanguage } = useLanguage()
-
-// 语言相关的便捷计算属性
 const translationsStore = useTranslationsStore()
 
-// 提供语言相关的依赖注入
 provide('currentLanguage', currentLanguage)
 provide('isZh', isZh)
 provide('isEn', isEn)
 
-// 页面滚动状态
 const isScrolled = ref(false)
-// 移动菜单状态
 const isMenuActive = ref(false)
-// 下拉菜单状态
 const activeDropdown = ref(null)
-// 悬停的分类状态
 const hoveredCategory = ref(null)
 const hoveredSubcategory = ref(null)
 let dropdownTimeout = null
 
-// 获取当前语言的导航项
 const currentNavItems = computed(() => {
   return translationsStore.getNavItems(languageStore.language)
 })
 
-// 获取当前语言的页脚数据
 const currentFooterData = computed(() => {
   return translationsStore.getFooterData(languageStore.language)
 })
 
-// 原有的页脚数据（如果不使用翻译）
-const footerData = {
-  slogan: '智能反无人机系统，守护空域安全',
-  copyright: '© 2025 杭州朗德智能科技有限公司 版权所有',
-  icp: '',
-  linkGroups: [
-    {
-      title: '关于我们',
-      links: [
-        { text: '企业简介', url: '/about' },
-        { text: '企业文化', url: '/about/culture' },
-        { text: '发展历程', url: '/about/history' },
-        { text: '荣誉资质', url: '/about/honors' }
-      ]
-    },
-    {
-      title: '新闻中心',
-      links: [
-        { text: '企业新闻', url: '/news/company' },
-        { text: '行业动态', url: '/news/industry' },
-        { text: '媒体报道', url: '/news/media' },
-        { text: '技术博客', url: '/news/blog' }
-      ]
-    }
-  ]
-}
+// 页脚联系信息（优先从 site-info store 取，缺失时使用默认）
+const footerContact = computed(() => {
+  const zh = isZh.value
+  return {
+    address: zh ? '浙江省杭州市上城区明石路515号明石商业大厦9楼9173室' : 'Yuhang District, Hangzhou, Zhejiang, China',
+    phone: '13548973785',
+    email: '173462959@qq.com'
+  }
+})
 
 const route = useRoute()
 const contentStore = useContentStore()
@@ -206,10 +216,8 @@ const currentRoute = computed(() => {
   return path.split('/')[1]
 })
 
-// 预加载基础数据
 const preloadBaseData = async () => {
   try {
-    // 获取网站基本信息
     const result = await contentStore.fetchContent('site-info')
     if (result === null && contentStore.error) {
       console.error('基础数据加载失败:', contentStore.error)
@@ -222,106 +230,56 @@ const preloadBaseData = async () => {
   }
 }
 
-// 生命周期钩子 - 组件挂载完成
 onMounted(async () => {
-  // 预加载基础数据但不等待它完成
   preloadBaseData().catch(error => {
     console.error('基础数据加载失败:', error)
   })
-  
-  // 监听滚动事件
+
   window.addEventListener('scroll', handleScroll)
-  
-  // 监听点击事件，点击菜单外部时关闭菜单
+
   document.addEventListener('click', (e) => {
     const target = e.target
     const isMenuBtn = target.closest('.mobile-menu-btn')
     const isMenu = target.closest('nav')
     const isDropdown = target.closest('.dropdown-menu')
     const isProductCenter = target.closest('.has-dropdown')
-    
-    // 如果点击的不是菜单相关区域，关闭所有菜单
+
     if (!isMenuBtn && !isMenu && !isDropdown && !isProductCenter) {
-      if (isMenuActive.value) {
-        closeMenu()
-      }
-      if (activeDropdown.value) {
-        hideDropdownImmediately()
-      }
+      if (isMenuActive.value) closeMenu()
+      if (activeDropdown.value) hideDropdownImmediately()
     }
-  })
-  
-  // 监听语言变化事件
-  document.addEventListener('languageChanged', (e) => {
-    // 语言变化后可以在这里执行一些操作
-    console.log('Language changed to:', e.detail)
   })
 
   await contentStore.initializeContent()
 })
 
-// 处理滚动事件
 const handleScroll = () => {
-  // 设置导航栏滚动状态
   isScrolled.value = window.scrollY > 50
-  
-  // 滚动时隐藏下拉菜单
   if (activeDropdown.value && window.scrollY > 50) {
     hideDropdownImmediately()
   }
 }
 
-// 切换移动菜单
 const toggleMenu = () => {
   isMenuActive.value = !isMenuActive.value
-  
-  // 菜单打开时禁止页面滚动
-  if (isMenuActive.value) {
-    document.body.style.overflow = 'hidden'
-    // 添加点击动画效果
-    const menuBtn = document.querySelector('.mobile-menu-btn')
-    if (menuBtn) {
-      menuBtn.classList.add('menu-btn-clicked')
-      setTimeout(() => {
-        menuBtn.classList.remove('menu-btn-clicked')
-      }, 300)
-    }
-  } else {
-    document.body.style.overflow = ''
-  }
+  document.body.style.overflow = isMenuActive.value ? 'hidden' : ''
 }
 
-// 关闭移动菜单
 const closeMenu = () => {
   if (isMenuActive.value) {
     isMenuActive.value = false
     document.body.style.overflow = ''
-    
-    // 关闭时也添加按钮动画
-    const menuBtn = document.querySelector('.mobile-menu-btn')
-    if (menuBtn) {
-      menuBtn.classList.add('menu-btn-clicked')
-      setTimeout(() => {
-        menuBtn.classList.remove('menu-btn-clicked')
-      }, 300)
-    }
   }
-  // 同时关闭下拉菜单
   hideDropdown()
 }
 
-// 显示下拉菜单
 const showDropdown = (itemId) => {
-  if (dropdownTimeout) {
-    clearTimeout(dropdownTimeout)
-  }
+  if (dropdownTimeout) clearTimeout(dropdownTimeout)
   activeDropdown.value = itemId
-  // 重置悬停状态
   hoveredCategory.value = null
   hoveredSubcategory.value = null
 }
 
-// 隐藏下拉菜单
 const hideDropdown = (itemId = null) => {
   dropdownTimeout = setTimeout(() => {
     if (!itemId || activeDropdown.value === itemId) {
@@ -332,386 +290,373 @@ const hideDropdown = (itemId = null) => {
   }, 200)
 }
 
-// 保持下拉菜单显示
 const keepDropdown = (itemId) => {
-  if (dropdownTimeout) {
-    clearTimeout(dropdownTimeout)
-  }
+  if (dropdownTimeout) clearTimeout(dropdownTimeout)
   activeDropdown.value = itemId
 }
 
-// 设置悬停的一级分类
 const setHoveredCategory = (category) => {
   hoveredCategory.value = category
-  hoveredSubcategory.value = null // 重置二级分类
+  hoveredSubcategory.value = null
 }
 
-// 设置悬停的二级分类
 const setHoveredSubcategory = (subcategory) => {
   hoveredSubcategory.value = subcategory
 }
 
-// 处理分类点击
 const handleCategoryClick = (category) => {
-  console.log('导航栏分类点击:', category)
-  
-  // 发出分类选择事件
   const event = new CustomEvent('categorySelected', {
-    detail: {
-      categoryId: category.id,
-      categoryText: category.text
-    }
+    detail: { categoryId: category.id, categoryText: category.text }
   })
   window.dispatchEvent(event)
-  
-  // 立即收起下拉菜单
   hideDropdownImmediately()
-  
-  // 跳转到产品中心页面
+
   if (route.path !== '/technology') {
-    console.log('跳转到产品中心页面')
     router.push('/technology').then(() => {
-      // 页面跳转完成后，增加更长的延迟以确保页面完全加载和事件处理完成
-      setTimeout(() => {
-        console.log('页面跳转完成，开始滚动')
-        scrollToProductList()
-      }, 1000) // 增加延迟时间
+      setTimeout(() => scrollToProductList(), 1000)
     })
   } else {
-    console.log('已在产品中心页面，直接滚动')
-    // 如果已经在产品中心页面，立即滚动
-    setTimeout(() => {
-      scrollToProductList()
-    }, 200) // 短延迟确保事件处理完成
+    setTimeout(() => scrollToProductList(), 200)
   }
-  
   closeMenu()
 }
 
-// 处理产品点击
 const handleProductClick = (productId) => {
-  // 发出产品选择事件
-  const event = new CustomEvent('productSelected', {
-    detail: {
-      productId: productId
-    }
-  })
+  const event = new CustomEvent('productSelected', { detail: { productId } })
   window.dispatchEvent(event)
-  
-  // 立即收起下拉菜单
   hideDropdownImmediately()
   closeMenu()
-  
-  // 如果不在产品中心页面，先导航到产品中心
+
   if (router.currentRoute.value.path !== '/technology') {
     router.push('/technology').then(() => {
-      // 导航完成后稍等一下，然后滚动到产品列表
-      setTimeout(() => {
-        scrollToProductList()
-      }, 300)
+      setTimeout(() => scrollToProductList(), 300)
     })
   } else {
-    // 已经在产品中心页面，直接滚动
-    setTimeout(() => {
-      scrollToProductList()
-    }, 100)
+    setTimeout(() => scrollToProductList(), 100)
   }
 }
 
-// 立即隐藏下拉菜单（不延迟）
 const hideDropdownImmediately = () => {
-  if (dropdownTimeout) {
-    clearTimeout(dropdownTimeout)
-  }
+  if (dropdownTimeout) clearTimeout(dropdownTimeout)
   activeDropdown.value = null
   hoveredCategory.value = null
   hoveredSubcategory.value = null
 }
 
-// 滚动到产品列表区域
 const scrollToProductList = () => {
-  // 在滚动开始时立即隐藏下拉菜单
   hideDropdownImmediately()
-  
-  console.log('开始执行滚动到产品列表')
-  console.log('当前页面路径:', route.path)
-  console.log('当前滚动位置:', window.pageYOffset)
-  console.log('页面高度:', document.documentElement.scrollHeight)
-  console.log('视口高度:', window.innerHeight)
-  
-  // 强制滚动策略 - 不再依赖元素位置计算
-  const forceScroll = () => {
-    // 使用多种方法确定滚动目标
-    const scrollTargets = [
-      () => window.innerHeight * 0.8, // 视口的80%
-      () => 800, // 固定800px
-      () => {
-        // 尝试找到产品分类元素的真实位置
-        const productElement = document.querySelector('.product-categories')
-        if (productElement) {
-          const rect = productElement.getBoundingClientRect()
-          const scrollTop = window.pageYOffset
-          const elementAbsoluteTop = rect.top + scrollTop
-          console.log('产品分类元素的绝对位置:', elementAbsoluteTop)
-          return Math.max(200, elementAbsoluteTop - 100)
-        }
-        return 600
-      }
-    ]
-    
-    // 尝试每个目标
-    for (let i = 0; i < scrollTargets.length; i++) {
-      const targetPos = scrollTargets[i]()
-      console.log(`尝试滚动目标 ${i + 1}: ${targetPos}px`)
-      
-      if (targetPos > 50 && targetPos < document.documentElement.scrollHeight) {
-        console.log(`执行滚动到: ${targetPos}px`)
-        
-        // 多种滚动方法同时使用
-        window.scrollTo({
-          top: targetPos,
-          behavior: 'smooth'
-        })
-        
-        // 延迟检查并强制滚加
-        setTimeout(() => {
-          const currentPos = window.pageYOffset
-          console.log(`滚动后当前位置: ${currentPos}px, 目标: ${targetPos}px`)
-          
-          if (Math.abs(currentPos - targetPos) > 100) {
-            console.log('平滑滚动未生效，使用强制滚动')
-            // 强制滚动
-            document.documentElement.scrollTop = targetPos
-            document.body.scrollTop = targetPos
-            window.scrollTo(0, targetPos)
-            
-            // 再次检查
-            setTimeout(() => {
-              const finalPos = window.pageYOffset
-              console.log(`强制滚动后最终位置: ${finalPos}px`)
-              
-              if (finalPos === 0) {
-                console.error('所有滚动方法都失败，可能存在CSS或布局问题')
-                
-                // 最后的尝试 - 修改页面样式
-                const htmlElement = document.documentElement
-                const bodyElement = document.body
-                
-                console.log('HTML overflow:', getComputedStyle(htmlElement).overflow)
-                console.log('Body overflow:', getComputedStyle(bodyElement).overflow)
-                console.log('HTML position:', getComputedStyle(htmlElement).position)
-                console.log('Body position:', getComputedStyle(bodyElement).position)
-                
-                // 尝试删除可能阻止滚动的样式
-                htmlElement.style.overflow = 'auto'
-                bodyElement.style.overflow = 'auto'
-                htmlElement.style.height = 'auto'
-                bodyElement.style.height = 'auto'
-                
-                // 再次尝试滚加
-                setTimeout(() => {
-                  window.scrollTo(0, targetPos)
-                  document.documentElement.scrollTop = targetPos
-                }, 100)
-              }
-            }, 300)
-          }
-        }, 500)
-        
-        return true
-      }
-    }
-    
-    return false
-  }
-  
-  // 立即执行强制滚动
-  if (forceScroll()) {
-    console.log('强制滚动执行完成')
+  const productElement = document.querySelector('.product-categories')
+  if (productElement) {
+    const rect = productElement.getBoundingClientRect()
+    const targetPos = Math.max(200, rect.top + window.pageYOffset - 100)
+    window.scrollTo({ top: targetPos, behavior: 'smooth' })
   } else {
-    console.error('所有滚动尝试都失败')
+    window.scrollTo({ top: 800, behavior: 'smooth' })
   }
 }
 
-// 处理语言切换
-const handleLanguageSwitch = () => {
-  console.log('App.vue中的语言切换按钮被点击');
-  
-  // 获取当前语言
-  const currentLang = languageStore.language;
-  console.log('当前语言:', currentLang);
-  
-  // 切换语言
-  languageStore.toggleLanguage();
-  
-  // 确保localStorage中的语言已更新
-  console.log('切换后的语言:', localStorage.getItem('language'));
-  
-  // 直接刷新页面
+watch(() => languageStore.language, async () => {
+  await nextTick()
+  window.dispatchEvent(new Event('resize'))
   setTimeout(() => {
-    console.log('执行页面刷新');
-    window.location.reload();
-  }, 100);
-}
-
-// 监听语言变化
-watch(() => languageStore.language, async (newLang) => {
-  console.log('语言已变更，开始强制刷新视图:', newLang);
-  
-  // 等待下一个DOM更新周期
-  await nextTick();
-  
-  // 触发全局resize事件以重新计算布局
-  window.dispatchEvent(new Event('resize'));
-  
-  // 触发特定元素的刷新
-  const contentElements = document.querySelectorAll('.news-list, .tech-sections, .cases-grid, .news-article');
-  contentElements.forEach(el => {
-    if(el) {
-      // 触发重绘
-      el.style.opacity = '0.9';
-      setTimeout(() => {
-        el.style.opacity = '1';
-      }, 50);
-    }
-  });
-  
-  // 短暂延迟后刷新当前路由
-  setTimeout(() => {
-    const currentPath = router.currentRoute.value.fullPath;
-    const refreshPath = currentPath.includes('?') 
-      ? `${currentPath}&_t=${Date.now()}` 
-      : `${currentPath}?_t=${Date.now()}`;
-    
-    router.replace(refreshPath);
-  }, 300);
+    const currentPath = router.currentRoute.value.fullPath
+    const refreshPath = currentPath.includes('?')
+      ? `${currentPath}&_t=${Date.now()}`
+      : `${currentPath}?_t=${Date.now()}`
+    router.replace(refreshPath)
+  }, 300)
 })
 </script>
 
 <style>
-/* 导入主样式 */
 @import './assets/base.css';
 
-/* 隐藏未加载数据的内容 */
 [v-cloak] {
   display: none;
 }
 
-/* 导航项特效样式 */
-.nav-item-active {
-  transform: scale(1.05);
-  transition: all 0.3s ease;
+/* ===== 导航栏 — 精确对齐参考 HTML ===== */
+header {
+  position: sticky !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  /* bg-surface/80 = rgba(251,248,255,0.8) */
+  background: rgba(251, 248, 255, 0.8) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  /* border-outline-variant/30 = rgba(195,197,217,0.3) */
+  border-bottom: 1px solid rgba(195, 197, 217, 0.3);
+  box-shadow: none !important;
+  z-index: 1000;
+  padding: 0 !important;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
-.nav-item-text {
+header.scrolled {
+  background: rgba(251, 248, 255, 0.96) !important;
+  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* px-gutter=24px, max-w-container-max=1280px */
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 100%;
+}
+
+/* Logo: gap-sm=12px */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+/* h-10=40px */
+.nav-logo-img {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* font-headline-md: Manrope 24px 600, text-primary=#003ec7 */
+.nav-logo-text {
+  font-family: 'Manrope', 'PingFang SC', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #003ec7;
+  white-space: nowrap;
+  letter-spacing: 0;
+  line-height: 1.3;
+}
+
+/* Nav: gap-lg=48px */
+nav ul {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
   position: relative;
-  z-index: 1;
 }
 
-.nav-item-badge {
-  position: absolute;
-  top: -8px;
-  right: -12px;
-  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
-  color: #fff;
-  font-size: 0.65rem;
-  padding: 2px 6px;
-  border-radius: 10px;
-  font-weight: 700;
-  box-shadow: 0 3px 8px rgba(56, 189, 248, 0.3);
-  opacity: 0;
-  transform: translateY(5px);
-  transition: all 0.3s ease;
-}
-
-.nav-item-active .nav-item-badge {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.nav-item-lang {
-  margin-left: 10px;
-}
-
-.nav-arrow {
-  opacity: 0;
-  transform: translateX(-10px);
-  transition: all 0.3s ease;
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-nav ul li a:hover .nav-arrow,
-nav ul li a.active .nav-arrow {
-  opacity: 1;
-  transform: translateX(0);
-  color: #4facfe;
-}
-
-@media (max-width: 767px) {
-  .nav-item-lang {
-    margin-left: 0;
-    margin-top: 15px;
-  }
-  
-  .nav-item-badge {
-    position: relative;
-    top: 0;
-    right: 0;
-    display: inline-block;
-    margin-left: 8px;
-    opacity: 1;
-    transform: none;
-  }
-  
-  .nav-arrow {
-    opacity: 1;
-    transform: none;
-    font-size: 1rem;
-  }
-}
-
-/* 添加菜单按钮点击动画 */
-.menu-btn-clicked {
-  transform: scale(0.9);
-  transition: transform 0.2s ease;
-}
-
-.menu-btn-clicked span {
-  background: #00f2fe !important;
-}
-
-/* 多级下拉菜单样式 */
-.has-dropdown {
+/* text-body-md: Inter 16px, text-on-surface-variant=#434656 */
+/* 注：覆盖 base.css 中 nav ul li a 的 border-radius/background/padding/::before */
+nav ul li a {
+  display: flex !important;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 2px !important;
+  font-size: 18px !important;
+  font-weight: 500 !important;
+  font-family: 'Inter', 'PingFang SC', sans-serif;
+  color: #434656 !important;
+  text-decoration: none;
+  transition: color 0.2s ease;
   position: relative;
+  white-space: nowrap;
+  background: transparent !important;
+  border-radius: 0 !important;
+  letter-spacing: 0;
+  transform: none !important;
+}
+
+/* 禁用 base.css 的 ::before 渐变伪元素下划线 */
+nav ul li a::before {
+  display: none !important;
+  content: none !important;
+}
+
+nav ul li a:hover {
+  color: #003ec7 !important;
+  background: transparent !important;
+  transform: none !important;
+}
+
+/* active：纯下划线风格，无胶囊背景 */
+nav ul li a.active {
+  color: #003ec7 !important;
+  font-weight: 700 !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+}
+
+/* 使用 ::after 伪元素做居中短下划线（覆盖 base.css 的 display:none） */
+nav ul li a.active::after {
+  content: '' !important;
+  display: block !important;
+  position: absolute !important;
+  left: 2px;
+  right: 2px;
+  bottom: -4px;
+  height: 2.5px;
+  background: #003ec7 !important;
+  border-radius: 2px;
+  opacity: 1 !important;
 }
 
 .dropdown-arrow {
-  transition: transform 0.3s ease;
+  font-size: 10px;
+  transition: transform 0.25s ease;
+  opacity: 0.5;
+  margin-left: 2px;
 }
 
 .has-dropdown:hover .dropdown-arrow {
   transform: rotate(180deg);
+  opacity: 1;
 }
 
-.dropdown-menu {
-  position: absolute;
-  top: 100%;
+/* Right actions */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  /* gap-md=24px */
+  gap: 24px;
+  flex-shrink: 0;
+}
+
+/* bg-surface-container=#ededfb, rounded-full, px-4 py-2, border-outline-variant/30 */
+.nav-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #ededfb;
+  border: 1px solid rgba(195, 197, 217, 0.3);
+  border-radius: 100px;
+  padding: 8px 16px;
+}
+
+.nav-search-icon {
+  font-size: 18px;
+  color: #737688;
+}
+
+/* text-sm=14px, w-32=128px, placeholder:text-outline=#737688 */
+.nav-search-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  color: #191b25;
+  width: 128px;
+  font-family: 'Inter', 'PingFang SC', sans-serif;
+}
+
+.nav-search-input::placeholder {
+  color: #737688;
+}
+
+/* bg-primary px-6 py-2.5 rounded-lg font-bold */
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  background: #003ec7;
+  color: #ffffff !important;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: 'Inter', 'PingFang SC', sans-serif;
+  padding: 10px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+}
+
+.nav-cta:hover {
+  opacity: 0.9;
+}
+
+.nav-cta:active {
+  transform: scale(0.97);
+}
+
+/* Mobile */
+.mobile-menu-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  z-index: 1001;
+  padding: 11px 6px;
+  background: transparent;
+  border: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-menu-btn span {
+  display: block;
+  height: 2px;
+  width: 22px;
+  background: #434656;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu-btn.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.mobile-menu-btn.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-btn.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
   left: 0;
-  min-width: 200px;
-  background: linear-gradient(135deg, rgba(219, 234, 254, 0.95) 0%, rgba(255, 255, 255, 0.98) 100%);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-radius: 16px;
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15), 0 4px 12px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(147, 197, 253, 0.4);
+  width: 100%;
+  height: 100%;
+  background: rgba(251, 248, 255, 0.97);
+  backdrop-filter: blur(10px);
+  z-index: 999;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(15px);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s ease;
+}
+
+.mobile-menu-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 200px;
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(20px);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 62, 199, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(195, 197, 217, 0.4);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 1000;
-  padding: 20px 0;
-  margin-top: 10px;
+  padding: 12px 0;
   pointer-events: none;
 }
 
@@ -720,7 +665,6 @@ nav ul li a.active .nav-arrow {
   visibility: visible;
   transform: translateY(0);
   pointer-events: auto;
-  animation: slideDown 0.4s ease-out;
 }
 
 .dropdown-content {
@@ -728,367 +672,504 @@ nav ul li a.active .nav-arrow {
   overflow: hidden;
 }
 
-/* 级联菜单水平布局 */
 .menu-levels {
   display: flex;
   min-height: 150px;
 }
 
 .level-column {
-  padding: 0 15px;
+  padding: 0 12px;
   min-height: 100%;
 }
 
-.level-column:last-child {
-  border-right: none;
-}
-
-/* 一级分类列 */
 .level-1-column {
   width: 200px;
-  background: rgba(59, 130, 246, 0.05);
-  border-radius: 12px 0 0 12px;
-  border-right: 1px solid rgba(226, 232, 240, 0.6);
+  background: rgba(0, 62, 199, 0.03);
+  border-radius: 8px 0 0 8px;
+  border-right: 1px solid rgba(195, 197, 217, 0.3);
 }
 
-/* 二级分类列 */
 .level-2-column {
   width: 220px;
-  background: rgba(248, 250, 252, 0.5);
-  border-right: 1px solid rgba(226, 232, 240, 0.6);
+  border-right: 1px solid rgba(195, 197, 217, 0.3);
 }
 
-/* 三级产品列 */
 .level-3-column {
-  width: 280px;
-  border-radius: 0 12px 12px 0;
-  background: rgba(255, 255, 255, 0.8);
+  width: 260px;
+  border-radius: 0 8px 8px 0;
 }
 
-/* 列标题 */
 .level-header {
-  padding: 12px 16px;
-  color: #1e293b;
+  padding: 10px 12px;
+  color: #191b25;
   font-weight: 600;
-  font-size: 14px;
-  border-bottom: 2px solid rgba(59, 130, 246, 0.2);
-  margin-bottom: 12px;
-  text-align: center;
-  background: rgba(59, 130, 246, 0.08);
-  border-radius: 8px;
-  letter-spacing: -0.01em;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 13px;
+  border-bottom: 1px solid rgba(0, 62, 199, 0.15);
+  margin-bottom: 8px;
+  font-family: 'Inter', 'PingFang SC', sans-serif;
 }
 
-/* 菜单项通用样式 */
 .menu-item {
-  margin-bottom: 4px;
-  border-radius: 8px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
+  margin-bottom: 2px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  cursor: pointer;
 }
 
 .item-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  z-index: 1;
+  padding: 9px 12px;
 }
 
 .item-title {
+  font-size: 13px;
   font-weight: 500;
-  letter-spacing: -0.01em;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  font-size: 14px;
-  text-align: left;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'Inter', 'PingFang SC', sans-serif;
+  color: #434656;
 }
 
 .item-arrow {
-  font-size: 0.7rem;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  opacity: 0.6;
-  color: #64748b;
+  font-size: 10px;
+  color: #737688;
+  transition: all 0.2s ease;
 }
 
-.item-link {
-  display: block;
-  text-decoration: none;
-  color: inherit;
+.menu-item:hover {
+  background: rgba(0, 62, 199, 0.07);
 }
 
-.item-link:hover {
-  text-decoration: none;
-  color: inherit;
+.menu-item:hover .item-title {
+  color: #003ec7;
 }
 
-/* 一级分类样式 */
-.level-1-item {
-  background: rgba(59, 130, 246, 0.08);
-  border: 1px solid rgba(59, 130, 246, 0.15);
+.menu-item.active {
+  background: rgba(0, 62, 199, 0.1);
 }
 
-.level-1-item .item-content {
-  color: #1e293b;
-}
-
-.level-1-item .item-title {
-  font-size: 14px;
+.menu-item.active .item-title {
+  color: #003ec7;
   font-weight: 600;
 }
 
-.level-1-item:hover,
-.level-1-item.active {
-  background: rgba(59, 130, 246, 0.15);
-  border-color: rgba(59, 130, 246, 0.3);
-  transform: translateX(3px);
-  box-shadow: 0 3px 12px rgba(59, 130, 246, 0.2);
-}
-
-.level-1-item:hover .item-title,
-.level-1-item.active .item-title {
-  color: #1e40af;
-  font-weight: 700;
-}
-
-.level-1-item:hover .item-arrow,
-.level-1-item.active .item-arrow {
-  color: #3b82f6;
-  transform: translateX(2px);
-  opacity: 1;
-}
-
-/* 二级分类样式 */
-.level-2-item {
-  background: rgba(248, 250, 252, 0.8);
-  border: 1px solid rgba(226, 232, 240, 0.6);
-}
-
-.level-2-item .item-content {
-  color: #475569;
-}
-
-.level-2-item .item-title {
-  font-size: 13px;
-  font-weight: 500;
-}
-
-.level-2-item:hover,
-.level-2-item.active {
-  background: rgba(59, 130, 246, 0.1);
-  border-color: rgba(59, 130, 246, 0.25);
-  transform: translateX(2px);
-  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.15);
-}
-
-.level-2-item:hover .item-title,
-.level-2-item.active .item-title {
-  color: #1e40af;
-  font-weight: 600;
-}
-
-.level-2-item:hover .item-arrow,
-.level-2-item.active .item-arrow {
-  color: #3b82f6;
-  transform: translateX(1px);
-  opacity: 1;
-}
-
-/* 三级产品样式 */
-.level-3-item {
-  border: 1px solid transparent;
-  background: rgba(255, 255, 255, 0.6);
-}
-
-.level-3-item .item-content {
-  color: #64748b;
-}
-
-.level-3-item .item-title {
-  font-size: 13px;
-  font-weight: 500;
-}
-
-.level-3-item:hover {
-  background: rgba(59, 130, 246, 0.08);
-  border-color: rgba(59, 130, 246, 0.2);
-  transform: translateX(1px);
-}
-
-.level-3-item:hover .item-title {
-  color: #1e40af;
-  font-weight: 600;
-}
-</style>
-
-/* 动画效果 */
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.level-2-column,
-.level-3-column {
-  animation: slideInRight 0.3s ease;
-}
-
-/* 滚动条样式 */
-.level-column::-webkit-scrollbar {
-  width: 4px;
-}
-
-.level-column::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 2px;
-}
-
-.level-column::-webkit-scrollbar-thumb {
-  background: rgba(79, 172, 254, 0.5);
-  border-radius: 2px;
-}
-
-.level-column::-webkit-scrollbar-thumb:hover {
-  background: rgba(79, 172, 254, 0.7);
-}
-
-/* 响应式处理 */
 @media (max-width: 1024px) {
-  .dropdown-menu {
-    min-width: 600px;
-  }
-  
-  .level-1-column,
-  .level-2-column,
-  .level-3-column {
-    width: auto;
-    flex: 1;
-  }
-}
-
-/* 移动端隐藏下拉菜单 */
-@media (max-width: 767px) {
-  .dropdown-menu {
+  .nav-search {
     display: none;
   }
-  
-  .dropdown-arrow {
-    display: none;
-  }
-  
-  .nav-arrow {
-    opacity: 1;
-    transform: none;
-    font-size: 1rem;
-  }
 }
 
-/* 添加导航链接点击动画 */
-nav ul li a:active {
-  transform: scale(0.97);
-  transition: transform 0.1s ease;
-}
-
-/* 移动端导航按钮增强 */
 @media (max-width: 767px) {
+  /* ===== 移动端 header 压缩 ===== */
+  header {
+    height: 64px;
+  }
+
+  .nav-container {
+    padding: 0 16px;
+  }
+
+  .nav-logo {
+    gap: 10px;
+  }
+
+  .nav-logo-img {
+    height: 36px;
+  }
+
+  .nav-logo-text {
+    font-size: 17px;
+    letter-spacing: 0.01em;
+  }
+
+  /* ===== 汉堡按钮：品牌色胶囊，白线醒目 ===== */
   .mobile-menu-btn {
-    padding: 10px;
-    background: rgba(15, 23, 42, 0.6);
-    border-radius: 10px;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    display: flex !important;
+    width: 42px !important;
+    height: 42px !important;
+    padding: 0 !important;
+    gap: 4px !important;
+    background: linear-gradient(135deg, #003ec7 0%, #5b8cff 100%) !important;
+    border: none !important;
+    border-radius: 12px !important;
+    box-shadow: 0 6px 16px rgba(0, 62, 199, 0.25),
+                0 2px 4px rgba(0, 62, 199, 0.12) !important;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .mobile-menu-btn span {
+    display: block !important;
+    width: 18px !important;
+    height: 2px !important;
+    background: #ffffff !important;
+    border-radius: 2px !important;
     transition: all 0.3s ease;
   }
-  
-  .mobile-menu-btn:hover {
-    background: rgba(15, 23, 42, 0.8);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+
+  .mobile-menu-btn:hover,
+  .mobile-menu-btn:hover span {
+    background: inherit;
   }
-  
+
+  .mobile-menu-btn:active {
+    transform: scale(0.94);
+    box-shadow: 0 2px 6px rgba(0, 62, 199, 0.2) !important;
+  }
+
   .mobile-menu-btn.active {
-    background: rgba(79, 172, 254, 0.2);
-    border-color: rgba(79, 172, 254, 0.3);
+    background: linear-gradient(135deg, #191b25 0%, #434656 100%) !important;
+    border-color: transparent !important;
+    box-shadow: 0 6px 16px rgba(25, 27, 37, 0.25) !important;
   }
-}
 
-/* iOS设备兼容性修复 */
-@supports (-webkit-touch-callout: none) {
+  .mobile-menu-btn.active span {
+    background: #ffffff !important;
+  }
+
+  .mobile-menu-btn.active span:nth-child(1) {
+    transform: rotate(45deg) translate(4px, 4px) !important;
+  }
+
+  .mobile-menu-btn.active span:nth-child(2) {
+    opacity: 0 !important;
+    transform: translateX(-10px) !important;
+  }
+
+  .mobile-menu-btn.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(4px, -4px) !important;
+  }
+
+  /* ===== 移动菜单面板：实底白 + 全屏 + 卡片化 ===== */
   nav {
-    background: rgba(15, 23, 42, 0.98);
+    display: none;
   }
-  
-  .mobile-menu-btn {
-    -webkit-tap-highlight-color: transparent;
+
+  nav.active {
+    display: flex !important;
+    position: fixed !important;
+    top: 64px !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: calc(100vh - 64px) !important;
+    z-index: 9999 !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    padding: 20px 16px 40px !important;
+    background: #ffffff !important;
+    box-shadow: 0 20px 40px rgba(15, 18, 48, 0.08);
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+    animation: navSlideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  
-  .mobile-menu-overlay {
-    background: rgba(15, 23, 42, 0.9);
+
+  @keyframes navSlideDown {
+    from { opacity: 0; transform: translateY(-12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  nav.active ul {
+    flex-direction: column;
+    width: 100%;
+    gap: 4px;
+  }
+
+  nav.active ul li {
+    width: 100%;
+  }
+
+  nav.active ul li a {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    padding: 16px 18px !important;
+    color: #0f1230 !important;
+    border-radius: 12px;
+    background: transparent !important;
+    border-left: 3px solid transparent;
+    transition: all 0.25s ease;
+  }
+
+  nav.active ul li a:hover,
+  nav.active ul li a:focus {
+    background: linear-gradient(135deg, rgba(0, 62, 199, 0.06) 0%, rgba(91, 140, 255, 0.04) 100%) !important;
+    color: #003ec7 !important;
+  }
+
+  nav.active ul li a.active {
+    background: linear-gradient(135deg, rgba(0, 62, 199, 0.1) 0%, rgba(91, 140, 255, 0.06) 100%) !important;
+    color: #003ec7 !important;
+    border-left: 3px solid #003ec7;
+    padding-left: 15px !important;
+  }
+
+  /* 覆盖桌面端 ::after 下划线，避免与左条冲突 */
+  nav.active ul li a.active::after {
+    display: none !important;
+  }
+
+  .nav-actions .nav-cta {
+    display: none;
+  }
+
+  .dropdown-menu {
+    display: none;
   }
 }
 
-/* 优化语言切换按钮样式 */
-.lang-switch {
+/* ===== 页脚 — 精细化样式 ===== */
+.site-footer {
+  position: relative;
+  background: linear-gradient(180deg, #f5f5fb 0%, #eaeaf5 100%) !important;
+  color: #191b25 !important;
+  border-top: 1px solid rgba(195, 197, 217, 0.4);
+  padding: 0 !important;
+  font-family: 'Inter', 'PingFang SC', sans-serif;
+}
+
+.site-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, #003ec7 25%, #5b8cff 50%, #003ec7 75%, transparent 100%);
+  opacity: 0.85;
+}
+
+.site-footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 72px 32px 48px;
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1.2fr;
+  gap: 64px;
+}
+
+.footer-col {
+  min-width: 0;
+}
+
+.footer-col-title {
+  position: relative;
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f1230;
+  letter-spacing: 0.04em;
+  margin: 0 0 28px 0;
+  padding-left: 12px;
+  font-family: 'Inter', 'PingFang SC', sans-serif;
+}
+
+.footer-col-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 14px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, #003ec7 0%, #5b8cff 100%);
+}
+
+/* 第一列：品牌 */
+.footer-brand {
+  grid-column: span 1;
+  max-width: 380px;
+}
+
+.footer-logo-row {
   display: flex;
   align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.footer-brand-logo {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.footer-brand-name {
+  font-family: 'Manrope', 'PingFang SC', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f1230;
+  white-space: nowrap;
+  line-height: 1.3;
+  letter-spacing: 0.01em;
+}
+
+.footer-slogan {
+  font-size: 13.5px;
+  color: #4a4d63;
+  line-height: 1.75;
+  margin: 0 0 24px 0;
+  opacity: 1;
+}
+
+/* 社交图标 */
+.footer-socials {
+  display: flex;
+  gap: 12px;
+}
+
+.footer-social {
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
-  gap: 8px;
-  background: linear-gradient(90deg, rgba(79, 172, 254, 0.15) 0%, rgba(0, 242, 254, 0.15) 100%);
-  color: white;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(79, 172, 254, 0.3);
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #003ec7;
+  text-decoration: none;
+  font-size: 14px;
+  border: 1px solid rgba(0, 62, 199, 0.15);
+  box-shadow: 0 1px 2px rgba(15, 18, 48, 0.04);
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.lang-switch:hover {
-  background: linear-gradient(90deg, rgba(79, 172, 254, 0.3) 0%, rgba(0, 242, 254, 0.3) 100%);
-  transform: translateY(-3px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+.footer-social:hover {
+  background: linear-gradient(135deg, #003ec7 0%, #5b8cff 100%);
+  color: #ffffff;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 62, 199, 0.28);
 }
 
-.lang-switch:active {
-  transform: translateY(-1px);
+/* 链接列 */
+.footer-link-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.lang-switch i {
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.9);
+.footer-link-list li {
+  margin: 0;
 }
 
-@media (max-width: 767px) {
-  .lang-switch {
-    width: 100%;
-    padding: 12px;
-    margin-top: 20px;
-    font-size: 1rem;
+.footer-link-list a {
+  position: relative;
+  display: inline-block;
+  font-size: 14px;
+  color: #4a4d63;
+  text-decoration: none;
+  transition: color 0.2s ease, padding-left 0.2s ease;
+  opacity: 1;
+}
+
+.footer-link-list a::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0;
+  height: 1px;
+  background: #003ec7;
+  transition: width 0.25s ease;
+}
+
+.footer-link-list a:hover {
+  color: #003ec7;
+  padding-left: 18px;
+}
+
+.footer-link-list a:hover::before {
+  width: 12px;
+}
+
+/* 联系详情 */
+.footer-contact-line {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13.5px;
+  color: #4a4d63;
+  line-height: 1.7;
+  margin: 0 0 14px 0;
+  opacity: 1;
+  word-break: break-word;
+}
+
+.footer-contact-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: rgba(0, 62, 199, 0.08);
+  color: #003ec7;
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+.footer-contact-label {
+  color: #737688;
+}
+
+/* 底部版权条 */
+.site-footer-bottom {
+  border-top: 1px solid rgba(195, 197, 217, 0.5);
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.site-footer-bottom-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 20px 32px;
+  text-align: center;
+}
+
+.site-footer-bottom-inner p {
+  font-size: 12px;
+  color: #737688;
+  margin: 0;
+  letter-spacing: 0.02em;
+  opacity: 1;
+}
+
+/* 响应式 */
+@media (max-width: 900px) {
+  .site-footer-inner {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    padding: 56px 24px 40px;
   }
-  
-  .lang-switch i {
-    font-size: 1.1rem;
+
+  .footer-brand {
+    grid-column: 1 / -1;
+    max-width: none;
   }
 }
 
-/* 添加语言切换动画 */
-@keyframes langSwitchFade {
-  0% { opacity: 0; transform: translateY(10px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
+@media (max-width: 520px) {
+  .site-footer-inner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 48px 20px 36px;
+  }
 
-.lang-switch span {
-  animation: langSwitchFade 0.3s ease forwards;
+  .footer-brand-name {
+    font-size: 18px;
+  }
+
+  .site-footer-bottom-inner {
+    padding: 18px 20px;
+  }
 }
+</style>

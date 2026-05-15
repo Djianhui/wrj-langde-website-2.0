@@ -176,18 +176,9 @@
             <span>蔬菜种植</span>
           </div>
           <div class="application-item">
-            <CustomIcons name="economic-crops" :size="40" />
+            <i class="fas fa-seedling" style="font-size:40px;color:#3b82f6;"></i>
             <span>经济作物</span>
           </div>
-        </div>
-      </div>
-      
-      <!-- 联系咨询 -->
-      <div class="product-contact">
-        <div class="contact-content">
-          <h2>需要了解更多？</h2>
-          <p>我们的专业团队随时为您提供技术支持和解决方案</p>
-          <RouterLink to="/contact" class="btn btn-primary">联系我们</RouterLink>
         </div>
       </div>
     </div>

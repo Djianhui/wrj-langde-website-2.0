@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>应用案例 - 朗德智能科技</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Manrope:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#d3e4fe",
+                        "on-surface": "#191b25",
+                        "tertiary": "#3f4f65",
+                        "on-background": "#191b25",
+                        "on-surface-variant": "#434656",
+                        "surface-tint": "#004ced",
+                        "tertiary-container": "#57677e",
+                        "inverse-on-surface": "#f0effe",
+                        "background": "#fbf8ff",
+                        "secondary": "#00677f",
+                        "on-primary-container": "#dfe3ff",
+                        "inverse-primary": "#b7c4ff",
+                        "error-container": "#ffdad6",
+                        "primary": "#003ec7",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#fbf8ff",
+                        "on-tertiary-fixed": "#0b1c30",
+                        "on-primary-fixed-variant": "#0038b6",
+                        "on-error": "#ffffff",
+                        "on-secondary-container": "#005266",
+                        "on-secondary-fixed-variant": "#004e60",
+                        "surface-container": "#ededfb",
+                        "on-primary-fixed": "#001452",
+                        "on-tertiary-container": "#d6e6ff",
+                        "surface-bright": "#fbf8ff",
+                        "surface-container-highest": "#e1e1ef",
+                        "outline": "#737688",
+                        "on-secondary-fixed": "#001f28",
+                        "surface-variant": "#e1e1ef",
+                        "secondary-container": "#00ccf9",
+                        "primary-container": "#0052ff",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#4cd6ff",
+                        "surface-container-high": "#e7e7f5",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#38485d",
+                        "surface-container-low": "#f3f2ff",
+                        "on-secondary": "#ffffff",
+                        "surface-dim": "#d9d9e7",
+                        "secondary-fixed": "#b7eaff",
+                        "inverse-surface": "#2e303a",
+                        "tertiary-fixed-dim": "#b7c8e1",
+                        "primary-fixed": "#dde1ff",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#b7c4ff",
+                        "outline-variant": "#c3c5d9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xl": "80px",
+                        "sm": "12px",
+                        "base": "8px",
+                        "lg": "48px",
+                        "xs": "4px",
+                        "md": "24px",
+                        "gutter": "24px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Manrope"],
+                        "headline-xl": ["Manrope"],
+                        "body-lg": ["Inter"],
+                        "headline-xl-mobile": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "letterSpacing": "0", "fontWeight": "600" }],
+                        "headline-xl": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "400" }],
+                        "headline-xl-mobile": ["32px", { "lineHeight": "1.1", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="bg-surface/90 dark:bg-surface-dim/90 backdrop-blur-md full-width top-0 sticky z-50 border-b border-outline-variant/30 dark:border-outline/20">
+<div class="flex justify-between items-center w-full px-lg max-w-container-max mx-auto h-xl">
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">
+                朗德智能科技
+            </div>
+<nav class="hidden md:flex items-center gap-md">
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-all duration-200 px-sm py-xs rounded" href="#">首页</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-all duration-200 px-sm py-xs rounded" href="#">产品中心</a>
+<a class="font-label-sm text-label-sm text-primary dark:text-primary-fixed border-b-2 border-primary dark:border-primary-fixed pb-1 hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-all duration-200 px-sm py-xs rounded" href="#">应用案例</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-all duration-200 px-sm py-xs rounded" href="#">技术研发</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-all duration-200 px-sm py-xs rounded" href="#">关于我们</a>
+</nav>
+<div class="flex items-center gap-md">
+<button class="bg-primary text-on-primary font-label-sm text-label-sm px-md py-sm rounded hover:bg-primary/90 transition-colors">联系我们</button>
+</div>
+</div>
+</header>
+<main class="flex-grow">
+<!-- Hero Section -->
+<section class="bg-surface-container-lowest py-xl border-b border-outline-variant/30">
+<div class="max-w-container-max mx-auto px-lg">
+<h1 class="font-headline-xl text-headline-xl text-on-surface mb-sm">应用案例</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">探索朗德智能科技在不同行业和场景下的实战应用成果，见证创新技术如何解决复杂挑战。</p>
+</div>
+</section>
+<!-- Filter Tags -->
+<section class="py-md bg-surface border-b border-outline-variant/30 sticky top-[80px] z-40 backdrop-blur-md bg-surface/90">
+<div class="max-w-container-max mx-auto px-lg flex flex-wrap gap-sm">
+<button class="bg-primary text-on-primary font-label-sm text-label-sm px-md py-sm rounded transition-colors">全部</button>
+<button class="bg-transparent border border-outline text-on-surface-variant font-label-sm text-label-sm px-md py-sm rounded hover:border-primary hover:text-primary transition-colors">军事安全</button>
+<button class="bg-transparent border border-outline text-on-surface-variant font-label-sm text-label-sm px-md py-sm rounded hover:border-primary hover:text-primary transition-colors">公共安全</button>
+<button class="bg-transparent border border-outline text-on-surface-variant font-label-sm text-label-sm px-md py-sm rounded hover:border-primary hover:text-primary transition-colors">工业应用</button>
+<button class="bg-transparent border border-outline text-on-surface-variant font-label-sm text-label-sm px-md py-sm rounded hover:border-primary hover:text-primary transition-colors">农业应用</button>
+<button class="bg-transparent border border-outline text-on-surface-variant font-label-sm text-label-sm px-md py-sm rounded hover:border-primary hover:text-primary transition-colors">应急救援</button>
+</div>
+</section>
+<!-- Case Grid -->
+<section class="py-xl bg-background">
+<div class="max-w-container-max mx-auto px-lg">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Case Card 1 -->
+<div class="bg-surface-container-lowest rounded-lg border border-outline-variant/50 hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col cursor-pointer group">
+<div class="h-64 bg-surface-container relative overflow-hidden">
+<img alt="Drone over border" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A high-resolution photograph of a tactical military drone flying over a rugged, mountainous border landscape at dusk. The scene is characterized by a high-tech, corporate minimalist aesthetic, emphasizing precision and technological authority. The lighting is cinematic, casting long shadows across the terrain, with a cool color palette dominated by deep blues and crisp whites. The mood is serious and professional, suitable for a defense and aviation sector portfolio." src=""/>
+<div class="absolute top-sm right-sm bg-surface-container-lowest/90 backdrop-blur-sm px-xs py-1 rounded font-label-sm text-label-sm text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">security</span>
+                                军事安全
+                            </div>
+</div>
+<div class="p-md flex-grow flex flex-col">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-sm group-hover:text-primary transition-colors">某边境低空雷达防御部署项目</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-grow">部署先进雷达与无人机协同系统，实现边境复杂地形下全天候低空入侵监测与预警拦截，提升防区安全系数 40%。</p>
+<div class="mt-md pt-sm border-t border-outline-variant/30 flex justify-between items-center text-primary font-label-sm text-label-sm">
+<span>查看详情</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- Case Card 2 -->
+<div class="bg-surface-container-lowest rounded-lg border border-outline-variant/50 hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col cursor-pointer group">
+<div class="h-64 bg-surface-container relative overflow-hidden">
+<img alt="Industrial facility monitoring" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="An aerial photograph of a sprawling industrial facility at twilight, illuminated by stark, geometric lighting. The image embodies a corporate minimalist style, focusing on efficiency and technological precision. The color palette features high-contrast dark backgrounds with striking white and cyan artificial lights from the facility. The composition highlights the geometric lines of the infrastructure, conveying a calm, high-stakes industrial environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbLDPjUZsZ36K_dh3gueQY_oxo_4UbYDcpXVjobsYDDVAecYNlQBC11j2HUFC1BjTKRiXddnu8uRB461URurGhdIO9a0QXmfz7yX3nBR9OqY1Bu3-dQvpMYytO9nFiPaQsMdcXnRkHVHNPEEzZ3BwiJRoL9TSIT7S0qrIxv575Mv-GQKu-sK7GAwEbA1gkgPadlYfU5cTEKl53vrbIPImKFhuwQ1yemLzMjxPfIzqwcXH8-mNizsY40qwk19UKuI5vGiGwqU9Z7MgN"/>
+<div class="absolute top-sm right-sm bg-surface-container-lowest/90 backdrop-blur-sm px-xs py-1 rounded font-label-sm text-label-sm text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">factory</span>
+                                工业应用
+                            </div>
+</div>
+<div class="p-md flex-grow flex flex-col">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-sm group-hover:text-primary transition-colors">大型石化厂区自动巡检系统</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-grow">利用多旋翼无人机结合热成像技术，对管线及高塔进行自动化周期性巡检，有效识别跑冒滴漏风险，降低人力成本。</p>
+<div class="mt-md pt-sm border-t border-outline-variant/30 flex justify-between items-center text-primary font-label-sm text-label-sm">
+<span>查看详情</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- Case Card 3 -->
+<div class="bg-surface-container-lowest rounded-lg border border-outline-variant/50 hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col cursor-pointer group">
+<div class="h-64 bg-surface-container relative overflow-hidden">
+<img alt="City event security" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A dynamic shot of a modern city center during a large-scale public event, viewed from a slightly elevated, surveillance-like angle. The aesthetic is clean, forward-thinking, and highly professional, utilizing a fixed-fluid hybrid layout feel. The color palette is restricted to cool urban greys, deep blues, and sharp white highlights. The image suggests calm control and high-tech security monitoring over a complex urban environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsfEZsWQ76iPtxl_w6ngNDiaxOSELQRP0kVQbsjQnZjb8NZe1jGUvWSDNiqltkoLngwO_jGOvqhjrIkcCsRfFKi8jgP1uL6PxBvcwt504jEQb40ttBpyc7U5QHkgDCPF5pV2urFka8dybZ0AzcU6mYFaNK0VBLb6K8RiOQkMBlZKoDtY8p8bBXCn8zVEX7Q29GRDonHODeL6fTtK4LWGxIIRDaVjMqNgum59KPDeZTgAUh3YtRU4_ci_V9ilFwd_RwUOg5bWiLaqJu"/>
+<div class="absolute top-sm right-sm bg-surface-container-lowest/90 backdrop-blur-sm px-xs py-1 rounded font-label-sm text-label-sm text-tertiary flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">local_police</span>
+                                公共安全
+                            </div>
+</div>
+<div class="p-md flex-grow flex flex-col">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-sm group-hover:text-primary transition-colors">市级大型活动空地协同安保</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-grow">构建基于无人机的高空指挥视角，实时回传现场高清画面，辅助指挥中心进行人流密度分析与突发事件快速响应。</p>
+<div class="mt-md pt-sm border-t border-outline-variant/30 flex justify-between items-center text-primary font-label-sm text-label-sm">
+<span>查看详情</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-surface-dim full-width bottom-0 border-t border-outline-variant/30 dark:border-outline/20">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter py-lg px-lg max-w-container-max mx-auto">
+<div class="md:col-span-1">
+<div class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-surface-variant mb-md">
+                    朗德智能科技
+                </div>
+<div class="font-body-md text-body-md text-on-surface-variant dark:text-surface-variant">
+                    © 2024 杭州朗德智能科技有限公司 版权所有
+                </div>
+</div>
+<div class="md:col-span-3 flex justify-end gap-lg items-start">
+<nav class="flex flex-col gap-sm">
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200" href="#">隐私政策</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200" href="#">法律声明</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200" href="#">诚聘英才</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors duration-200" href="#">合作伙伴</a>
+</nav>
+</div>
+</div>
+</footer>
+</body></html>

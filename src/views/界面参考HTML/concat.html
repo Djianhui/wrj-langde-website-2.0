@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface": "#fbf8ff",
+                    "tertiary": "#3f4f65",
+                    "surface-variant": "#e1e1ef",
+                    "surface-container": "#ededfb",
+                    "tertiary-fixed-dim": "#b7c8e1",
+                    "outline": "#737688",
+                    "on-primary-fixed-variant": "#0038b6",
+                    "inverse-surface": "#2e303a",
+                    "on-tertiary-fixed-variant": "#38485d",
+                    "on-secondary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "on-primary-container": "#dfe3ff",
+                    "on-error": "#ffffff",
+                    "error": "#ba1a1a",
+                    "on-tertiary": "#ffffff",
+                    "surface-bright": "#fbf8ff",
+                    "outline-variant": "#c3c5d9",
+                    "on-tertiary-container": "#d6e6ff",
+                    "background": "#fbf8ff",
+                    "surface-dim": "#d9d9e7",
+                    "primary-fixed": "#dde1ff",
+                    "on-secondary-fixed-variant": "#004e60",
+                    "surface-tint": "#004ced",
+                    "on-error-container": "#93000a",
+                    "inverse-primary": "#b7c4ff",
+                    "surface-container-high": "#e7e7f5",
+                    "tertiary-container": "#57677e",
+                    "surface-container-highest": "#e1e1ef",
+                    "primary-container": "#0052ff",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed-dim": "#4cd6ff",
+                    "secondary-container": "#00ccf9",
+                    "on-primary": "#ffffff",
+                    "primary": "#003ec7",
+                    "on-tertiary-fixed": "#0b1c30",
+                    "on-surface": "#191b25",
+                    "secondary": "#00677f",
+                    "on-surface-variant": "#434656",
+                    "tertiary-fixed": "#d3e4fe",
+                    "on-primary-fixed": "#001452",
+                    "on-background": "#191b25",
+                    "surface-container-low": "#f3f2ff",
+                    "inverse-on-surface": "#f0effe",
+                    "on-secondary-fixed": "#001f28",
+                    "primary-fixed-dim": "#b7c4ff",
+                    "secondary-fixed": "#b7eaff",
+                    "on-secondary-container": "#005266"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "xl": "80px",
+                    "sm": "12px",
+                    "lg": "48px",
+                    "gutter": "24px",
+                    "xs": "4px",
+                    "base": "8px",
+                    "container-max": "1280px",
+                    "md": "24px"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Manrope"],
+                    "headline-xl-mobile": ["Manrope"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-md": ["Manrope"],
+                    "headline-lg-mobile": ["Manrope"],
+                    "headline-lg": ["Manrope"]
+            },
+            "fontSize": {
+                    "headline-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-xl-mobile": ["32px", {"lineHeight": "1.1", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "letterSpacing": "0", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(115, 118, 136, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md dark:bg-surface-dim/90 border-b border-outline-variant/30 dark:border-outline/20 shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center h-20 px-gutter max-w-container-max mx-auto">
+<div class="text-headline-md font-headline-md text-primary dark:text-primary-fixed tracking-tight cursor-pointer active:scale-95 duration-200">
+                Lander 朗德智能科技
+            </div>
+<div class="hidden md:flex items-center gap-lg">
+<a class="font-body-md text-body-md font-medium text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">首页</a>
+<a class="font-body-md text-body-md font-medium text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">产品中心</a>
+<a class="font-body-md text-body-md font-medium text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">应用案例</a>
+<a class="font-body-md text-body-md font-medium text-primary dark:text-primary-fixed font-bold border-b-2 border-primary dark:border-primary-fixed pb-1" href="#">关于我们</a>
+</div>
+<div class="flex items-center gap-md">
+<button class="bg-primary text-on-primary px-lg py-sm rounded-xl font-medium active:scale-95 duration-200 hover:bg-primary/90 transition-all">
+                    联系我们
+                </button>
+<button class="md:hidden material-symbols-outlined text-on-surface-variant">menu</button>
+</div>
+</div>
+</nav>
+<main class="pt-20">
+<!-- Header Banner -->
+<section class="relative h-[400px] flex items-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover" data-alt="A futuristic, high-tech abstract background featuring glowing blue digital network lines and deep space nebulas. The lighting is sophisticated and cool-toned, dominated by primary blue and deep slate colors, reflecting a professional aerospace engineering atmosphere. The overall mood is innovative, vast, and technologically advanced, perfectly suited for a corporate defense and aviation leader's brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZdAIH-_ZJ18D-j7-TEQB1YjtLLjerxosFHmI_M-Tihnkl2Zia5A5YAw7khg_lhI9PF4c2C09u05zkxtNB4alqrueuQO2cnCv9OXBd4wiDtPLt0UCIPX70s_ph4o0x4Jbzgk3ahnQZ1Yy3LufymFEmTbxUSxK0dZd_xlI-5JqBVL10Se2LJR1lAeQ1DHQsXGc0mdu8TDNHy3Xh4bZuFveBBLbDvD-SmYvDxL0kaUdOuCOTGXTsmMhTVRECv-mPc2TaWndEXnRcjo5_"/>
+<div class="absolute inset-0 bg-gradient-to-r from-primary/80 to-transparent"></div>
+</div>
+<div class="relative z-10 max-w-container-max mx-auto px-gutter w-full">
+<div class="max-w-2xl">
+<h1 class="font-headline-xl text-headline-xl text-white mb-md">联系我们</h1>
+<p class="font-body-lg text-body-lg text-primary-fixed max-w-lg">
+                        致力于通过领先的无人机技术与智能感知系统，保障每一片空域的安全与高效。朗德智能，与您共同探索科技的无限可能。
+                    </p>
+</div>
+</div>
+</section>
+<!-- Contact Info & Form Section -->
+<section class="py-xl max-w-container-max mx-auto px-gutter">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<!-- Left: Contact Cards -->
+<div class="lg:col-span-5 space-y-md">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-md">
+<!-- Office Location -->
+<div class="bg-surface-container-low p-md rounded-xl border border-outline-variant/30 hover:shadow-md transition-shadow">
+<div class="flex items-start gap-md">
+<div class="bg-primary-container p-sm rounded-lg">
+<span class="material-symbols-outlined text-on-primary-container">location_on</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md mb-xs">办公地点</h3>
+<p class="text-on-surface-variant font-body-md">杭州市上城区环站东路768号<br/>东站花园商务中心1幢12层</p>
+</div>
+</div>
+</div>
+<!-- Phone & Email -->
+<div class="bg-surface-container-low p-md rounded-xl border border-outline-variant/30 hover:shadow-md transition-shadow">
+<div class="flex items-start gap-md">
+<div class="bg-primary-container p-sm rounded-lg">
+<span class="material-symbols-outlined text-on-primary-container">contact_phone</span>
+</div>
+<div class="space-y-sm">
+<div>
+<h3 class="font-headline-md text-headline-md mb-xs">电话支持</h3>
+<p class="text-on-surface-variant font-body-md">0571-XXXX-XXXX</p>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md mb-xs">邮箱联系</h3>
+<p class="text-on-surface-variant font-body-md">info@lander-tech.com</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Working Hours -->
+<div class="bg-surface-container-low p-md rounded-xl border border-outline-variant/30 hover:shadow-md transition-shadow">
+<div class="flex items-start gap-md">
+<div class="bg-primary-container p-sm rounded-lg">
+<span class="material-symbols-outlined text-on-primary-container">schedule</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md mb-xs">营业时间</h3>
+<p class="text-on-surface-variant font-body-md">周一至周五: 09:00 - 18:00<br/>周六及周日: 预约接待</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right: Inquiry Form -->
+<div class="lg:col-span-7">
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant/50 shadow-sm">
+<div class="mb-lg">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-sm">在线咨询</h2>
+<p class="text-on-surface-variant">请填写以下表单，我们的技术专家将在24小时内与您取得联系。</p>
+</div>
+<form class="space-y-md">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase">姓名</label>
+<input class="w-full bg-transparent border border-outline-variant rounded-lg px-md py-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="您的姓名" type="text"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase">公司名称</label>
+<input class="w-full bg-transparent border border-outline-variant rounded-lg px-md py-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="所属企业或机构" type="text"/>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase">联系电话</label>
+<input class="w-full bg-transparent border border-outline-variant rounded-lg px-md py-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="常用联系号码" type="tel"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase">电子邮箱</label>
+<input class="w-full bg-transparent border border-outline-variant rounded-lg px-md py-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="official@company.com" type="email"/>
+</div>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase">咨询内容</label>
+<textarea class="w-full bg-transparent border border-outline-variant rounded-lg px-md py-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="请简要描述您的需求或合作意向" rows="4"></textarea>
+</div>
+<button class="w-full bg-primary text-on-primary py-md rounded-xl font-medium text-body-lg hover:bg-primary-container transition-all active:scale-[0.98]" type="submit">
+                                提交咨询
+                            </button>
+</form>
+</div>
+</div>
+</div>
+</section>
+<!-- Partner Section -->
+<section class="py-xl bg-surface-container-high overflow-hidden">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="text-center mb-lg">
+<span class="font-label-sm text-label-sm text-primary tracking-widest uppercase">Global Network</span>
+<h2 class="font-headline-lg text-headline-lg mt-base">全球合作伙伴计划</h2>
+<p class="text-on-surface-variant mt-sm max-w-2xl mx-auto">
+                        朗德智能正积极拓展全球业务版图，寻找具备专业资质与行业资源的合作伙伴，共同推进行业级无人机应用的普及。
+                    </p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-md">
+<div class="bg-surface-container-lowest p-lg rounded-xl flex flex-col items-center text-center gap-sm group hover:bg-primary transition-colors duration-300">
+<span class="material-symbols-outlined text-primary text-[40px] group-hover:text-on-primary transition-colors">handshake</span>
+<h4 class="font-headline-md text-headline-md group-hover:text-on-primary transition-colors">渠道分销</h4>
+<p class="text-on-surface-variant text-body-md group-hover:text-on-primary/80 transition-colors">共享市场红利与品牌价值</p>
+</div>
+<div class="bg-surface-container-lowest p-lg rounded-xl flex flex-col items-center text-center gap-sm group hover:bg-primary transition-colors duration-300">
+<span class="material-symbols-outlined text-primary text-[40px] group-hover:text-on-primary transition-colors">build_circle</span>
+<h4 class="font-headline-md text-headline-md group-hover:text-on-primary transition-colors">技术合作</h4>
+<p class="text-on-surface-variant text-body-md group-hover:text-on-primary/80 transition-colors">算法共享与系统深度融合</p>
+</div>
+<div class="bg-surface-container-lowest p-lg rounded-xl flex flex-col items-center text-center gap-sm group hover:bg-primary transition-colors duration-300">
+<span class="material-symbols-outlined text-primary text-[40px] group-hover:text-on-primary transition-colors">security</span>
+<h4 class="font-headline-md text-headline-md group-hover:text-on-primary transition-colors">特种定制</h4>
+<p class="text-on-surface-variant text-body-md group-hover:text-on-primary/80 transition-colors">为行业客户提供专属解决方案</p>
+</div>
+<div class="bg-surface-container-lowest p-lg rounded-xl flex flex-col items-center text-center gap-sm group hover:bg-primary transition-colors duration-300">
+<span class="material-symbols-outlined text-primary text-[40px] group-hover:text-on-primary transition-colors">school</span>
+<h4 class="font-headline-md text-headline-md group-hover:text-on-primary transition-colors">培训交付</h4>
+<p class="text-on-surface-variant text-body-md group-hover:text-on-primary/80 transition-colors">完善的课程体系与实操训练</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Map Section Placeholder -->
+<section class="h-[400px] w-full relative">
+<div class="absolute inset-0 bg-surface-dim">
+<img class="w-full h-full object-cover" data-alt="A clean, minimalist high-contrast monochrome map background of a modern city center like Hangzhou. The map features elegant slate gray and soft white lines, emphasizing the geometric precision of the urban grid. The design has a subtle digital overlay of primary blue data points, conveying a sense of smart city infrastructure and technological connectivity. The style is professional, high-end, and aligns perfectly with aerospace corporate aesthetics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpTZpgfU4xEd4_jtaYl7XTtutq_DOQmta_KFKwswHY3GG12ghhYX_Boo_dUmoehYEuuQXErADLQVNNzLQEStErF03FTD8rMQEY8PGhFNzQLZaoNiVwljGHSXe21XeTmr83VrMrmcO_3NBohxg6IBK0Y6dokVz1tOFIhHM6XkkhS0uN8gcoN5ppb2YIbDyu8iYPdssbMCFNH4rOLp1AmMHRGHim94Rw_aqA6pgR39C8FG2WbuJe62VRYb7zLBFXnvK6fjpl2xAxBsQC"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="bg-surface p-md rounded-xl shadow-xl border border-primary/20 animate-pulse">
+<div class="flex items-center gap-sm text-primary">
+<span class="material-symbols-outlined">location_on</span>
+<span class="font-bold">朗德智能总部 · 杭州</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-inverse-surface dark:bg-surface-container-lowest w-full py-xl">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-lg px-gutter max-w-container-max mx-auto">
+<div class="col-span-1 md:col-span-1">
+<div class="text-headline-md font-headline-md text-surface dark:text-primary mb-md">
+                    Lander 朗德智能
+                </div>
+<p class="text-surface-variant/70 dark:text-on-surface-variant/70 text-body-md mb-md">
+                    专注于高精度工业无人机与智能安防系统的研发与制造，为行业客户提供卓越的低空安全解决方案。
+                </p>
+</div>
+<div class="space-y-sm">
+<h4 class="text-surface dark:text-primary font-semibold mb-md">产品中心</h4>
+<a class="block text-surface-variant/70 dark:text-on-surface-variant/70 hover:text-surface dark:hover:text-primary hover:underline transition-all cursor-pointer" href="#">行业级无人机</a>
+<a class="block text-surface-variant/70 dark:text-on-surface-variant/70 hover:text-surface dark:hover:text-primary hover:underline transition-all cursor-pointer" href="#">感知雷达系统</a>
+<a class="block text-surface-variant/70 dark:text-on-surface-variant/70 hover:text-surface dark:hover:text-primary hover:underline transition-all cursor-pointer" href="#">智能云控平台</a>
+</div>
+<div class="space-y-sm">
+<h4 class="text-surface dark:text-primary font-semibold mb-md">关于我们</h4>
+<a class="block text-surface-variant/70 dark:text-on-surface-variant/70 hover:text-surface dark:hover:text-primary hover:underline transition-all cursor-pointer" href="#">公司简介</a>
+<a class="block text-surface-variant/70 dark:text-on-surface-variant/70 hover:text-surface dark:hover:text-primary hover:underline transition-all cursor-pointer" href="#">技术研发</a>
+<a class="block text-surface-variant/70 dark:text-on-surface-variant/70 hover:text-surface dark:hover:text-primary hover:underline transition-all cursor-pointer" href="#">新闻中心</a>
+</div>
+<div class="space-y-sm">
+<h4 class="text-surface dark:text-primary font-semibold mb-md">服务支持</h4>
+<a class="block text-surface-variant/70 dark:text-on-surface-variant/70 hover:text-surface dark:hover:text-primary hover:underline transition-all cursor-pointer" href="#">技术文档</a>
+<a class="block text-surface-variant/70 dark:text-on-surface-variant/70 hover:text-surface dark:hover:text-primary hover:underline transition-all cursor-pointer" href="#">售后服务</a>
+<a class="block text-surface-variant/70 dark:text-on-surface-variant/70 hover:text-surface dark:hover:text-primary hover:underline transition-all cursor-pointer" href="#">联系我们</a>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-gutter mt-xl pt-lg border-t border-surface-variant/20">
+<div class="flex flex-col md:flex-row justify-between items-center gap-md">
+<div class="text-body-md text-surface-variant/80 dark:text-on-surface-variant/80">
+                    © 2024 杭州朗德智能科技. 版权所有. 浙ICP备xxxxxxxx号
+                </div>
+<div class="flex gap-md">
+<a class="text-surface-variant/70 hover:text-surface text-label-sm uppercase tracking-wider" href="#">Privacy Policy</a>
+<a class="text-surface-variant/70 hover:text-surface text-label-sm uppercase tracking-wider" href="#">Terms of Service</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

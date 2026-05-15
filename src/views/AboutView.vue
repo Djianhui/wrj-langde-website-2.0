@@ -1,847 +1,717 @@
 <template>
-  <div class="about-page page-content">
-    <div class="container">
-      <h1 class="section-title">{{ isZh ? '关于我们' : 'About Us' }}</h1>
-      
-      <div class="about-intro">
-        <div class="about-text">
-          <div class="company-badge">{{ currentAboutData.title }}</div>
-          <p v-for="(paragraph, index) in currentAboutData.paragraphs" :key="index">{{ paragraph }}</p>
-        </div>
-        <div class="about-image">
-          <img :src="currentAboutData.image" :alt="currentAboutData.title" @error="handleImageError">
-          <div class="image-caption">
-            <span>{{ isZh ? '科技创新 · 智慧赋能' : 'Tech Innovation · Smart Empowerment' }}</span>
+  <div class="about-page">
+    <!-- ===== Hero Banner ===== -->
+    <section class="about-hero">
+      <div class="hero-bg">
+        <img src="/images/about/about_bj.jpg" :alt="isZh ? '低空安全' : 'Low Altitude Security'" class="hero-bg-img" @error="onHeroImgError">
+        <div class="hero-bg-gradient"></div>
+        <div class="hero-bg-grid"></div>
+      </div>
+      <div class="hero-inner">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            <span class="hero-badge-text">{{ isZh ? 'LOW ALTITUDE SECURITY PIONEER' : 'LOW ALTITUDE SECURITY PIONEER' }}</span>
           </div>
+          <h1 class="hero-title">
+            <template v-if="isZh">领航低空安全未来<br>领军低空安全未来</template>
+            <template v-else>Pioneering the Future<br>of Low Altitude Security</template>
+          </h1>
+          <p class="hero-desc">
+            {{ isZh
+              ? '杭州朗德智能科技致力于构建全方位的低空安全防御体系，为全球航空安全与国防事业提供卓越的智能无人机防控解决方案。'
+              : 'Hangzhou Lande Intelligent Technology is dedicated to building a comprehensive low-altitude security defense system, providing superior intelligent UAV countermeasure solutions for global aviation safety and national defense.' }}
+          </p>
         </div>
       </div>
-      
-      <div class="about-sections">
-        <div class="about-section" v-for="(section, index) in aboutSections" :key="section.id" :class="{ 'reverse': index % 2 === 1 }">
-          <div class="section-text">
-            <h2>{{ section.title }}</h2>
-            <div v-html="section.content"></div>
-            <RouterLink :to="`/about/${section.id}`" class="btn">{{ isZh ? '了解更多' : 'Learn More' }}</RouterLink>
+    </section>
+
+    <!-- ===== Company Introduction ===== -->
+    <section class="company-intro">
+      <div class="lander-container">
+        <div class="intro-grid">
+          <div class="intro-image">
+            <div class="intro-image-bg"></div>
+            <img src="/images/about/about_02.png" :alt="isZh ? '研发实验室' : 'R&D Lab'" @error="onIntroImgError">
+            <div class="intro-image-badge">
+              <div class="badge-year">2025</div>
+              <div class="badge-text">{{ isZh ? '创立于中国·杭州' : 'Founded in Hangzhou, China' }}</div>
+            </div>
           </div>
-          <div class="section-image">
-            <img :src="section.image || `https://via.placeholder.com/500x300?text=${section.title}`" :alt="section.title">
-          </div>
-        </div>
-      </div>
-      
-      <div class="about-stats">
-        <div class="stat-item" v-for="(stat, index) in currentAboutData.stats" :key="index">
-          <h3 v-html="stat.value"></h3>
-          <p>{{ stat.description }}</p>
-        </div>
-      </div>
-      
-      <!-- 联系我们 -->
-      <section id="contact" class="contact section">
-        <div class="contact-bg"></div>
-        <div class="container">
-          <div class="section-header">
-            <h2 class="section-title">{{ isZh ? '联系我们' : 'Contact Us' }}</h2>
-            <p class="section-desc">{{ isZh ? '随时随地与我们的专业团队取得联系，解答您的问题与需求' : 'Get in touch with our professional team anytime, anywhere to answer your questions and needs' }}</p>
-          </div>
-          <div class="contact-content">
-            <div class="contact-info">
-              <div class="info-card">
-                <div class="info-header">
-                  <div class="info-icon">
-                    <i class="fas fa-map-marker-alt"></i>
-                  </div>
-                  <h3>{{ isZh ? '公司地址' : 'Company Address' }}</h3>
-                </div>
-                <div v-for="(address, index) in currentSiteInfo.contactInfo.addresses" :key="index" class="address-item">
-                  <div class="address-label">
-                    <span class="location-badge" :class="index === 0 ? 'headquarters' : 'branch'">
-                      <i class="fas fa-building"></i>
-                      {{ index === 0 ? (isZh ? '公司总部' : 'Headquarters') : (isZh ? '分公司' : 'Branch Office') }}
-                    </span>
-                  </div>
-                  <p>{{ address }}</p>
-                  <div class="address-image">
-                    <img :src="index === 0 ? '/images/company/company-location.jpg.svg' : '/images/company/csdz.png'" alt="公司地址" @error="handleAddressImageError">
-                    <div class="address-overlay">
-                      <div class="address-marker">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>{{ isZh ? '朗德智能' : 'Lande' }}</span>
-                      </div>
-                    </div>
-                  </div>
-                  <a :href="`https://ditu.amap.com/search?query=${encodeURIComponent(address)}`" target="_blank" class="info-link">{{ isZh ? '获取导航' : 'Get Directions' }} <i class="fas fa-arrow-right"></i></a>
-                </div>
+          <div class="intro-text">
+            <div class="section-eyebrow">Company Profile</div>
+            <h2 class="section-h2">{{ isZh ? '杭州朗德智能科技有限公司' : 'Hangzhou Lande Intelligent Technology Co., Ltd.' }}</h2>
+            <div class="intro-paragraphs">
+              <p>{{ isZh
+                ? '成立于2025年，朗德智能科技坐落于充满创新活力的杭州。作为一家专注于无人机防控与低空经济领域的高新技术企业，我们深耕于射频干扰、协议解码及雷达探测等核心技术的研发与应用。'
+                : 'Founded in 2025 and based in innovation-rich Hangzhou, Lande Intelligent Technology is a high-tech enterprise focused on UAV countermeasures and the low-altitude economy, with deep expertise in RF jamming, protocol decoding and radar detection.' }}</p>
+              <p>{{ isZh
+                ? '在低空经济飞速发展的当下，安全已成为核心基石。我们依托深厚的军工级技术背景，为大型活动、重点基建、边境安防及企业私域提供端到端的低空安保服务。我们的愿景是让天空更透明、让地面更安全。'
+                : 'As the low-altitude economy grows rapidly, security has become the cornerstone. Backed by solid military-grade technology, we deliver end-to-end low-altitude security services for major events, critical infrastructure, border defense and private enterprises. Our vision: a more transparent sky and a safer ground.' }}</p>
+            </div>
+            <div class="intro-stats">
+              <div class="intro-stat-card">
+                <div class="stat-num">3+</div>
+                <div class="stat-label">{{ isZh ? '核心专利技术' : 'Core Patents' }}</div>
               </div>
-              <div class="info-card">
-                <div class="info-header">
-                  <div class="info-icon">
-                    <i class="fas fa-phone"></i>
-                  </div>
-                  <h3>{{ isZh ? '联系电话' : 'Phone' }}</h3>
-                </div>
-                <p>{{ currentSiteInfo.contactInfo.phone }}</p>
-                <a :href="`tel:${currentSiteInfo.contactInfo.phone}`" class="info-link">{{ isZh ? '拨打电话' : 'Call Us' }} <i class="fas fa-arrow-right"></i></a>
-              </div>
-              <div class="info-card">
-                <div class="info-header">
-                  <div class="info-icon">
-                    <i class="fas fa-envelope"></i>
-                  </div>
-                  <h3>{{ isZh ? '电子邮箱' : 'Email' }}</h3>
-                </div>
-                <p>{{ currentSiteInfo.contactInfo.email }}</p>
-                <!-- <a :href="`mailto:${currentSiteInfo.contactInfo.email}`" class="info-link">{{ isZh ? '发送邮件' : 'Send Email' }} <i class="fas fa-arrow-right"></i></a> -->
+              <div class="intro-stat-card">
+                <div class="stat-num">17+</div>
+                <div class="stat-label">{{ isZh ? '核心软件著作权' : 'Mil-grade Tested' }}</div>
               </div>
             </div>
-            <ContactForm />
           </div>
         </div>
-      </section>
-      
-      <div class="join-us">
-        <h2>{{ isZh ? '加入我们' : 'Join Us' }}</h2>
-        <p>{{ isZh ? '朗德智能欢迎有才华、有激情的你加入我们的团队，一起创造智能化未来！' : 'Lande Intelligent welcomes talented and passionate individuals to join our team and create an intelligent future together!' }}</p>
-        <RouterLink to="/join" class="btn btn-primary">{{ isZh ? '查看职位' : 'View Positions' }}</RouterLink>
       </div>
-    </div>
+    </section>
+
+    <!-- ===== Core Values (Bento) ===== -->
+    <section class="core-values">
+      <div class="lander-container values-header">
+        <div class="section-eyebrow">Core Values</div>
+        <h2 class="section-h2">{{ isZh ? '驱动卓越的核心价值' : 'Core Values Driving Excellence' }}</h2>
+      </div>
+      <div class="lander-container values-grid">
+        <div v-for="(v, idx) in coreValues" :key="idx" class="value-card">
+          <div class="value-icon">
+            <i :class="v.icon"></i>
+          </div>
+          <h3 class="value-title">{{ v.title }}</h3>
+          <p class="value-desc">{{ v.desc }}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Development Roadmap ===== -->
+    <section class="roadmap">
+      <div class="lander-container">
+        <div class="roadmap-grid">
+          <div class="roadmap-intro">
+            <div class="section-eyebrow">Roadmap</div>
+            <h2 class="section-h2">{{ isZh ? '征程与里程碑' : 'Journey & Milestones' }}</h2>
+            <p class="roadmap-desc">{{ isZh
+              ? '从西子湖畔的初创梦想，到如今低空安防领域的领航者，每一步都凝聚着朗德人的智慧与汗水。'
+              : 'From a startup dream by West Lake to a pioneer in low-altitude security — every step is powered by the wisdom and dedication of the Lande team.' }}</p>
+          </div>
+          <div class="timeline">
+            <div class="timeline-line"></div>
+            <div v-for="(m, idx) in milestones" :key="idx" class="milestone" :class="{ 'is-active': m.active }">
+              <div class="milestone-dot"><span></span></div>
+              <div class="milestone-date">{{ m.date }}</div>
+              <h4 class="milestone-title">{{ m.title }}</h4>
+              <p class="milestone-desc">{{ m.desc }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Team & R&D ===== -->
+    <section class="rnd-section">
+      <div class="lander-container">
+        <div class="rnd-grid">
+          <div class="rnd-text">
+            <div class="section-eyebrow light">R&amp;D &amp; Engineering</div>
+            <h2 class="section-h2 light">{{ isZh ? '严苛标准的科研基因' : 'Rigorous R&D DNA' }}</h2>
+            <p class="rnd-desc">{{ isZh
+              ? '我们的技术核心来源于一流航空航天实验室，团队由多位拥有10年以上国防科技背景的专家领衔。每一个算法、每一个电路、每一颗螺丝，都经过超千小时的实地模拟测试。'
+              : 'Our technical core stems from top aerospace laboratories, led by experts with 10+ years of defense tech experience. Every algorithm, circuit and component is validated through thousands of hours of field simulation.' }}</p>
+            <div class="rnd-badges">
+              <div class="rnd-badge primary">
+                <i class="fas fa-medal"></i>
+                <div>
+                  <div class="rnd-badge-title">{{ isZh ? '军工级测试标准 (GJB 150A)' : 'Military Grade Testing (GJB 150A)' }}</div>
+                  <div class="rnd-badge-sub">{{ isZh ? '通过高温、低温、盐雾、振动及冲击测试' : 'Passed temperature, salt spray, vibration & shock tests' }}</div>
+                </div>
+              </div>
+              <div class="rnd-badge">
+                <i class="fas fa-shield-alt"></i>
+                <div>
+                  <div class="rnd-badge-title">{{ isZh ? '零延迟态势感知' : 'Zero Latency Situational Awareness' }}</div>
+                  <div class="rnd-badge-sub">{{ isZh ? '全天候 24/7 无盲区自动预警，响应时间 < 1s' : '24/7 blind-spot free auto warning, response &lt; 1s' }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="rnd-panel">
+            <div class="rnd-panel-grid"></div>
+            <img src="/images/about/about_03.png" :alt="isZh ? '科研实验室' : 'R&D Lab'" class="rnd-panel-img" @error="onRndImgError">
+            <div class="rnd-panel-stats">
+              <div class="rnd-stat-card">
+                <div class="rnd-stat-num">70%</div>
+                <div class="rnd-stat-label">{{ isZh ? '研发人员占比' : 'R&D Headcount' }}</div>
+              </div>
+              <div class="rnd-stat-card">
+                <div class="rnd-stat-num">12k+</div>
+                <div class="rnd-stat-label">{{ isZh ? '模拟对抗实验' : 'Simulations Run' }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
 <script setup>
-import { onMounted, computed } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useContentStore } from '@/store/modules/content'
-import ContactForm from '@/components/ContactForm.vue'
+import { computed } from 'vue'
 import { useLanguage } from '@/mixins/language'
 
-// 使用语言相关功能
-const { isZh, isEn, getAboutData, getCurrentSiteInfo } = useLanguage()
+const { isZh } = useLanguage()
 
-const contentStore = useContentStore()
-const { aboutSections, aboutData } = storeToRefs(contentStore)
+const coreValues = computed(() => isZh.value ? [
+  { icon: 'fas fa-check-circle', title: '卓越品质', desc: '我们坚持近乎苛刻的制造标准，确保每一台设备都能在极寒、极热及高电磁干扰等极端环境下稳定运行。' },
+  { icon: 'fas fa-handshake',   title: '诚实守信', desc: '以客户价值为中心，通过透明的服务流程与可靠的售后保障，构建深厚的全球伙伴信任体系。' },
+  { icon: 'fas fa-rocket',      title: '科技创新', desc: '将AI深度学习应用于信号分析，持续突破技术边界，引领低空安全防御从"被动阻截"向"主动态势感知"跨越。' }
+] : [
+  { icon: 'fas fa-check-circle', title: 'Superior Quality', desc: 'We uphold near-uncompromising manufacturing standards to guarantee stable operation in extreme cold, heat, and high-EMI environments.' },
+  { icon: 'fas fa-handshake',   title: 'Integrity & Trust', desc: 'Customer value is at our core. Transparent processes and reliable aftercare build lasting partnerships worldwide.' },
+  { icon: 'fas fa-rocket',      title: 'Tech Innovation', desc: 'Applying deep learning to signal analysis, we push the boundary from passive countermeasures to proactive situational awareness.' }
+])
 
-// 获取当前语言的关于我们数据
-const currentAboutData = computed(() => getAboutData())
+const milestones = computed(() => isZh.value ? [
+  { date: '2025 Q2', title: '杭州朗德正式扬帆起航', desc: '确立"低空大脑"研发战略，组建核心研发团队。', active: true },
+  { date: '2026 Q3', title: 'LD-Series 第一代防控系统交付', desc: '在多地政府试点项目中获得极高评价，突破全频段干扰核心技术。', active: false },
+  { date: '未来愿景', title: '构建全球无缝低空安全网', desc: '推动行业标准制定，实现防、管、控一体化的低空数字底座。', active: false }
+] : [
+  { date: '2025 Q2', title: 'Lande Officially Sets Sail', desc: 'Established the "Low Altitude Brain" R&D strategy and assembled the core team.', active: true },
+  { date: '2026 Q3', title: 'LD-Series Gen-1 Delivered', desc: 'Highly rated in multi-region government pilots; breakthrough in full-band jamming.', active: false },
+  { date: 'Future',  title: 'A Global Seamless Low-Altitude Security Net', desc: 'Driving industry standards and an integrated detect-manage-control digital foundation.', active: false }
+])
 
-// 获取当前语言的网站信息
-const currentSiteInfo = computed(() => {
-  // 尝试从contentStore获取
-  const siteInfoFromStore = getCurrentSiteInfo.value
-  if (siteInfoFromStore && siteInfoFromStore.contactInfo) {
-    return siteInfoFromStore
-  }
-  
-  // 使用默认数据
-  return isZh.value ? {
-    companyName: '杭州朗德智能科技有限公司',
-    contactInfo: {
-      address: '浙江省杭州市滨江区科技园区创新大厦A座15楼',
-      phone: '13548973785',
-      email: '173462959@qq.com'
-    }
-  } : {
-    companyName: 'Hangzhou Lande Intelligent Technology Co., Ltd.',
-    contactInfo: {
-      address: '15F, Building A, Innovation Tower, Science & Technology Park, Binjiang District, Hangzhou, Zhejiang',
-      phone: '13548973785',
-      email: '173462959@qq.com'
-    }
-  }
-})
-
-// 处理图片加载错误
-const handleImageError = (event) => {
-  const altText = isZh.value ? '朗德智能公司环境' : 'Lande Intelligent Company Environment'
-  event.target.src = `https://via.placeholder.com/800x500?text=${altText}`
-}
-
-// 处理地址图片加载错误
-const handleAddressImageError = (event) => {
-  event.target.src = '/images/company/company-location-placeholder.jpg'
-}
-
-onMounted(async () => {
-  // 获取关于我们页面数据
-  await contentStore.fetchContent('about')
-})
+const onHeroImgError = (e) => { e.target.src = '/images/about/company.jpg' }
+const onIntroImgError = (e) => { e.target.src = '/images/about/about_02.png' }
+const onRndImgError = (e) => { e.target.src = '/images/about/about_03.png' }
 </script>
 
 <style scoped>
+/* ===== TOKENS ===== */
 .about-page {
-  padding-top: 100px;
-  padding-bottom: 80px;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-  min-height: 100vh;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: #fbf8ff;
+  color: #191b25;
+  -webkit-font-smoothing: antialiased;
 }
 
-.section-title {
-  font-size: 2.8rem;
-  margin-bottom: 30px;
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: 700;
-  text-align: center;
-  letter-spacing: -0.02em;
-  position: relative;
-}
-
-.section-title::after {
-  content: '';
-  position: absolute;
-  bottom: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 4px;
-  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
-  border-radius: 2px;
-}
-
-.company-badge {
-  display: inline-block;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.08) 100%);
-  color: #3b82f6;
-  padding: 12px 24px;
-  border-radius: 50px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  margin-bottom: 24px;
-  border: 1px solid rgba(59, 130, 246, 0.2);
-  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.1);
-  letter-spacing: 0.5px;
-  font-family: 'Inter', sans-serif;
-}
-
-.about-intro {
-  display: flex;
-  gap: 60px;
-  align-items: center;
-  margin: 60px 0;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  border-radius: 24px;
-  padding: 50px;
-  box-shadow: 0 20px 60px rgba(59, 130, 246, 0.08);
-  border: 1px solid rgba(59, 130, 246, 0.1);
-  position: relative;
-  overflow: hidden;
-}
-
-.about-intro::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
-  border-radius: 24px 24px 0 0;
-}
-
-.about-text {
-  flex: 1;
-}
-
-.about-text p {
-  margin-bottom: 24px;
-  line-height: 1.8;
-  color: #1e293b;
-  font-size: 1.15rem;
-  font-weight: 400;
-  font-family: 'Inter', sans-serif;
-  letter-spacing: -0.01em;
-}
-
-.about-image {
-  flex: 1;
-  position: relative;
-}
-
-.about-image img {
-  width: 100%;
-  border-radius: 20px;
-  box-shadow: 0 20px 60px rgba(59, 130, 246, 0.15);
-  transition: transform 0.5s ease;
-}
-
-.about-image:hover img {
-  transform: scale(1.02);
-}
-
-.image-caption {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(59, 130, 246, 0.9);
-  backdrop-filter: blur(10px);
-  color: #fff;
-  padding: 12px 20px;
-  border-radius: 50px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.3);
-  font-family: 'Inter', sans-serif;
-}
-
-.about-sections {
-  margin: 100px 0;
-}
-
-.about-section {
-  display: flex;
-  align-items: center;
-  gap: 60px;
-  margin-bottom: 100px;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  border-radius: 24px;
-  padding: 50px;
-  box-shadow: 0 15px 50px rgba(59, 130, 246, 0.06);
-  border: 1px solid rgba(59, 130, 246, 0.08);
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.3s ease;
-}
-
-.about-section:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 25px 80px rgba(59, 130, 246, 0.12);
-}
-
-.about-section.reverse {
-  flex-direction: row-reverse;
-}
-
-.section-text, .section-image {
-  flex: 1;
-}
-
-.section-text h2 {
-  font-size: 2.2rem;
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 24px;
-  position: relative;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  font-family: 'Inter', sans-serif;
-}
-
-.section-text h2::after {
-  content: '';
-  position: absolute;
-  bottom: -12px;
-  left: 0;
-  width: 60px;
-  height: 3px;
-  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
-  border-radius: 2px;
-}
-
-.section-text div {
-  margin-bottom: 32px;
-  line-height: 1.8;
-  color: #475569;
-  font-size: 1.05rem;
-  font-family: 'Inter', sans-serif;
-}
-
-.section-image img {
-  width: 100%;
-  border-radius: 20px;
-  box-shadow: 0 20px 60px rgba(59, 130, 246, 0.15);
-  transition: transform 0.5s ease;
-}
-
-.section-image:hover img {
-  transform: scale(1.05);
-}
-
-.about-stats {
-  display: flex;
-  justify-content: space-between;
-  margin: 100px 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.9) 100%);
-  backdrop-filter: blur(20px);
-  padding: 80px 60px;
-  border-radius: 24px;
-  box-shadow: 0 20px 60px rgba(59, 130, 246, 0.08);
-  border: 1px solid rgba(59, 130, 246, 0.1);
-  position: relative;
-  overflow: hidden;
-}
-
-.about-stats::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
-  border-radius: 24px 24px 0 0;
-}
-
-.stat-item {
-  text-align: center;
-  padding: 0 30px;
-  position: relative;
-}
-
-.stat-item:not(:last-child)::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 1px;
-  height: 60px;
-  background: linear-gradient(to bottom, transparent, rgba(59, 130, 246, 0.3), transparent);
-}
-
-.stat-item h3 {
-  font-size: 3.5rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 12px;
-  font-family: 'Inter', sans-serif;
-  letter-spacing: -0.02em;
-}
-
-.stat-item p {
-  color: #475569;
-  font-weight: 500;
-  font-size: 1.1rem;
-  font-family: 'Inter', sans-serif;
-}
-
-.join-us {
-  text-align: center;
-  margin: 100px 0 60px;
-  padding: 80px 60px;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.03) 100%);
-  border-radius: 24px;
-  box-shadow: 0 20px 60px rgba(59, 130, 246, 0.08);
-  border: 1px solid rgba(59, 130, 246, 0.1);
-  position: relative;
-  overflow: hidden;
-}
-
-.join-us::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
-  border-radius: 24px 24px 0 0;
-}
-
-.join-us h2 {
-  font-size: 2.8rem;
-  margin-bottom: 24px;
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: 700;
-  font-family: 'Inter', sans-serif;
-  letter-spacing: -0.02em;
-}
-
-.join-us p {
-  max-width: 600px;
-  margin: 0 auto 40px;
-  color: #475569;
-  font-size: 1.15rem;
-  line-height: 1.7;
-  font-family: 'Inter', sans-serif;
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  padding: 16px 32px;
-  background: rgba(255, 255, 255, 0.9);
-  color: #3b82f6;
-  border-radius: 50px;
-  font-weight: 600;
-  font-size: 1rem;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.15);
-  text-decoration: none;
-  border: 1px solid rgba(59, 130, 246, 0.2);
-  font-family: 'Inter', sans-serif;
-  letter-spacing: 0.3px;
-}
-
-.btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 15px 40px rgba(59, 130, 246, 0.25);
-  background: #3b82f6;
-  color: white;
-}
-
-.btn-primary {
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  color: #fff;
-  border: none;
-  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
-}
-
-.btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4);
-  background: linear-gradient(135deg, #4338ca 0%, #7c3aed 100%);
-}
-
-@media (max-width: 991px) {
-  .about-intro {
-    flex-direction: column;
-  }
-  
-  .about-section {
-    flex-direction: column;
-  }
-  
-  .about-section.reverse {
-    flex-direction: column;
-  }
-  
-  .about-stats {
-    flex-wrap: wrap;
-    gap: 30px;
-  }
-  
-  .stat-item {
-    width: 45%;
-  }
-}
-
-@media (max-width: 767px) {
-  .stat-item {
-    width: 100%;
-    margin-bottom: 30px;
-  }
-  
-  .about-stats {
-    padding: 30px;
-  }
-  
-  .join-us {
-    padding: 30px;
-  }
-}
-
-/* 联系我们部分样式 */
-.contact {
-  padding: 100px 0;
-  position: relative;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-  overflow: hidden;
-}
-
-.contact-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('data:image/svg+xml;utf8,<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg"><circle cx="2" cy="2" r="1" fill="%233b82f633"/></svg>');
-  background-size: 30px 30px;
-  opacity: 0.4;
-}
-
-.contact .section-title {
-  font-size: 2.8rem;
-  margin-bottom: 20px;
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: 700;
-  text-align: center;
-  letter-spacing: -0.02em;
-  font-family: 'Inter', sans-serif;
-}
-
-.contact .section-desc {
-  text-align: center;
-  color: #475569;
-  font-size: 1.15rem;
-  max-width: 600px;
+.lander-container {
+  max-width: 1280px;
   margin: 0 auto;
-  line-height: 1.6;
+  padding: 0 24px;
+}
+
+.section-eyebrow {
   font-family: 'Inter', sans-serif;
-}
-
-.contact .container {
-  position: relative;
-  z-index: 2;
-}
-
-.contact-content {
-  display: grid;
-  grid-template-columns: 1fr 1.5fr;
-  gap: 60px;
-  margin-top: 60px;
-}
-
-.contact-info {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 40px;
-}
-
-.info-card {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  border-radius: 20px;
-  padding: 40px;
-  box-shadow: 0 15px 50px rgba(59, 130, 246, 0.08);
-  border: 1px solid rgba(59, 130, 246, 0.1);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-.info-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
-}
-
-.info-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 25px 80px rgba(59, 130, 246, 0.15);
-}
-
-.info-card:hover::before {
-  transform: scaleX(1);
-}
-
-.info-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.info-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.08) 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #3b82f6;
-  font-size: 20px;
-  margin-right: 18px;
-  flex-shrink: 0;
-  border: 1px solid rgba(59, 130, 246, 0.15);
-  transition: all 0.3s ease;
-}
-
-.info-card:hover .info-icon {
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  color: white;
-  transform: scale(1.1);
-}
-
-.info-header h3 {
-  font-size: 1.3rem;
-  color: #1e293b;
-  margin: 0;
+  font-size: 12px;
   font-weight: 600;
-  font-family: 'Inter', sans-serif;
-}
-
-.info-card p {
-  color: #64748b;
-  margin-bottom: 20px;
-  line-height: 1.7;
-  font-size: 1.05rem;
-  font-family: 'Inter', sans-serif;
-}
-
-.address-item {
-  margin-bottom: 30px;
-}
-
-.address-item:last-child {
-  margin-bottom: 0;
-}
-
-.address-label {
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #003ec7;
   margin-bottom: 12px;
 }
+.section-eyebrow.light { color: #b7c4ff; }
 
-.location-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.3px;
+.section-h2 {
+  font-family: 'Manrope', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #191b25;
+  margin: 0 0 24px;
 }
+.section-h2.light { color: #ffffff; }
 
-.location-badge.headquarters {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(139, 92, 246, 0.1) 100%);
-  color: #3b82f6;
-  border: 1px solid rgba(59, 130, 246, 0.3);
-}
-
-.location-badge.branch {
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(5, 150, 105, 0.1) 100%);
-  color: #10b981;
-  border: 1px solid rgba(16, 185, 129, 0.3);
-}
-
-.location-badge i {
-  font-size: 0.75rem;
-}
-
-.address-item p {
-  margin-bottom: 10px;
-}
-
-.address-item .info-link {
-  margin-top: 8px;
-}
-
-.info-link {
-  display: inline-flex;
-  align-items: center;
-  color: #3b82f6;
-  font-weight: 600;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  margin-top: 16px;
-  text-decoration: none;
-  padding: 8px 16px;
-  border-radius: 50px;
-  background: rgba(59, 130, 246, 0.05);
-  border: 1px solid rgba(59, 130, 246, 0.1);
-}
-
-.info-link:hover {
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  color: white;
-  transform: translateX(5px);
-  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
-}
-
-/* 地址图片样式 */
-.address-image {
+/* ===== HERO ===== */
+.about-hero {
   position: relative;
-  width: 100%;
-  height: 200px;
-  border-radius: 12px;
+  height: 614px;
+  display: flex;
+  align-items: center;
   overflow: hidden;
-  margin: 15px 0;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  background: #2e303a;
 }
 
-.address-image img {
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-bg-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  opacity: 0.4;
 }
 
-.address-image:hover img {
-  transform: scale(1.05);
-}
-
-.address-overlay {
+.hero-bg-gradient {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
+  background: linear-gradient(to right, #2e303a 0%, rgba(46, 48, 58, 0.6) 55%, transparent 100%);
+}
+
+.hero-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, #003ec7 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.08;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
   width: 100%;
-  height: 100%;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.5));
+}
+
+.hero-content { max-width: 768px; }
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(0, 82, 255, 0.2);
+  border-radius: 999px;
+  margin-bottom: 24px;
+}
+
+.hero-badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #003ec7;
+  box-shadow: 0 0 0 0 rgba(0, 62, 199, 0.6);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(0, 62, 199, 0.6); }
+  70%  { box-shadow: 0 0 0 8px rgba(0, 62, 199, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 62, 199, 0); }
+}
+
+.hero-badge-text {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: #dde1ff;
+}
+
+.hero-title {
+  font-family: 'Manrope', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  margin: 0 0 24px;
+}
+
+.hero-desc {
+  font-size: 18px;
+  line-height: 1.6;
+  color: rgba(225, 225, 239, 0.8);
+  max-width: 640px;
+  margin: 0;
+}
+
+/* ===== Company Introduction ===== */
+.company-intro {
+  padding: 80px 0;
+  background: #fbf8ff;
+}
+
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.intro-image {
+  position: relative;
+}
+
+.intro-image-bg {
+  position: absolute;
+  inset: -16px;
+  background: rgba(0, 62, 199, 0.05);
+  border-radius: 16px;
+  transition: background 0.3s ease;
+}
+
+.intro-image:hover .intro-image-bg { background: rgba(0, 62, 199, 0.1); }
+
+.intro-image img {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 18px 40px rgba(25, 27, 37, 0.12);
+}
+
+.intro-image-badge {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  border-radius: 8px;
+  border: 1px solid rgba(115, 118, 136, 0.2);
+  z-index: 2;
+}
+
+.badge-year {
+  font-family: 'Manrope', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #003ec7;
+  line-height: 1;
+}
+
+.badge-text {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #737688;
+  margin-top: 4px;
+}
+
+.intro-paragraphs p {
+  font-size: 18px;
+  line-height: 1.7;
+  color: #434656;
+  margin: 0 0 16px;
+}
+.intro-paragraphs p:last-child { margin-bottom: 0; }
+
+.intro-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.intro-stat-card {
+  padding: 24px;
+  background: #ededfb;
+  border-radius: 12px;
+}
+
+.stat-num {
+  font-family: 'Manrope', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #003ec7;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.stat-label {
+  font-size: 16px;
+  color: #737688;
+}
+
+/* ===== Core Values ===== */
+.core-values {
+  padding: 80px 0;
+  background: #f3f2ff;
+}
+
+.values-header { text-align: center; margin-bottom: 48px; }
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.value-card {
+  padding: 48px;
+  background: #fbf8ff;
+  border-radius: 12px;
+  border: 1px solid rgba(115, 118, 136, 0.2);
+  transition: all 0.3s ease;
+}
+
+.value-card:hover {
+  box-shadow: 0 14px 32px rgba(0, 62, 199, 0.08);
+  transform: translateY(-4px);
+}
+
+.value-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  background: rgba(0, 62, 199, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #003ec7;
+  font-size: 22px;
+  margin-bottom: 24px;
+  transition: all 0.3s ease;
+}
+
+.value-card:hover .value-icon {
+  background: #003ec7;
+  color: #ffffff;
+}
+
+.value-title {
+  font-family: 'Manrope', 'PingFang SC', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #191b25;
+  margin: 0 0 12px;
+}
+
+.value-desc {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #434656;
+  margin: 0;
+}
+
+/* ===== Roadmap ===== */
+.roadmap {
+  padding: 80px 0;
+  background: #fbf8ff;
+}
+
+.roadmap-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 48px;
+}
+
+.roadmap-desc {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #434656;
+  margin: 0;
+}
+
+.timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.timeline-line {
+  position: absolute;
+  left: 15px;
+  top: 6px;
+  bottom: 6px;
+  width: 1px;
+  background: #c3c5d9;
+}
+
+.milestone {
+  position: relative;
+  padding-left: 48px;
+}
+
+.milestone-dot {
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #e7e7f5;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.address-marker {
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 30px;
-  padding: 8px 16px;
+.milestone-dot span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #737688;
+}
+
+.milestone.is-active .milestone-dot {
+  background: #dde1ff;
+}
+.milestone.is-active .milestone-dot span {
+  background: #003ec7;
+}
+
+.milestone-date {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #737688;
+  margin-bottom: 4px;
+}
+.milestone.is-active .milestone-date { color: #003ec7; }
+
+.milestone-title {
+  font-family: 'Manrope', 'PingFang SC', sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: #191b25;
+  margin: 0 0 6px;
+}
+
+.milestone-desc {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #434656;
+  margin: 0;
+}
+
+/* ===== R&D Section ===== */
+.rnd-section {
+  padding: 80px 0;
+  background: #2e303a;
+  color: #ffffff;
+}
+
+.rnd-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.rnd-desc {
+  font-size: 18px;
+  line-height: 1.7;
+  color: rgba(225, 225, 239, 0.8);
+  margin: 0 0 48px;
+}
+
+.rnd-badges {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.rnd-badge {
   display: flex;
   align-items: center;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  transform: translateY(0);
-  transition: transform 0.3s ease;
+  gap: 20px;
+  padding: 20px 24px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  border-left: 4px solid transparent;
 }
 
-.address-image:hover .address-marker {
-  transform: translateY(-5px);
+.rnd-badge.primary { border-left-color: #003ec7; }
+
+.rnd-badge i {
+  font-size: 24px;
+  color: #b7c4ff;
+  flex-shrink: 0;
 }
 
-.address-marker i {
-  color: #4facfe;
-  font-size: 18px;
-  margin-right: 8px;
+.rnd-badge-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 4px;
 }
 
-.address-marker span {
-  font-weight: 600;
-  color: #0f172a;
+.rnd-badge-sub {
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: rgba(225, 225, 239, 0.6);
 }
 
-/* 响应式调整 */
-@media (max-width: 992px) {
-  .contact-content {
+.rnd-panel {
+  position: relative;
+  padding: 24px;
+  background: rgba(225, 225, 239, 0.05);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.rnd-panel-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, #003ec7 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.08;
+}
+
+.rnd-panel-img {
+  position: relative;
+  width: 100%;
+  height: 256px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.rnd-panel-stats {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.rnd-stat-card {
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.rnd-stat-num {
+  font-family: 'Manrope', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #b7c4ff;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.rnd-stat-label {
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: rgba(225, 225, 239, 0.6);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+  .intro-grid,
+  .rnd-grid {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 48px;
   }
-  
-  .contact-info {
-    grid-template-columns: 1fr;
-  }
-  
-  .info-card:first-child {
-    grid-row: auto;
-  }
+  .roadmap-grid { grid-template-columns: 1fr; gap: 32px; }
+  .values-grid { grid-template-columns: 1fr 1fr; }
+  .hero-title { font-size: 40px; }
 }
 
 @media (max-width: 768px) {
-  .contact {
-    padding: 60px 0;
-  }
-  
-  .info-card {
-    padding: 20px;
-  }
-  
-  .address-image {
-    height: 150px;
-  }
-  
-  .info-icon {
-    width: 40px;
-    height: 40px;
-    font-size: 16px;
-  }
-  
-  .info-header h3 {
-    font-size: 1.1rem;
-  }
+  .about-hero { height: auto; padding: 100px 0 80px; }
+  .hero-title { font-size: 32px; }
+  .hero-desc { font-size: 16px; }
+  .company-intro,
+  .core-values,
+  .roadmap,
+  .rnd-section { padding: 56px 0; }
+  .values-grid { grid-template-columns: 1fr; }
+  .intro-image img { height: 280px; }
+  .section-h2 { font-size: 26px; }
+  .value-card { padding: 32px 24px; }
+  .intro-stats { grid-template-columns: 1fr; }
 }
-</style> 
+
+@media (max-width: 480px) {
+  .hero-badge-text { font-size: 10px; letter-spacing: 0.1em; }
+  .hero-title { font-size: 28px; }
+  .intro-image-badge { padding: 12px 14px; }
+  .badge-year { font-size: 20px; }
+}
+</style>

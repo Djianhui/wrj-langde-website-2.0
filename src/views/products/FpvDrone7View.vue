@@ -104,28 +104,28 @@
         <div class="features-grid">
           <div class="feature-card">
             <div class="feature-icon">
-              <CustomIcons name="flight-control" :size="32" />
+              <i class="fas fa-gamepad"></i>
             </div>
             <h3>专业飞行大脑</h3>
             <p>可选用F4或F7高性能飞控，作为系统的智慧中枢，确保飞行姿态稳定，响应精准，为远征飞行提供可靠保障。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
-              <CustomIcons name="cruise-body" :size="32" />
+              <i class="fas fa-rocket"></i>
             </div>
             <h3>专属巡航机身</h3>
             <p>基于Chimera7等经典7寸机架，优化气动布局，为搭载大容量电池提供充足空间，天生为长途飞行打造。</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">
-              <CustomIcons name="endurance" :size="32" />
+              <i class="fas fa-battery-full"></i>
             </div>
             <h3>卓越续航能力</h3>
             <p>续航表现远超同级。空载状态下续航可达约18分钟，即使在1.5kg的载荷下，仍能提供约10分钟的有效飞行时间，让创作与探索从容不迫。</p>
           </div>
          <div class="feature-card">
             <div class="feature-icon">
-              <CustomIcons name="cruise-speed" :size="32" />
+              <i class="fas fa-tachometer-alt"></i>
             </div>
             <h3>高效巡航速度</h3>
             <p>可与广受好评的ELRS TX12遥控器及从入门到专业的各类FPV眼镜无缝协作，为您提供从操控到观看到的完整第一视角飞行体验。</p>
@@ -138,30 +138,21 @@
         <h2 class="section-title">应用场景</h2>
         <div class="applications-grid">
           <div class="application-item">
-            <CustomIcons name="long-range-cruise" :size="40" />
+            <i class="fas fa-route" style="font-size:40px;color:#3b82f6;"></i>
             <span>远距巡航</span>
           </div>
           <div class="application-item">
-            <CustomIcons name="aerial-exploration" :size="40" />
+            <i class="fas fa-mountain" style="font-size:40px;color:#3b82f6;"></i>
             <span>航拍勘探</span>
           </div>
           <div class="application-item">
-            <CustomIcons name="landscape-photography" :size="40" />
+            <i class="fas fa-camera-retro" style="font-size:40px;color:#3b82f6;"></i>
             <span>风景摄影</span>
           </div>
           <div class="application-item">
-            <CustomIcons name="professional-mapping" :size="40" />
+            <i class="fas fa-map-marked-alt" style="font-size:40px;color:#3b82f6;"></i>
             <span>测绘作业</span>
           </div>
-        </div>
-      </div>
-      
-      <!-- 联系咨询 -->
-      <div class="product-contact">
-        <div class="contact-content">
-          <h2>需要了解更多？</h2>
-          <p>我们的专业团队随时为您提供技术支持和解决方案</p>
-          <RouterLink to="/contact" class="btn btn-primary">联系我们</RouterLink>
         </div>
       </div>
     </div>

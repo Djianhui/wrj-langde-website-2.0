@@ -186,7 +186,7 @@ const contentTypes = [
     "slogan": "智能科技，创造可能",
     "description": "用智能科技赋能产业升级，驱动未来创新",
     "contactInfo": {
-      "address": "浙江省杭州市滨江区科技园区创新大厦A座15楼",
+      "address": "浙江省杭州市上城区明石路515号明石商业大厦9楼9173室",
       "phone": "0571-8888 9999",
       "email": "info@landeintelligent.com"
     }

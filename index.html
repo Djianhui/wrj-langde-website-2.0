@@ -115,63 +115,9 @@
     
     <!-- 初始加载样式 -->
     <style>
-        .init-loading {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .init-loading-content {
-            text-align: center;
-        }
-        
-        .init-loading-logo {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 30px;
-            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: init-pulse 2s infinite;
-        }
-        
-        @keyframes init-pulse {
-            0% { opacity: 0.8; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.05); }
-            100% { opacity: 0.8; transform: scale(1); }
-        }
-        
-        .init-loading-spinner {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-        
-        .init-spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid rgba(79, 172, 254, 0.2);
-            border-top: 4px solid #4facfe;
-            border-radius: 50%;
-            animation: init-spin 1s linear infinite;
-        }
-        
-        @keyframes init-spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .init-loading-text {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 1rem;
+        /* body 浅色底免白屏闪烁 */
+        html, body {
+            background: #fbfaff;
         }
         
         /* 隐藏Vue模板语法，防止初始加载时闪现 */
@@ -240,19 +186,6 @@
                 document.title = 'Lande Intelligent - Smart Drone and Anti-Drone Solution Provider';
                 document.querySelector('meta[name="description"]').setAttribute('content', 
                     'Lande Intelligent Technology is a leading provider of drone systems and anti-drone solutions, committed to airspace security protection');
-                
-                // 设置加载文本
-                document.addEventListener('DOMContentLoaded', function() {
-                    var loadingText = document.querySelector('.init-loading-text');
-                    if (loadingText) {
-                        loadingText.textContent = 'Loading...';
-                    }
-                    
-                    var loadingLogo = document.querySelector('.init-loading-logo');
-                    if (loadingLogo) {
-                        loadingLogo.textContent = 'Lande Intelligent';
-                    }
-                });
             }
             
             // 监听DOM加载完成
@@ -273,17 +206,6 @@
     </script>
 </head>
 <body>
-    <!-- 初始加载界面 -->
-    <div id="init-loading" class="init-loading">
-        <div class="init-loading-content">
-            <div class="init-loading-logo">朗德智能</div>
-            <div class="init-loading-spinner">
-                <div class="init-spinner"></div>
-            </div>
-            <div class="init-loading-text">加载中...</div>
-        </div>
-    </div>
-
     <div id="app" v-cloak>
         <!-- 导航栏 -->
         <header :class="{'scrolled': isScrolled}">
@@ -500,21 +422,6 @@
     </div>
 
     <script type="module" src="/src/main.js"></script>
-    <script>
-        // 监听Vue应用挂载完成，隐藏初始加载界面
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(function() {
-                var initLoading = document.getElementById('init-loading');
-                if (initLoading) {
-                    initLoading.style.opacity = '0';
-                    initLoading.style.transition = 'opacity 0.5s';
-                    setTimeout(function() {
-                        initLoading.style.display = 'none';
-                    }, 500);
-                }
-            }, 1000);
-        });
-    </script>
 </body>
 </html> 
 </html> 

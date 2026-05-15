@@ -35,6 +35,22 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   background-color: var(--bg-color);
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 移动端长英文 / URL / 邮箱折行兑底（仅 ≤ 768px 生效） */
+@media (max-width: 768px) {
+  p,
+  li,
+  td,
+  th,
+  span,
+  a,
+  h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
 }
 
 .container {
@@ -278,78 +294,8 @@ nav ul li a::after {
   display: none;
 }
 
-.mobile-menu-btn {
-  display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 28px;
-  height: 20px;
-  cursor: pointer;
-  z-index: 1001;
-  padding: 5px;
-  border-radius: 6px;
-  background: rgba(248, 250, 252, 0.9);
-  border: 1px solid rgba(226, 232, 240, 0.6);
-  transition: all 0.3s ease;
-}
-
-.mobile-menu-btn span {
-  display: block;
-  height: 2px;
-  width: 100%;
-  background: #64748b;
-  border-radius: 2px;
-  transition: all 0.3s ease;
-}
-
-.mobile-menu-btn:hover {
-  background: rgba(59, 130, 246, 0.1);
-  border-color: rgba(59, 130, 246, 0.3);
-}
-
-.mobile-menu-btn:hover span {
-  background: #3b82f6;
-}
-
-/* 移动菜单蒙层 */
-.mobile-menu-btn.active span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
-  background: #ef4444;
-}
-
-.mobile-menu-btn.active span:nth-child(2) {
-  opacity: 0;
-  transform: translateX(-15px);
-}
-
-.mobile-menu-btn.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
-  background: #ef4444;
-}
-
-.mobile-menu-btn.active {
-  background: rgba(239, 68, 68, 0.1);
-  border-color: rgba(239, 68, 68, 0.3);
-}
-
-.mobile-menu-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  z-index: 999;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-}
-
-.mobile-menu-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
+/* 注：旧版 .mobile-menu-btn / .mobile-menu-overlay 全套规则已移除，
+   统一由 App.vue 内新版移动菜单接管（品牌色胶囊按钮 + 实底白全屏面板） */
 
 /* 页脚 */
 footer {
